@@ -1,0 +1,8 @@
+ HOME -----  공지사항 (함경채)
+            -----  합격자소서 (함경채)
+            -----  Q&A (함경채)
+            
+            공지사항 목록: http://localhost:9090/team4_git/notice/list.do
+            합격자소서 목록: http://localhost:9090/team4_git/pass_self/list.do
+            Q&A 목록: http://localhost:9090/team4_git/answer/list.do
+            
