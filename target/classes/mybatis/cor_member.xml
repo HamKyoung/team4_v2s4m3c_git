@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.team4.CormemberDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.cormember.CormemberDAOInter">
+  <!-- 
+  insert: INSERT SQL 실행
+  id: Spring에서 호출시 사용
+  parameterType: 전달받는 데이터 객체의 타입
+  return: 등록한 레코드 갯수 리턴
+  SQL선언시 ';'은 삭제
+  #{}: ? 동일
+  #{name}: public String getName() 자동 호출
+   --> 
+  <insert id="create" parameterType="CormemberVO">
+    insert into cor_member(cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1, cor_mail, cor_date)
+    values(cor_member_seq.nextval, #{cor_id}, #{cor_passwd}, #{cor_name}, #{cor_resident}, #{cor_sex}, #{cor_phone}, #{cor_zipcode}, #{cor_addr}, #{cor_addr1}, #{cor_mail}, sysdate)
+  </insert> 
+  
+  <!-- 
+  레코드 갯수 만큼 CormemberVO 객체를 만들어 ArrayList에 저장하여 리턴,
+  List<CormemberVO> list = new ArrayList<CormemberVO>(); 
+  -->
+  <select id="list_memberno_asc" resultType="CormemberVO">
+    SELECT cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_addr ,cor_mail, cor_date
+    FROM cor_member
+    ORDER BY cor_memberno ASC
+  </select>
+  
+  <!-- 조회 id: read, 입력: cor_memberno, 리턴: CormemberVO -->
+  <select id="read" parameterType="int" resultType="CormemberVO">
+    SELECT cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1, cor_mail, cor_date
+    FROM cor_member
+    WHERE cor_memberno = #{cor_memberno}
+  </select>
+  
+  <!-- 수정, id: update, 입력: CormemberVO, 리턴: int -->
+  <update id="update" parameterType="CormemberVO">
+    UPDATE cor_member
+    SET cor_name=#{cor_name}, cor_resident=#{cor_resident}, cor_sex=#{cor_sex}, cor_phone=#{cor_phone}, cor_addr=#{cor_addr}, cor_mail=#{cor_mail}
+    WHERE cor_memberno =#{cor_memberno} 
+  </update>
+  
+  <!-- 삭제,id: delete 입력:int 리턴:int -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM cor_member
+    WHERE cor_memberno =#{cor_memberno}
+  </delete>
+  
+  <!-- id 중복 검사 -->
+  <select id="id_check" parameterType="String" resultType="int">
+    SELECT COUNT(*) as id_check
+    FROM cor_member
+    WHERE cor_id=#{cor_id}
+  </select>
+  
+  <!-- 패스워드 검사 -->
+  <select id="passwd_check" parameterType="HashMap" resultType="int">
+   SELECT COUNT(*) as passwd_cnt
+   FROM cor_member
+   WHERE cor_memberno=#{cor_memberno} AND cor_passwd=#{cor_passwd}
+  </select>
+  
+  <!-- 비밀번호 변경 -->
+  <update id="update_passwd" parameterType="CormemberVO">
+   UPDATE cor_member
+   SET cor_passwd=#{cor_passwd}
+   WHERE cor_memberno = #{cor_memberno}
+  </update>
+  
+  <!-- 로그인 -->
+  <select id="login" resultType="int" parameterType="Map">
+    SELECT COUNT(*) as cnt
+    FROM cor_member
+    WHERE cor_id=#{cor_id} AND cor_passwd=#{cor_passwd}
+  </select>
+  
+  <!-- 회원 정보 조회 -->
+  <select id="readById" parameterType="String" resultType="CormemberVO">
+    SELECT cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date
+    FROM cor_member
+    WHERE cor_id = #{cor_id}
+  </select>
+  
+  
+</mapper>
+
+
+
+
+

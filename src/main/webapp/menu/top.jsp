@@ -18,8 +18,10 @@
     </NAV> 
     
     <DIV class='member_menu'>
-      <A class='top_menu_link'  href='${pageContext.request.contextPath}/member/list.do'>로그인</A><span class='top_menu_sep'>&nbsp;</span>
-      <A class='top_menu_link'  href='${pageContext.request.contextPath}/member/list.do'>회원가입</A>
+      <A class='top_menu_link'  href='${pageContext.request.contextPath}/survey/list.do'>설문 조사 목록</A><br>
+      <A class='top_menu_link'  href='${pageContext.request.contextPath}/surveyitem/list.do'>설문 조사 항목</A><br>
+      <A class='top_menu_link'  href='${pageContext.request.contextPath}/surveymember/list.do'>설문 참여 인원</A><br>
+      
     </DIV>
     
  

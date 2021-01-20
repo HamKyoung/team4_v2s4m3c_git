@@ -31,7 +31,13 @@
                               dev.mvc.notice,
                               dev.mvc.questions,
                               dev.mvc.answer,
-                              dev.mvc.pass_self" />
+                              dev.mvc.pass_self,
+                              dev.mvc.cormember,
+                              dev.mvc.genmember,
+                              dev.mvc.survey,
+                              dev.mvc.surveyitem,
+                              dev.mvc.surveymember,
+                              dev.mvc.admin" />
                    
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>

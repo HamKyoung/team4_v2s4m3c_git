@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.team4.CormemberDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.surveymember.SurveymemberDAOInter">
+
+  <insert id="create" parameterType="SurveymemberVO">
+    INSERT INTO surveymember(sur_memberno, sur_itemno, gen_memberno, rdate)
+    VALUES(surveymember_seq.nextval, #{sur_itemno}, #{gen_memberno}, sysdate)
+  </insert>
+
+  <select id="list" resultType="Survey_genVO">
+    SELECT s.sur_memberno, s.sur_itemno, s.gen_memberno, s.rdate, g.gen_id as gid
+    FROM surveymember s , gen_member g
+    WHERE s.gen_memberno = g.gen_memberno
+    ORDER BY sur_memberno ASC
+  </select>
+  
+  <select id="read" parameterType="int" resultType="SurveymemberVO">
+    SELECT sur_memberno, sur_itemno, gen_memberno, rdate
+    FROM surveymember 
+    WHERE sur_memberno=#{sur_memberno}
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM surveymember
+    WHERE sur_memberno=#{sur_memberno}
+  </delete>
+</mapper>

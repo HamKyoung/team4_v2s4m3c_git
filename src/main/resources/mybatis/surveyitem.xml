@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.team4.CormemberDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.surveyitem.SurveyitemDAOInter">
+
+  <insert id="create" parameterType="SurveyitemVO">
+    INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
+    VALUES(surveyitem_seq.nextval, #{surveyno}, #{itemseq}, #{item}, #{itemfile}, #{itemcnt})
+  </insert>
+  
+  <select id="list" resultType="SurveyitemVO">
+    SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt
+    FROM surveyitem 
+    ORDER BY itemseq ASC
+  </select>
+  
+  <select id="read" parameterType="int" resultType="SurveyitemVO">
+    SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt
+    FROM surveyitem 
+    WHERE sur_itemno=#{sur_itemno}
+  </select>
+  
+  <update id="update" parameterType="SurveyitemVO">
+    UPDATE surveyitem 
+    SET item=#{item}, itemcnt=#{itemcnt}
+    WHERE sur_itemno=#{sur_itemno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM surveyitem
+    WHERE sur_itemno=#{sur_itemno}
+  </delete>
+  
+    <!-- 설문조사항목별 검색 목록 -->
+   <select id="list_by_search" resultType="SurveyitemVO" parameterType="HashMap">
+      SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt, word
+      FROM surveyitem 
+     <choose>
+       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+         WHERE surveyno=#{surveyno}
+       </when>
+       <otherwise>
+         WHERE surveyno=#{surveyno} AND (item LIKE '%' || #{word} || '%' 
+                                                        OR itemfile LIKE '%' || #{word} || '%' 
+                                                        OR word LIKE '%' || #{word} || '%')
+       </otherwise>
+     </choose>
+     ORDER BY surveyno DESC   
+   </select>
+   
+   <!-- 카테고리별 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM surveyitem
+     <choose>
+       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수-->
+         WHERE surveyno=#{surveyno}
+       </when>
+       <otherwise><!-- 검색하는 경우의 레코드 갯수-->
+         WHERE surveyno=#{surveyno} AND (item LIKE '%' || #{word} || '%' 
+                                                        OR itemfile LIKE '%' || #{word} || '%' 
+                                                        OR word LIKE '%' || #{word} || '%')
+       </otherwise>
+     </choose>
+   </select>  
+
+</mapper>
