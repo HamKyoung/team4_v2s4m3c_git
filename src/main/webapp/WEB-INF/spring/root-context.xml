@@ -37,7 +37,11 @@
                               dev.mvc.survey,
                               dev.mvc.surveyitem,
                               dev.mvc.surveymember,
-                              dev.mvc.admin" />
+                              dev.mvc.admin,
+                              dev.mvc.comintro ,
+                              dev.mvc.comcate ,
+                              dev.mvc.recruit ,
+                              dev.mvc.attachfile" />
                    
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>

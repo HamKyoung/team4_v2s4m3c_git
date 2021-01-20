@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.comintro.ComIntroDAOInter">
+
+  <!-- 등록 -->
+  <insert id="create" parameterType="ComIntroVO">
+    INSERT INTO com_intro(comno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,cor_memberno)
+    VALUES(comintro_seq.nextval, #{com_name},#{com_form},#{com_type},#{sales},#{homepage},#{address},#{num_people},#{edate},#{ceo_name},#{cor_memberno})
+  </insert>
+  
+  <!--글 목록, id="list_all"  -->
+  <select id="list_all" resultType="ComIntroVO">
+    SELECT comno, com_name, com_form,com_type, sales, homepage,address,num_people,edate,ceo_name,visible
+    FROM com_intro
+    ORDER BY comno ASC  
+  </select>  
+  
+   
+  <!-- 조회, id: read, 입력: cateno, 리턴: CateVO -->
+  <select id="read" resultType="ComIntroVO" parameterType="int">
+    SELECT comno, com_name, com_form,com_type, sales, homepage,address,num_people,edate,ceo_name
+    FROM com_intro
+    WHERE comno=#{comno}
+  </select>  
+  
+  <!-- 수정 -->
+  <update id="update" parameterType="ComIntroVO">
+    UPDATE com_intro
+    SET com_name=#{com_name}, com_form=#{com_form},com_type=#{com_type}, sales=#{sales},
+     homepage=#{homepage},address=#{address},num_people=#{num_people},edate=#{edate},ceo_name=#{ceo_name}
+    WHERE comno = #{comno}
+  </update>
+
+  <!-- 삭제, return: int -->
+  <delete id="delete" parameterType="int">
+    DELETE com_intro
+    WHERE comno = #{comno}
+  </delete>  
+  
+  
+  <!-- 출력모드, id: update_visible, 입력: ComIntroVO, 리턴: int -->
+  <update id="update_visible" parameterType="ComIntroVO">
+    UPDATE com_intro
+    SET visible=#{visible}
+    WHERE comno=#{comno}
+  </update>
+  
+  <!-- 우선 순위에따른 목록 출력 -->
+  <select id="list_seqno_asc" resultType="ComIntroVO" >
+    SELECT comno, com_name, com_type, visible
+    FROM com_intro
+    ORDER BY comno ASC;
+  </select>
+  
+</mapper>

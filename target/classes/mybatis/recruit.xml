@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.recruit.RecruitDAOInter">
+  <insert id="create" parameterType="RecruitVO">
+    INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+                                  file1, thumb1, size1)
+    VALUES(recruit_seq.nextval,#{cateno}, #{title}, #{content}, #{homepage},
+                 #{passwd}, #{word}, sysdate, #{file1}, #{thumb1}, #{size1})
+  </insert> 
+  
+  <select id="list_all" resultType="RecruitVO">
+    SELECT recruitno, cateno, title, seqno,  content, homepage ,passwd, word, rdate
+    FROM recruit 
+    ORDER BY recruitno DESC
+  </select> 
+  
+  <select id="list_by_cateno" resultType="RecruitVO" parameterType="int">
+    SELECT recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+                                  file1, thumb1, size1
+    FROM recruit 
+    WHERE cateno = #{cateno}
+    ORDER BY recruitno DESC
+  </select> 
+    
+  <select id="read" resultType="RecruitVO" parameterType="int">
+    SELECT recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+                                  file1, thumb1, size1
+    FROM recruit
+    WHERE recruitno = #{recruitno}
+  </select>
+  
+  <update id="update" parameterType="RecruitVO">
+    UPDATE recruit 
+    SET title=#{title}, content=#{content}, homepage=#{homepage}, word=#{word}
+    WHERE recruitno=#{recruitno}
+  </update>
+  
+  <select id="passwd_check" parameterType="HashMap" resultType="int">
+    SELECT COUNT(*) as passwd_cnt
+    FROM recruit
+    WHERE recruitno=#{recruitno} AND passwd=#{passwd}
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM recruit
+    WHERE recruitno=#{recruitno}
+  </delete>
+         
+</mapper>
+
+
+
+
+

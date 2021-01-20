@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.comcate.ComCateDAOInter">
+
+  <!-- 등록 -->
+  <insert id="create" parameterType="ComCateVO">
+    INSERT INTO com_cate(cateno, comno, cate_name, cate_seqno, cate_visible, cate_date)
+    VALUES(cate_seq.nextval, #{comno}, #{cate_name}, #{cate_seqno}, #{cate_visible}, sysdate)
+  </insert>
+  
+  <!-- 목록  -->
+  <select id="list_cateno_asc" resultType="ComCateVO">
+    SELECT cateno, comno, cate_name, cate_seqno, cate_visible, cate_date, cate_cnt
+    FROM com_cate
+    ORDER BY cateno ASC
+  </select>
+  
+    <select id="list_seqno_asc" resultType="ComCateVO">
+    SELECT cateno, comno, cate_name, cate_seqno, cate_visible, cate_date, cate_cnt
+    FROM com_cate
+    ORDER BY cate_seqno ASC
+  </select>
+  
+  <!-- 회사 이름에 따른 직무별 목록 -->
+  <select id ="list_by_comno" resultType="ComCateVO"  parameterType="int">
+    SELECT cateno, comno, cate_name, cate_seqno, cate_visible, cate_date, cate_cnt
+    FROM com_cate
+    WHERE comno=#{comno}
+    ORDER BY cate_seqno ASC
+  </select>
+  
+  <!-- 조회, id: read, 입력: cateno, 리턴: ComCateVO -->
+  <select id="read" resultType="ComCateVO" parameterType="int">
+    SELECT cateno, comno, cate_name, cate_seqno, cate_visible, cate_date, cate_cnt
+    FROM com_cate
+    WHERE cateno=#{cateno}
+  </select>  
+  
+  <!-- 수정 -->
+  <update id="update" parameterType="ComCateVO">
+    UPDATE com_cate
+    SET comno=#{comno}, cate_name=#{cate_name}, cate_seqno=#{cate_seqno}, cate_visible=#{cate_visible}
+    WHERE cateno = #{cateno}
+  </update>
+  
+  <!-- 삭제, return: int -->
+  <delete id="delete" parameterType="int">
+    DELETE com_cate
+    WHERE cateno = #{cateno}
+  </delete> 
+  
+   <!-- 우선순위 상향 up 10 ▷ 1 -->
+  <update id="update_seqno_up" parameterType="int">
+    UPDATE com_cate
+    SET cate_seqno = cate_seqno - 1
+    WHERE cateno = #{cateno}
+  </update>
+  
+  <!-- 우선순위 하향 down 1 ▷ 10 -->
+  <update id="update_seqno_down" parameterType="int">
+    UPDATE com_cate
+    SET cate_seqno = cate_seqno + 1
+    WHERE cateno = #{cateno}
+  </update>
+  
+  <!-- 출력모드수정, id: update_visible, 입력: ComCateVO, 리턴: int -->
+  <update id="update_visible" parameterType="ComCateVO">
+    UPDATE com_cate
+    SET cate_visible=#{cate_visible}
+    WHERE cateno=#{cateno}
+  </update>
+  
+  <!-- comintro + comcate inner join,  1 : 다, 통합 VO -->
+  <select id="list_join" resultType="ComIntro_ComCate_join">
+    SELECT r.comno as r_comno, r.com_name as r_com_name,
+               c.cateno, c.comno, c.cate_name, c.cate_seqno, c.cate_visible, c.cate_date, c.cate_cnt
+    FROM com_intro r, com_cate c
+    WHERE r.comno = c.comno
+    ORDER BY r.comno ASC, c.cate_seqno ASC
+  </select>
+ 
+  <!-- comintro 별 comcate 목록: comintro + comcate inner join,  1 : 다, 통합 VO -->
+  <!--  
+  <select id="list_join_by_categrpno" resultType="ComIntro_ComCate_join" parameterType="int">
+    SELECT r.comno as r_comno, r.com_name as r_com_name,
+               c.cateno, c.comno, c.cate_name, c.cate_seqno, c.cate_visible, c.cate_date, c.cate_cnt
+    FROM com_intro r, com_cate c
+    WHERE (r.comno = c.comno) AND r.comno=#{comno}
+    ORDER BY r.comno ASC, c.cate_seqno ASC
+  </select>
+ -->
+ 
+  <update id="increaseCnt" parameterType="int">
+    UPDATE com_cate 
+    SET cate_cnt = cate_cnt + 1 
+    WHERE cateno=#{cateno}
+  </update>
+
+  <update id="decreaseCnt" parameterType="int">
+    UPDATE com_cate 
+    SET cate_cnt = cate_cnt - 1 
+    WHERE cateno=#{cateno}
+  </update>
+  
+
+</mapper>
