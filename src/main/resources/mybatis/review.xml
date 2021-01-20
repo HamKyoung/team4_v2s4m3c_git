@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.review.ReviewDAOInter">
+
+  <insert id="create" parameterType="ReviewVO">
+    INSERT INTO com_review(rev_no, com_name,rev_title, rev_score, rev_depart, rev_content, rev_visible, 
+                                            rev_good, rev_bad, rev_date, rev_cnt, comno, gen_memberno)
+    VALUES(com_review_seq.nextval, #{com_name}, #{rev_title}, #{rev_score}, #{rev_depart}, #{rev_content}, #{rev_visible}, 
+                 #{rev_good}, #{rev_bad}, sysdate, 0, #{comno}, #{gen_memberno})
+  </insert>
+  
+  <select id="list_rev_no" resultType="ReviewVO">
+    SELECT rev_no, com_name, rev_title, rev_score, rev_visible, rev_date, comno
+    FROM com_review
+    ORDER BY rev_no ASC
+  </select>
+  
+  <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <select id="list_comno"  resultType="ReviewVO" parameterType="HashMap">
+     SELECT rev_no, com_name, rev_title, rev_score, rev_content, rev_visible, rev_date, comno, r
+     FROM (
+                SELECT rev_no, com_name, rev_title, rev_score, rev_content, rev_visible, rev_date, comno, rownum as r
+                FROM (
+                          SELECT rev_no, com_name, rev_title, rev_score, rev_content, rev_visible, rev_date, comno
+                          FROM com_review
+                          <choose>
+                            <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                              WHERE rev_no=#{rev_no}
+                            </when>
+                            <otherwise>
+                              WHERE comno=#{comno} AND (com_name LIKE '%' || #{com_name} 
+                                                                              OR rev_content LIKE '%' || #{com_name}) 
+                            </otherwise>
+                          </choose>                            
+                          ORDER BY rev_no DESC
+                )
+     )
+     WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
+   </select>
+  
+     <!-- 카테고리별 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM com_review
+     <choose>
+       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+         WHERE rev_no=#{rev_no}
+       </when>
+       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+         WHERE rev_no=#{rev_no} AND (title LIKE '%' || #{com_name} || '%' 
+                                                        OR rev_content LIKE '%' || #{rev_content} || '%')
+       </otherwise>
+     </choose>
+   </select>    
+  
+  <select id="read" resultType="ReviewVO" parameterType="int">
+    SELECT rev_no, com_name, rev_title, rev_score, rev_depart, rev_content, rev_visible, rev_date, comno
+    FROM com_review
+    WHERE rev_no=#{rev_no}
+  </select>  
+
+  <update id="update" parameterType="ReviewVO">
+    UPDATE com_review 
+    SET rev_title=#{rev_title}, rev_score=#{rev_score}, rev_depart=#{rev_depart}, rev_content=#{rev_content}
+    WHERE rev_no=#{rev_no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM com_review
+    WHERE rev_no=#{rev_no}
+  </delete>
+  
+  
+  
+  
+  
+  
+    
+    
+
+  
+</mapper>
+
+
+
+
+

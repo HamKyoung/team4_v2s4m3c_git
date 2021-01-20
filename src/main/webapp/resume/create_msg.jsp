@@ -5,8 +5,9 @@
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge;">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>채용뉴스</title>
+<title>JOB</title>
  
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
 <script type="text/JavaScript"
@@ -20,24 +21,21 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
-    뉴스 등록
+    이력서
   </DIV>
-   
- 
-  <div class='menu_line'></div>
-   
+       
 <DIV class='message'>
   <fieldset class='fieldset_basic'>
     <UL>
       <c:choose>
         <c:when test="${cnt == 1 }">
           <LI class='li_none'>
-            <span class='span_success'> 뉴스를 등록했습니다.</span>
+            <span class='span_success'>새로운 이력서를 등록했습니다.</span>
           </LI>
         </c:when>
         <c:otherwise>
           <LI class='li_none'>
-            <span class='span_fail'> 뉴스 등록에 실패했습니다.</span>
+            <span class='span_fail'>새로운 이력서 등록에 실패했습니다.</span>
           </LI>
         </c:otherwise>
       </c:choose>
@@ -47,7 +45,7 @@
           <c:when test="${cnt == 1 }">
             <button type='button' 
                          onclick="location.href='./create.do'"
-                         class="btn btn-info">새로운 뉴스 등록</button>
+                         class="btn btn-info">새로운 이력서 등록</button>
           </c:when>
           <c:otherwise>
             <button type='button' 
@@ -57,8 +55,8 @@
         </c:choose>
                     
         <button type='button' 
-                    onclick="location.href='./list.do'"
-                    class="btn btn-info">목록</button>
+                    onclick="location.href='../index.jsp'"
+                    class="btn btn-info">메인화면으로</button>
       </LI>
      </UL>
   </fieldset>
@@ -69,3 +67,4 @@
 </body>
  
 </html>
+   

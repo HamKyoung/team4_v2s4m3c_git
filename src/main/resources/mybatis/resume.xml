@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.resume.ResumeDAOInter">
+
+  <insert id="create" parameterType="ResumeVO">
+  <selectKey keyProperty="res_no" resultType="int" order="BEFORE">
+      SELECT mem_res_seq.nextval FROM dual
+  </selectKey>
+  
+    INSERT ALL
+    
+    INTO mem_res
+    VALUES(mem_res_seq.nextval, #{gen_name}, #{res_phone}, #{res_mail1}, #{res_mail2}, #{res_title}, 
+    #{res_intro}, #{res_work}, #{res_web}, #{res_visible}, sysdate, #{res_pic}, #{res_thumb}, #{res_size}, 
+    #{gen_memberno})
+
+		INTO res_scho
+		VALUES(#{res_scname}, #{res_major1}, #{res_major2}, #{res_gotin}, #{res_grad}, mem_res_seq.nextval)
+		
+		INTO res_lice
+		VALUES(#{res_lice1}, #{res_lice1_lev}, #{res_lice2}, #{res_lice2_lev}, mem_res_seq.nextval)
+		
+		SELECT * FROM DUAL
+  </insert>
+
+  <!-- <select id="list_by_gen_memberno" resultType="ResumeVO" parameterType="int"> 나중에 필터로 리스트 볼 수 있게하기
+    SELECT res_no, res_intro, res_web
+    FROM com_res
+    WHERE gen_memberno=#{gen_memberno}
+    ORDER BY contentsno DESC
+  </select>  
+  -->
+  
+  <select id="list_all" resultType="ResumeVO">
+    SELECT res_no, res_thumb, res_title, res_mail1, res_mail2, res_visible
+    FROM mem_res 
+    ORDER BY res_no ASC    
+  </select> 
+  
+  <select id="read" resultType="ResumeVO" parameterType="int">
+    SELECT r.res_no as mem_res_res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, 
+    s.res_no as res_scho_res_no, res_scname, res_major1, res_major2, res_gotin,res_grad, 
+    l.res_no as res_lice_res_no, res_lice1, res_lice1_lev, res_lice2, res_lice2_lev
+    FROM mem_res r, res_scho s, res_lice l
+    WHERE (r.res_no=s.res_no) AND (s.res_no=l.res_no) AND r.res_no = #{res_no}
+  </select>
+  
+  <update id="update" parameterType="ResumeVO">
+    UPDATE mem_res 
+    SET gen_name=#{gen_name}, res_intro=#{res_intro}, res_scho=#{res_scho}, res_grad=#{res_grad}, res_work, res_cert, res_cert_lev, res_web, res_date, res_pic, res_thumb, res_size
+    WHERE res_no=#{res_no}
+  </update>
+
+  
+  
+
+</mapper>
+
+
+
