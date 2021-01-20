@@ -3,7 +3,9 @@
             -----  Q&A (함경채)
             
             -----  회사소개 (류화정)
+            http://localhost:9090/team4/comintro/list_all.do
             -----  구인 (류화정)
+            http://localhost:9090/team4/recruit/list.do?cateno=1
                         
             -----  회사리뷰(김소영)
             -----  회원 이력서: 로그인한 회원에게만 노출(김소영)
