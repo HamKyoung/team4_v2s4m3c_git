@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.notice.NoticeDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.pass_self.Pass_selfDAOInter">
+
+  <!-- 등록 -->
+  <insert id="create" parameterType="Pass_selfVO">
+    INSERT INTO pass_self(pass_self_no, comno, cor_memberno, pass_self_title, pass_self_item1, pass_self_item2, pass_self_item3, pass_self_item4, pass_self_item5, 
+                                    pass_self_ans1, pass_self_ans2, pass_self_ans3, pass_self_ans4, pass_self_ans5, pass_self_date)
+    VALUES(pass_self_seq.nextval, #{comno}, #{cor_memberno}, #{pass_self_title}, #{pass_self_item1}, #{pass_self_item2}, #{pass_self_item3}, #{pass_self_item4}, 
+                #{pass_self_item5}, #{pass_self_ans1}, #{pass_self_ans2}, #{pass_self_ans3}, #{pass_self_ans4}, #{pass_self_ans5}, sysdate)
+  </insert> 
+  
+  <!-- 목록 -->  
+<!--   <select id="list" resultType="Pass_selfVO">
+    SELECT pass_self_no, comno, cor_memberno, pass_self_title, pass_self_item1, pass_self_item2, pass_self_item3, pass_self_item4, pass_self_item5, 
+              pass_self_ans1, pass_self_ans2, pass_self_ans3, pass_self_ans4, pass_self_ans5, pass_self_date, pass_self_views
+    FROM pass_self
+    ORDER BY pass_self_no DESC
+  </select> -->
+  
+  
+  <!-- 목록 -->  
+  <select id="list" resultType="Pass_selfVO">
+    SELECT p.pass_self_no, p.comno, p.cor_memberno, p.cor_memberno, p.pass_self_title, p.pass_self_date, p.pass_self_views, c.com_name
+    FROM pass_self p, conpany_intro c
+    WHERE p.comno = c.comno
+    ORDER BY pass_self_no DESC
+  </select>
+  
+  
+  
+  <!-- 조회, 수정폼, 삭제폼 -->
+  <select id="read" parameterType="int" resultType="Pass_selfVO">
+    SELECT pass_self_no, comno, cor_memberno, pass_self_title, pass_self_item1, pass_self_item2, pass_self_item3, pass_self_item4, pass_self_item5, 
+                                    pass_self_ans1, pass_self_ans2, pass_self_ans3, pass_self_ans4, pass_self_ans5, pass_self_date, pass_self_views
+    FROM pass_self
+    WHERE pass_self_no = #{pass_self_no}
+  </select>
+  
+  <!-- 수정, id: update, 입력: Pass_selfVO, 리턴: int -->
+  <update id="update" parameterType="Pass_selfVO">
+    UPDATE pass_self
+    SET pass_self_title=#{pass_self_title}, pass_self_item1=#{pass_self_item1}, pass_self_item2=#{pass_self_item2}, pass_self_item3=#{pass_self_item3}, pass_self_item4=#{pass_self_item4}, pass_self_item5=#{pass_self_item5}, 
+                                    pass_self_ans1=#{pass_self_ans1}, pass_self_ans2=#{pass_self_ans2}, pass_self_ans3=#{pass_self_ans3}, pass_self_ans4=#{pass_self_ans4}, pass_self_ans5=#{pass_self_ans5}
+    WHERE pass_self_no = #{pass_self_no}
+  </update>
+  
+  <!-- 삭제, return: int -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM pass_self
+    WHERE pass_self_no = #{pass_self_no}
+  </delete>   
+  
+  
+</mapper>
+
+
+
+
+
+

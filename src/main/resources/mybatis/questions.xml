@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.notice.NoticeDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.questions.QuesDAOInter">
+
+  <!-- 등록 -->
+  <insert id="create" parameterType="QuesVO">
+    INSERT INTO questions(ques_no, gen_memberno, ques_title, ques_con, ques_date, ques_passwd)
+    VALUES(questions_seq.nextval, #{gen_memberno}, #{ques_title}, #{ques_con}, sysdate, #{ques_passwd})
+  </insert> 
+
+  <!-- 목록 -->  
+<!--   <select id="list_ques_no_desc" resultType="QuesVO">
+    SELECT ques_no, gen_memberno, ques_title, ques_con, ques_date, ques_views, ques_passwd
+    FROM questions
+    ORDER BY ques_no DESC
+  </select> -->
+  
+  <!-- 목록 -->  
+  <select id="list_ques_no_desc" resultType="QuesVO">
+    SELECT q.ques_no, q.gen_memberno, q.ques_title, q.ques_con, q.ques_date, q.ques_views, q.ques_passwd, gm.gen_name
+    FROM questions q, general_member gm
+    WHERE q.gen_memberno = gm.gen_memberno
+    ORDER BY q.ques_no DESC
+  </select>
+  
+  <!-- 조회, 수정폼, 삭제폼 -->
+  <select id="read" parameterType="int" resultType="QuesVO">
+    SELECT ques_no, gen_memberno, ques_title, ques_con, ques_date, ques_views, ques_passwd
+    FROM questions
+    WHERE ques_no = #{ques_no}
+  </select>
+  
+  <!-- 수정 -->
+  <update id="update" parameterType="QuesVO">
+    UPDATE questions
+    SET ques_title=#{ques_title}, ques_con=#{ques_con}
+    WHERE ques_no = #{ques_no}
+  </update>
+  
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM questions
+    WHERE ques_no = #{ques_no}
+  </delete>
+  
+  <!-- 비밀번호 확인 -->
+  <select id="passwd_check" parameterType="HashMap" resultType="int">
+    SELECT COUNT(*) as passwd_cnt
+    FROM questions
+    WHERE ques_no=#{ques_no} AND ques_passwd=#{ques_passwd}
+  </select>
+
+
+
+</mapper>
+
+
+
+
+
+

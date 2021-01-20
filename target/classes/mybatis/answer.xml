@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.notice.NoticeDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.answer.AnsDAOInter">
+
+  <!-- 등록 -->
+  <insert id="create" parameterType="AnsVO">
+    INSERT INTO answer(ans_no, ques_no, ans_title, ans_con, ans_date)
+    VALUES(answer_seq.nextval, #{ques_no}, #{ans_title}, #{ans_con}, sysdate)
+  </insert> 
+  
+  <!-- 목록 -->  
+  <select id="list_ans_no_asc" resultType="AnsVO">
+    SELECT ans_no, ques_no, ans_title, ans_con, ans_date, ans_views
+    FROM answer
+    ORDER BY ans_no ASC
+  </select>
+  
+  <!-- 조회, 수정, 삭제폼 -->
+  <select id="read" parameterType="int" resultType="AnsVO">
+    SELECT ans_no, ques_no, ans_title, ans_con, ans_date, ans_views
+    FROM answer
+    WHERE ans_no = #{ans_no}
+  </select>
+  
+  <!-- 수정 -->
+  <update id="update" parameterType="AnsVO">
+    UPDATE answer
+    SET ans_title=#{ans_title}, ans_con=#{ans_con}
+    WHERE ans_no = #{ans_no}
+  </update>
+  
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM answer
+    WHERE ans_no = #{ans_no}
+  </delete>
+
+  <!-- 답변 여부 확인 -->
+  <select id="ans_cnt" parameterType="int" resultType="int">
+    SELECT COUNT(*) as ans_cnt
+    FROM answer
+    WHERE ques_no = #{ques_no}
+  </select>
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>
+
+
+
+
