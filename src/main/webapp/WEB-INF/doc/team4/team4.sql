@@ -960,6 +960,24 @@ CREATE TABLE mem_res(
   FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
 );
 
+COMMENT ON TABLE MEM_RES is 'MEM_RES';
+COMMENT ON COLUMN MEM_RES.RES_NO is '이력서 번호';
+COMMENT ON COLUMN MEM_RES.GEN_NAME is '회원 이름';
+COMMENT ON COLUMN MEM_RES.RES_PHONE is '연락처';
+COMMENT ON COLUMN MEM_RES.RES_MAIL1 is '메일(아이디)';
+COMMENT ON COLUMN MEM_RES.RES_MAIL2 is '메일(도메인)';
+COMMENT ON COLUMN MEM_RES.RES_TITLE is '제목';
+COMMENT ON COLUMN MEM_RES.RES_INTRO is '짧은 자기소개';
+COMMENT ON COLUMN MEM_RES.RES_WORK is '경력기술';
+COMMENT ON COLUMN MEM_RES.RES_WEB is '포트폴리오';
+COMMENT ON COLUMN MEM_RES.RES_VISIBLE is '공개/비공개 여부';
+COMMENT ON COLUMN MEM_RES.RES_DATE is '작성 날짜';
+COMMENT ON COLUMN MEM_RES.RES_PIC is '사진';
+COMMENT ON COLUMN MEM_RES.RES_THUMB is '사진 썸네일';
+COMMENT ON COLUMN MEM_RES.RES_SIZE is '사진 크기';
+COMMENT ON COLUMN MEM_RES.GEN_MEMBERNO is '회원번호';
+
+
 CREATE SEQUENCE mem_res_seq
   START WITH 1              -- 시작 번호
   INCREMENT BY 1          -- 증가값
@@ -980,6 +998,15 @@ CREATE TABLE res_scho(
   FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
 );
 
+COMMENT ON TABLE RES_SCHO is 'RES_SCHO';
+COMMENT ON COLUMN RES_SCHO.RES_SCNAME is '학교명';
+COMMENT ON COLUMN RES_SCHO.RES_MAJOR1 is '전공';
+COMMENT ON COLUMN RES_SCHO.RES_MAJOR2 is '부전공/복수전공';
+COMMENT ON COLUMN RES_SCHO.RES_GOTIN is '입학일';
+COMMENT ON COLUMN RES_SCHO.RES_GRAD is '졸업일';
+COMMENT ON COLUMN RES_SCHO.RES_NO is '이력서 번호';
+
+
 /**********************************/
 /* Table Name: 자격증 */
 /**********************************/
@@ -991,6 +1018,14 @@ CREATE TABLE res_lice(
 		res_no                        		NUMBER(10)		                NOT NULL       PRIMARY KEY ,
   FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
 );
+
+COMMENT ON TABLE RES_LICE is 'RES_LICE';
+COMMENT ON COLUMN RES_LICE.RES_LICE1 is '자격증1';
+COMMENT ON COLUMN RES_LICE.RES_LICE1_LEV is '자격증1 급수';
+COMMENT ON COLUMN RES_LICE.RES_LICE2 is '자격증2';
+COMMENT ON COLUMN RES_LICE.RES_LICE2_LEV is '자격증2 급수';
+COMMENT ON COLUMN RES_LICE.RES_NO is '이력서 번호';
+
 
 -- 등록
 INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
