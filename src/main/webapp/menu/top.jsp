@@ -18,8 +18,6 @@
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/pass_self/list.do'>합격 자기소개서</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/answer/list.do'>Q&A</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link'  style='font-size: 10px;' href='${pageContext.request.contextPath}/survey/list.do'>설문 조사 목록</A><span class='top_menu_sep'>&nbsp;</span>
-      <A class='top_menu_link'  style='font-size: 10px;' href='${pageContext.request.contextPath}/surveyitem/list.do'>설문 조사 항목</A><span class='top_menu_sep'>&nbsp;</span>
-      <A class='top_menu_link'  style='font-size: 10px;' href='${pageContext.request.contextPath}/surveymember/list.do'>설문 참여 인원</A>
     </NAV> 
     
     <DIV class='member_menu'>
