@@ -36,8 +36,19 @@
     <context:component-scan base-package="dev.mvc.jobnws" /> <!-- 관리자 패키지 -->
   <context:component-scan base-package="dev.mvc.jobsup" /> <!-- 관리자 패키지 -->
   <context:component-scan base-package="dev.mvc.admin" /> <!-- 관리자 패키지 -->
+<<<<<<< HEAD
 
 	
+=======
+	<context:component-scan base-package="dev.mvc.review" /> <!-- 리뷰 패키지 -->
+  <context:component-scan base-package="dev.mvc.resume" /> <!-- 이력서 패키지 -->
+  <context:component-scan base-package="dev.mvc.comintro" /> <!-- 회사소개 패키지 -->
+  <context:component-scan base-package="dev.mvc.comcate" /> <!-- 회사직무별 패키지 -->
+  <context:component-scan base-package="dev.mvc.recruit" /> <!-- 구인 패키지 -->
+  <context:component-scan base-package="dev.mvc.attachfile" /> <!-- 첨부파일 패키지 -->
+  
+  
+>>>>>>> refs/remotes/origin/master
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"
     class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
