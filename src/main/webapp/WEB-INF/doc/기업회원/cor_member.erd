@@ -30,13 +30,13 @@
       <targetConnections/>
       <error></error>
       <linkedPath></linkedPath>
-      <tableName>기업회원</tableName>
-      <logicalName>cor_member</logicalName>
+      <tableName>cor_member</tableName>
+      <logicalName>기업회원</logicalName>
       <description></description>
       <columns>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>회원 번호</columnName>
-          <logicalName>cor_memberno</logicalName>
+          <columnName>cor_memberno</columnName>
+          <logicalName>회원 번호</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
             <name>NUMERIC</name>
             <logicalName>Numeric</logicalName>
@@ -51,8 +51,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>회원 아이디</columnName>
-          <logicalName>cor_id</logicalName>
+          <columnName>cor_id</columnName>
+          <logicalName>회원 아이디</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
             <name>VARCHAR</name>
             <logicalName>String</logicalName>
@@ -67,8 +67,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>비밀번호</columnName>
-          <logicalName>cor_passwd</logicalName>
+          <columnName>cor_passwd</columnName>
+          <logicalName>비밀번호</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>20</size>
           <notNull>true</notNull>
@@ -78,8 +78,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>회원 이름</columnName>
-          <logicalName>cor_name</logicalName>
+          <columnName>cor_name</columnName>
+          <logicalName>회원 이름</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>20</size>
           <notNull>true</notNull>
@@ -89,8 +89,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>생년월일</columnName>
-          <logicalName>cor_resident</logicalName>
+          <columnName>cor_resident</columnName>
+          <logicalName>생년월일</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>13</size>
           <notNull>true</notNull>
@@ -100,8 +100,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>성별</columnName>
-          <logicalName>cor_sex</logicalName>
+          <columnName>cor_sex</columnName>
+          <logicalName>성별</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>10</size>
           <notNull>true</notNull>
@@ -111,8 +111,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>전화 번호</columnName>
-          <logicalName>cor_phone</logicalName>
+          <columnName>cor_phone</columnName>
+          <logicalName>전화 번호</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>20</size>
           <notNull>true</notNull>
@@ -122,8 +122,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>우편 번호</columnName>
-          <logicalName>cor_zipcode</logicalName>
+          <columnName>cor_zipcode</columnName>
+          <logicalName>우편 번호</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>5</size>
           <notNull>false</notNull>
@@ -133,8 +133,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>회원 주소</columnName>
-          <logicalName>cor_addr</logicalName>
+          <columnName>cor_addr</columnName>
+          <logicalName>회원 주소</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>100</size>
           <notNull>false</notNull>
@@ -144,8 +144,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>회원 주소1</columnName>
-          <logicalName>cor_addr1</logicalName>
+          <columnName>cor_addr1</columnName>
+          <logicalName>회원 주소1</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>50</size>
           <notNull>false</notNull>
@@ -155,8 +155,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>이메일</columnName>
-          <logicalName>cor_mail</logicalName>
+          <columnName>cor_mail</columnName>
+          <logicalName>이메일</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>50</size>
           <notNull>true</notNull>
@@ -166,8 +166,8 @@
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>가입 날짜</columnName>
-          <logicalName>cor_date</logicalName>
+          <columnName>cor_date</columnName>
+          <logicalName>가입 날짜</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
             <name>DATE</name>
             <logicalName>Date</logicalName>

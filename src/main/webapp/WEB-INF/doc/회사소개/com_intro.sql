@@ -2,9 +2,9 @@
 /* Table Name: 기업 회원 */
 /**********************************/
 
-DROP TABLE corporate_member CASCADE CONSTRAINTS; 
-DROP TABLE corporate_member;
-CREATE TABLE corporate_member(
+DROP TABLE cor_member CASCADE CONSTRAINTS; 
+DROP TABLE cor_member;
+CREATE TABLE cor_member(
 		cor_memberno                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
 		cor_id                        		VARCHAR2(50)		 NOT NULL,
 		cor_passwd                    		VARCHAR2(20)		 NOT NULL,
