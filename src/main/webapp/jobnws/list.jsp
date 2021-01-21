@@ -53,25 +53,25 @@
     </ASIDE>
     <tbody>
     <c:forEach var="JobnwsVO" items="${list }">  <!-- request 객체에 접근 -->
-      <c:set var="newsno" value="${JobnwsVO.newsno}" />
-      <c:set var="news_thumb1" value="${JobnwsVO.news_thumb1 }" />
+      <c:set var="jobnwsno" value="${JobnwsVO.jobnwsno}" />
+      <c:set var="jobnws_thumb1" value="${JobnwsVO.jobnws_thumb1 }" />
       
       <TR>
-        <TD class="td_bs">${newsno }</TD>
+        <TD class="td_bs">${jobnwsno }</TD>
         <TD>
                <c:choose>
-                <c:when test="${news_thumb1.endsWith('jpg') || news_thumb1.endsWith('png') || news_thumb1.endsWith('gif')}">
-                  <IMG src="./storage/main_images/${news_thumb1 }" style="width: 120px; height: 80px;"> 
+                <c:when test="${jobnws_thumb1.endsWith('jpg') || jobnws_thumb1.endsWith('png') || jobnws_thumb1.endsWith('gif')}">
+                  <IMG src="./storage/main_images/${jobnws_thumb1 }" style="width: 120px; height: 80px;"> 
                 </c:when>
                 <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
-                  ${contentsVO.news_file1}
+                  ${contentsVO.jobnws_file1}
                 </c:otherwise>
               </c:choose>
               </TD>
-        <TD class="td_bs_left"><A href="./read.do?newsno=${newsno }">${JobnwsVO.news_title }</A></TD>
-        <TD class="td_bs">${JobnwsVO.news_cnt }</TD>
-        <TD class="td_bs">${JobnwsVO.news_good }</TD>
-        <TD class="td_bs">${JobnwsVO.news_date.substring(0, 10) }</TD>     
+        <TD class="td_bs_left"><A href="./read.do?jobnwsno=${jobnwsno }">${JobnwsVO.jobnws_title }</A></TD>
+        <TD class="td_bs">${JobnwsVO.jobnws_cnt }</TD>
+        <TD class="td_bs">${JobnwsVO.jobnws_good }</TD>
+        <TD class="td_bs">${JobnwsVO.jobnws_date.substring(0, 10) }</TD>     
       </TR> 
     </c:forEach>
     

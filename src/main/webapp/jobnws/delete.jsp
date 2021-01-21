@@ -29,16 +29,16 @@
   <div class='menu_line'></div>
  
   <FORM name='frm' method='POST' action='./delete.do'>
-      <input type='hidden' name='newsno' value='${param.newsno}'>
+      <input type='hidden' name='jobnwsno' value='${param.jobnwsno}'>
      
       <div class="form-group">   
         <div class="col-md-12" style='text-align: center; margin: 30px;'>
-          삭제 되는글: ${jobnwsVO.news_title }<br><br>
+          삭제 되는글: ${jobnwsVO.jobnws_title }<br><br>
           삭제하시겠습니까? 삭제하시면 복구 할 수 없습니다.<br><br>
           
         <div class="form-group">   
         <div class="col-md-12">
-          <input type='password' class="form-control" name='news_passwd'  value='1234' placeholder="패스워드" style='width: 20%; margin: 10px auto;'>
+          <input type='password' class="form-control" name='jobnws_passwd'  value='1234' placeholder="패스워드" style='width: 20%; margin: 10px auto;'>
         </div>
       </div>
           
