@@ -706,3 +706,351 @@ COMMIT;
 
 SELECT * FROM jobnws ORDER BY jobnwsno ASC;
 
+COMMIT;
+
+
+/**********************************/
+/* Table Name: 설문조사 */
+/**********************************/
+drop table surveymember;
+drop table surveyitem;
+drop table survey;
+CREATE TABLE survey(
+		surveyno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		topic                         		VARCHAR2(200)		 NOT NULL,
+		startdate                     	VARCHAR2(10)		 NOT NULL,
+		enddate                       	VARCHAR2(10)		 NOT NULL,
+		poster                        	VARCHAR2(100)	     NULL,
+		cnt                           		NUMBER(7)		     NULL ,
+		continueyn                    		CHAR(1)		     NOT NULL
+);
+
+COMMENT ON TABLE survey is '설문조사';
+COMMENT ON COLUMN survey.surveyno is '설문조사번호';
+COMMENT ON COLUMN survey.topic is '제목';
+COMMENT ON COLUMN survey.startdate is '시작날짜';
+COMMENT ON COLUMN survey.enddate is '종료 날짜';
+COMMENT ON COLUMN survey.poster is '포스터 파일';
+COMMENT ON COLUMN survey.cnt is '참여인원';
+COMMENT ON COLUMN survey.continueyn is '진행여부';
+
+DROP SEQUENCE survey_seq;
+CREATE SEQUENCE survey_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(10) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+
+-- 등록
+INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
+VALUES(survey_seq.nextval, '설문조사', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
+
+INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
+VALUES(survey_seq.nextval, '설문조사1', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
+
+INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
+VALUES(survey_seq.nextval, '설문조사2', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
+
+INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
+VALUES(survey_seq.nextval, '설문조사2', '2020-11-04', '2020-11-11', ' ', 1, 'Y');
+
+INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
+VALUES(survey_seq.nextval, 'topic', '2020-11-04', '2020-11-11', ' ', 1, 'Y');
+
+ALTER TABLE survey
+ADD (word VARCHAR2(300));
+
+--목록
+SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word
+FROM survey 
+ORDER BY surveyno ASC;
+
+SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word
+FROM survey 
+WHERE (topic LIKE '%' || 'topic' || '%' 
+             OR poster LIKE '%' || topic || '%' 
+             OR word LIKE '%' || topic || '%')
+ORDER BY surveyno DESC;  
+
+commit;
+
+/**********************************/
+/* Table Name: 설문 조사 항목 */
+/**********************************/
+drop table surveyitem;
+DROP SEQUENCE surveyitem_seq;
+
+CREATE TABLE surveyitem(
+		sur_itemno                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		surveyno                      		NUMBER(10)		 NOT NULL,
+		itemseq                       		NUMBER(2)	DEFAULT 1	 NOT NULL,
+		item                          		VARCHAR2(200)		 NOT NULL,
+		itemfile                      		VARCHAR2(100)		 NULL,
+		itemcnt                       		NUMBER(7)	DEFAULT 0	 NOT NULL,
+  FOREIGN KEY (surveyno) REFERENCES survey (surveyno)
+);
+
+COMMENT ON TABLE surveyitem is '설문 조사 항목';
+COMMENT ON COLUMN surveyitem.sur_itemno is '설문 조사 항목 번호';
+COMMENT ON COLUMN surveyitem.surveyno is '설문 조사 번호';
+COMMENT ON COLUMN surveyitem.itemseq is '항목 출력 순서';
+COMMENT ON COLUMN surveyitem.item is '항목';
+COMMENT ON COLUMN surveyitem.itemfile is '항목 파일';
+COMMENT ON COLUMN surveyitem.itemcnt is '항목 선택 인원';
+
+drop table surveyitem;
+DROP SEQUENCE surveyitem_seq;
+CREATE SEQUENCE surveyitem_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(10) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+  
+-- 등록
+INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
+VALUES(surveyitem_seq.nextval, 1, 1, '테스트', '파일', 0);
+
+INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
+VALUES(surveyitem_seq.nextval, 1, 1, '테스트', '파일', 0);
+
+INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
+VALUES(surveyitem_seq.nextval, 1, 1, '테스트', '파일', 0);
+
+INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
+VALUES(surveyitem_seq.nextval, 1, 1, 'test', 'file', 0);
+
+ALTER TABLE surveyitem
+ADD (word VARCHAR2(300));
+
+-- 목록
+SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt, word
+FROM surveyitem 
+ORDER BY itemseq ASC;
+
+commit;
+
+-- 조회
+SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt
+FROM surveyitem 
+WHERE sur_itemno=1;
+
+/**********************************/
+/* Table Name: 설문 참여 회원 */
+/**********************************/
+CREATE TABLE surveymember(
+		sur_memberno                  		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		sur_itemno                    		NUMBER(10)		 NOT NULL,
+		gen_memberno                  		NUMBER(7)		 NOT NULL,
+		rdate                         		DATE		 NOT NULL,
+  FOREIGN KEY (sur_itemno) REFERENCES surveyitem (sur_itemno),
+  FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
+);
+
+COMMENT ON TABLE surveymember is '설문 참여 회원';
+COMMENT ON COLUMN surveymember.sur_memberno is '설문 참여 회원 번호';
+COMMENT ON COLUMN surveymember.sur_itemno is '설문 조사 항목 번호';
+COMMENT ON COLUMN surveymember.gen_memberno is '회원 번호';
+COMMENT ON COLUMN surveymember.rdate is '설문 참여 날짜';
+
+DROP SEQUENCE surveymember_seq;
+CREATE SEQUENCE surveymember_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(10) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+
+-- 등록
+INSERT INTO surveymember(sur_memberno, sur_itemno, gen_memberno, rdate)
+VALUES(surveymember_seq.nextval, 1, 1, sysdate);
+
+INSERT INTO surveymember(sur_memberno, sur_itemno, gen_memberno, rdate)
+VALUES(surveymember_seq.nextval, 1, 2, sysdate);
+
+INSERT INTO surveymember(sur_memberno, sur_itemno, gen_memberno, rdate)
+VALUES(surveymember_seq.nextval, 1, 3, sysdate);
+
+-- 목록
+SELECT sur_memberno, sur_itemno, gen_memberno, rdate
+FROM surveymember 
+ORDER BY sur_memberno ASC;
+
+commit;
+
+-- 조회
+SELECT sur_memberno, sur_itemno, gen_memberno, rdate
+FROM surveymember 
+WHERE sur_memberno=1;
+
+
+--멤버 조인
+SELECT s.sur_memberno, s.sur_itemno, s.gen_memberno, s.rdate, g.gen_id as gid
+FROM surveymember s , gen_member g
+WHERE s.gen_memberno = g.gen_memberno
+ORDER BY sur_memberno ASC
+
+
+/**********************************/
+/* Table Name: 이력서 */
+/**********************************/
+DROP TABLE mem_res CASCADE CONSTRAINTS;
+DROP SEQUENCE mem_res_seq;
+
+DROP TABLE res_scho CASCADE CONSTRAINTS;
+
+DROP TABLE res_lice CASCADE CONSTRAINTS;
+
+
+CREATE TABLE mem_res(
+		res_no                        		NUMBER(10)		        NOT NULL		 PRIMARY KEY,
+		gen_name                      		VARCHAR2(20)		 NOT NULL,
+		res_phone                     		VARCHAR2(60)		 NOT NULL,
+		res_mail1                      		VARCHAR2(200)		 NOT NULL,
+		res_mail2                      		VARCHAR2(200)		 NOT NULL,
+		res_title                     		VARCHAR2(100)		    NOT NULL,
+		res_intro                     		VARCHAR2(800)		    NOT NULL,
+		res_work                      	CLOB		                    DEFAULT 0		 NULL ,
+		res_web                       	VARCHAR2(100)		NULL ,
+		res_visible                   	CHAR(1)		            DEFAULT 'Y'	 NOT NULL,
+		res_date                      		DATE		                NOT NULL,
+		res_pic                       		VARCHAR2(100)		 NULL ,
+		res_thumb                     	VARCHAR2(100)		 NULL ,
+		res_size                      		NUMBER(10)		         NULL ,
+		gen_memberno               	NUMBER(7)		         NULL ,
+  FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
+);
+
+CREATE SEQUENCE mem_res_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+
+/**********************************/
+/* Table Name: 이력서 학력정보 */
+/**********************************/
+CREATE TABLE res_scho(
+		res_scname                     VARCHAR2(80)		            NOT NULL,
+		res_major1                        VARCHAR2(100)		        NOT NULL,
+		res_major2                    	VARCHAR2(100)		        NULL ,
+		res_gotin                     		VARCHAR2(50)		            NOT NULL,
+		res_grad                      	VARCHAR2(50)		            NOT NULL,
+		res_no                        		NUMBER(10)		                NOT NULL       PRIMARY KEY,
+  FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
+);
+
+/**********************************/
+/* Table Name: 자격증 */
+/**********************************/
+CREATE TABLE res_lice(
+		res_lice1                     		VARCHAR2(50)		 NULL 		 ,
+		res_lice1_lev                 		VARCHAR2(30)		 NULL ,
+		res_lice2                     		VARCHAR2(50)		 NULL,
+		res_lice2_lev                 		VARCHAR2(30)		 NULL ,
+		res_no                        		NUMBER(10)		                NOT NULL       PRIMARY KEY ,
+  FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
+);
+
+-- 등록
+INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
+VALUES(mem_res_seq.nextval, '홍길동', '010-1234-5678', 'abcde', 'naver.com', '안녕하세요', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 1);
+INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
+VALUES(mem_res_seq.nextval, '김소영',  '010-1234-5678', 'abcde', 'naver.com', '안녕하세요', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 2);
+INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
+VALUES(mem_res_seq.nextval, '김철수',  '010-1234-5678', 'abcde', 'naver.com', '안녕하세요', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 3);
+
+INSERT INTO res_scho(res_scname, res_major1, res_major2, res_gotin,res_grad)
+VALUES('서울대학교', '디지털콘텐츠게임애니메이션공학부', '사회복지학과', 980076,998076);
+
+INSERT INTO res_lice(res_lice1, res_lice1_lev, res_lice2, res_lice2_lev)
+VALUES('토익', 960, '토스', 7, 2);
+
+INSERT ALL
+INTO mem_res
+VALUES(mem_res_seq.nextval, '박지현', '01012554841', 'abcde', 'naver.com', '제목', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 1)
+INTO res_scho
+VALUES ('제주대학교', '영어영문학과', '신문방송학과', 200106, 201115,mem_res_seq.nextval)
+INTO res_lice
+VALUES('토익', 990, '토스', 9,mem_res_seq.nextval)
+SELECT * FROM DUAL; 
+
+
+-- 목록
+SELECT*FROM mem_res ORDER BY res_no ASC;
+SELECT*FROM res_scho;
+SELECT*FROM res_lice;
+SELECT*FROM mem_res ORDER BY gen_memberno ASC;
+
+-- 조회
+SELECT r.res_no as mem_res_res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno, 
+s.res_no as res_scho_res_no, res_scname, res_major1, res_major2, res_gotin,res_grad, 
+l.res_no as res_lice_res_no, res_lice1, res_lice1_lev, res_lice2, res_lice2_lev
+FROM mem_res r, res_scho s, res_lice l
+WHERE r.res_no=s.res_no AND s.res_no=l.res_no AND r.res_no = 1;
+
+
+COMMIT;
+
+
+/**********************************/
+/* Table Name: 회사리뷰 */
+/**********************************/
+CREATE TABLE com_review(
+		rev_no                        		    NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		com_name                      		VARCHAR2(50)		 NOT NULL,
+		rev_title                     		    VARCHAR2(50)		 NOT NULL,
+		rev_score                     		NUMBER(10)		 DEFAULT 0		 NOT NULL,
+		rev_depart                    		VARCHAR2(50)		 NOT NULL,
+		rev_content                   		VARCHAR2(1000)		 NOT NULL,
+		rev_visible                   		CHAR(1)		 DEFAULT 'Y'		 NOT NULL,
+		rev_good                      		NUMBER(10)		 NOT NULL,
+		rev_bad                       		    NUMBER(10)		 NOT NULL,
+		rev_date                      		    DATE		 NOT NULL,
+		rev_cnt                           		    NUMBER(10)		 NOT NULL,
+		comno                         		    NUMBER(10)		 NULL,
+		gen_memberno                   NUMBER(7)		 NULL,
+  FOREIGN KEY (comno) REFERENCES com_intro (comno),
+  FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
+);
+
+CREATE SEQUENCE com_review_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+
+COMMENT ON TABLE com_review is '회사리뷰';
+COMMENT ON COLUMN com_review.rev_no is '리뷰 번호';
+COMMENT ON COLUMN com_review.com_name is '사명';
+COMMENT ON COLUMN com_review.rev_title is '리뷰 제목';
+COMMENT ON COLUMN com_review.rev_score is '회사 평점';
+COMMENT ON COLUMN com_review.rev_depart is '근무부서';
+COMMENT ON COLUMN com_review.rev_content is '리뷰 내용';
+COMMENT ON COLUMN com_review.rev_visible is '출력모드';
+COMMENT ON COLUMN com_review.rev_good is '추천수';
+COMMENT ON COLUMN com_review.rev_bad is '신고수';
+COMMENT ON COLUMN com_review.rev_date is '작성일';
+COMMENT ON COLUMN com_review.rev_cnt is '등록된 글 수';
+COMMENT ON COLUMN com_review.comno is '회사번호';
+COMMENT ON COLUMN com_review.gen_memberno is '회원 번호';
+
+-- 등록
+INSERT INTO com_review(rev_no, com_name,rev_title, rev_score, rev_depart, rev_content, 
+rev_visible, rev_good, rev_bad, rev_date, rev_cnt, comno, gen_memberno)
+VALUES(com_review_seq.nextval, '솔데스크', '제목', '5', '행정', '역에서 가까운 학원', 
+'Y', '1','0', sysdate, '1', '1', '1');
+
+INSERT INTO com_review(rev_no, com_name,rev_title, rev_score, rev_depart, rev_content, 
+rev_visible, rev_good, rev_bad, rev_date, rev_cnt, comno, gen_memberno)
+VALUES(com_review_seq.nextval, '제일기획', '제목', '5', '데이터마케팅', '밥이 맛있음', 
+'Y', '1','0', sysdate, '1', '2', '2');
+
+-- 목록
+SELECT*FROM com_review ORDER BY rev_no ASC;
+
+commit;
+
