@@ -11,6 +11,10 @@
     <HR>
     ⓒ Copyright Team4 All rights reserved.
   </DIV>
+  
+  <DIV style='text-align: right;'>
+    <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/admin/login.do' >관리자</A><span class='top_menu_sep'>&nbsp;</span>
+  </DIV>
 
 </DIV> <!-- container END -->  
 
