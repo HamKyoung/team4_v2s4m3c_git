@@ -2,29 +2,31 @@
 /* Table Name: 공지사항 */
 /**********************************/
 CREATE TABLE notice(
-		notice_no             	NUMBER(10)		                             NOT NULL	 PRIMARY KEY,     -- 공지사항 번호
-		notice_name           VARCHAR2(200)		                         NOT NULL,                              -- 공지사항 제목 
-		notice_con        		CLOB                  		                     NOT NULL,                              -- 공지사항 내용
-        notice_seqno          NUMBER(7)	    	 DEFAULT 0		 NOT NULL,                              -- 공지사항 출력 순서
-		notice_views       	NUMBER(10)		     DEFAULT 0		 NOT NULL,                              -- 공지사항 조회수
-		notice_visible       	CHAR(1)		         DEFAULT 'N'		 NOT NULL,                              -- 공지사항 공개 여부
-		notice_date         	DATE		                 NOT NULL,                                                       -- 공지사항 등록일
-        notice_file1                                   VARCHAR(100)          NULL,
-        notice_thumb1                              VARCHAR(100)          NULL,
-        notice_size1                                 NUMBER(10)      DEFAULT 0 NULL  
+    notice_no                         NUMBER(10)     NOT NULL    PRIMARY KEY,
+    notice_name                       VARCHAR2(200)    NOT NULL,
+    notice_con                        CLOB     NOT NULL,
+    notice_seqno                      NUMBER(7)    DEFAULT 0     NOT NULL,
+    notice_views                      NUMBER(10)     DEFAULT 0     NOT NULL,
+    notice_visible                    CHAR(1)    DEFAULT 'N'     NOT NULL,
+    notice_date                       DATE     NOT NULL,
+    notice_file1                      VARCHAR2(100)    NULL ,
+    notice_thumb1                     VARCHAR2(100)    NULL ,
+    notice_size1                      NUMBER(10)     DEFAULT 0     NULL ,
+    notice_word                       VARCHAR2(300)    NULL 
 );
 
 COMMENT ON TABLE notice is '공지사항';
 COMMENT ON COLUMN notice.notice_no is '공지사항 번호';
 COMMENT ON COLUMN notice.notice_name is '공지사항 제목';
 COMMENT ON COLUMN notice.notice_con is '공지사항 내용';
-COMMENT ON COLUMN notice.notice_seqno is '공지사항 출력 순서';
+COMMENT ON COLUMN notice.notice_seqno is '공지사항 출력순서';
 COMMENT ON COLUMN notice.notice_views is '공지사항 조회수';
 COMMENT ON COLUMN notice.notice_visible is '공지사항 출력모드';
 COMMENT ON COLUMN notice.notice_date is '공지사항 작성날짜';
 COMMENT ON COLUMN notice.notice_file1 is '공지사항 이미지';
-COMMENT ON COLUMN notice.notice_thumb1 is '공지사항 메인 이미지 Preview';
-COMMENT ON COLUMN notice.notice_size1 is '메인 이미지 크기';
+COMMENT ON COLUMN notice.notice_thumb1 is '공지사항 이미지 Preview';
+COMMENT ON COLUMN notice.notice_size1 is '공지사항 이미지 크기';
+COMMENT ON COLUMN notice.notice_word is '공지사항 검색어';
 
 DROP TABLE notice;
 
@@ -51,8 +53,6 @@ SELECT notice_no, notice_name, notice_con, notice_seqno, notice_views, notice_vi
 FROM notice
 ORDER BY notice_seqno ASC;
 
-ALTER TABLE notice
-ADD (notice_word VARCHAR2(300));
 
 
 commit;
@@ -60,7 +60,7 @@ commit;
 -- 검색된 레코드 갯수
 SELECT COUNT(*) as cnt
 FROM notice
-WHERE word LIKE '%롯데카드%';
+WHERE notice_word LIKE '%롯데카드%';
 
 
 -- step 3, 1 page
