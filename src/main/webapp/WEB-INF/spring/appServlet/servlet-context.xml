@@ -28,6 +28,12 @@
 	<context:component-scan base-package="dev.mvc.questions" /> <!-- 질문 패키지 -->
 	<context:component-scan base-package="dev.mvc.answer" /> <!-- 답변 패키지 -->
 	<context:component-scan base-package="dev.mvc.pass_self" /> <!-- 합격자소서 패키지 -->
+  <context:component-scan base-package="dev.mvc.cormember" /> <!-- 기업회원 패키지 -->
+  <context:component-scan base-package="dev.mvc.genmember" /> <!-- 개인회원 패키지 -->
+  <context:component-scan base-package="dev.mvc.survey" /> <!-- 설문조사 패키지 -->
+  <context:component-scan base-package="dev.mvc.surveyitem" /> <!-- 설문조사항목 패키지 -->
+  <context:component-scan base-package="dev.mvc.surveymember" /> <!-- 설문참여인원 패키지 -->
+  <context:component-scan base-package="dev.mvc.admin" /> <!-- 관리자 패키지 -->
 	
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"
