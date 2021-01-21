@@ -16,7 +16,7 @@ CREATE TABLE questions(
 		ques_date                     		DATE		 NOT NULL,
 		ques_views                    		NUMBER(10)		 DEFAULT 0		 NOT NULL,
 		ques_passwd                   		VARCHAR2(10)		 NOT NULL,
-  FOREIGN KEY (gen_memberno) REFERENCES general_member (gen_memberno)
+  FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
 );
 
 /**********************************/
@@ -43,6 +43,7 @@ COMMENT ON COLUMN answer.ans_views is '답변 조회수';
 DROP TABLE answer;
 
 DROP SEQUENCE answer_seq;
+
 CREATE SEQUENCE answer_seq
   START WITH 1              -- 시작 번호
   INCREMENT BY 1          -- 증가값

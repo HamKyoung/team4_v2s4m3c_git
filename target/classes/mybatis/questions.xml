@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 목록 -->  
   <select id="list_ques_no_desc" resultType="QuesVO">
     SELECT q.ques_no, q.gen_memberno, q.ques_title, q.ques_con, q.ques_date, q.ques_views, q.ques_passwd, gm.gen_name
-    FROM questions q, general_member gm
+    FROM questions q, gen_member gm
     WHERE q.gen_memberno = gm.gen_memberno
     ORDER BY q.ques_no DESC
   </select>

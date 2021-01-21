@@ -44,34 +44,10 @@ VALUES(conpany_intro_seq.nextval, 'LG', '아이티', '개발', 300, 'www.samsoung.com
 commit;
 
 /**********************************/
-/* Table Name: 기업 회원 */
-/**********************************/
-DROP TABLE corporate_member;
-CREATE TABLE corporate_member(
-		cor_memberno                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY
-);
-
-COMMENT ON TABLE corporate_member is '기업 회원';
-COMMENT ON COLUMN corporate_member.cor_memberno is '기업 회원 번호';
-
-DROP SEQUENCE corporate_member_seq;
-CREATE SEQUENCE corporate_member_seq
-  START WITH 1              -- 시작 번호
-  INCREMENT BY 1          -- 증가값
-  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
-  CACHE 2                       -- 2번은 메모리에서만 계산
-  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
-  
-INSERT INTO corporate_member(cor_memberno)
-VALUES(corporate_member_seq.nextval);
-  
-  
-
-
-/**********************************/
 /* Table Name: 합격자소서 */
 /**********************************/
 DROP TABLE pass_self;
+
 CREATE TABLE pass_self(
 		pass_self_no                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
 		comno                         		NUMBER(10)		 NULL ,
@@ -90,7 +66,7 @@ CREATE TABLE pass_self(
 		pass_self_date                		DATE		 NOT NULL,
 		pass_self_views               		NUMBER(10)		 DEFAULT 0		 NOT NULL,
   FOREIGN KEY (comno) REFERENCES conpany_intro (comno),
-  FOREIGN KEY (cor_memberno) REFERENCES corporate_member (cor_memberno)
+  FOREIGN KEY (cor_memberno) REFERENCES cor_member (cor_memberno)
 );
 
 COMMENT ON TABLE pass_self is '합격자소서';

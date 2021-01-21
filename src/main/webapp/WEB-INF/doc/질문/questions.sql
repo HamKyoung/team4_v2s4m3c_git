@@ -1,40 +1,3 @@
-/**********************************/
-/* Table Name: 일반회원 */
-/**********************************/
-CREATE TABLE general_member(
-		gen_memberno                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY
-);
-
-DROP TABLE general_member;
-
-COMMENT ON TABLE general_member is '일반회원';
-COMMENT ON COLUMN general_member.gen_memberno is '회원 번호';
-
-DROP SEQUENCE general_seq;
-
-CREATE SEQUENCE general_seq
-  START WITH 1              -- 시작 번호
-  INCREMENT BY 1          -- 증가값
-  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
-  CACHE 2                       -- 2번은 메모리에서만 계산
-  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
-
-INSERT INTO general_member(gen_memberno)
-VALUES('general_seq.nextval');
-
-INSERT INTO general_member(gen_memberno, gen_name)
-VALUES(general_seq.nextval, '수제비');
-
-DROP TABLE general_member;
-
-
-ALTER TABLE general_member
-ADD (gen_name VARCHAR2(20));
-
-ALTER TABLE general_member
-MODIFY (gen_name NOT NULL);
-
-DESCRIBE general_member;
 
 /**********************************/
 /* Table Name: 질문 */
@@ -47,7 +10,7 @@ CREATE TABLE questions(
 		ques_date                     		DATE		 NOT NULL,
 		ques_views                    		NUMBER(10)		 DEFAULT 0		 NOT NULL,
 		ques_passwd                   		VARCHAR2(10)		 NOT NULL,
-  FOREIGN KEY (gen_memberno) REFERENCES general_member (gen_memberno)
+  FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
 );
 
 COMMENT ON TABLE questions is '질문';
@@ -85,7 +48,7 @@ FROM questions
 ORDER BY ques_no ASC;
 
 SELECT q.ques_no, q.gen_memberno, q.ques_title, q.ques_con, q.ques_date, q.ques_views, q.ques_passwd, gm.gen_name
-FROM questions q, general_member gm
+FROM questions q, gen_member gm
 WHERE q.gen_memberno = gm.gen_memberno
 ORDER BY q.ques_no DESC;
 

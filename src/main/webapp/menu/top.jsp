@@ -23,8 +23,8 @@
     </NAV> 
     
     <DIV class='member_menu'>
-      <A class='top_menu_link'  href='${pageContext.request.contextPath}/member/list.do'>로그인</A><span class='top_menu_sep'>&nbsp;</span>
-      <A class='top_menu_link'  href='${pageContext.request.contextPath}/member/list.do'>회원가입</A>
+      <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/login.do'>로그인</A><span class='top_menu_sep'>&nbsp;</span>
+      <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/create.do'>회원가입</A>
     </DIV>
     
  
