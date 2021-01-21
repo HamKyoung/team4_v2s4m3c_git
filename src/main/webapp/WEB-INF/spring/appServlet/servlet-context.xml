@@ -34,7 +34,9 @@
   <context:component-scan base-package="dev.mvc.surveyitem" /> <!-- 설문조사항목 패키지 -->
   <context:component-scan base-package="dev.mvc.surveymember" /> <!-- 설문참여인원 패키지 -->
   <context:component-scan base-package="dev.mvc.admin" /> <!-- 관리자 패키지 -->
-	
+	<context:component-scan base-package="dev.mvc.review" /> <!-- 리뷰 패키지 -->
+  <context:component-scan base-package="dev.mvc.resume" /> <!-- 이력서 패키지 -->
+  
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"
     class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
