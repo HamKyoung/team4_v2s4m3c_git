@@ -54,30 +54,30 @@ public class JobnwsCont {
     // -------------------------------------------------------------------
     // 파일 전송 코드 시작
     // -------------------------------------------------------------------
-    String news_file1 = "";     // main image
-    String news_thumb1 = ""; // preview image
+    String jobnws_file1 = "";     // main image
+    String jobnws_thumb1 = ""; // preview image
         
     String upDir = Tool.getRealPath(request, "/jobnws/storage/main_images"); // 절대 경로
     // 전송 파일이 없어서도 fnamesMF 객체가 생성됨.
     // <input type='file' class="form-control" name='file1MF' id='file1MF' 
     //           value='' placeholder="파일 선택" multiple="multiple">
-    MultipartFile mf = jobnwsVO.getNews_file1MF();
+    MultipartFile mf = jobnwsVO.getJobnws_file1MF();
     System.out.println(mf);
-    long news_size1 = mf.getSize();  // 파일 크기
-    if (news_size1 > 0) { // 파일 크기 체크
+    long jobnws_size1 = mf.getSize();  // 파일 크기
+    if (jobnws_size1 > 0) { // 파일 크기 체크
       // mp3 = mf.getOriginalFilename(); // 원본 파일명, spring.jpg
       // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
-     news_file1 = Upload.saveFileSpring(mf, upDir); 
+      jobnws_file1 = Upload.saveFileSpring(mf, upDir); 
       
-      if (Tool.isImage(news_file1)) { // 이미지인지 검사
+      if (Tool.isImage(jobnws_file1)) { // 이미지인지 검사
         // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
-        news_thumb1 = Tool.preview(upDir, news_file1, 200, 150); 
+        jobnws_thumb1 = Tool.preview(upDir, jobnws_file1, 200, 150); 
       }   
     }    
     
-    jobnwsVO.setNews_file1(news_file1);
-    jobnwsVO.setNews_thumb1(news_thumb1);
-    jobnwsVO.setNews_size1(news_size1);
+    jobnwsVO.setJobnws_file1(jobnws_file1);
+    jobnwsVO.setJobnws_thumb1(jobnws_thumb1);
+    jobnwsVO.setJobnws_size1(jobnws_size1);
     // -------------------------------------------------------------------
     // 파일 전송 코드 종료
     // -------------------------------------------------------------------
@@ -100,7 +100,7 @@ public class JobnwsCont {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobnws/list"); // /webapp/jobnws/list.jsp
     
-    List<JobnwsVO> list = this.jobnwsProc.list_newsno_asc();
+    List<JobnwsVO> list = this.jobnwsProc.list_jobnwsno_asc();
     mav.addObject("list", list);
 
     return mav; // forward
@@ -112,11 +112,11 @@ public class JobnwsCont {
    * @return
    */
   @RequestMapping(value = "/jobnws/read.do", method = RequestMethod.GET)
-  public ModelAndView read_update(int newsno) {
+  public ModelAndView read_update(int jobnwsno) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobnws/read"); // /webapp/jobnws/read.jsp
 
-    JobnwsVO jobnwsVO = this.jobnwsProc.read(newsno);
+    JobnwsVO jobnwsVO = this.jobnwsProc.read(jobnwsno);
     mav.addObject("jobnwsVO", jobnwsVO);
         
     mav.setViewName("/jobnws/read"); // /webapp/contents/read.jsp 
@@ -128,10 +128,10 @@ public class JobnwsCont {
    * @return
    */
   @RequestMapping(value="/jobnws/update.do", method=RequestMethod.GET )
-  public ModelAndView update(int newsno) {
+  public ModelAndView update(int jobnwsno) {
     ModelAndView mav = new ModelAndView();
     
-    JobnwsVO jobnwsVO = this.jobnwsProc.read_update(newsno); // 수정용 읽기
+    JobnwsVO jobnwsVO = this.jobnwsProc.read_update(jobnwsno); // 수정용 읽기
     mav.addObject("jobnwsVO", jobnwsVO); // request.setAttribute("jobnwsVO", jobnwsVO);
     
     mav.setViewName("/jobnws/update"); // webapp/jobnws/update.jsp
@@ -148,22 +148,22 @@ public class JobnwsCont {
   public ModelAndView update(JobnwsVO jobnwsVO) {
     ModelAndView mav = new ModelAndView();
     
-    mav.addObject("newsno", jobnwsVO.getNewsno());
+    mav.addObject("jobnwsno", jobnwsVO.getJobnwsno());
     
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("newsno", jobnwsVO.getNewsno());
-    hashMap.put("news_passwd", jobnwsVO.getNews_passwd());
+    hashMap.put("jobnwsno", jobnwsVO.getJobnwsno());
+    hashMap.put("jobnws_passwd", jobnwsVO.getJobnws_passwd());
     
-    int news_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int jobnws_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
     int cnt = 0;             // 수정된 레코드 갯수 
     
-    news_passwd_cnt = this.jobnwsProc.news_passwd_check(hashMap);
+    jobnws_passwd_cnt = this.jobnwsProc.jobnws_passwd_check(hashMap);
     
-    if (news_passwd_cnt == 1) { // 패스워드가 일치할 경우 글 수정
+    if (jobnws_passwd_cnt == 1) { // 패스워드가 일치할 경우 글 수정
       cnt = this.jobnwsProc.update(jobnwsVO);
     }
     mav.addObject("cnt", cnt); // request에 저장
-    mav.addObject("news_passwd_cnt", news_passwd_cnt); // request에 저장
+    mav.addObject("jobnws_passwd_cnt", jobnws_passwd_cnt); // request에 저장
         
     mav.setViewName("/jobnws/update_msg"); // webapp/jobnws/update_msg.jsp
     
@@ -175,10 +175,10 @@ public class JobnwsCont {
    * @return
    */
   @RequestMapping(value="/jobnws/delete.do", method=RequestMethod.GET )
-  public ModelAndView delete(int newsno) {
+  public ModelAndView delete(int jobnwsno) {
     ModelAndView mav = new ModelAndView();
     
-    JobnwsVO jobnwsVO = this.jobnwsProc.read(newsno); // 삭제용 읽기
+    JobnwsVO jobnwsVO = this.jobnwsProc.read(jobnwsno); // 삭제용 읽기
     mav.addObject("jobnwsVO", jobnwsVO); // request.setAttribute("contentsVO", contentsVO);
     
     mav.setViewName("/jobnws/delete"); // webapp/contents/delete.jsp
@@ -194,26 +194,26 @@ public class JobnwsCont {
   @RequestMapping(value="/jobnws/delete.do", method=RequestMethod.POST )
   public ModelAndView delete(JobnwsVO jobnwsVO) {
     ModelAndView mav = new ModelAndView();
-    int newsno = jobnwsVO.getNewsno();
+    int jobnwsno = jobnwsVO.getJobnwsno();
     
-    String title = this.jobnwsProc.read(newsno).getNews_title();
+    String title = this.jobnwsProc.read(jobnwsno).getJobnws_title();
     mav.addObject("title", title);
     
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("newsno", newsno);
-    hashMap.put("news_passwd", jobnwsVO.getNews_passwd());
+    hashMap.put("jobnwsno", jobnwsno);
+    hashMap.put("jobnws_passwd", jobnwsVO.getJobnws_passwd());
     
-    int news_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int jobnws_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
     int cnt = 0;             // 수정된 레코드 갯수 
     
-    news_passwd_cnt = this.jobnwsProc.news_passwd_check(hashMap);
+    jobnws_passwd_cnt = this.jobnwsProc.jobnws_passwd_check(hashMap);
     
-    if (news_passwd_cnt == 1) { // 패스워드가 일치할 경우 글 삭제
+    if (jobnws_passwd_cnt == 1) { // 패스워드가 일치할 경우 글 삭제
       cnt = this.jobnwsProc.delete(jobnwsVO);
     }
 
     mav.addObject("cnt", cnt); // request에 저장
-    mav.addObject("news_passwd_cnt", news_passwd_cnt); // request에 저장
+    mav.addObject("jobnws_passwd_cnt", jobnws_passwd_cnt); // request에 저장
         
     mav.setViewName("/jobnws/delete_msg"); // webapp/jobnws/delete_msg.jsp
     
@@ -226,11 +226,11 @@ public class JobnwsCont {
    * @return
    */
   @RequestMapping(value = "/jobnws/img_create.do", method = RequestMethod.GET)
-  public ModelAndView img_create(int newsno) {
+  public ModelAndView img_create(int jobnwsno) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobnws/img_create"); // /webapp/jobnws/img_create.jsp
 
-    JobnwsVO jobnwsVO = this.jobnwsProc.read(newsno);
+    JobnwsVO jobnwsVO = this.jobnwsProc.read(jobnwsno);
     mav.addObject("jobnwsVO", jobnwsVO);
     
     return mav; // forward
@@ -246,46 +246,46 @@ public class JobnwsCont {
     ModelAndView mav = new ModelAndView();
     
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("newsno", jobnwsVO.getNewsno());
-    hashMap.put("news_passwd", jobnwsVO.getNews_passwd());
+    hashMap.put("jobnwsno", jobnwsVO.getJobnwsno());
+    hashMap.put("jobnws_passwd", jobnwsVO.getJobnws_passwd());
     
-    int news_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int jobnws_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
     int cnt = 0;             // 수정된 레코드 갯수 
     
-    news_passwd_cnt = this.jobnwsProc.news_passwd_check(hashMap);
+    jobnws_passwd_cnt = this.jobnwsProc.jobnws_passwd_check(hashMap);
     
-    if (news_passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
+    if (jobnws_passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
       // -------------------------------------------------------------------
       // 파일 전송 코드 시작
       // -------------------------------------------------------------------
-      String news_file1 = "";     // main image
-      String news_thumb1 = ""; // preview image
+      String jobnws_file1 = "";     // main image
+      String jobnws_thumb1 = ""; // preview image
           
       String upDir = Tool.getRealPath(request, "/jobnws/storage/main_images"); // 절대 경로
       // 전송 파일이 없어서도 fnamesMF 객체가 생성됨.
       // <input type='file' class="form-control" name='file1MF' id='file1MF' 
       //           value='' placeholder="파일 선택" multiple="multiple">
-      MultipartFile mf = jobnwsVO.getNews_file1MF();
-      long news_size1 = mf.getSize();  // 파일 크기
-      if (news_size1 > 0) { // 파일 크기 체크
+      MultipartFile mf = jobnwsVO.getJobnws_file1MF();
+      long jobnws_size1 = mf.getSize();  // 파일 크기
+      if (jobnws_size1 > 0) { // 파일 크기 체크
         // mp3 = mf.getOriginalFilename(); // 원본 파일명, spring.jpg
         // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
-        news_file1 = Upload.saveFileSpring(mf, upDir); 
+        jobnws_file1 = Upload.saveFileSpring(mf, upDir); 
         
-        if (Tool.isImage(news_file1)) { // 이미지인지 검사
+        if (Tool.isImage(jobnws_file1)) { // 이미지인지 검사
           // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
-          news_thumb1 = Tool.preview(upDir, news_file1, 200, 150); 
+          jobnws_thumb1 = Tool.preview(upDir, jobnws_file1, 200, 150); 
         }
       }    
       
-      jobnwsVO.setNews_file1(news_file1);
-      jobnwsVO.setNews_thumb1(news_thumb1);
-      jobnwsVO.setNews_size1(news_size1);
+      jobnwsVO.setJobnws_file1(jobnws_file1);
+      jobnwsVO.setJobnws_thumb1(jobnws_thumb1);
+      jobnwsVO.setJobnws_size1(jobnws_size1);
       // -------------------------------------------------------------------
       // 파일 전송 코드 종료
       // -------------------------------------------------------------------
       
-      mav.setViewName("redirect:/jobnws/read.do?newsno=" + jobnwsVO.getNewsno());
+      mav.setViewName("redirect:/jobnws/read.do?jobnwsno=" + jobnwsVO.getJobnwsno());
       
       cnt = this.jobnwsProc.img_create(jobnwsVO);
       // mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
@@ -296,7 +296,7 @@ public class JobnwsCont {
     }
 
     mav.addObject("cnt", cnt); // request에 저장
-    mav.addObject("news_passwd_cnt", news_passwd_cnt); // request에 저장
+    mav.addObject("jobnws_passwd_cnt", jobnws_passwd_cnt); // request에 저장
             
     return mav;    
   }
@@ -307,11 +307,11 @@ public class JobnwsCont {
    * @return
    */
   @RequestMapping(value = "/jobnws/img_update.do", method = RequestMethod.GET)
-  public ModelAndView img_update(int newsno) {
+  public ModelAndView img_update(int jobnwsno) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobnws/img_update"); // /webapp/jobnws/img_update.jsp
 
-    JobnwsVO jobnwsVO = this.jobnwsProc.read(newsno);
+    JobnwsVO jobnwsVO = this.jobnwsProc.read(jobnwsno);
     mav.addObject("jobnwsVO", jobnwsVO);
     
     
@@ -325,48 +325,48 @@ public class JobnwsCont {
    */
   @RequestMapping(value = "/jobnws/img_delete.do", method = RequestMethod.POST)
   public ModelAndView img_delete(HttpServletRequest request,
-                                                 int newsno, String news_passwd) {
+                                                 int jobnwsno, String jobnws_passwd) {
     ModelAndView mav = new ModelAndView();
     
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("newsno", newsno);
-    hashMap.put("news_passwd", news_passwd);
+    hashMap.put("jobnwsno", jobnwsno);
+    hashMap.put("jobnws_passwd", jobnws_passwd);
     
-    int news_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int jobnws_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
     int cnt = 0;             // 수정된 레코드 갯수 
     
-    news_passwd_cnt = this.jobnwsProc.news_passwd_check(hashMap);
+    jobnws_passwd_cnt = this.jobnwsProc.jobnws_passwd_check(hashMap);
     
-    if (news_passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
+    if (jobnws_passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
       // -------------------------------------------------------------------
       // 파일 삭제 코드 시작
       // -------------------------------------------------------------------
       // 삭제할 파일 정보를 읽어옴.
-      JobnwsVO jobnwsVO = jobnwsProc.read(newsno);
-      // System.out.println("news_file1: " + jobnwsVO.getNews_file1());
+      JobnwsVO jobnwsVO = jobnwsProc.read(jobnwsno);
+      // System.out.println("jobnws_file1: " + jobnwsVO.getJobnws_file1());
       
-      String news_file1 = jobnwsVO.getNews_file1().trim();
-      String news_thumb1 = jobnwsVO.getNews_thumb1().trim();
-      long news_size1 = jobnwsVO.getNews_size1();
+      String jobnws_file1 = jobnwsVO.getJobnws_file1().trim();
+      String jobnws_thumb1 = jobnwsVO.getJobnws_thumb1().trim();
+      long jobnws_size1 = jobnwsVO.getJobnws_size1();
       boolean sw = false;
       
       String upDir = Tool.getRealPath(request, "/jobnws/storage/main_images"); // 절대 경로
-      sw = Tool.deleteFile(upDir, jobnwsVO.getNews_file1());  // Folder에서 1건의 파일 삭제
-      sw = Tool.deleteFile(upDir, jobnwsVO.getNews_thumb1());  // Folder에서 1건의 파일 삭제
+      sw = Tool.deleteFile(upDir, jobnwsVO.getJobnws_file1());  // Folder에서 1건의 파일 삭제
+      sw = Tool.deleteFile(upDir, jobnwsVO.getJobnws_thumb1());  // Folder에서 1건의 파일 삭제
       // System.out.println("sw: " + sw);
       
-      news_file1 = "";
-      news_thumb1 = "";
-      news_size1 = 0;
+      jobnws_file1 = "";
+      jobnws_thumb1 = "";
+      jobnws_size1 = 0;
       
-      jobnwsVO.setNews_file1(news_file1);
-      jobnwsVO.setNews_thumb1(news_thumb1);
-      jobnwsVO.setNews_size1(news_size1);
+      jobnwsVO.setJobnws_file1(jobnws_file1);
+      jobnwsVO.setJobnws_thumb1(jobnws_thumb1);
+      jobnwsVO.setJobnws_size1(jobnws_size1);
       // -------------------------------------------------------------------
       // 파일 삭제 종료 시작
       // -------------------------------------------------------------------
       
-      mav.setViewName("redirect:/jobnws/read.do?newsno=" + newsno);
+      mav.setViewName("redirect:/jobnws/read.do?jobnwsno=" + jobnwsno);
       
       cnt = this.jobnwsProc.img_delete(jobnwsVO);
       // mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
@@ -377,7 +377,7 @@ public class JobnwsCont {
     }
 
     mav.addObject("cnt", cnt); // request에 저장
-    mav.addObject("news_passwd_cnt", news_passwd_cnt); // request에 저장
+    mav.addObject("jobnws_passwd_cnt", jobnws_passwd_cnt); // request에 저장
             
     return mav;    
   }
@@ -392,30 +392,30 @@ public class JobnwsCont {
     ModelAndView mav = new ModelAndView();
     
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("newsno", jobnwsVO.getNewsno());
-    hashMap.put("news_passwd", jobnwsVO.getNews_passwd());
+    hashMap.put("jobnwsno", jobnwsVO.getJobnwsno());
+    hashMap.put("jobnws_passwd", jobnwsVO.getJobnws_passwd());
     
-    int news_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int jobnws_passwd_cnt = 0; // 패스워드 일치 레코드 갯수
     int cnt = 0;             // 수정된 레코드 갯수 
     
-    news_passwd_cnt = this.jobnwsProc.news_passwd_check(hashMap);
+    jobnws_passwd_cnt = this.jobnwsProc.jobnws_passwd_check(hashMap);
     
-    if (news_passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
+    if (jobnws_passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
       // -------------------------------------------------------------------
       // 파일 삭제 코드 시작
       // -------------------------------------------------------------------
       // 삭제할 파일 정보를 읽어옴.
-      JobnwsVO vo = jobnwsProc.read(jobnwsVO.getNewsno());
-      // System.out.println("file1: " + jobnwsVO.getNews_file1());
+      JobnwsVO vo = jobnwsProc.read(jobnwsVO.getJobnwsno());
+      // System.out.println("file1: " + jobnwsVO.getJobnws_file1());
       
-      String news_file1 = vo.getNews_file1().trim();
-      String news_thumb1 = vo.getNews_thumb1().trim();
-      long news_size1 = 0;
+      String jobnws_file1 = vo.getJobnws_file1().trim();
+      String jobnws_thumb1 = vo.getJobnws_thumb1().trim();
+      long jobnws_size1 = 0;
       boolean sw = false;
       
       String upDir = Tool.getRealPath(request, "/jobnws/storage/main_images"); // 절대 경로
-      sw = Tool.deleteFile(upDir, jobnwsVO.getNews_file1());  // Folder에서 1건의 파일 삭제
-      sw = Tool.deleteFile(upDir, jobnwsVO.getNews_thumb1());  // Folder에서 1건의 파일 삭제
+      sw = Tool.deleteFile(upDir, jobnwsVO.getJobnws_file1());  // Folder에서 1건의 파일 삭제
+      sw = Tool.deleteFile(upDir, jobnwsVO.getJobnws_thumb1());  // Folder에서 1건의 파일 삭제
       // System.out.println("sw: " + sw);
       // -------------------------------------------------------------------
       // 파일 삭제 종료 시작
@@ -427,27 +427,27 @@ public class JobnwsCont {
       // 전송 파일이 없어서도 fnamesMF 객체가 생성됨.
       // <input type='file' class="form-control" name='file1MF' id='file1MF' 
       //           value='' placeholder="파일 선택" multiple="multiple">
-      MultipartFile mf = jobnwsVO.getNews_file1MF();
-      news_size1 = mf.getSize();  // 파일 크기
-      if (news_size1 > 0) { // 파일 크기 체크
+      MultipartFile mf = jobnwsVO.getJobnws_file1MF();
+      jobnws_size1 = mf.getSize();  // 파일 크기
+      if (jobnws_size1 > 0) { // 파일 크기 체크
         // mp3 = mf.getOriginalFilename(); // 원본 파일명, spring.jpg
         // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
-        news_file1 = Upload.saveFileSpring(mf, upDir); 
+        jobnws_file1 = Upload.saveFileSpring(mf, upDir); 
         
-        if (Tool.isImage(news_file1)) { // 이미지인지 검사
+        if (Tool.isImage(jobnws_file1)) { // 이미지인지 검사
           // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
-          news_thumb1 = Tool.preview(upDir, news_file1, 200, 150); 
+          jobnws_thumb1 = Tool.preview(upDir, jobnws_file1, 200, 150); 
         }
       }    
       
-      jobnwsVO.setNews_file1(news_file1);
-      jobnwsVO.setNews_thumb1(news_thumb1);
-      jobnwsVO.setNews_size1(news_size1);
+      jobnwsVO.setJobnws_file1(jobnws_file1);
+      jobnwsVO.setJobnws_thumb1(jobnws_thumb1);
+      jobnwsVO.setJobnws_size1(jobnws_size1);
       // -------------------------------------------------------------------
       // 파일 전송 코드 종료
       // -------------------------------------------------------------------
 
-      mav.setViewName("redirect:/jobnws/read.do?newsno=" + jobnwsVO.getNewsno());
+      mav.setViewName("redirect:/jobnws/read.do?jobnwsno=" + jobnwsVO.getJobnwsno());
       
       cnt = this.jobnwsProc.img_create(jobnwsVO);
       // mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
@@ -458,7 +458,7 @@ public class JobnwsCont {
     }
 
     mav.addObject("cnt", cnt); // request에 저장
-    mav.addObject("news_passwd_cnt", news_passwd_cnt); // request에 저장
+    mav.addObject("jobnws_passwd_cnt", jobnws_passwd_cnt); // request에 저장
             
     return mav;    
   }

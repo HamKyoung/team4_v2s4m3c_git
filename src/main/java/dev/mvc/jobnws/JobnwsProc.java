@@ -26,23 +26,23 @@ public class JobnwsProc implements JobnwsProcInter {
   }
   
   @Override
-  public List<JobnwsVO> list_newsno_asc() {
-    List<JobnwsVO> list = this.jobnwsDAO.list_newsno_asc();
+  public List<JobnwsVO> list_jobnwsno_asc() {
+    List<JobnwsVO> list = this.jobnwsDAO.list_jobnwsno_asc();
     return list;
   }
 
   @Override
-  public JobnwsVO read(int newsno) {
-   JobnwsVO jobnwsVO = this.jobnwsDAO.read(newsno);
+  public JobnwsVO read(int jobnwsno) {
+   JobnwsVO jobnwsVO = this.jobnwsDAO.read(jobnwsno);
    
-   String news_title = jobnwsVO.getNews_title();
-   String news_content = jobnwsVO.getNews_content();
+   String jobnws_title = jobnwsVO.getJobnws_title();
+   String jobnws_content = jobnwsVO.getJobnws_content();
    
-   news_title = Tool.convertChar(news_title);  // 특수 문자 처리
-   news_content = Tool.convertChar(news_content);
+   jobnws_title = Tool.convertChar(jobnws_title);  // 특수 문자 처리
+   jobnws_content = Tool.convertChar(jobnws_content);
    
-   jobnwsVO.setNews_title(news_title);
-   jobnwsVO.setNews_content(news_content);
+   jobnwsVO.setJobnws_title(jobnws_title);
+   jobnwsVO.setJobnws_content(jobnws_content);
    
     return jobnwsVO;
   }
@@ -54,8 +54,8 @@ public class JobnwsProc implements JobnwsProcInter {
   }
 
   @Override
-  public JobnwsVO read_update(int newsno) {
-    JobnwsVO jobnwsVO = this.jobnwsDAO.read(newsno);
+  public JobnwsVO read_update(int jobnwsno) {
+    JobnwsVO jobnwsVO = this.jobnwsDAO.read(jobnwsno);
     return jobnwsVO;
   }
 
@@ -63,8 +63,8 @@ public class JobnwsProc implements JobnwsProcInter {
 
 
   @Override
-  public int delete(int newsno) {
-    int cnt = this.jobnwsDAO.delete(newsno);
+  public int delete(int jobnwsno) {
+    int cnt = this.jobnwsDAO.delete(jobnwsno);
     return cnt;
   }
 
@@ -75,20 +75,20 @@ public class JobnwsProc implements JobnwsProcInter {
   }
 
   @Override
-  public int news_passwd_check(HashMap hashMap) {
-    int news_passwd_cnt = this.jobnwsDAO.news_passwd_check(hashMap);
-    return news_passwd_cnt;
+  public int jobnws_passwd_check(HashMap hashMap) {
+    int jobnws_passwd_cnt = this.jobnwsDAO.jobnws_passwd_check(hashMap);
+    return jobnws_passwd_cnt;
   }
 
   @Override
-  public int update_cnt(int newsno) {
-    int cnt = this.jobnwsDAO.update_cnt(newsno);
+  public int update_cnt(int jobnwsno) {
+    int cnt = this.jobnwsDAO.update_cnt(jobnwsno);
     return cnt;
   }
 
   @Override
-  public int update_good(int newsno) {
-    int cnt = this.jobnwsDAO.update_good(newsno);
+  public int update_good(int jobnwsno) {
+    int cnt = this.jobnwsDAO.update_good(jobnwsno);
     return cnt;
   }
 

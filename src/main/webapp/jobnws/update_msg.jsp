@@ -20,7 +20,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>
-     ${jobnwsVO.news_title }
+     ${jobnwsVO.jobnws_title }
   </DIV>
 
   <ASIDE class="aside_left">
@@ -37,7 +37,7 @@
   <fieldset class='fieldset_basic'>
     <UL>
       <c:choose>
-        <c:when test="${news_passwd_cnt == 1 }"> <!-- 패스워드 일치 -->
+        <c:when test="${jobnws_passwd_cnt == 1 }"> <!-- 패스워드 일치 -->
           <c:choose>
             <c:when test="${cnt == 1}"> <!-- 글 수정 성공 -->
               <LI class='li_none'>
@@ -62,13 +62,13 @@
       </c:choose>
       
       <c:choose>
-        <c:when test="${cnt == 1 && news_passwd_cnt == 1}">
+        <c:when test="${cnt == 1 && jobnws_passwd_cnt == 1}">
           <LI class='li_none'>
             <button type='button' 
-                        onclick="location.href='./read.do?newsno=${param.newsno}&newsno=${param.newsno}'"
+                        onclick="location.href='./read.do?jobnwsno=${param.jobnwsno}&jobnwsno=${param.jobnwsno}'"
                         class="btn btn-info">변경 확인</button>
             <button type='button' 
-                        onclick="location.href='./list.do?newsno=${param.newsno}'"
+                        onclick="location.href='./list.do?jobnwsno=${param.jobnwsno}'"
                         class="btn btn-info">목록</button>                        
           </LI>
         </c:when>
@@ -78,7 +78,7 @@
                         onclick="history.back();"
                         class="btn btn-info">재시도</button>
             <button type='button' 
-                        onclick="location.href='./list.do?newsno=${param.newsno}'"
+                        onclick="location.href='./list.do?jobnwsno=${param.jobnwsno}'"
                         class="btn btn-info">목록</button>                        
           </LI>
         </c:otherwise> 

@@ -21,7 +21,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
-    『${jobnwsVO.news_title}』 메인 이미지 등록
+    『${jobnwsVO.jobnws_title}』 메인 이미지 등록
   </DIV>
   
   <ASIDE class="aside_left">
@@ -39,27 +39,27 @@
                 enctype="multipart/form-data">
                
   
-      <input type='hidden' name='newsno' id='newsno' value="${param.newsno }">
+      <input type='hidden' name='jobnwsno' id='jobnwsno' value="${param.jobnwsno }">
       
       
       <div class="form-group">   
         <div class="col-md-12">
           <%-- 실제 컬럼명: file1, Spring File 객체 대응: file1MF --%>
-          <input type='file' class="form-control" name='news_file1MF' id='news_file1MF' 
+          <input type='file' class="form-control" name='jobnws_file1MF' id='jobnws_file1MF' 
                     value='' placeholder="파일 선택">
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='password' class="form-control" name='news_passwd'  value='1234' placeholder="패스워드" style='width: 20%;'>
+          <input type='password' class="form-control" name='jobnws_passwd'  value='1234' placeholder="패스워드" style='width: 20%;'>
         </div>
       </div>
       
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">등록</button>
         <button type="button" 
-                    onclick="location.href='./list.do?newsno=${param.newsno}'" 
+                    onclick="location.href='./list.do?jobnwsno=${param.jobnwsno}'" 
                     class="btn btn-info">취소[목록]</button>
       </DIV>
        

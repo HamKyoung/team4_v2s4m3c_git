@@ -22,7 +22,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
  <DIV class="title_line">
-    『${jobnwsVO.news_title}』 메인 이미지 변경 및 삭제
+    『${jobnwsVO.jobnws_title}』 메인 이미지 변경 및 삭제
   </DIV>
   
   <ASIDE class="aside_left">
@@ -40,23 +40,23 @@
     <H4>메인 이미지 삭제</H4>
 
     <%-- 이미지가 존재하는 경우 이미지를 출력하고 삭제 버튼 표시 --%>
-    <c:set var="news_file1" value="${jobnwsVO.news_file1 }" />
-    <c:if test="${news_file1.endsWith('jpg') || news_file1.endsWith('png') || news_file1.endsWith('gif')}">
+    <c:set var="jobnws_file1" value="${jobnwsVO.jobnws_file1 }" />
+    <c:if test="${jobnws_file1.endsWith('jpg') || jobnws_file1.endsWith('png') || jobnws_file1.endsWith('gif')}">
       <FORM name='frm' method='POST' action='./img_delete.do' class="form-horizontal">
       
-        <input type='hidden' name='newsno' id='newsno' value="${param.newsno }">
+        <input type='hidden' name='jobnwsno' id='jobnwsno' value="${param.jobnwsno }">
 
-        <IMG src="./storage/main_images/${news_file1 }" style="width: 50%; margin-bottom: 10px;">
+        <IMG src="./storage/main_images/${jobnws_file1 }" style="width: 50%; margin-bottom: 10px;">
         
         <div class="form-group">   
           <div class="col-md-12">
-            <input type='password' class="form-control" name='news_passwd'  value='1234' placeholder="패스워드" style='width: 20%;'>
+            <input type='password' class="form-control" name='jobnws_passwd'  value='1234' placeholder="패스워드" style='width: 20%;'>
           </div>
         </div>
         
         <button type="submit" class="btn btn-info">메인 이미지 삭제</button>
         <button type="button" 
-                    onclick="location.href='./read.do?newsno=${param.newsno}'" 
+                    onclick="location.href='./read.do?jobnwsno=${param.jobnwsno}'" 
                     class="btn btn-info">취소[조회]</button>
       </FORM> 
     </c:if> 
@@ -68,25 +68,25 @@
                 enctype="multipart/form-data">
                
       
-      <input type='hidden' name='newsno' id='newsno' value="${param.newsno }">
+      <input type='hidden' name='jobnwsno' id='jobnwsno' value="${param.jobnwsno }">
       
       <div class="form-group">   
         <div class="col-md-12">
           <%-- 실제 컬럼명: file1, Spring File 객체 대응: file1MF --%>
-          <input type='file' class="form-control" name='news_file1MF' id='news_file1MF' 
+          <input type='file' class="form-control" name='jobnws_file1MF' id='jobnws_file1MF' 
                     value='' placeholder="파일 선택">
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='password' class="form-control" name='news_passwd'  value='1234' placeholder="패스워드" style='width: 20%;'>
+          <input type='password' class="form-control" name='jobnws_passwd'  value='1234' placeholder="패스워드" style='width: 20%;'>
         </div>
       </div>
       
       <button type="submit" class="btn btn-info">새로운 메인 이미지 등록</button>
       <button type="button" 
-                  onclick="location.href='./read.do?newsno=${param.newsno}'" 
+                  onclick="location.href='./read.do?jobnwsno=${param.jobnwsno}'" 
                   class="btn btn-info">취소[조회]</button>
     </FORM>
   </DIV>

@@ -33,35 +33,35 @@
       <div class="form-group">   
         <div class="col-md-12">
         뉴스 제목
-          <input type='text' class="form-control" name='news_title' value='단풍' placeholder="제목" required="required" style='width: 80%;'>
+          <input type='text' class="form-control" name='jobnws_title' value='단풍' placeholder="제목" required="required" style='width: 80%;'>
         </div>
       </div>   
       
       <div class="form-group">   
         <div class="col-md-12">
         뉴스 내용
-          <textarea class="form-control" name='news_content' id='news_content' rows='10' placeholder="내용">전나무 숲길</textarea>
+          <textarea class="form-control" name='jobnws_content' id='jobnws_content' rows='10' placeholder="내용">전나무 숲길</textarea>
         </div>
       </div>
 
       <div class="form-group">   
         <div class="col-md-12">
         뉴스 출처
-          <input type='text' class="form-control" name='news_url' value='http://www.kma.go.kr' placeholder="인터넷 주소" style='width: 80%;'>
+          <input type='text' class="form-control" name='jobnws_url' value='http://www.kma.go.kr' placeholder="인터넷 주소" style='width: 80%;'>
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
           <%-- 실제 컬럼명: file1, Spring File 객체 대응: fiel1MF --%>
-          <input type='file' class="form-control" name='news_file1MF' id='news_file1MF' 
+          <input type='file' class="form-control" name='jobnws_file1MF' id='jobnws_file1MF' 
                     value='' placeholder="파일 선택">
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='password' class="form-control" name='news_passwd'  value='1234' placeholder="비밀번호" style='width: 20%;'>
+          <input type='password' class="form-control" name='jobnws_passwd'  value='1234' placeholder="비밀번호" style='width: 20%;'>
         </div>
         </div>   
       

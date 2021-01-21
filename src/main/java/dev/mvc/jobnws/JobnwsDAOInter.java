@@ -20,7 +20,7 @@ public interface JobnwsDAOInter {
    * 목록
    * @return
    */
-  public List<JobnwsVO> list_newsno_asc();
+  public List<JobnwsVO> list_jobnwsno_asc();
   
   
   /**
@@ -28,7 +28,7 @@ public interface JobnwsDAOInter {
    * @param jobnwsno
    * @return
    */
-  public JobnwsVO read(int newsno);
+  public JobnwsVO read(int jobnwsno);
   
   /**
    * 수정 처리
@@ -39,24 +39,24 @@ public interface JobnwsDAOInter {
   
   /**
    * 수정용 조회 
-   * @param newsno
+   * @param jobnwsno
    * @return
    */
-  public JobnwsVO read_update(int newsno);
+  public JobnwsVO read_update(int jobnwsno);
     
   /**
    * 패스워드 검사
    * @param hashMap
    * @return
    */
-  public int news_passwd_check(HashMap hashMap);
+  public int jobnws_passwd_check(HashMap hashMap);
   
   /**
    * 삭제
-   * @param newsno
+   * @param jobnwsno
    * @return
    */
-  public int delete(int newsno);
+  public int delete(int jobnwsno);
   
   /**
    * 삭제 처리
@@ -67,17 +67,17 @@ public interface JobnwsDAOInter {
   
   /**
    * 조회수 증가
-   * @param newsno
+   * @param jobnwsno
    * @return
    */
-  public int update_cnt(int newsno);
+  public int update_cnt(int jobnwsno);
   
   /**
    * 추천수 증가
-   * @param newsno
+   * @param jobnwsno
    * @return
    */
-  public int update_good(int newsno);
+  public int update_good(int jobnwsno);
   
   /**
    * 이미지 변경
