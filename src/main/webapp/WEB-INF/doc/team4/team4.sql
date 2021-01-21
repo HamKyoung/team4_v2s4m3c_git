@@ -274,6 +274,49 @@ ORDER BY comno ASC;
  commit;
  
  /**********************************/
+/* Table Name: 구직신청 */
+/**********************************/
+DROP TABLE jobsup;
+CREATE TABLE jobsup(
+		jobsupno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+        gen_memberno                  		NUMBER(7)		 NOT NULL ,
+		comno                        		NUMBER(10)		 NOT NULL ,
+		jobsup_title                  		VARCHAR2(300)		 NOT NULL,
+		jobsup_msg                    		VARCHAR2(1000)		 NOT NULL,
+		jobsup_date                   		DATE		 NOT NULL,
+  FOREIGN KEY (comno) REFERENCES com_intro (comno),
+  FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
+);
+
+COMMENT ON TABLE jobsup is '구직 신청';
+COMMENT ON COLUMN jobsup.jopsupno is '구직 신청 번호';
+COMMENT ON COLUMN jobsup.jopsup_title is '지원 제목';
+COMMENT ON COLUMN jobsup.jobsup_msg is '지원 메세지';
+COMMENT ON COLUMN jobsup.jobsup_date is '지원 등록일';
+COMMENT ON COLUMN jobsup.gen_memberno is '회원 번호';
+COMMENT ON COLUMN jobsup.comno is '회사 번호';
+
+
+DROP SEQUENCE jobsup_seq;
+CREATE SEQUENCE jobsup_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+ 
+-- 등록
+INSERT INTO jobsup(jobsupno, gen_memberno, comno, jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval, 1, 2, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
+  
+
+-- 목록
+SELECT jobsupno, gen_memberno, comno, jobsup_title, jobsup_msg, jobsup_date
+FROM jobsup
+ORDER BY jobsupno ASC;
+ 
+ COMMIT;
+ /**********************************/
 /* Table Name: 회사카테고리(직무별) */
 /**********************************/
 drop table com_cate;
@@ -415,6 +458,54 @@ commit;
 
 
 /**********************************/
+/* Table Name: 첨부파일 */
+/**********************************/
+DROP TABLE attachfile;
+CREATE TABLE attachfile(
+        attachfileno                  NUMBER(10)         NOT NULL         PRIMARY KEY,
+        recruitno                   NUMBER(10)         NULL ,
+        fname                             VARCHAR2(100)         NOT NULL,
+        fupname                      VARCHAR2(100)         NOT NULL,
+        thumb                         VARCHAR2(100)         NULL ,
+        fsize                                 NUMBER(10)         DEFAULT 0         NOT NULL,
+        rdate                           DATE     NOT NULL,
+  FOREIGN KEY (recruitno) REFERENCES recruit (recruitno)
+);
+
+COMMENT ON TABLE attachfile is '첨부파일';
+COMMENT ON COLUMN attachfile.recruitno is '구인번호';
+COMMENT ON COLUMN attachfile.contentsno is '컨텐츠번호';
+COMMENT ON COLUMN attachfile.fname is '원본 파일명';
+COMMENT ON COLUMN attachfile.fupname is '업로드 파일명';
+COMMENT ON COLUMN attachfile.thumb is 'Thumb 파일명';
+COMMENT ON COLUMN attachfile.fsize is '파일 사이즈';
+COMMENT ON COLUMN attachfile.rdate is '등록일';
+
+DROP SEQUENCE attachfile_seq;
+CREATE SEQUENCE attachfile_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+
+-- 1) 등록  
+INSERT INTO attachfile(attachfileno, recruitno, fname, fupname, thumb, fsize, rdate)
+VALUES(attachfile_seq.nextval, 1, 'samyang.jpg', 'samyang_1.jpg', 'samyang_t.jpg', 1000, sysdate);
+
+INSERT INTO attachfile(attachfileno, recruitno, fname, fupname, thumb, fsize, rdate)
+VALUES(attachfile_seq.nextval, 1, 'samyang2.jpg', 'samyang2_1.jpg', 'samyang2_t.jpg', 2000, sysdate);
+             
+INSERT INTO attachfile(attachfileno, recruitno, fname, fupname, thumb, fsize, rdate)
+VALUES(attachfile_seq.nextval,  1, 'samyang3.jpg', 'samyang3_1.jpg', 'samyang3_t.jpg', 3000, sysdate);   
+
+
+-- 2) 목록( contentsno 기준 내림 차순, attachfileno 기준 오르차순)
+SELECT attachfileno, recruitno, fname, fupname, thumb, fsize, rdate
+FROM attachfile
+ORDER BY recruitno DESC,  attachfileno ASC;
+
+/**********************************/
 /* Table Name: 기업 회원 */
 /**********************************/
 CREATE TABLE CORPORATE_MEMBER(
@@ -473,6 +564,7 @@ commit;
 /**********************************/
 /* Table Name: 합격자소서 */
 /**********************************/
+DROP TABLE  PASS_SELF;
 CREATE TABLE PASS_SELF(
 		PASS_SELF_NO                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
 		COMNO                         		NUMBER(10)		 NULL ,
@@ -547,4 +639,70 @@ WHERE p.comno = c.comno
 ORDER BY pass_self_no DESC;
 
 commit;
+
+
+/**********************************/
+/* Table Name: 회사뉴스 */
+/**********************************/
+DROP TABLE jobnws;
+CREATE TABLE jobnws(
+		jobnwsno                        		NUMBER(30)		 NOT NULL,
+		jobnws_title                    		VARCHAR2(1000)		 NOT NULL,
+		jobnws_content                  		CLOB 		 NOT NULL,
+		jobnws_url                      		VARCHAR2(500)		 NOT NULL,
+        jobnws_passwd                      	VARCHAR2(15)		 NOT NULL,
+		jobnws_cnt                      		NUMBER(10)		 DEFAULT 0		 NOT NULL,
+		jobnws_good                     		NUMBER(10)		 DEFAULT 0		 NOT NULL,
+		jobnws_coment                   		VARCHAR2(1000)		 NULL ,
+		jobnws_date                     		DATE		 NOT NULL,
+		jobnws_file1                    		VARCHAR2(100)		 NULL ,
+		jobnws_thumb1                       VARCHAR2(100)		 NULL ,
+		jobnws_size1                    		NUMBER(10)		 DEFAULT 0		 NULL 
+);
+
+COMMENT ON TABLE jobnws is '회사뉴스';
+COMMENT ON COLUMN jobnws.jobnwsno is '뉴스 번호';
+COMMENT ON COLUMN jobnws.jobnws_title is '뉴스 제목';
+COMMENT ON COLUMN jobnws.jobnws_content is '뉴스 내용';
+COMMENT ON COLUMN jobnws.jobnws_url is '뉴스 출처';
+COMMENT ON COLUMN jobnws.jobnws_cnt is '뉴스 조회수';
+COMMENT ON COLUMN jobnws.jobnws_good is '뉴스 추천수';
+COMMENT ON COLUMN jobnws.jobnws_coment is '뉴스 댓글';
+COMMENT ON COLUMN jobnws.jobnws_date is '등록일';
+COMMENT ON COLUMN jobnws.jobnws_file1 is '뉴스 메인 이미지';
+COMMENT ON COLUMN jobnws.jobnws_thumb1 is '뉴스 메인 이미지 Preview';
+COMMENT ON COLUMN jobnws.jobnws_size1 is '뉴스 매인 이미지 크기';
+
+
+ALTER TABLE jobnws ADD CONSTRAINT IDX_jobnws_PK PRIMARY KEY (jobnwsno);
+
+
+DROP SEQUENCE jobnws_seq;
+CREATE SEQUENCE jobnws_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+  
+/**********************************/
+/* Table Name:  뉴스 */
+/**********************************/
+
+-- 등록
+INSERT INTO jobnws(jobnwsno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1)
+VALUES(jobnws_seq.nextval, '삼성채용뉴스', '이러한 조건하에', 'https://', 0, 0, '좋은 도움이됬어요', '1234', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+
+
+-- 뉴스 테이블에 추가
+INSERT INTO jobnws(jobnwsno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1 )
+VALUES(jobnws_seq.nextval, '삼성채용뉴스', '이러한 조건하에', 'https://', 0, 0, '좋은 도움이됬어요', '1234', sysdate, 'summer.jpg', 'summer_t.jpg', 23657);
+
+INSERT INTO jobnws(jobnwsno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1)
+VALUES(jobnws_seq.nextval, 'LG채용뉴스', '이러한 조건하에', 'https://', 0, 0, '좋은 도움이됬어요', '1234', sysdate, 'winter.jpg', 'winter_t.jpg', 23657);
+
+
+COMMIT;
+
+SELECT * FROM jobnws ORDER BY jobnwsno ASC;
 
