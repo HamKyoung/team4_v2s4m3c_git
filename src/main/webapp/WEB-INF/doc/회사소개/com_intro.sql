@@ -1,4 +1,46 @@
 /**********************************/
+<<<<<<< HEAD
+/* Table Name: 기업 회원 */
+/**********************************/
+
+DROP TABLE cor_member CASCADE CONSTRAINTS; 
+DROP TABLE cor_member;
+CREATE TABLE cor_member(
+		cor_memberno                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
+		cor_id                        		VARCHAR2(50)		 NOT NULL,
+		cor_passwd                    		VARCHAR2(20)		 NOT NULL,
+		cor_name                      		VARCHAR2(20)		 NOT NULL,
+		cor_resident                  		VARCHAR2(13)		 NOT NULL,
+		cor_sex                       		VARCHAR2(10)		 NOT NULL,
+		cor_phone                     		VARCHAR2(20)		 NOT NULL,
+		cor_addr                      		VARCHAR2(100)		 NOT NULL,
+		cor_mail                      		VARCHAR2(50)		 NOT NULL,
+		cor_date                      		DATE		 NOT NULL
+);
+
+COMMENT ON TABLE corporate_member is '기업 회원';
+COMMENT ON COLUMN corporate_member.cor_memberno is '기업 회원 번호';
+COMMENT ON COLUMN corporate_member.cor_id is '기업 회원 아이디';
+COMMENT ON COLUMN corporate_member.cor_passwd is '기업 회원 비밀번호';
+COMMENT ON COLUMN corporate_member.cor_name is '기업 회원 이름';
+COMMENT ON COLUMN corporate_member.cor_resident is '기업 회원 주민 번호';
+COMMENT ON COLUMN corporate_member.cor_sex is '기업 회원 성별 ';
+COMMENT ON COLUMN corporate_member.cor_phone is '기업 회원 전화 번호';
+COMMENT ON COLUMN corporate_member.cor_addr is '기업 회원 주소';
+COMMENT ON COLUMN corporate_member.cor_mail is '기업 회원 이메일';
+COMMENT ON COLUMN corporate_member.cor_date is '기업 회원 가입 날짜';
+
+DROP SEQUENCE cormem_seq;
+CREATE SEQUENCE cormem_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+  
+/**********************************/
+=======
+>>>>>>> refs/remotes/origin/master
 /* Table Name: 회사소개 */
 /**********************************/
 DROP TABLE com_intro CASCADE CONSTRAINTS; 
