@@ -29,11 +29,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 목록 -->  
   <select id="list" resultType="Pass_selfVO">
     SELECT p.pass_self_no, p.comno, p.cor_memberno, p.cor_memberno, p.pass_self_title, p.pass_self_date, p.pass_self_views, c.com_name
-    FROM pass_self p, conpany_intro c
+    FROM pass_self p, com_intro c
     WHERE p.comno = c.comno
     ORDER BY pass_self_no DESC
   </select>
-  
   
   
   <!-- 조회, 수정폼, 삭제폼 -->
