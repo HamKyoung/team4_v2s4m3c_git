@@ -27,7 +27,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" />
  
-  <DIV class='title_line'>공지사항
+  <DIV class='title_line'>공지 사항
   <ASIDE class="aside_right">
     <A href="./create.do" title="등록">등록</A>
   </ASIDE>
