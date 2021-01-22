@@ -63,8 +63,9 @@
             <td>
               <a href="./read.do?recruitno=${recruitno}">${recruitVO.title}</a> 
             </td> 
+            <td class="td_bs">${comintroVO.com_name }</td> 
             <td style='text-align: center;'>${recruitVO.rdate.substring(0, 10)}</td>
-            <td style='text-align: center;'>${recruitVO.cateno}</td>
+            
 
 <%--             <td style='text-align: center;'>${recruitVO.memberno}</td>
             <td style='text-align: center;'>${recruitVO.ip}</td> --%>
