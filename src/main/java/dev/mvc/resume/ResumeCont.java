@@ -32,6 +32,12 @@ public class ResumeCont {
     return mav;
   }
   
+  /**
+   * 등록 진행
+   * @param request
+   * @param resumeVO
+   * @return
+   */
   @RequestMapping(value = "/resume/create.do", method = RequestMethod.POST)
   public ModelAndView create(HttpServletRequest request, ResumeVO resumeVO) {
     ModelAndView mav = new ModelAndView();
@@ -68,11 +74,11 @@ public class ResumeCont {
     // 파일 전송 코드 종료
     // -------------------------------------------------------------------
     
-    mav.setViewName("/resume/create_msg"); 
-    
     int cnt = this.resumeProc.create(resumeVO);
     mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
 
+    mav.setViewName("/resume/create_msg"); 
+    
     return mav; // forward
   }
   
