@@ -1,11 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <DIV class='container' style='width: 100%;'> 
   <!-- 화면 상단 메뉴 -->
 
 <header class='header'>
   <!-- <A href='${pageContext.request.contextPath}/index.jsp' style='margin-left: 30px; margin-top: 30px;'>로고</A>  -->
-  <A class='top_menu_link' style='font-size: 10px;' href="${pageContext.request.contextPath}/index.jsp" >메인</A><span class='top_menu_sep'>&nbsp;</span>
+  <A class='top_menu_link' style='font-size: 10px;' href="${pageContext.request.contextPath}/index.jsp" >메인</A>
 
     <NAV class='top_menu'>      
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/notice/list.do' >공지사항</A><span class='top_menu_sep'>&nbsp;</span>
@@ -21,7 +22,15 @@
     </NAV> 
     
     <DIV class='member_menu'>
-      <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/login.do'>로그인</A><span class='top_menu_sep'>&nbsp;</span>
+      <c:choose>
+        <c:when test="${sessionScope.id == null}">
+          <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/login.do' >Login</A><span class='top_menu_sep'> </span>
+        </c:when>
+        <c:otherwise>
+          ${sessionScope.id } <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/logout.do' >Logout</A><span class='top_menu_sep'> </span>
+        </c:otherwise>
+      </c:choose>
+
       <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/create.do'>회원가입</A>
     </DIV>
     
