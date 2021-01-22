@@ -64,7 +64,7 @@
             <td style='vertical-align: middle;'>
               <a href="./read.do?recruitno=${recruitno}">${recruitVO.title}</a> 
             </td> 
-            <td class="td_bs">${categrpVO.name }</td>
+            <td class="td_bs">${comintroVO.com_name }</td>
             <td style='vertical-align: middle; text-align: center;'>${recruitVO.rdate.substring(0, 10)}</td>
 <%--             <td style='vertical-align: middle; text-align: center;'>
               <c:choose>
