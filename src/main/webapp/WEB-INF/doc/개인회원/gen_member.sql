@@ -1,5 +1,5 @@
 /**********************************/
-/* Table Name: ì¼ë°˜ íšŒì› */
+/* Table Name: ÀÏ¹İ È¸¿ø */
 /**********************************/
 drop table gen_member;
 CREATE TABLE gen_member(
@@ -17,84 +17,84 @@ CREATE TABLE gen_member(
 		gen_date                      		DATE		 NOT NULL
 );
 
-COMMENT ON TABLE gen_member is 'ì¼ë°˜ íšŒì›';
-COMMENT ON COLUMN gen_member.gen_memberno is 'íšŒì› ë²ˆí˜¸';
-COMMENT ON COLUMN gen_member.gen_id is 'íšŒì› ì•„ì´ë””';
-COMMENT ON COLUMN gen_member.gen_passwd is 'ë¹„ë°€ë²ˆí˜¸ ';
-COMMENT ON COLUMN gen_member.gen_name is 'íšŒì› ì´ë¦„';
-COMMENT ON COLUMN gen_member.gen_resident is 'ìƒë…„ì›”ì¼';
-COMMENT ON COLUMN gen_member.gen_sex is 'ì„±ë³„';
-COMMENT ON COLUMN gen_member.gen_phone is 'ì „í™” ë²ˆí˜¸';
-COMMENT ON COLUMN gen_member.gen_zipcode is 'ìš°í¸ ë²ˆí˜¸';
-COMMENT ON COLUMN gen_member.gen_addr is 'íšŒì› ì£¼ì†Œ';
-COMMENT ON COLUMN gen_member.gen_addr1 is 'íšŒì› ì£¼ì†Œ1';
-COMMENT ON COLUMN gen_member.gen_mail is 'ì´ë©”ì¼';
-COMMENT ON COLUMN gen_member.gen_date is 'ê°€ì… ë‚ ì§œ';
+COMMENT ON TABLE gen_member is 'ÀÏ¹İ È¸¿ø';
+COMMENT ON COLUMN gen_member.gen_memberno is 'È¸¿ø ¹øÈ£';
+COMMENT ON COLUMN gen_member.gen_id is 'È¸¿ø ¾ÆÀÌµğ';
+COMMENT ON COLUMN gen_member.gen_passwd is 'ºñ¹Ğ¹øÈ£ ';
+COMMENT ON COLUMN gen_member.gen_name is 'È¸¿ø ÀÌ¸§';
+COMMENT ON COLUMN gen_member.gen_resident is '»ı³â¿ùÀÏ';
+COMMENT ON COLUMN gen_member.gen_sex is '¼ºº°';
+COMMENT ON COLUMN gen_member.gen_phone is 'ÀüÈ­ ¹øÈ£';
+COMMENT ON COLUMN gen_member.gen_zipcode is '¿ìÆí ¹øÈ£';
+COMMENT ON COLUMN gen_member.gen_addr is 'È¸¿ø ÁÖ¼Ò';
+COMMENT ON COLUMN gen_member.gen_addr1 is 'È¸¿ø ÁÖ¼Ò1';
+COMMENT ON COLUMN gen_member.gen_mail is 'ÀÌ¸ŞÀÏ';
+COMMENT ON COLUMN gen_member.gen_date is '°¡ÀÔ ³¯Â¥';
 
 DROP SEQUENCE gen_member_seq;
 CREATE SEQUENCE gen_member_seq
-  START WITH 1              -- ì‹œì‘ ë²ˆí˜¸
-  INCREMENT BY 1          -- ì¦ê°€ê°’
-  MAXVALUE 9999999999 -- ìµœëŒ€ê°’: 9999999 --> NUMBER(10) ëŒ€ì‘
-  CACHE 2                       -- 2ë²ˆì€ ë©”ëª¨ë¦¬ì—ì„œë§Œ ê³„ì‚°
-  NOCYCLE;                     -- ë‹¤ì‹œ 1ë¶€í„° ìƒì„±ë˜ëŠ” ê²ƒì„ ë°©ì§€
+  START WITH 1              -- ½ÃÀÛ ¹øÈ£
+  INCREMENT BY 1          -- Áõ°¡°ª
+  MAXVALUE 9999999999 -- ÃÖ´ë°ª: 9999999 --> NUMBER(10) ´ëÀÀ
+  CACHE 2                       -- 2¹øÀº ¸Ş¸ğ¸®¿¡¼­¸¸ °è»ê
+  NOCYCLE;                     -- ´Ù½Ã 1ºÎÅÍ »ı¼ºµÇ´Â °ÍÀ» ¹æÁö
   
--- ë“±ë¡
+-- µî·Ï
 insert into gen_member(gen_memberno, gen_id, gen_passwd, gen_name, gen_resident, gen_sex, gen_phone, gen_zipcode, gen_addr, gen_addr1, gen_mail, gen_date)
-values(GEN_MEMBER_SEQ.nextval, 'test', '1234', 'í…ŒìŠ¤íŠ¸', '010101', 'ë‚¨ì', '01012341234', 0, 0, 0, 'test@test.com', sysdate);
+values(GEN_MEMBER_SEQ.nextval, 'test', '1234', 'Å×½ºÆ®', '010101', '³²ÀÚ', '01012341234', 0, 0, 0, 'test@test.com', sysdate);
 
 insert into gen_member(gen_memberno, gen_id, gen_passwd, gen_name, gen_resident, gen_sex, gen_phone, gen_zipcode, gen_addr, gen_addr1, gen_mail, gen_date)
-values(GEN_MEMBER_SEQ.nextval, 'test1', '1234', 'í…ŒìŠ¤íŠ¸', '010101', 'ë‚¨ì', '01012341234', 0, 0, 0, 'test@test.com', sysdate);
+values(GEN_MEMBER_SEQ.nextval, 'test1', '1234', 'Å×½ºÆ®', '010101', '³²ÀÚ', '01012341234', 0, 0, 0, 'test@test.com', sysdate);
 
 insert into gen_member(gen_memberno, gen_id, gen_passwd, gen_name, gen_resident, gen_sex, gen_phone, gen_zipcode, gen_addr, gen_addr1, gen_mail, gen_date)
-values(GEN_MEMBER_SEQ.nextval, 'test2', '1234', 'í…ŒìŠ¤íŠ¸', '010101', 'ë‚¨ì', '01012341234', 0, 0, 0, 'test@test.com', sysdate);
+values(GEN_MEMBER_SEQ.nextval, 'test2', '1234', 'Å×½ºÆ®', '010101', '³²ÀÚ', '01012341234', 0, 0, 0, 'test@test.com', sysdate);
 
 SELECT * FROM gen_member;
 
 commit;
 
--- ëª©ë¡
+-- ¸ñ·Ï
 SELECT gen_memberno, gen_id, gen_passwd, gen_name, gen_resident, gen_sex, gen_phone, gen_zipcode, gen_addr, gen_addr1, gen_mail, gen_date
 FROM gen_member
 ORDER BY gen_memberno ASC;
 
--- ì¡°íšŒ
+-- Á¶È¸
 SELECT gen_memberno, gen_id, gen_passwd, gen_name, gen_resident, gen_sex, gen_phone, gen_zipcode, gen_addr, gen_addr1, gen_mail, gen_date
 FROM gen_member
 WHERE gen_memberno = 1;
 
 commit;
 
--- ìˆ˜ì •
+-- ¼öÁ¤
 UPDATE gen_member
-SET gen_id='test4', gen_name='test', gen_resident='2222222', gen_sex='ì—¬ì', gen_phone='010222222222', gen_addr='í…ŒìŠ¤íŠ¸ì‹œ í…ŒìŠ¤íŠ¸ë™', gen_mail='ë©”ì¼'
+SET gen_id='test4', gen_name='test', gen_resident='2222222', gen_sex='¿©ÀÚ', gen_phone='010222222222', gen_addr='Å×½ºÆ®½Ã Å×½ºÆ®µ¿', gen_mail='¸ŞÀÏ'
 WHERE gen_memberno = 4;
 
--- ì‚­ì œ
+-- »èÁ¦
 DELETE FROM gen_member
 WHERE gen_memberno =1;
 
--- ì•„ì´ë”” ì¤‘ë³µì²´í¬
+-- ¾ÆÀÌµğ Áßº¹Ã¼Å©
 SELECT COUNT(*) as id_cnt
 FROM gen_member
 WHERE gen_id='test2';
 
--- ë¹„ë°€ë²ˆí˜¸ ì²´í¬
+-- ºñ¹Ğ¹øÈ£ Ã¼Å©
 SELECT COUNT(*) as passwd_check
 FROM gen_member
 WHERE gen_memberno=24 AND gen_passwd='1234';
 
---ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
+--ºñ¹Ğ¹øÈ£ º¯°æ
 UPDATE gen_member
 SET gen_passwd='12345'
 WHERE gen_memberno = 2;
 
---ë¡œê·¸ì¸
+--·Î±×ÀÎ
 SELECT COUNT(*) as cnt
 FROM gen_member
 WHERE gen_id='test' AND gen_passwd='1234';
 
--- idë¥¼ ì´ìš©í•œ íšŒì› ì •ë³´ ì¡°íšŒ
+-- id¸¦ ÀÌ¿ëÇÑ È¸¿ø Á¤º¸ Á¶È¸
 SELECT gen_memberno, gen_id, gen_passwd, gen_name, gen_resident, gen_sex, gen_phone, gen_zipcode, gen_addr, gen_addr1, gen_mail, gen_date
 FROM gen_member
 WHERE gen_id = 'test';

@@ -1,5 +1,5 @@
 /**********************************/
-/* Table Name: ê¸°ì—… íšŒì› */
+/* Table Name: ±â¾÷ È¸¿ø */
 /**********************************/
 drop table cor_member;
 CREATE TABLE cor_member(
@@ -17,73 +17,73 @@ CREATE TABLE cor_member(
 		cor_date                      		DATE		 NOT NULL
 );
 
-COMMENT ON TABLE cor_member is 'ê¸°ì—… íšŒì›';
-COMMENT ON COLUMN cor_member.cor_memberno is 'ê¸°ì—… íšŒì› ë²ˆí˜¸';
-COMMENT ON COLUMN cor_member.cor_id is 'ê¸°ì—… íšŒì› ì•„ì´ë””';
-COMMENT ON COLUMN cor_member.cor_passwd is 'ê¸°ì—… íšŒì› ë¹„ë°€ë²ˆí˜¸';
-COMMENT ON COLUMN cor_member.cor_name is 'ê¸°ì—… íšŒì› ì´ë¦„';
-COMMENT ON COLUMN cor_member.cor_resident is 'ê¸°ì—… íšŒì› ìƒë…„ì›”ì¼';
-COMMENT ON COLUMN cor_member.cor_sex is 'ê¸°ì—… íšŒì› ì„±ë³„ ';
-COMMENT ON COLUMN cor_member.cor_phone is 'ê¸°ì—… íšŒì› ì „í™” ë²ˆí˜¸';
-COMMENT ON COLUMN cor_member.cor_zipcode is 'ê¸°ì—… íšŒì› ìš°í¸ ë²ˆí˜¸';
-COMMENT ON COLUMN cor_member.cor_addr is 'ê¸°ì—… íšŒì› ì£¼ì†Œ';
-COMMENT ON COLUMN cor_member.cor_addr1 is 'ê¸°ì—… íšŒì› ì£¼ì†Œ1';
-COMMENT ON COLUMN cor_member.cor_mail is 'ê¸°ì—… íšŒì› ì´ë©”ì¼';
-COMMENT ON COLUMN cor_member.cor_date is 'ê¸°ì—… íšŒì› ê°€ì… ë‚ ì§œ';
+COMMENT ON TABLE cor_member is '±â¾÷ È¸¿ø';
+COMMENT ON COLUMN cor_member.cor_memberno is '±â¾÷ È¸¿ø ¹øÈ£';
+COMMENT ON COLUMN cor_member.cor_id is '±â¾÷ È¸¿ø ¾ÆÀÌµğ';
+COMMENT ON COLUMN cor_member.cor_passwd is '±â¾÷ È¸¿ø ºñ¹Ğ¹øÈ£';
+COMMENT ON COLUMN cor_member.cor_name is '±â¾÷ È¸¿ø ÀÌ¸§';
+COMMENT ON COLUMN cor_member.cor_resident is '±â¾÷ È¸¿ø »ı³â¿ùÀÏ';
+COMMENT ON COLUMN cor_member.cor_sex is '±â¾÷ È¸¿ø ¼ºº° ';
+COMMENT ON COLUMN cor_member.cor_phone is '±â¾÷ È¸¿ø ÀüÈ­ ¹øÈ£';
+COMMENT ON COLUMN cor_member.cor_zipcode is '±â¾÷ È¸¿ø ¿ìÆí ¹øÈ£';
+COMMENT ON COLUMN cor_member.cor_addr is '±â¾÷ È¸¿ø ÁÖ¼Ò';
+COMMENT ON COLUMN cor_member.cor_addr1 is '±â¾÷ È¸¿ø ÁÖ¼Ò1';
+COMMENT ON COLUMN cor_member.cor_mail is '±â¾÷ È¸¿ø ÀÌ¸ŞÀÏ';
+COMMENT ON COLUMN cor_member.cor_date is '±â¾÷ È¸¿ø °¡ÀÔ ³¯Â¥';
 
 DROP SEQUENCE cor_member_seq;
 CREATE SEQUENCE cor_member_seq
-  START WITH 1              -- ì‹œì‘ ë²ˆí˜¸
-  INCREMENT BY 1          -- ì¦ê°€ê°’
-  MAXVALUE 9999999999 -- ìµœëŒ€ê°’: 9999999 --> NUMBER(10) ëŒ€ì‘
-  CACHE 2                       -- 2ë²ˆì€ ë©”ëª¨ë¦¬ì—ì„œë§Œ ê³„ì‚°
-  NOCYCLE;                     -- ë‹¤ì‹œ 1ë¶€í„° ìƒì„±ë˜ëŠ” ê²ƒì„ ë°©ì§€
+  START WITH 1              -- ½ÃÀÛ ¹øÈ£
+  INCREMENT BY 1          -- Áõ°¡°ª
+  MAXVALUE 9999999999 -- ÃÖ´ë°ª: 9999999 --> NUMBER(10) ´ëÀÀ
+  CACHE 2                       -- 2¹øÀº ¸Ş¸ğ¸®¿¡¼­¸¸ °è»ê
+  NOCYCLE;                     -- ´Ù½Ã 1ºÎÅÍ »ı¼ºµÇ´Â °ÍÀ» ¹æÁö
 
 
--- ë“±ë¡
+-- µî·Ï
 insert into cor_member(cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date)
-values(cor_member_seq.nextval, 'test', '1234', 'í…ŒìŠ¤íŠ¸', '1111111', 'ë‚¨ì', '01011111111', 0, 0, 0, 'test@test.com', sysdate);
-
-insert into cor_member(cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date)
-values(cor_member_seq.nextval, 'test1', '1234', 'í…ŒìŠ¤íŠ¸', '1111111', 'ë‚¨ì', '01011111111', 0, 0, 0, 'test@test.com', sysdate);
+values(cor_member_seq.nextval, 'test', '1234', 'Å×½ºÆ®', '1111111', '³²ÀÚ', '01011111111', 0, 0, 0, 'test@test.com', sysdate);
 
 insert into cor_member(cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date)
-values(cor_member_seq.nextval, 'test2', '1234', 'í…ŒìŠ¤íŠ¸', '1111111', 'ë‚¨ì', '01011111111', 0, 0, 0, 'test@test.com', sysdate);
+values(cor_member_seq.nextval, 'test1', '1234', 'Å×½ºÆ®', '1111111', '³²ÀÚ', '01011111111', 0, 0, 0, 'test@test.com', sysdate);
+
+insert into cor_member(cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date)
+values(cor_member_seq.nextval, 'test2', '1234', 'Å×½ºÆ®', '1111111', '³²ÀÚ', '01011111111', 0, 0, 0, 'test@test.com', sysdate);
 
 SELECT * FROM cor_member;
 
--- ëª©ë¡
+-- ¸ñ·Ï
 SELECT cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date
 FROM cor_member
 ORDER BY cor_memberno ASC;
 
--- ì¡°íšŒ
+-- Á¶È¸
 SELECT cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date
 FROM cor_member
 WHERE cor_memberno = 1;
 
--- ìˆ˜ì •
+-- ¼öÁ¤
 UPDATE cor_member
-SET cor_id='test2', cor_passwd='1234', cor_name='test', cor_resident='961111', cor_sex='ë‚¨ì', cor_phone='0101111111', cor_addr='ì£¼ì†Œ', cor_mail='ë©”ì¼'
+SET cor_id='test2', cor_passwd='1234', cor_name='test', cor_resident='961111', cor_sex='³²ÀÚ', cor_phone='0101111111', cor_addr='ÁÖ¼Ò', cor_mail='¸ŞÀÏ'
 WHERE cor_memberno = 4;
 
--- ì‚­ì œ
+-- »èÁ¦
 DELETE FROM cor_member
 WHERE cor_memberno =1;
 
---ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
+--ºñ¹Ğ¹øÈ£ º¯°æ
 UPDATE cor_member
 SET cor_passwd='1234'
 WHERE cor_memberno=2;
 
 commit;
 
--- ë¡œê·¸ì¸
+-- ·Î±×ÀÎ
 SELECT COUNT(*) as cnt
 FROM cor_member
 WHERE cor_id='test' AND cor_passwd='1234';
 
--- idë¥¼ ì´ìš©í•œ íšŒì› ì •ë³´ ì¡°íšŒ
+-- id¸¦ ÀÌ¿ëÇÑ È¸¿ø Á¤º¸ Á¶È¸
 SELECT cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_zipcode, cor_addr, cor_addr1,  cor_mail, cor_date
 FROM cor_member
 WHERE cor_id = 'test';
