@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<DIV class='container' style='width: 100%;'> 
-  <!-- 화면 상단 메뉴 -->
+<DIV class='container' style='width: 100%;'>
 
 <header class='header'>
   <!-- <A href='${pageContext.request.contextPath}/index.jsp' style='margin-left: 30px; margin-top: 30px;'>로고</A>  -->
@@ -23,11 +22,11 @@
     
     <DIV class='member_menu'>
       <c:choose>
-        <c:when test="${sessionScope.id == null}">
+        <c:when test="${sessionScope.gen_id == null}">
           <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/login.do' >Login</A><span class='top_menu_sep'> </span>
         </c:when>
         <c:otherwise>
-          ${sessionScope.id } <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/logout.do' >Logout</A><span class='top_menu_sep'> </span>
+          ${sessionScope.gen_id } <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/logout.do' >Logout</A><span class='top_menu_sep'> </span>
         </c:otherwise>
       </c:choose>
 
