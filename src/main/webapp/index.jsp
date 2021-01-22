@@ -20,19 +20,30 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
 
-  <DIV style='width: 80%; text-align: center'>
-    메인
+  <DIV class="col-md-9"> 
+    <DIV class="col-md-3">
+      채용공고 3 x N
+    </DIV>    
+    <DIV class="col-md-3">
+      채용공고 3 x N    
+    </DIV>    
+    <DIV class="col-md-3">
+      채용공고 3 x N    
+    </DIV>
+    <br>
+    <DIV class="col-md-3">
+      채용공고 3 x N    
+    </DIV>
+
   </DIV>
     
-  <DIV style='margin: 0px auto; width: 90%;'>
-    <DIV style='float: left; width: 50%;'>
-     </DIV>
-     <DIV style='float: left; width: 50%;'>
-    </DIV>  
+  <DIV class="col-md-3">
+    <DIV class="col-md-3">
+      사이드메뉴(공지사항, 뉴스)
+    </DIV>    
+    
   </DIV>
  
-  <DIV style='width: 94.8%; margin: 0px auto;'>
-  </DIV>  
  
 <jsp:include page="/menu/bottom.jsp" flush='false' />
  

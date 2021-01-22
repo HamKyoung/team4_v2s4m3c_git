@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<DIV class='container' style='width: 100%;'>
+<DIV class='container' style='width: 90%; '>
 
 <header class='header'>
   <!-- <A href='${pageContext.request.contextPath}/index.jsp' style='margin-left: 30px; margin-top: 30px;'>로고</A>-->
@@ -40,10 +40,8 @@
   
 <!-- TOP HOME 닫음 -->
 
-
-
-    <DIV class="col-sm-9 col-md-10 cont" style='margin-top: 100px;'>  <!-- 내용 출력 컬럼 -->  
-      <DIV class='content' style='margin-left: 30%;'>
+    <DIV class="col-md-12 cont" style='margin-top: 100px;'>
+      <DIV class='content'>
 
     
 
