@@ -118,7 +118,7 @@
     ${recruitVO.title}
   </DIV>
   <ASIDE class="aside_left">
-    <A href="../comintro/list.do">카테고리 그룹</A> > 
+    <A href="../comintro/list_all.do">회사목록</A> > 
     <A href="../comcate/list.do?comno=${comintroVO.comno }">${comintroVO.com_name }</A> > 
     <A href="../recruit/list.do?cateno=${recruitVO.cateno }&word=${param.word }&nowPage=${param.nowPage}">${comcateVO.cate_name}</A>  
   </ASIDE>
