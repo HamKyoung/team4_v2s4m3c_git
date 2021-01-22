@@ -22,12 +22,12 @@
     
     <DIV class='member_menu'>
       <c:choose>
-        <c:when test="${sessionScope.gen_id == null}">
-          <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/login.do' >Login</A><span class='top_menu_sep'> </span>
-        </c:when>
-        <c:otherwise>
-          ${sessionScope.gen_id } <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/logout.do' >Logout</A><span class='top_menu_sep'> </span>
-        </c:otherwise>
+          <c:when test="${sessionScope.gen_id == null}">
+            <A class='top_menu_link'  href='${pageContext.request.contextPath}/login/login.jsp' >Login</A><span class='top_menu_sep'>&nbsp;</span>
+          </c:when>
+          <c:otherwise>
+            ${sessionScope.gen_id } <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/logout.do' >Logout</A><span class='top_menu_sep'> </span>
+          </c:otherwise>
       </c:choose>
 
       <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/create.do'>회원가입</A>
