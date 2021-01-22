@@ -18,7 +18,7 @@
  
 </head> 
  
-<body>
+<body>  
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
     구직 신청
@@ -31,9 +31,10 @@
                enctype="multipart/form-data">
                
       <!-- FK comno 지정 -->
-      <input type='hidden' name='comno' id='comno' value='${param.comno }'>
+      <input type="text" name='comno' id='comno' value='2'>
       <!-- FK gen_memberno 지정 -->
-      <input type='hidden' name='gen_memberno' id='gen_memberno' value="${param.gen_memberno }">
+      <%-- <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.genmemberno}"> --%>
+       <input type='text' name='gen_memberno' id='gen_memberno' value="1">
                
       <div class="form-group">   
         <div class="col-md-12">
