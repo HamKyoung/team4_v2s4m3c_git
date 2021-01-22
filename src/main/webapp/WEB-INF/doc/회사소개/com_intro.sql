@@ -1,5 +1,4 @@
 /**********************************/
-<<<<<<< HEAD
 /* Table Name: 기업 회원 */
 /**********************************/
 
@@ -39,8 +38,6 @@ CREATE SEQUENCE cormem_seq
   NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
   
 /**********************************/
-=======
->>>>>>> refs/remotes/origin/master
 /* Table Name: 회사소개 */
 /**********************************/
 DROP TABLE com_intro CASCADE CONSTRAINTS; 
