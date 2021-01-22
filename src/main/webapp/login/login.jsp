@@ -19,6 +19,7 @@
 </head> 
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
+
 <a href="../genmember/login.do">개인 회원 로그인</a>
 <br>
 <a href="../cormember/login.do">기업 회원 로그인</a>

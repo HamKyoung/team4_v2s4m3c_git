@@ -4,7 +4,7 @@
 <DIV class='container' style='width: 100%;'>
 
 <header class='header'>
-  <!-- <A href='${pageContext.request.contextPath}/index.jsp' style='margin-left: 30px; margin-top: 30px;'>로고</A>  -->
+  <!-- <A href='${pageContext.request.contextPath}/index.jsp' style='margin-left: 30px; margin-top: 30px;'>로고</A>-->
   <A class='top_menu_link' style='font-size: 10px;' href="${pageContext.request.contextPath}/index.jsp" >메인</A>
 
     <NAV class='top_menu'>      
