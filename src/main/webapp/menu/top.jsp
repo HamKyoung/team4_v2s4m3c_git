@@ -30,7 +30,7 @@
           </c:otherwise>
       </c:choose>
 
-      <A class='top_menu_link'  href='${pageContext.request.contextPath}/genmember/create.do'>회원가입</A>
+      <A class='top_menu_link'  href='${pageContext.request.contextPath}/create/create.jsp'>회원가입</A>
     </DIV>
     
  

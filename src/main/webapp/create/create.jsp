@@ -18,8 +18,11 @@
 
 </head> 
 <body>
+<jsp:include page="/menu/top.jsp" />
+
 <a href="../genmember/create.do">개인 회원 로그인</a>
 <a href="../cormember/create.do">기업 회원 로그인</a>
+
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
 
