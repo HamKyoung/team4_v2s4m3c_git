@@ -1,5 +1,5 @@
 /**********************************/
-/* Table Name: ê´€ë¦¬ì */
+/* Table Name: °ü¸®ÀÚ */
 /**********************************/
 drop table admin;
 CREATE TABLE admin(
@@ -11,16 +11,16 @@ CREATE TABLE admin(
 
 DROP SEQUENCE admin_seq;
 CREATE SEQUENCE admin_seq
-  START WITH 1              -- ì‹œì‘ ë²ˆí˜¸
-  INCREMENT BY 1          -- ì¦ê°€ê°’
-  MAXVALUE 9999999999 -- ìµœëŒ€ê°’: 9999999 --> NUMBER(10) ëŒ€ì‘
-  CACHE 2                       -- 2ë²ˆì€ ë©”ëª¨ë¦¬ì—ì„œë§Œ ê³„ì‚°
-  NOCYCLE;                     -- ë‹¤ì‹œ 1ë¶€í„° ìƒì„±ë˜ëŠ” ê²ƒì„ ë°©ì§€
+  START WITH 1              -- ½ÃÀÛ ¹øÈ£
+  INCREMENT BY 1          -- Áõ°¡°ª
+  MAXVALUE 9999999999 -- ÃÖ´ë°ª: 9999999 --> NUMBER(10) ´ëÀÀ
+  CACHE 2                       -- 2¹øÀº ¸Ş¸ğ¸®¿¡¼­¸¸ °è»ê
+  NOCYCLE;                     -- ´Ù½Ã 1ºÎÅÍ »ı¼ºµÇ´Â °ÍÀ» ¹æÁö
 
 
--- ë“±ë¡
+-- µî·Ï
 insert into admin(adminno, id, passwd, name)
-values(admin_seq.nextval, 'admin', '1234', 'ê´€ë¦¬ì');
+values(admin_seq.nextval, 'admin', '1234', '°ü¸®ÀÚ');
 
 SELECT *
 FROM admin;
