@@ -18,8 +18,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
 <script type="text/javascript">
- 
-  
+  function login() {
+    alert("로그인이 필요합니다.");
+    }
 </script>
  
 </head> 
@@ -29,7 +30,16 @@
  
   <DIV class='title_line'>Q&A 게시판
   <ASIDE class="aside_right">
-    <A href="../questions/create.do" title="등록">질문 등록</A>
+    <c:set var="login" value="${login}" />
+    
+    <c:choose>
+    <c:when test="${login eq true }">
+    <A href="../questions/create.do" title="등록">질문 등록 </A>
+    </c:when>
+    <c:otherwise>
+    <A href="../login/login.jsp" onclick="login();" title="등록">질문 등록 </A>
+    </c:otherwise>
+    </c:choose>
   </ASIDE>
   </DIV>
  
