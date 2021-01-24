@@ -42,9 +42,14 @@
           <textarea class="form-control" name='ques_con' id='ques_con' rows='10' placeholder="내용" style='width: 90%;'>오늘은 무슨요일 인가요?</textarea>
         </li>
         <li class="li_none">
-          <label>이름 (현재는 회원테이블 PK)</label>
-          <input type='text' class="form-control" name='gen_memberno' value='1' placeholder="제목" required="required" style='width: 10%;'>
-        </li>
+          <c:choose>
+            <c:when test="${sessionScope.gen_id  != null}">
+              <label>작성자: ${sessionScope.gen_name }</label>
+            </c:when>
+          </c:choose>
+          <input type="hidden" name='gen_memberno' id='gen_memberno' value='${sessionScope.genmemberno}'>
+
+        </li>        
         <li class="li_none">
           <label>비밀번호 </label>
           <input type='password' class="form-control" name='ques_passwd' value='1234' placeholder="제목" required="required" style='width: 10%;'>
