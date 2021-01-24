@@ -14,7 +14,7 @@
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/recruit/list_all.do' >채용</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/jobsup/list.do' >구직</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/review/list.do'>리뷰</A><span class='top_menu_sep'>&nbsp;</span>
-      <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/resume/list_all.do'>이력서</A><span class='top_menu_sep'>&nbsp;</span>
+      <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/resume/list.do'>이력서</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/pass_self/list.do'>합격 자기소개서</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/answer/list.do'>Q&A</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link'  style='font-size: 10px;' href='${pageContext.request.contextPath}/survey/list.do'>설문 조사 목록</A><span class='top_menu_sep'>&nbsp;</span>
