@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.admin.AdminProc;
 import dev.mvc.answer.AnsProcInter;
+import dev.mvc.cormember.CormemberProc;
+import dev.mvc.genmember.GenmemberProc;
+import dev.mvc.genmember.GenmemberVO;
 
 @Controller
 public class QuesCont {
@@ -30,6 +33,14 @@ public class QuesCont {
   @Qualifier("dev.mvc.admin.AdminProc")
   private AdminProc adminProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.cormember.CormemberProc")
+  private CormemberProc cormemberProc;  
+  
   public QuesCont() {
     System.out.println("--> QuesCont created.");
   }
@@ -39,7 +50,7 @@ public class QuesCont {
    * @return
    */
   @RequestMapping(value = "/questions/create.do", method = RequestMethod.GET)
-  public ModelAndView create() {
+  public ModelAndView create(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/questions/create");
     return mav; // forward
@@ -70,7 +81,7 @@ public class QuesCont {
   public ModelAndView list() {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/questions/list");
-
+    
     List<QuesVO> list = this.quesProc.list_ques_no_desc();
     mav.addObject("list", list);
     
