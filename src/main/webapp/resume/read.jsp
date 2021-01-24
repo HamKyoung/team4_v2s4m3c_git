@@ -18,20 +18,24 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script type="text/JavaScript">
+
+</script>
 </head>
 
 <body>
 <c:set var="res_no" value="${resumeVO.res_no}" />
-<c:set var="gen_memberno" value="${resumeVO.gen_memberno}" />
+<c:set var="gen_memberno" value="${genmemberVO.gen_memberno}" />
 
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
     ${param.res_no}
   </DIV>
+  
   <ASIDE class="aside_left">
   </ASIDE>
   <ASIDE class="aside_right">
-    <A href="./create.do">글 등록</A>
+<%--     <A href="./create.do">글 등록</A>
     <c:choose>
       <c:when test="${resumeVO.res_pic.trim().length() > 0 }">
         <span class='menu_divide' > | </span> 
@@ -42,18 +46,24 @@
         <A href='./img_create.do?res_no=${res_no }'>이미지 등록</A>     
       </c:otherwise>
     </c:choose>    
-    <span class='menu_divide' > | </span>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' > | </span> 
+    <span class='menu_divide' > | </span> --%>
+
     <A href='./list_all.do'>목록</A>
     
+    <span class='menu_divide' > | </span>
+        <c:choose>
+          <c:when test="${resumeVO.res_visible == 'Y'}">
+            <A href="./update_visible.do?res_no=${res_no }&res_visible=${resumeVO.res_visible }">비공개</A>
+          </c:when>
+          <c:otherwise>
+            <A href="./update_visible.do?res_no=${res_no }&res_visible=${resumeVO.res_visible }">공개</A>
+           </c:otherwise>
+         </c:choose>
+        
     <span class='menu_divide' > | </span> 
-    <A href='./update_visible.do?res_no=${res_no }&gen_memberno=${gen_memberno}&res_visible=${res_visible}'>수정</A>
-    
+    <A href='./read_update.do?res_no=${res_no }'>수정</A>
     <span class='menu_divide' > | </span> 
-    <A href='./update.do?res_no=${res_no }&gen_memberno=${gen_memberno}'>수정</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./delete.do?res_no=${res_no }&gen_memberno=${gen_memberno}'>삭제</A>
+    <A href='./read_delete.do?res_no=${res_no }'>삭제</A>
   </ASIDE>
   
   <div class='menu_line'></div>
@@ -63,7 +73,7 @@
       
       <fieldset class="fieldset_basic">
         <ul>
-          <li class="li_none" style='border-bottom: solid 1px #AAAAAA;'>
+          <li class="li_none">
             <span>${resumeVO.res_title }</span>
             <span>${resumeVO.res_date.substring(0, 16)}</span>
           </li>
@@ -80,7 +90,7 @@
             ${resumeVO.res_phone }
           </li>
           <li class="li_none"> 메일
-            ${resumeVO.res_mail1 }@${resumeVO.res_mail2} 
+            ${resumeVO.res_mail}
           </li>
           <li class="li_none"> 자기소개
             ${resumeVO.res_intro }
@@ -89,36 +99,20 @@
             ${resumeVO.res_work }
           </li>
           <li class="li_none"> 최종학력
-            ${resumeVO.res_scname }
+            ${resumeVO.res_school }
           </li>
           <li class="li_none"> 전공
-            ${resumeVO.res_major1 }
-          </li>
-          <li class="li_none"> 부/복수 전공
-            ${resumeVO.res_major2 }
-          </li>
-          <li class="li_none"> 입학일자
-            ${resumeVO.res_gotin }
-          </li>
-          <li class="li_none"> 졸업일자
-            ${resumeVO.res_grad }
+            ${resumeVO.res_major }
           </li>
           <li class="li_none"> 자격증
-            ${resumeVO.res_lice1 }
+            ${resumeVO.res_lice }
           </li>
-          <li class="li_none"> 자격증 상세
-            ${resumeVO.res_lice1_lev }
+          <li class="li_none"> 자격증 급수
+            ${resumeVO.res_lice_lev }
           </li>
-          <li class="li_none"> 자격증2
-            ${resumeVO.res_lice2 }
-          </li>
-          <li class="li_none"> 자격증2 상세
-            ${resumeVO.res_lice2_lev }
-          </li>
-          <li class="li_none">링크
+          <li class="li_none">포트폴리오
             ${resumeVO.res_web }
-          </li>
-          
+          </li>          
         </ul>
       </fieldset>
   </FORM>
