@@ -32,8 +32,6 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal" enctype="multipart/form-data">               
       <!-- FK memberno 지정 -->
-      <input type='hidden' name='gen_memberno' id='gen_memberno' value='${sessionScope.gen_memberno }'> <!-- 회원 고유번호로 바꿔야함 -->
-      <input type='hidden' name='res_visible' id='res_visible' value='${resumeVO.res_visible }'> <!-- 기업회원에게 공개여부 결정 -->
             
       <div class="form-group">
         <label class="control-label col-md-3">이름</label>
@@ -68,7 +66,7 @@
       <div class="form-group">   
         <label class="control-label col-md-3">자기소개</label>
         <div class="col-md-9">
-          <textarea class="form-control" name='res_intro' value='${resumeVO.res_intro }'  id='res_intro' rows='5' placeholder="자기소개" maxlength="150" style='width: 50%;'>자기소개(150자 제한)</textarea>
+          <textarea class="form-control" name='res_intro' id='res_intro' rows='5' placeholder="자기소개" maxlength="150" style='width: 50%;'>${resumeVO.res_intro }</textarea>
         </div>
       </div>
       
@@ -89,7 +87,7 @@
       <div class="form-group">
         <label class="control-label col-md-3">경력기술서</label>
         <div class="col-md-9">
-          <textarea rows="10" class="form-control" name='res_work' value='${resumeVO.res_work }'  placeholder="경력기술서 예시) ~~~~" required="required" style='width: 50%;'></textarea>
+          <textarea rows="10" class="form-control" name='res_work' required="required" style='width: 50%;'>${resumeVO.res_work }</textarea>
         </div>
       </div>
 

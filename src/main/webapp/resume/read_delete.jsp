@@ -31,16 +31,16 @@
  
   <DIV id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <div class="msg_warning">삭제한 이력서는 복구 할 수 없습니다.</div>
-      <FORM name='frm' method="get" action='./update.do'>
+      <FORM name='frm_delete' method="POST" action='./delete.do'>
           <input type="hidden" name="res_no" id="res_no" value="${resumeVO.res_no}">
     
           <button type="submit" id='submit'>삭제</button>
           <button type="button" onclick="location.href='./list.do'">취소</button>
+    </DIV>
     
           <fieldset class="fieldset_basic">
             <ul>
               <li class="li_none">
-                <span>${resumeVO.res_title }</span>
                 <span>${resumeVO.res_date.substring(0, 16)}</span>
               </li>
               <li class="li_none">
@@ -82,7 +82,7 @@
             </ul>
           </fieldset>
       </FORM>
-  </DIV>
+</DIV>
    
 
  

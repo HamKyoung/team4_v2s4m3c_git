@@ -48,7 +48,7 @@
     </c:choose>    
     <span class='menu_divide' > | </span> --%>
 
-    <A href='./list_all.do'>목록</A>
+    <A href='./list.do'>목록</A>
     
     <span class='menu_divide' > | </span>
         <c:choose>
@@ -74,7 +74,6 @@
       <fieldset class="fieldset_basic">
         <ul>
           <li class="li_none">
-            <span>${resumeVO.res_title }</span>
             <span>${resumeVO.res_date.substring(0, 16)}</span>
           </li>
           <li class="li_none">

@@ -33,7 +33,7 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal" enctype="multipart/form-data">               
       <!-- FK memberno 지정 -->
-      <input type='hidden' name='gen_memberno' id='gen_memberno' value='${sessionScope.gen_memberno }'> <!-- 회원 고유번호로 바꿔야함 -->
+      <input type='hidden' name='gen_memberno' id='gen_memberno' value='1'> <!-- 회원 고유번호로 바꿔야함 -->
       <input type='hidden' name='res_visible' id='res_visible' value='Y'> <!-- 기업회원에게 공개여부 결정 -->
             
       <div class="form-group">

@@ -74,7 +74,7 @@
           <th style='text-align: center;'>사진(나중엔 지울것)</th>
           <th style='text-align: center;'>자기소개</th>
           <th style='text-align: center;'>메일</th>
-          <th style='text-align: center;'>공개여부<th>
+          <th style='text-align: center;'>수정<th>
         </tr>
       
       </thead>
@@ -97,7 +97,8 @@
                 </c:otherwise>
               </c:choose>
             </td>
-            <td style='text-align: center; vertical-align: middle;'>${resumeVO.res_mail}</td>
+            <td style='text-align: center; vertical-align: middle;'><a href="./read.do?res_no=${res_no}">${resumeVO.res_intro}</a></td>
+            <td style='text-align: center; vertical-align: middle;'><a href="./read.do?res_no=${res_no}">${resumeVO.res_mail}</a></td>
             
             <TD class="td_bs">
               <A href="./read_update.do?res_no=${res_no }" title="수정"><span class="glyphicon glyphicon-pencil"></span></A>
@@ -105,10 +106,10 @@
 
               <c:choose>
                 <c:when test="${resumeVO.res_visible == 'Y'}">
-                  <A href="./update_visible.do?res_no=${res_no }&res_visible=${resumeVO.res_visible }"><IMG src="./images/open.png" style='width: 18px;'></A>
+                  <A href="./update_visible.do?res_no=${res_no }&res_visible=${resumeVO.res_visible }">${resumeVO.res_visible }</A>
                 </c:when>
                 <c:otherwise>
-                  <A href="./update_visible.do?res_no=${res_no }&res_visible=${resumeVO.res_visible }"><IMG src="./images/close.png" style='width: 18px;'></A>
+                  <A href="./update_visible.do?res_no=${res_no }&res_visible=${resumeVO.res_visible }">${resumeVO.res_visible }</A>
                 </c:otherwise>
               </c:choose>
             </TD>   

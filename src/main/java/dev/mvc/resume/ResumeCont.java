@@ -149,7 +149,7 @@ public class ResumeCont {
    * ¼öÁ¤ Æû
    * @return
    */
-  @RequestMapping(value="/resume/update.do", method=RequestMethod.GET )
+  @RequestMapping(value="/resume/read_update.do", method=RequestMethod.GET )
   public ModelAndView read_update(int res_no,
       @RequestParam(value="word", defaultValue="") String word,
       @RequestParam(value="nowPage", defaultValue="1") int nowPage
