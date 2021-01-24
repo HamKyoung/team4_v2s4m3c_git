@@ -3,6 +3,8 @@ package dev.mvc.questions;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.admin.AdminProc;
 import dev.mvc.answer.AnsProcInter;
-import dev.mvc.notice.NoticeVO;
 
 @Controller
 public class QuesCont {
@@ -24,12 +26,16 @@ public class QuesCont {
   @Qualifier("dev.mvc.answer.AnsProc")
   private AnsProcInter ansProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.admin.AdminProc")
+  private AdminProc adminProc;
+  
   public QuesCont() {
     System.out.println("--> QuesCont created.");
   }
 
   /**
-   * 질문 등록
+   * 吏�臾� �깅�
    * @return
    */
   @RequestMapping(value = "/questions/create.do", method = RequestMethod.GET)
@@ -40,7 +46,7 @@ public class QuesCont {
   }
 
   /**
-   * 질문 등록 처리
+   * 吏�臾� �깅� 泥�由�
    * @param quesVO
    * @return
    */
@@ -57,7 +63,7 @@ public class QuesCont {
   }
   
   /**
-   * 질문 목록
+   * 吏�臾� 紐⑸�
    * @return
    */
   @RequestMapping(value = "/questions/list.do", method = RequestMethod.GET)
@@ -72,23 +78,31 @@ public class QuesCont {
   }
   
   /**
-   * 질문 조회
+   * 吏�臾� 議고��
    * @param ques_no
    * @return
    */
   @RequestMapping(value = "/questions/read.do", method = RequestMethod.GET)
-  public ModelAndView read(int ques_no) {
+  public ModelAndView read(int ques_no, HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
     QuesVO quesVO = this.quesProc.read(ques_no);
     mav.addObject("quesVO", quesVO);
 
+    boolean adlogin = false;
+    
+    if (adminProc.isAdmin(session)) {  // 관리자 로그인
+      adlogin = true;
+    }
+    
+    mav.addObject("adlogin", adlogin);
+    
     mav.setViewName("/questions/read");
     return mav;
   }
   
   /**
-   * 질문 수정용 조회
+   * 吏�臾� ������ 議고��
    * @param ques_no
    * @return
    */
@@ -107,7 +121,7 @@ public class QuesCont {
   }
   
   /**
-   * 질문 삭제용 조회
+   * 吏�臾� ������ 議고��
    * @param notice_no
    * @return
    */
@@ -126,7 +140,7 @@ public class QuesCont {
   }
    
   /**
-   * 질문 수정 처리
+   * 吏�臾� ���� 泥�由�
    * @param quesVO
    * @return
    */
@@ -141,10 +155,10 @@ public class QuesCont {
     int passwd_cnt = 0; 
     int cnt = 0;             
     
-    passwd_cnt = this.quesProc.passwd_check(hashMap); // 패스워드 체크
+    passwd_cnt = this.quesProc.passwd_check(hashMap); // �⑥�ㅼ���� 泥댄��
 
     if (passwd_cnt == 1) { 
-      cnt = this.quesProc.update(quesVO); // 수정 처리
+      cnt = this.quesProc.update(quesVO); // ���� 泥�由�
     }
 
     mav.addObject("cnt", cnt);
@@ -155,7 +169,7 @@ public class QuesCont {
   }
 
   /**
-   * 질문 삭제 처리
+   * 吏�臾� ���� 泥�由�
    * @param ques_no
    * @return
    */
@@ -171,14 +185,14 @@ public class QuesCont {
     int passwd_cnt = 0; 
     int cnt = 0;             
     
-    passwd_cnt = this.quesProc.passwd_check(hashMap); // 패스워드 체크
+    passwd_cnt = this.quesProc.passwd_check(hashMap); // �⑥�ㅼ���� 泥댄��
     
     int ans_cnt = 0;
     
     ans_cnt = this.ansProc.ans_cnt(ques_no);
 
     if (passwd_cnt == 1 && ans_cnt == 0) { 
-      cnt =this.quesProc.delete(ques_no); // 삭제 처리
+      cnt =this.quesProc.delete(ques_no); // ���� 泥�由�
     }
 
     mav.addObject("cnt", cnt);
