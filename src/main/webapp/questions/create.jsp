@@ -46,9 +46,11 @@
             <c:when test="${sessionScope.gen_id  != null}">
               <label>작성자: ${sessionScope.gen_name }</label>
             </c:when>
+            <c:when test="${sessionScope.cor_id  != null}">
+              <label>작성자: ${sessionScope.cor_name }</label>
+            </c:when>
           </c:choose>
           <input type="hidden" name='gen_memberno' id='gen_memberno' value='${sessionScope.genmemberno}'>
-
         </li>        
         <li class="li_none">
           <label>비밀번호 </label>

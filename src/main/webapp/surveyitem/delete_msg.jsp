@@ -33,6 +33,7 @@
           <LI class='li_none'><span class='span_success'>삭제 완료.</span></LI>
         </c:when>
         <c:otherwise>
+          <!-- 회원 탈퇴 실패 -->
           <LI class='li_none'><span class='span_fail'>삭제에
               실패했습니다.</span></LI>
           <LI class='li_none'><span class='span_fail'>다시

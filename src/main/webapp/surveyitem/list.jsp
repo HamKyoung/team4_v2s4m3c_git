@@ -27,11 +27,17 @@
 <body>
 <jsp:include page="/menu/top.jsp" />
  
-  <DIV class='title_line'>설문 조사 목록</DIV>
+  <DIV class='title_line'>설문 조사 목록
+    <aside class="aside_right">
+      <c:if test="${sessionScope.id != null}">
+        <A href='./create.do?surveyno=${param.surveyno }'>등록</A> 
+      </c:if>
+    </aside>
+  </DIV>
   
   <DIV style="text-align: right;">  
     <form name='frm' id='frm' method='get' action='./list.do'>
-      <input type='hidden' name='cateno' value='${surveyitemVO.surveyno }'>
+      <input type='hidden' name='surveyno' value='${surveyVO.surveyno }'>
       <br>
       <c:choose>
         <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
@@ -45,61 +51,95 @@
       <button type='submit'>검색</button>
       <c:if test="${param.word.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list.do?surveyitemno=${surveyitemVO.surveyno }&word='">검색 취소</button>  
+                     onclick="location.href='./list.do?surveyno=${surveyVO.surveyno}&word='">검색 취소</button>  
       </c:if>    
     </form>
   </DIV>
   
   <div class="aside_right"></div>
-  <TABLE class='table table-striped'>
-    <colgroup>
-      <col style='width: 15%;'/>
-      <col style="width: 15%;"/>
-      <col style='width: 10%;'/>
-      <col style='width: 20%;'/>
-      <col style='width: 20%;'/>
-      <col style='width: 10%;'/>
-    </colgroup>
-   
-    <thead>  
-    <TR>
-      <TH class="th_bs">설문조사항목번호</TH>
-      <TH class="th_bs">설문조사 번호</TH>
-      <TH class="th_bs">출력순서</TH>
-      <TH class="th_bs">항목</TH>
-      <TH class="th_bs">항목 파일</TH>
-      <TH class="th_bs">항목 선택 인원</TH>
-    </TR>
-    </thead>
+  
+  <c:choose>
+    <c:when test="${sessionScope.id != null}">
+      <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 10%;'/>
+          <col style="width: 40%;"/>
+          <col style='width: 15%;'/>
+          <col style='width: 15%;'/>
+          <col style='width: 20%;'/>
+        </colgroup>
+       
+        <thead>  
+        <TR>
+          <TH class="th_bs">번호</TH>
+          <TH class="th_bs">주제</TH>
+          <TH class="th_bs">시작 날짜</TH>
+          <TH class="th_bs">종료 날짜</TH>
+          <TH class="th_bs">기타</TH>
+        </TR>
+        </thead>
+        
+        <tbody>
+        <c:forEach var="SurveyVO" items="${list }">  <!-- request 객체에 접근 -->
+          <c:set var="surveyno" value="${SurveyVO.surveyno}" />
+          <TR>
+            <TD class="td_bs">${surveyno }</TD>
+            <TD class="td_left">
+              <a href="../surveyitem/list.do?surveyno=${surveyno }">${SurveyVO.topic }</a>
+            </TD>
+            <TD class="td_bs">${SurveyVO.startdate }</TD>
+            <TD class="td_bs">${SurveyVO.enddate }</TD>
+            <TD class="td_bs"><a href="./delete.do?surveyno=${surveyno }">삭제</a>
+              <a href="../surveyitem/list.do?surveyno=${surveyno }">항목관리</a>
+            </TD>
+          </TR>
+        </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:when>
     
-    <tbody>
-    <c:forEach var="SurveyitemVO" items="${list }">  <!-- request 객체에 접근 -->
-      <c:set var="sur_itemno" value="${SurveyitemVO.sur_itemno}" />
-      <c:set var="surveyno" value="${SurveyitemVO.surveyno}" />
-      <c:set var="itemfile" value="${SurveyitemVO.itemfile}" />
-      <TR>
-        <TD class="td_bs">${sur_itemno }</TD>
-        <TD class="td_left">${surveyno }</TD>
-        <TD class="td_bs">${SurveyitemVO.itemseq }</TD>
-        <TD class="td_bs">
-          <a href="./read.do?sur_itemno=${sur_itemno }">${SurveyitemVO.item }</a>
-        </TD>
-        <TD style='vertical-align: middle; text-align: center;'>
-         <c:choose>
-                <c:when test="${itemfile.endsWith('jpg') || itemfile.endsWith('png') || itemfile.endsWith('gif')}">
-                  <IMG src="./storage/main_images/${itemfile }" style='width: 120px; height: 80px;'> 
+    <c:otherwise>
+      <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 10%;'/>
+          <col style="width: 50%;"/>
+          <col style='width: 20%;'/>
+          <col style='width: 20%;'/>
+        </colgroup>
+       
+        <thead>  
+        <TR>
+          <TH class="th_bs">번호</TH>
+          <TH class="th_bs">주제</TH>
+          <TH class="th_bs">시작 날짜</TH>
+          <TH class="th_bs">종료 날짜</TH>
+        </TR>
+        </thead>
+        
+        <tbody>
+        <c:forEach var="SurveyVO" items="${list }">  <!-- request 객체에 접근 -->
+          <c:set var="surveyno" value="${SurveyVO.surveyno}" />
+          <TR>
+            <TD class="td_bs">${surveyno }</TD>
+            <TD class="td_left">
+              <c:choose>
+                <c:when test="${sessionScope.gen_id != null || sessionScope.cor_id != null}">
+                  <a href="../surveyitem/list.do?surveyno=${surveyno }">${SurveyVO.topic }</a> 
                 </c:when>
-                <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
-                  ${SurveyitemVO.itemfile}
+                <c:otherwise>
+                  <a href="../login/login_need.jsp">${SurveyVO.topic }</a>
                 </c:otherwise>
               </c:choose>
             </TD>
-        <TD class="td_bs">${SurveyitemVO.itemcnt }</TD>
-      </TR>
-    </c:forEach>
-    </tbody>
-   
-  </TABLE>
+            <TD class="td_bs">${SurveyVO.startdate }</TD>
+            <TD class="td_bs">${SurveyVO.enddate }</TD>
+          </TR>
+        </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:otherwise>
+  </c:choose>
+  
  
  
 <jsp:include page="/menu/bottom.jsp" />

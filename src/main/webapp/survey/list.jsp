@@ -28,7 +28,11 @@
 <jsp:include page="/menu/top.jsp" />
  
   <DIV class='title_line'>설문 조사 목록
-    <aside class="aside_right"><a href="./create.do">등록</a></aside>
+    <aside class="aside_right">
+      <c:if test="${sessionScope.id != null}">
+        <A href='./create.do?surveyno=${param.surveyno }'>등록</A> 
+      </c:if>
+    </aside>
   </DIV>
   
   <DIV style="text-align: right;">  
@@ -53,44 +57,89 @@
   </DIV>
   
   <div class="aside_right"></div>
-  <TABLE class='table table-striped'>
-    <colgroup>
-      <col style='width: 10%;'/>
-      <col style="width: 40%;"/>
-      <col style='width: 10%;'/>
-      <col style='width: 10%;'/>
-      <col style='width: 10%;'/>
-      <col style='width: 10%;'/>
-    </colgroup>
-   
-    <thead>  
-    <TR>
-      <TH class="th_bs">번호</TH>
-      <TH class="th_bs">주제</TH>
-      <TH class="th_bs">시작 날짜</TH>
-      <TH class="th_bs">종료 날짜</TH>
-      <TH class="th_bs">참여 인원</TH>
-      <TH class="th_bs">진행 여부</TH>
-    </TR>
-    </thead>
+  
+  <c:choose>
+    <c:when test="${sessionScope.id != null}">
+      <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 10%;'/>
+          <col style="width: 40%;"/>
+          <col style='width: 15%;'/>
+          <col style='width: 15%;'/>
+          <col style='width: 20%;'/>
+        </colgroup>
+       
+        <thead>  
+        <TR>
+          <TH class="th_bs">번호</TH>
+          <TH class="th_bs">주제</TH>
+          <TH class="th_bs">시작 날짜</TH>
+          <TH class="th_bs">종료 날짜</TH>
+          <TH class="th_bs">기타</TH>
+        </TR>
+        </thead>
+        
+        <tbody>
+        <c:forEach var="SurveyVO" items="${list }">  <!-- request 객체에 접근 -->
+          <c:set var="surveyno" value="${SurveyVO.surveyno}" />
+          <TR>
+            <TD class="td_bs">${surveyno }</TD>
+            <TD class="td_left">
+              <a href="../surveyitem/list.do?surveyno=${surveyno }">${SurveyVO.topic }</a>
+            </TD>
+            <TD class="td_bs">${SurveyVO.startdate }</TD>
+            <TD class="td_bs">${SurveyVO.enddate }</TD>
+            <TD class="td_bs"><a href="./delete.do?surveyno=${surveyno }">삭제</a>
+              <a href="../surveyitem/list.do?surveyno=${surveyno }">항목관리</a>
+            </TD>
+          </TR>
+        </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:when>
     
-    <tbody>
-    <c:forEach var="SurveyVO" items="${list }">  <!-- request 객체에 접근 -->
-      <c:set var="surveyno" value="${SurveyVO.surveyno}" />
-      <TR>
-        <TD class="td_bs">${surveyno }</TD>
-        <TD class="td_left">
-        <a href="./read.do?surveyno=${surveyno }">${SurveyVO.topic }</a>
-        </TD>
-        <TD class="td_bs">${SurveyVO.startdate }</TD>
-        <TD class="td_bs">${SurveyVO.enddate }</TD>
-        <TD class="td_bs">${SurveyVO.cnt }</TD>
-        <TD class="td_bs">${SurveyVO.continueyn }</TD>
-      </TR>
-    </c:forEach>
-    </tbody>
-   
-  </TABLE>
+    <c:otherwise>
+      <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 10%;'/>
+          <col style="width: 50%;"/>
+          <col style='width: 20%;'/>
+          <col style='width: 20%;'/>
+        </colgroup>
+       
+        <thead>  
+        <TR>
+          <TH class="th_bs">번호</TH>
+          <TH class="th_bs">주제</TH>
+          <TH class="th_bs">시작 날짜</TH>
+          <TH class="th_bs">종료 날짜</TH>
+        </TR>
+        </thead>
+        
+        <tbody>
+        <c:forEach var="SurveyVO" items="${list }">  <!-- request 객체에 접근 -->
+          <c:set var="surveyno" value="${SurveyVO.surveyno}" />
+          <TR>
+            <TD class="td_bs">${surveyno }</TD>
+            <TD class="td_left">
+              <c:choose>
+                <c:when test="${sessionScope.gen_id != null || sessionScope.cor_id != null}">
+                  <a href="../surveyitem/list.do?surveyno=${surveyno }">${SurveyVO.topic }</a> 
+                </c:when>
+                <c:otherwise>
+                  <a href="../login/login_need.jsp">${SurveyVO.topic }</a>
+                </c:otherwise>
+              </c:choose>
+            </TD>
+            <TD class="td_bs">${SurveyVO.startdate }</TD>
+            <TD class="td_bs">${SurveyVO.enddate }</TD>
+          </TR>
+        </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:otherwise>
+  </c:choose>
+  
  
  
 <jsp:include page="/menu/bottom.jsp" />
