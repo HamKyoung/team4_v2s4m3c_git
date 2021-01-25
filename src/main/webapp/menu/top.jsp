@@ -7,7 +7,7 @@
   <!-- <A href='${pageContext.request.contextPath}/index.jsp' style='margin-left: 30px; margin-top: 30px;'>로고</A>-->
   <A class='top_menu_link' style='font-size: 10px;' href="${pageContext.request.contextPath}/index.jsp" >메인</A>
 
-    <NAV class='top_menu'>      
+    <NAV class='top_menu'>   
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/notice/list.do' >공지사항</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/comintro/list_all.do' >기업</A><span class='top_menu_sep'>&nbsp;</span>
       <A class='top_menu_link' style='font-size: 10px;' href='${pageContext.request.contextPath}/jobnws/list.do' >뉴스</A><span class='top_menu_sep'>&nbsp;</span>

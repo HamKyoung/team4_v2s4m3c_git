@@ -21,7 +21,7 @@
  
 <body>
 <c:set var="res_no" value="${resumeVO.res_no}" />
-<c:set var="gen_memberno" value="${genmemberVO.gen_memberno}" />
+<c:set var="gen_memberno" value="${resumeVO.gen_memberno}" />
 
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>
@@ -30,8 +30,10 @@
  
   <div class='menu_line'></div>
   <DIV style='width: 100%;'>
-    <FORM name='frm' method='POST' action='./create.do' class="form-horizontal" enctype="multipart/form-data">               
-      <!-- FK memberno 지정 -->
+    <FORM name='frm' method='POST' action='./update.do' class="form-horizontal" enctype="multipart/form-data">               
+            <input type="hidden" name="res_visible" value="${resumeVO.res_visible }">
+            <input type="hidden" name="gen_memberno" value="${gen_memberno }">
+            <input type="hidden" name="res_no" value="${res_no }">
             
       <div class="form-group">
         <label class="control-label col-md-3">이름</label>
