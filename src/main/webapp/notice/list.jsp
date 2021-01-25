@@ -26,10 +26,12 @@
  
 <body>
 <jsp:include page="/menu/top.jsp" />
- 
+  <c:set var="login" value="${login}" />
   <DIV class='title_line'>공지사항
   <ASIDE class="aside_right">
+    <c:if test="${adlogin eq true }">
     <A href="./create.do" title="등록">등록</A>
+    </c:if>
   </ASIDE>
   
   <DIV style="text-align: right;">  
@@ -51,12 +53,11 @@
       </c:if>    
     </form>
   </DIV>
-  
-  
   </DIV>
- 
   
 <TABLE class='table table-striped'>
+  <c:choose>
+  <c:when test="${adlogin eq true }">
   <colgroup>
     <col style='width: 10%;'/>
     <col style='width: 55%;'/>
@@ -64,7 +65,6 @@
     <col style='width: 7%;'/>    
     <col style='width: 15%;'/>
   </colgroup>
- 
   <thead>  
   <TR>
     <TH class="th_bs"></TH>
@@ -74,15 +74,30 @@
     <TH class="th_bs">기타</TH>
   </TR>
   </thead>
-  
-  <tbody>
+  </c:when>
+  <c:otherwise>
+  <colgroup>
+    <col style='width: 10%;'/>
+    <col style='width: 70%;'/>
+    <col style='width: 20%;'/>
+  </colgroup>
+  <thead>  
+  <TR>
+    <TH class="th_bs"></TH>
+    <TH class="th_bs">제목</TH>
+    <TH class="th_bs">등록일</TH>
+  </TR>
+  </thead>
+  </c:otherwise>
+  </c:choose>
+  <tbody>  
   <c:forEach var="noticeVO" items="${list}">
     <c:set var="notice_seqno" value="${noticeVO.notice_seqno }" />
     <TR>
       <TD class="td_bs">[공지]</TD>
       <TD><a href="./read.do?notice_no=${noticeVO.notice_no}">${noticeVO.notice_name}</a></TD> 
-
       <TD class="td_bs">${noticeVO.notice_date.substring(0, 10) }</TD>
+      <c:if test="${adlogin eq true }">
       <TD class="td_bs">
         <c:choose>
           <c:when test="${noticeVO.notice_visible == 'Y'}">
@@ -99,12 +114,13 @@
         <A href="./update_seqno_up.do?notice_no=${noticeVO.notice_no }" title="우선순위 상향"><span class="glyphicon glyphicon-arrow-up"></span></A>
         <A href="./update_seqno_down.do?notice_no=${noticeVO.notice_no }" title="우선순위 하향"><span class="glyphicon glyphicon-arrow-down"></span></A>       
       </TD>   
+      </c:if>
     </TR>   
   </c:forEach> 
   </tbody>
 </TABLE>
+
 <DIV class='bottom_menu'>${paging }</DIV>
- 
  
 <jsp:include page="/menu/bottom.jsp" />
 </body>
