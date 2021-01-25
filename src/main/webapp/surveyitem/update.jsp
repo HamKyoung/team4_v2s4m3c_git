@@ -21,7 +21,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
-    설문 조사 수정
+    설문 조사 항목 수정
   </DIV>
   
   <ASIDE class="aside_left">
@@ -32,31 +32,26 @@
   
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./update.do' class="form-horizontal">
-      <input type='hidden' name='surveyno' id='surveyno' value='${surveyVO.surveyno }'>
+      <input type='hidden' name='surveyno' id='surveyno' value='${surveyitemVO.surveyno }'>
+      <input type='hidden' name='sur_itemno' id='sur_itemno' value='${surveyitemVO.sur_itemno }'>
 
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='topic' value='test' placeholder="주제" required="required" style='width: 30%;'>
+          <input type='text' class="form-control" name='itemseq' value='1' placeholder="출력 모드" required="required" style='width: 30%;'>
         </div>
       </div>   
 
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='startdate' value='2020.01.01' placeholder="시작 날짜" style='width: 15%;'>
+          <input type='text' class="form-control" name='item' value='test' placeholder="항목" style='width: 15%;'>
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='enddate' value='2020.02.01' placeholder="종료 날짜" style='width: 15%;'>
+          <input type='text' class="form-control" name='itemcnt' value='1' placeholder="항목 참여 인원" style='width: 15%;'>
         </div>
       </div>    
-      
-      <div class="form-group">   
-        <div class="col-md-12">
-          <input type='text' class="form-control" name='cnt'  value='1' placeholder="참여 인원" style='width: 15%;'>
-        </div>
-      </div>
       
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">수정</button>
