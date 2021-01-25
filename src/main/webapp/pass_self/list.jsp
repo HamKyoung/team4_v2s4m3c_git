@@ -29,7 +29,9 @@
  
   <DIV class='title_line'>합격 자소서
   <ASIDE class="aside_right">
-    <A href="./create.do" title="등록">등록</A>
+    <c:if test="${corlogin eq true }">
+       <A href="./create.do" title="등록">등록</A>
+    </c:if>
   </ASIDE>
   </DIV>
  
@@ -57,7 +59,14 @@
   <c:forEach var="pass_selfVO" items="${list}">
     <TR>
       <TD class="td_bs">${pass_selfVO.pass_self_no }</TD>
+      <c:choose>
+      <c:when test="${corlogin eq true || genlogin eq true } ">
       <TD><a href="./read.do?pass_self_no=${pass_selfVO.pass_self_no}">${pass_selfVO.pass_self_title}</a></TD> 
+      </c:when>
+      <c:otherwise>
+      <TD><a href="../genmember/login_need.jsp">${pass_selfVO.pass_self_title}</a></TD> 
+      </c:otherwise>
+      </c:choose>
       <TD class="td_bs">${pass_selfVO.com_name }</TD>
       <TD class="td_bs">${pass_selfVO.pass_self_date.substring(0, 10) }</TD>
       <TD class="td_bs">
