@@ -2,6 +2,8 @@ package dev.mvc.answer;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cormember.CormemberProc;
+import dev.mvc.genmember.GenmemberProc;
 import dev.mvc.notice.NoticeVO;
 import dev.mvc.questions.QuesProcInter;
 import dev.mvc.questions.QuesVO;
@@ -23,12 +27,22 @@ public class AnsCont {
   @Qualifier("dev.mvc.answer.AnsProc")
   private AnsProcInter ansProc;
   
+  
+  @Autowired
+  @Qualifier("dev.mvc.cormember.CormemberProc")
+  private CormemberProc cormemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
+  
+  
   public AnsCont() {
     System.out.println("--> AnsCont created.");
   }
   
   /**
-   * �듬� �깅�
+   * 占쎈�э옙 占쎄�占�
    * @return
    */
   @RequestMapping(value = "/answer/create.do", method = RequestMethod.GET)
@@ -39,7 +53,7 @@ public class AnsCont {
   }
   
   /**
-   * �듬� �깅� 泥�由�
+   * 占쎈�э옙 占쎄�占� 筌ｏ옙�깍옙
    * @param AnsVO
    * @return
    */
@@ -56,16 +70,24 @@ public class AnsCont {
   }
   
   /**
-   * �듬� 由ъ�ㅽ��
+   * 占쎈�э옙 �귐�占썬�쏙옙占�
    * @return
    */
   @RequestMapping(value = "/answer/list.do", method = RequestMethod.GET)
-  public ModelAndView list() {
+  public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/answer/list"); 
     
+    boolean login = false;
+    
+    if (genmemberProc.isMember(session) || cormemberProc.isMember(session)) { // 회원 로그인 된 경우
+      login = true;
+    }
+    mav.addObject("login", login);
+    
     List<QuesVO> ques_list =this.quesProc.list_ques_no_desc();
     mav.addObject("ques_list", ques_list);
+    
     List<AnsVO> list = this.ansProc.list_ans_no_asc();
     mav.addObject("list", list);
     
@@ -74,7 +96,7 @@ public class AnsCont {
   }
   
   /**
-   * �듬� 議고��
+   * 占쎈�э옙 鈺곌�占쏙옙
    * @param ans_no
    * @return
    */
@@ -90,7 +112,7 @@ public class AnsCont {
   }
   
   /**
-   * �듬� ������ 議고��
+   * 占쎈�э옙 占쏙옙占쏙옙占쏙옙 鈺곌�占쏙옙
    * @param ans_no
    * @return
    */
@@ -109,7 +131,7 @@ public class AnsCont {
   }
   
   /**
-   * �듬� ������ 議고��
+   * 占쎈�э옙 占쏙옙占쏙옙占쏙옙 鈺곌�占쏙옙
    * @param ans_no
    * @return
    */
@@ -128,7 +150,7 @@ public class AnsCont {
   }
   
   /**
-   * �듬� ���� 泥�由�
+   * 占쎈�э옙 占쏙옙占쏙옙 筌ｏ옙�깍옙
    * @param ansVO
    * @return
    */
@@ -146,7 +168,7 @@ public class AnsCont {
   }
   
   /**
-   * �듬� ���� 泥�由�
+   * 占쎈�э옙 占쏙옙占쏙옙 筌ｏ옙�깍옙
    * @param ans_no
    * @return
    */

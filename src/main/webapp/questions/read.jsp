@@ -28,8 +28,10 @@
       <fieldset>
           <li class="li_none" style='border-bottom: solid 1px #AAAAAA;'>
                <ASIDE class="aside_right">
+                <c:if test="${adlogin eq true}">
                 <span class='menu_divide' >|</span>
                 <A href="../answer/create.do?ques_no=${ques_no }">답변 달기</A>
+                </c:if>
                 <span class='menu_divide' >|</span>
                 <A href="javascript:location.reload();">새로고침</A>
                 <span class='menu_divide' >|</span>
