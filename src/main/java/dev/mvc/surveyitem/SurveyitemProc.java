@@ -2,6 +2,7 @@ package dev.mvc.surveyitem;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,6 +55,12 @@ public class SurveyitemProc implements SurveyitemProcInter {
   @Override
   public int search_count(HashMap<String, Object> hashMap) {
     int cnt = this.surveyitemDAO.search_count(hashMap);
+    return cnt;
+  }
+
+  @Override
+  public int update_cnt(Map map){
+    int cnt = this.surveyitemDAO.update_cnt(map);
     return cnt;
   }
   

@@ -2,6 +2,7 @@ package dev.mvc.surveyitem;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface SurveyitemDAOInter {
   
@@ -31,6 +32,13 @@ public interface SurveyitemDAOInter {
    * @return
    */
   public int update(SurveyitemVO surveyitemVO);
+  
+  /**
+   * 카운트
+   * @param surveyitemVO
+   * @return
+   */
+  public int update_cnt(Map map);
   
   /**
    * 삭제
