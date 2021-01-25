@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.surveyitem.SurveyitemProc;
+import dev.mvc.surveyitem.SurveyitemVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -22,6 +24,10 @@ public class SurveyCont {
   @Autowired
   @Qualifier("dev.mvc.survey.SurveyProc")
   private SurveyProc surveyProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.surveyitem.SurveyitemProc")
+  private SurveyitemProc surveyitemProc;
   
   public SurveyCont() {
     System.out.println("--> SurveyCont created.");
@@ -102,7 +108,7 @@ public class SurveyCont {
     // 검색 목록
     List<SurveyVO> list = surveyProc.list_by_search(map);
     mav.addObject("list", list);
-    
+   
     // 검색된 레코드 갯수
     int search_count = surveyProc.search_count(map);
     mav.addObject("search_count", search_count);
