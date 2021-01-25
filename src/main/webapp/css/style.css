@@ -28,6 +28,47 @@
     height: 100px;
     background-color: rgba(21, 132, 103, 1);  /* 0.2: Alpha, 투명도, 1: 불투명 #158467*/
   }
+  
+    /*바텀 헤더*/
+  .bottom_header {
+    height:40px; background-color:#158467;
+  }
+  
+  /*GNB*/
+  .bottom_header .gnb {
+    width:996px; margin:0 auto;
+  }
+  .bottom_header .gnb>li {
+    float:left; width:166px; position:relative;
+  }
+  .bottom_header .gnb>li>a {
+    display:block; text-align:center; color:#FFF; font-size:16px; font-weight:bold; line-height:40px;
+  }
+  
+  .bottom_header .gnb>li:hover>a {
+    background:#158467;
+  }
+  
+    /*서브메뉴*/
+  .gnb>li:hover .depth2 {
+    display:block;
+  }
+  .gnb .depth2 {
+    position:absolute; left:0; top:40px; background:#f5f5f5; display:none; width:166px; padding:30px 20px; z-index:1
+  }
+  .gnb .depth2 li {
+    margin-top:15px;
+  }
+  .gnb .depth2 li:first-child {
+    margin-top:0px;
+  }
+  .gnb .depth2 a {
+    color:#333; font-size:14px; display:block;
+  }
+  .gnb .depth2 li a:hover {
+    color:#03C; text-decoration:underline;
+  }
+  
     
   /* ****************** */
   /*      메뉴 관련      */
@@ -346,9 +387,6 @@
     padding-top: 0px;
     padding-left: 20px; 
   }
-  
-  
-  
   
 
 
