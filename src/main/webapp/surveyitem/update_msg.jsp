@@ -24,6 +24,9 @@
 <DIV class='message'>
      <fieldset class='fieldset_basic'>
       <UL>
+        <c:choose>
+          <c:when test="${passwd_cnt == 1 }">
+            <!-- 패스워드 일치 -->
             <c:choose>
               <c:when test="${cnt == 1}">
                 <!-- 글 수정 성공 -->
@@ -38,12 +41,19 @@
                     시도해주세요.</span></LI>
               </c:otherwise>
             </c:choose>
+          </c:when>
+          <c:otherwise>
+            <!-- 패스워드 불일치 -->
+            <LI class='li_none'><span class='span_fail'>패스워드가
+                일치하지 않습니다. 다시 시도해주세요.</span></LI>
+          </c:otherwise>
+        </c:choose>
 
         <c:choose>
-          <c:when test="${cnt == 1}">
+          <c:when test="${cnt == 1 && passwd_cnt == 1}">
             <LI class='li_none'>
               <button type='button'
-                onclick="location.href='./read.do?sur_itemno=${param.sur_itemno }&surveyno=${param.surveyno}'"
+                onclick="location.href='./read.do?surveyno${param.surveyno}'"
                 class="btn btn-info">변경 확인</button>
               <button type='button'
                 onclick="location.href='./list.do?surveyno=${param.surveyno}'"
