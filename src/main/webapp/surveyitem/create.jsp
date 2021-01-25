@@ -21,7 +21,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
-    설문조사 등록
+    설문조사항목 등록
   </DIV>
   
   <ASIDE class="aside_left">
@@ -35,39 +35,28 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"
                 enctype="multipart/form-data">
+      <input type='hidden' name='surveyno' id='surveyno' value='${param.surveyno }'>
 
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='topic' value='test' placeholder="주제" required="required" style='width: 30%;'>
-        </div>
-      </div>   
-
-      <div class="form-group">   
-        <div class="col-md-12">
-          <input type='text' class="form-control" name='startdate' value='2020.01.01' placeholder="시작 날짜" style='width: 15%;'>
+          <input type='text' class="form-control" name='itemseq' value='1' placeholder="출력 순서" style='width: 15%;'>
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='enddate' value='2020.02.01' placeholder="종료 날짜" style='width: 15%;'>
+          <input type='text' class="form-control" name='item' value='아이템' placeholder="아이템" style='width: 15%;'>
         </div>
       </div>    
       
       <div class="form-group">   
         <div class="col-md-12">
-          <%-- 실제 컬럼명: fiel1, Spring File 객체 대응: fiel1MF --%>
-          <input type='file' class="form-control" name='posterMF' id='posterMF' 
+          <%-- 실제 컬럼명: fiel1, Spring File 객체 대응: itemfileMF --%>
+          <input type='file' class="form-control" name='itemfileMF' id='itemfileMF' 
                     value='' placeholder="파일 선택">
         </div>
       </div>
       
-      <div class="form-group">   
-        <div class="col-md-12">
-          <input type='text' class="form-control" name='continueyn' value='Y' placeholder="진행 여부" style='width: 50%;'>
-        </div>
-      </div> 
-        
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">등록</button>
         <button type="button" 

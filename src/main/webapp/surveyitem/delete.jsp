@@ -21,7 +21,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
-    기업 회원 삭제
+    설문 조사 항목
   </DIV>
   
   <ASIDE class="aside_left">
@@ -33,7 +33,8 @@
   <DIV id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <div class="msg_warning">설문조사를 삭제 하면 복구 할 수 없습니다.</div>
     <FORM name='frm' method='POST' action='./delete.do' class="form-horizontal">
-    <input type='hidden' name='surveyno' id='surveyno' value='${surveyVO.surveyno }'>
+    <input type='hidden' name='sur_itemno' id='sur_itemno' value='${surveyitemVO.sur_itemno }'>
+    <input type='hidden' name='surveyno' id='surveyno' value='${surveyitemVO.surveyno }'>
 
         
       <DIV class='content_bottom_menu'>
