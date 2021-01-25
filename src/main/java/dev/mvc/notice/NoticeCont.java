@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.admin.AdminProc;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -23,6 +25,10 @@ public class NoticeCont {
   @Qualifier("dev.mvc.notice.NoticeProc")
 
   private NoticeProcInter noticeProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.admin.AdminProc")
+  private AdminProc adminProc;
 
   public NoticeCont() {
     System.out.println("--> NoticeCont created.");
@@ -102,11 +108,20 @@ public class NoticeCont {
   @RequestMapping(value = "/notice/list.do", method = RequestMethod.GET)
   public ModelAndView list_notice_seqno_asc(
       @RequestParam(value="notice_word", defaultValue="") String notice_word,
-      @RequestParam(value="nowPage", defaultValue="1") int nowPage
+      @RequestParam(value="nowPage", defaultValue="1") int nowPage,
+      HttpSession session
       ) { 
     System.out.println("--> nowPage: " + nowPage);
     
     ModelAndView mav = new ModelAndView();
+    
+    boolean adlogin = false;
+    
+    if (adminProc.isAdmin(session)) {  // 관리자 로그인
+      adlogin = true;
+    }
+    
+    mav.addObject("adlogin", adlogin);
     
     // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
     HashMap<String, Object> map = new HashMap<String, Object>();
