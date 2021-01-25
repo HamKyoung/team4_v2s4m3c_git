@@ -3,6 +3,8 @@ package dev.mvc.pass_self;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cormember.CormemberProc;
+import dev.mvc.genmember.GenmemberProc;
 import dev.mvc.questions.QuesVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
@@ -19,6 +23,13 @@ import dev.mvc.tool.Upload;
 @Controller
 public class Pass_selfCont {
   
+  @Autowired
+  @Qualifier("dev.mvc.cormember.CormemberProc")
+  private CormemberProc cormemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
   
   @Autowired
   @Qualifier("dev.mvc.pass_self.Pass_selfProc")
@@ -61,10 +72,24 @@ public class Pass_selfCont {
    * @return
    */
   @RequestMapping(value = "/pass_self/list.do", method = RequestMethod.GET)
-  public ModelAndView list() {
+  public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/pass_self/list");
 
+    boolean genlogin = false;
+    boolean corlogin = false;
+    
+    if (genmemberProc.isMember(session)) { // 일반회원 로그인 된 경우
+      genlogin = true;
+    }
+    
+    if (cormemberProc.isMember(session)) {
+      corlogin = true;
+    }
+
+    mav.addObject("genlogin", genlogin);
+    mav.addObject("corlogin", corlogin);
+    
     List<Pass_selfVO> list = this.pass_selfProc.list();
     
     mav.addObject("list", list);
