@@ -2,15 +2,18 @@ package dev.mvc.surveyitem;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.survey.SurveyProc;
@@ -30,6 +33,34 @@ public class SurveyitemCont {
   
   public SurveyitemCont() {
     System.out.println("--> SurveyitemCont created.");
+  }
+  
+  /**
+   * 투표, JSON 출력
+   * 
+   * @return
+   */
+  @ResponseBody
+  @RequestMapping(value = "/surveyitem/vote.do", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+  public String vote(int sur_itemno, int surveyno ) {
+    
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("sur_itemno", sur_itemno);     // #{sur_itemno}
+    map.put("surveyno", surveyno); // #{surveyno}
+    
+    int cnt = this.surveyitemProc.update_cnt(map);
+    int itemcnt = 0;
+    
+    if (cnt == 1) {
+      SurveyitemVO surveyitemVO =  this.surveyitemProc.read(sur_itemno);
+      itemcnt = surveyitemVO.getItemcnt();
+    }
+
+    JSONObject json = new JSONObject();
+    json.put("itemcnt", itemcnt);
+    json.put("cnt", cnt);
+
+    return json.toString();
   }
   
   /**
@@ -101,7 +132,7 @@ public class SurveyitemCont {
     
     // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
     HashMap<String, Object> map = new HashMap<String, Object>();
-    map.put("surveyno", surveyno); // #{cateno}
+    map.put("surveyno", surveyno); // #{surveyno}
     map.put("word", word);     // #{word}
     
     // 검색 목록
@@ -111,7 +142,34 @@ public class SurveyitemCont {
     // 검색된 레코드 갯수
     int search_count = surveyitemProc.search_count(map);
     mav.addObject("search_count", search_count);
+    
+    SurveyVO surveyVO = surveyProc.read(surveyno);
+    mav.addObject("surveyVO", surveyVO);
 
+    return mav;
+  }    
+  
+  /**
+   * 설문 조사 결과 목록 http://localhost:9090/team4/surveyitem/list.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/surveyitem/result.do", method = RequestMethod.GET)
+  public ModelAndView list_by_result(
+      @RequestParam(value="surveyno", defaultValue="1") int surveyno
+      ) { 
+    
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/surveyitem/result");   
+    
+    // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("surveyno", surveyno); // #{surveyno}
+    
+    // 검색 목록
+    List<SurveyitemVO> list = surveyitemProc.list_by_search(map);
+    mav.addObject("list", list);
+    
     SurveyVO surveyVO = surveyProc.read(surveyno);
     mav.addObject("surveyVO", surveyVO);
 
@@ -133,6 +191,7 @@ public class SurveyitemCont {
 
     return mav; // forward
   }
+  
   
   /**
    * 수정 폼 http://localhost:9090/team4/surveyitem/update.do

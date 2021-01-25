@@ -51,7 +51,7 @@
       <LI class='li_none'>
         <br>
         <button type='button' 
-                    onclick="location.href='./index'"
+                    onclick="location.href='../index.do'"
                     class="btn btn-info">홈페이지</button>
       </LI>
      </UL>

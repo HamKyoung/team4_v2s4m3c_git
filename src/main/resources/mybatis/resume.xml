@@ -30,7 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     UPDATE mem_res
     
     SET gen_name=#{gen_name}, res_phone=#{res_phone}, res_mail=#{res_mail}, res_intro=#{res_intro}, res_school=#{res_school}, res_major=#{res_major}, 
-            res_lice=#{res_lice}, res_lice_lev=#{res_lice_lev}, res_work=#{res_work}, res_web=#{res_web}, res_visible=#{res_visible}, sysdate, res_pic=#{res_pic}, res_thumb=#{res_thumb}, res_size=#{res_size}
+            res_lice=#{res_lice}, res_lice_lev=#{res_lice_lev}, res_work=#{res_work}, res_web=#{res_web}, res_visible=#{res_visible}, 
+            res_pic=#{res_pic}, res_thumb=#{res_thumb}, res_size=#{res_size}
     
     WHERE res_no=#{res_no}
   </update>

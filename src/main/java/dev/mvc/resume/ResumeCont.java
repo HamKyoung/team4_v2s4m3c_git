@@ -380,20 +380,5 @@ public class ResumeCont {
     return mav;
   }
 
-  /**
-   * 새로고침을 방지하는 메시지 출력
-   * @return
-   */
-  @RequestMapping(value = "/resume/msg.do", method = RequestMethod.GET)
-  public ModelAndView msg(String url) {
-    ModelAndView mav = new ModelAndView();
-
-    // 등록 처리 메시지: create_msg --> /review/create_msg.jsp
-    // 수정 처리 메시지: update_msg --> /review/update_msg.jsp
-    // 삭제 처리 메시지: delete_msg --> /review/delete_msg.jsp
-    mav.setViewName("/resume/" + url); // forward
-
-    return mav; // forward
-  }
 
 }

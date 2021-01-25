@@ -53,8 +53,8 @@
         </c:choose>
                     
         <button type='button' 
-                    onclick="location.href='../index.jsp'"
-                    class="btn btn-info">메인화면으로</button>
+                    onclick="location.href='./list.do'"
+                    class="btn btn-info">목록</button>
       </LI>
      </UL>
   </fieldset>

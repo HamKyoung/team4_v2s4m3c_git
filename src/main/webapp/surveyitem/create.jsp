@@ -57,13 +57,6 @@
         </div>
       </div>
       
-      <div class="form-group">   
-        <div class="col-md-12">
-          <input type='text' class="form-control" name='itemcnt'  value='10' placeholder="참여 인원" style='width: 15%;'>
-        </div>
-      </div>
-      
-        
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">등록</button>
         <button type="button" 

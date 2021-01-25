@@ -32,6 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE sur_itemno=#{sur_itemno}
   </update>
   
+  <update id="update_cnt" parameterType="map">
+    UPDATE surveyitem 
+    SET itemcnt = itemcnt + 1
+    WHERE sur_itemno =#{sur_itemno} and surveyno =#{surveyno}
+  </update>
+  
   <delete id="delete" parameterType="int">
     DELETE FROM surveyitem
     WHERE sur_itemno=#{sur_itemno}
