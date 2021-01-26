@@ -83,7 +83,7 @@
   
   .member_menu{
     text-align: right;
-    position: relative; /* 로그인, 회원가입란 */ 
+    position: relative; /* 로그인, 회원가입란 */
   }
     
   .top_menu_label {
@@ -227,25 +227,25 @@
   /* ************************************************ */  
   .top_menu_link:link{  /* 방문전 상태 */
     text-decoration: none; /* 밑줄 삭제 */
-    color: black;
+    color: white;
     font-weight: bold;
   }
 
   .top_menu_link:visited{  /* 방문후 상태 */
     text-decoration: none; /* 밑줄 삭제 */
-    color: black;
+    color: white;
     font-weight: bold;
   }
 
   .top_menu_link:hover{  /* A 태그에 마우스가 올라간 상태 */
     text-decoration: underline; /* 밑줄 출력 */
-    color: black;
+    color: white;
     font-weight: bold;
   }
 
   .top_menu_link:active{  /* A 태그를 클릭한 상태 */
     text-decoration: underline; /* 밑줄 출력 */
-    color: black;
+    color: white;
     font-weight: bold;
   }
   
