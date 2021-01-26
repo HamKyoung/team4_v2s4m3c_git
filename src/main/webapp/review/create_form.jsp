@@ -104,7 +104,7 @@
   </div>
   
   <div class="content_bottom_menu" style="padding-right: 20%;">
-    <button type="submit" id="btn_send" class="btn btn-primary">등록</button>
+    <button type="button" id="btn_send" class="btn btn-primary">등록</button>
     <button type="button" onclick="location.href='./list.do'" class="btn btn-light">목록</button>
   </div>
 
