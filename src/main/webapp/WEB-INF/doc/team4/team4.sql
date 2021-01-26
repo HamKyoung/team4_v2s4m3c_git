@@ -485,7 +485,23 @@ INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, 
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,1, '2021년도 쿠팡 신입 / 경력사원 모집', 4, '우리는 몇명뽑는다' ,'http://www.daum.net',
              '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
-            
+
+
+INSERT INTO recruit(recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+                              file1, thumb1, size1)
+VALUES(recruit_seq.nextval,2, '2021년 개발자 채용', 1, '우리는 몇명뽑는다' ,'http://www.daum.net',
+             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+
+INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+                              file1, thumb1, size1)
+VALUES(recruit_seq.nextval,2, '2021년도 현성그룹 신입 / 경력사원 모집', 2, '우리는 몇명뽑는다' ,'http://www.daum.net',
+             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+
+INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+                              file1, thumb1, size1)
+VALUES(recruit_seq.nextval,2, '2021년도 카카오 경력모집', 3, '우리는 몇명뽑는다' ,'http://www.daum.net',
+             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+
 
 2) 전체목록
 SELECT recruitno, cateno, title, content, homepage ,passwd, word, rdate
@@ -933,50 +949,52 @@ ORDER BY sur_memberno ASC
 /**********************************/
 /* Table Name: 이력서 */
 /**********************************/
+
 DROP TABLE mem_res CASCADE CONSTRAINTS;
 DROP SEQUENCE mem_res_seq;
 
 DROP TABLE res_scho CASCADE CONSTRAINTS;
-
 DROP TABLE res_lice CASCADE CONSTRAINTS;
-
 
 CREATE TABLE mem_res(
 		res_no                        		NUMBER(10)		        NOT NULL		 PRIMARY KEY,
-		gen_name                      		VARCHAR2(20)		 NOT NULL,
-		res_phone                     		VARCHAR2(60)		 NOT NULL,
-		res_mail1                      		VARCHAR2(200)		 NOT NULL,
-		res_mail2                      		VARCHAR2(200)		 NOT NULL,
-		res_title                     		VARCHAR2(100)		    NOT NULL,
-		res_intro                     		VARCHAR2(800)		    NOT NULL,
-		res_work                      	CLOB		                    DEFAULT 0		 NULL ,
-		res_web                       	VARCHAR2(100)		NULL ,
-		res_visible                   	CHAR(1)		            DEFAULT 'Y'	 NOT NULL,
-		res_date                      		DATE		                NOT NULL,
-		res_pic                       		VARCHAR2(100)		 NULL ,
-		res_thumb                     	VARCHAR2(100)		 NULL ,
-		res_size                      		NUMBER(10)		         NULL ,
-		gen_memberno               	NUMBER(7)		         NULL ,
+		gen_name                      		VARCHAR2(20)		        NOT NULL,
+		res_phone                     		VARCHAR2(60)		        NOT NULL,
+		res_mail                    		    VARCHAR2(200)		    NOT NULL,
+		res_intro                     		    VARCHAR2(800)		    NOT NULL,
+        res_school                           VARCHAR2(80)		        NOT NULL,
+		res_major                            VARCHAR2(100)		    NOT NULL,
+        res_lice                     		    VARCHAR2(50)		        NULL,
+		res_lice_lev                 		    VARCHAR2(30)		        NULL ,
+		res_work                      	    CLOB		                    DEFAULT 0		 NULL ,
+		res_web                       	    VARCHAR2(100)		    NULL ,
+		res_visible                   	        CHAR(1)		                DEFAULT 'Y'	 NOT NULL,
+		res_date                      		DATE		                    NOT NULL,
+		res_pic                       		    VARCHAR2(100)		    NULL ,
+		res_thumb                     	    VARCHAR2(100)		    NULL ,
+		res_size                      		    NUMBER(10)		        NULL ,
+		gen_memberno               	    NUMBER(7)		            NULL ,
   FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
 );
 
-COMMENT ON TABLE MEM_RES is 'MEM_RES';
+COMMENT ON TABLE MEM_RES is '이력서';
 COMMENT ON COLUMN MEM_RES.RES_NO is '이력서 번호';
 COMMENT ON COLUMN MEM_RES.GEN_NAME is '회원 이름';
 COMMENT ON COLUMN MEM_RES.RES_PHONE is '연락처';
-COMMENT ON COLUMN MEM_RES.RES_MAIL1 is '메일(아이디)';
-COMMENT ON COLUMN MEM_RES.RES_MAIL2 is '메일(도메인)';
-COMMENT ON COLUMN MEM_RES.RES_TITLE is '제목';
-COMMENT ON COLUMN MEM_RES.RES_INTRO is '짧은 자기소개';
-COMMENT ON COLUMN MEM_RES.RES_WORK is '경력기술';
-COMMENT ON COLUMN MEM_RES.RES_WEB is '포트폴리오';
-COMMENT ON COLUMN MEM_RES.RES_VISIBLE is '공개/비공개 여부';
-COMMENT ON COLUMN MEM_RES.RES_DATE is '작성 날짜';
+COMMENT ON COLUMN MEM_RES.RES_MAIL is '이메일';
+COMMENT ON COLUMN MEM_RES.RES_INTRO is '자기소개';
+COMMENT ON COLUMN MEM_RES.RES_SCHOOL is '최종학력';
+COMMENT ON COLUMN MEM_RES.RES_MAJOR is '전공';
+COMMENT ON COLUMN MEM_RES.RES_LICE is '자격증';
+COMMENT ON COLUMN MEM_RES.RES_LICE_LEV is '자격증 급수';
+COMMENT ON COLUMN MEM_RES.RES_WORK is '경력기술서';
+COMMENT ON COLUMN MEM_RES.RES_WEB is '링크';
+COMMENT ON COLUMN MEM_RES.RES_VISIBLE is '공개 여부';
+COMMENT ON COLUMN MEM_RES.RES_DATE is '작성일';
 COMMENT ON COLUMN MEM_RES.RES_PIC is '사진';
-COMMENT ON COLUMN MEM_RES.RES_THUMB is '사진 썸네일';
-COMMENT ON COLUMN MEM_RES.RES_SIZE is '사진 크기';
-COMMENT ON COLUMN MEM_RES.GEN_MEMBERNO is '회원번호';
-
+COMMENT ON COLUMN MEM_RES.RES_THUMB is '썸네일';
+COMMENT ON COLUMN MEM_RES.RES_SIZE is '사진 용량';
+COMMENT ON COLUMN MEM_RES.GEN_MEMBERNO is '회원 번호';
 
 CREATE SEQUENCE mem_res_seq
   START WITH 1              -- 시작 번호
@@ -985,87 +1003,67 @@ CREATE SEQUENCE mem_res_seq
   CACHE 2                       -- 2번은 메모리에서만 계산
   NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
 
-/**********************************/
-/* Table Name: 이력서 학력정보 */
-/**********************************/
-CREATE TABLE res_scho(
-		res_scname                     VARCHAR2(80)		            NOT NULL,
-		res_major1                        VARCHAR2(100)		        NOT NULL,
-		res_major2                    	VARCHAR2(100)		        NULL ,
-		res_gotin                     		VARCHAR2(50)		            NOT NULL,
-		res_grad                      	VARCHAR2(50)		            NOT NULL,
-		res_no                        		NUMBER(10)		                NOT NULL       PRIMARY KEY,
-  FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
-);
-
-COMMENT ON TABLE RES_SCHO is 'RES_SCHO';
-COMMENT ON COLUMN RES_SCHO.RES_SCNAME is '학교명';
-COMMENT ON COLUMN RES_SCHO.RES_MAJOR1 is '전공';
-COMMENT ON COLUMN RES_SCHO.RES_MAJOR2 is '부전공/복수전공';
-COMMENT ON COLUMN RES_SCHO.RES_GOTIN is '입학일';
-COMMENT ON COLUMN RES_SCHO.RES_GRAD is '졸업일';
-COMMENT ON COLUMN RES_SCHO.RES_NO is '이력서 번호';
-
-
-/**********************************/
-/* Table Name: 자격증 */
-/**********************************/
-CREATE TABLE res_lice(
-		res_lice1                     		VARCHAR2(50)		 NULL 		 ,
-		res_lice1_lev                 		VARCHAR2(30)		 NULL ,
-		res_lice2                     		VARCHAR2(50)		 NULL,
-		res_lice2_lev                 		VARCHAR2(30)		 NULL ,
-		res_no                        		NUMBER(10)		                NOT NULL       PRIMARY KEY ,
-  FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
-);
-
-COMMENT ON TABLE RES_LICE is 'RES_LICE';
-COMMENT ON COLUMN RES_LICE.RES_LICE1 is '자격증1';
-COMMENT ON COLUMN RES_LICE.RES_LICE1_LEV is '자격증1 급수';
-COMMENT ON COLUMN RES_LICE.RES_LICE2 is '자격증2';
-COMMENT ON COLUMN RES_LICE.RES_LICE2_LEV is '자격증2 급수';
-COMMENT ON COLUMN RES_LICE.RES_NO is '이력서 번호';
-
-
 -- 등록
-INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
-VALUES(mem_res_seq.nextval, '홍길동', '010-1234-5678', 'abcde', 'naver.com', '안녕하세요', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 1);
-INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
-VALUES(mem_res_seq.nextval, '김소영',  '010-1234-5678', 'abcde', 'naver.com', '안녕하세요', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 2);
-INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
-VALUES(mem_res_seq.nextval, '김철수',  '010-1234-5678', 'abcde', 'naver.com', '안녕하세요', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 3);
-
-INSERT INTO res_scho(res_scname, res_major1, res_major2, res_gotin,res_grad)
-VALUES('서울대학교', '디지털콘텐츠게임애니메이션공학부', '사회복지학과', 980076,998076);
-
-INSERT INTO res_lice(res_lice1, res_lice1_lev, res_lice2, res_lice2_lev)
-VALUES('토익', 960, '토스', 7, 2);
-
-INSERT ALL
-INTO mem_res
-VALUES(mem_res_seq.nextval, '박지현', '01012554841', 'abcde', 'naver.com', '제목', '자기소개', 'ㅇㅇ회사 ㅇㅇ 직무 근무', 'www.daum.net', 'Y', sysdate, '사진', '썸네일', 10, 1)
-INTO res_scho
-VALUES ('제주대학교', '영어영문학과', '신문방송학과', 200106, 201115,mem_res_seq.nextval)
-INTO res_lice
-VALUES('토익', 990, '토스', 9,mem_res_seq.nextval)
-SELECT * FROM DUAL; 
+INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+                                res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
+VALUES(mem_res_seq.nextval, '홍길동', '01012345678', 'team4@naver.com', '자기소개입니다.', '하나고등학교', '인문계', '토익', '900',
+           '경력기술', 'www.naver.com', 'Y', sysdate, 'member.jpg', 'member_t.jpg', 1, 1);
+INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+                                res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
+VALUES(mem_res_seq.nextval, '가길동', '01012345678', 'team4@naver.com', '자기소개입니다.', '하나고등학교', '인문계', '토익', '900',
+           '경력기술', 'www.naver.com', 'Y', sysdate, 'member.jpg', 'member_t.jpg', 1, 2);
+INSERT INTO mem_res(res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+                                res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno)
+VALUES(mem_res_seq.nextval, '나길동', '01012345678', 'team4@naver.com', '자기소개입니다.', '하나고등학교', '인문계', '토익', '900',
+           '경력기술', 'www.naver.com', 'Y', sysdate, 'member.jpg', 'member_t.jpg', 1, 3);       
+           
+--목록
+SELECT * FROM mem_res
+ORDER BY res_no ASC;
 
 
--- 목록
-SELECT*FROM mem_res ORDER BY res_no ASC;
-SELECT*FROM res_scho;
-SELECT*FROM res_lice;
-SELECT*FROM mem_res ORDER BY gen_memberno ASC;
+-- 검색된 레코드 갯수
+SELECT COUNT(*) as cnt
+FROM mem_res
+WHERE res_work LIKE '%경력%';
 
--- 조회
-SELECT r.res_no as mem_res_res_no, gen_name, res_phone, res_mail1, res_mail2, res_title, res_intro, res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno, 
-s.res_no as res_scho_res_no, res_scname, res_major1, res_major2, res_gotin,res_grad, 
-l.res_no as res_lice_res_no, res_lice1, res_lice1_lev, res_lice2, res_lice2_lev
-FROM mem_res r, res_scho s, res_lice l
-WHERE r.res_no=s.res_no AND s.res_no=l.res_no AND r.res_no = 1;
+-- step 3, 1 page
+SELECT res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+          res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno, r
+FROM (
+           SELECT res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+                     res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno, rownum as r
+           FROM (
+                     SELECT res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+                                res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno
+                     FROM mem_res
+                     WHERE res_work LIKE '%경력%'
+                     ORDER BY res_no DESC
+           )          
+)
+WHERE r >= 1 AND r <= 10;
 
+-- step 3, 2 page
+SELECT res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+          res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno, r
+FROM (
+           SELECT res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+                     res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno, rownum as r
+           FROM (
+                     SELECT res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+                                res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno
+                     FROM mem_res
+                     WHERE res_work LIKE '%경력%'
+                     ORDER BY res_no DESC
+           )          
+)
+WHERE r >= 11 AND r <= 20;
 
-COMMIT;
+-- read, 조회
+SELECT res_no, gen_name, res_phone, res_mail, res_intro, res_school, res_major, res_lice, res_lice_lev, 
+          res_work, res_web, res_visible, res_date, res_pic, res_thumb, res_size, gen_memberno
+FROM mem_res
+WHERE res_no = 1;
 
 
 /**********************************/
