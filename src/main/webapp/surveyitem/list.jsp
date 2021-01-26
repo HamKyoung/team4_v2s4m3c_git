@@ -25,6 +25,7 @@ $(function(){
 
     var msg ="surveyno=" + surveyno;
     msg += "&sur_itemno=" + sur_itemno;
+    alert(sur_itemno);
     var params = msg;
     
     $.ajax({
@@ -36,8 +37,8 @@ $(function(){
       data: params,      // 데이터
       success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
         if(rdata.cnt == 1){
-          alert("완료되었습니다.")
-          location.href = './result.do?surveyno='+${param.surveyno}
+          alert("완료되었습니다.");
+          location.href = './result.do?surveyno='+${param.surveyno};
         }
       },
       // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
