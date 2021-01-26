@@ -60,7 +60,7 @@
     <TR>
       <TD class="td_bs">${pass_selfVO.pass_self_no }</TD>
       <c:choose>
-      <c:when test="${corlogin eq true || genlogin eq true } ">
+      <c:when test="${corlogin eq true || genlogin eq true}">
       <TD><a href="./read.do?pass_self_no=${pass_selfVO.pass_self_no}">${pass_selfVO.pass_self_title}</a></TD> 
       </c:when>
       <c:otherwise>
