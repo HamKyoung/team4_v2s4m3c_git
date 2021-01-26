@@ -30,6 +30,9 @@
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"
                enctype="multipart/form-data">
                
+      <!-- FK adminno 지정 -->
+      <input type='hidden' name='adminno' id='adminno' value='1'>
+               
       <div class="form-group">   
         <div class="col-md-12">
         뉴스 제목

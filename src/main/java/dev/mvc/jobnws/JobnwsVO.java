@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /*
     jobnwsno                            NUMBER(30)     NOT NULL,
+    adminno                              NUMBER(30)    NOT NULL,
     jobnws_title                        VARCHAR2(1000)     NOT NULL,
     jobnws_content                      CLOB     NOT NULL,
     jobnws_url                          VARCHAR2(500)    NOT NULL,
@@ -14,11 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
     jobnws_date                         DATE     NOT NULL,
     jobnws_file1                        VARCHAR2(100)    NULL ,
     jobnws_thumb1                       VARCHAR2(100)    NULL ,
-    jobnws_size1                        NUMBER(10)     DEFAULT 0     NULL 
+    jobnws_size1                        NUMBER(10)     DEFAULT 0     NULL,
  */
 public class JobnwsVO {
   /** 뉴스 번호*/
   private int jobnwsno = 0;
+  /** 관리자 번호*/
+  private int adminno = 0;
   /** 뉴스 제목 */
   private String jobnws_title = "";
   /** 뉴스 내용 */
@@ -50,6 +53,14 @@ public class JobnwsVO {
 
   public void setJobnwsno(int jobnwsno) {
     this.jobnwsno = jobnwsno;
+  }
+
+  public int getAdminno() {
+    return adminno;
+  }
+
+  public void setAdminno(int adminno) {
+    this.adminno = adminno;
   }
 
   public String getJobnws_title() {
@@ -147,7 +158,4 @@ public class JobnwsVO {
   public void setJobnws_file1MF(MultipartFile jobnws_file1MF) {
     this.jobnws_file1MF = jobnws_file1MF;
   }
-
-
-  
 } 
