@@ -126,7 +126,7 @@ CREATE TABLE pass_self(
     pass_self_date                    DATE     NOT NULL,
     pass_self_views                   NUMBER(10)     DEFAULT 0     NOT NULL,
   FOREIGN KEY (comno) REFERENCES com_intro (comno),
-  FOREIGN KEY (cor_memberno) REFERENCES corporate_member (cor_memberno)
+  FOREIGN KEY (cor_memberno) REFERENCES cor_member (cor_memberno)
 );
 
 COMMENT ON TABLE pass_self is '합격자소서';
@@ -157,12 +157,12 @@ CREATE SEQUENCE pass_self_seq
   
 INSERT INTO pass_self(pass_self_no, comno, cor_memberno, pass_self_title, pass_self_item1, pass_self_item2, pass_self_item3, pass_self_item4, pass_self_item5, 
                                 pass_self_ans1, pass_self_ans2, pass_self_ans3, pass_self_ans4, pass_self_ans5, pass_self_date, pass_self_views)
-VALUES(pass_self_seq.nextval, '1', '2', '합격자소서 제목', '첫번째 항목', '두번째 항목', '세번째 항목', '네번째 항목', '마지막 항목', '첫번째 답변', '두번째 답변', '세번째 답변', '네번째 답변',
+VALUES(pass_self_seq.nextval, '1', '1', '합격자소서 제목', '첫번째 항목', '두번째 항목', '세번째 항목', '네번째 항목', '마지막 항목', '첫번째 답변', '두번째 답변', '세번째 답변', '네번째 답변',
 '다섯번째 답변', sysdate, '0');
 
 INSERT INTO pass_self(pass_self_no, comno, cor_memberno, pass_self_title, pass_self_item1, pass_self_item2, pass_self_item3, pass_self_item4, pass_self_item5, 
                                 pass_self_ans1, pass_self_ans2, pass_self_ans3, pass_self_ans4, pass_self_ans5, pass_self_date, pass_self_views)
-VALUES(pass_self_seq.nextval, '1', '3', '합격자소서 제목2', '첫번째 항목2', '두번째 항목2', '세번째 항목2', '네번째 항목2', '마지막 항목2', '첫번째 답변2', '두번째 답변2', '세번째 답변2', '네번째 답변2',
+VALUES(pass_self_seq.nextval, '1', '2', '합격자소서 제목2', '첫번째 항목2', '두번째 항목2', '세번째 항목2', '네번째 항목2', '마지막 항목2', '첫번째 답변2', '두번째 답변2', '세번째 답변2', '네번째 답변2',
 '다섯번째 답변2', sysdate, '0');
 
 INSERT INTO pass_self(pass_self_no, comno, cor_memberno, pass_self_title, pass_self_item1, pass_self_item2, pass_self_item3, pass_self_item4, pass_self_item5, 
