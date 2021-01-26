@@ -27,6 +27,7 @@
   </ASIDE>
   <ASIDE class="aside_right">
     <A href="javascript:location.reload();">새로고침</A>
+    <A href="./create.do">/ 등록</A>
     <!--  <span class='menu_divide' >│</span> -->
   </ASIDE> 
   <DIV class='menu_line'></DIV>
@@ -46,9 +47,7 @@
           <th style='text-align: center;'>순서</th>
           <th style='text-align: center;'>제목</th>
           <th style='text-align: center;'>회사명</th>
-          <!-- <th style='text-align: center;'>회원</th> -->
           <th style='text-align: center;'>등록일</th>
-          <!-- <th style='text-align: center;'>IP</th> -->
         </tr>
       
       </thead>
