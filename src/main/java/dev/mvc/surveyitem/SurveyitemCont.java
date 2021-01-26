@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import dev.mvc.genmember.GenmemberProc;
+import dev.mvc.genmember.GenmemberVO;
 import dev.mvc.survey.SurveyProc;
 import dev.mvc.survey.SurveyVO;
+import dev.mvc.surveymember.SurveymemberProc;
+import dev.mvc.surveymember.SurveymemberVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -31,6 +37,14 @@ public class SurveyitemCont {
   @Qualifier("dev.mvc.surveyitem.SurveyitemProc")
   private SurveyitemProc surveyitemProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.surveymember.SurveymemberProc")
+  private SurveymemberProc surveymemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
+  
   public SurveyitemCont() {
     System.out.println("--> SurveyitemCont created.");
   }
@@ -42,24 +56,39 @@ public class SurveyitemCont {
    */
   @ResponseBody
   @RequestMapping(value = "/surveyitem/vote.do", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
-  public String vote(int sur_itemno, int surveyno ) {
+  public String vote(int sur_itemno, int surveyno, HttpSession session ) {
     
     Map<String, Object> map = new HashMap<String, Object>();
     map.put("sur_itemno", sur_itemno);     // #{sur_itemno}
     map.put("surveyno", surveyno); // #{surveyno}
     
-    int cnt = this.surveyitemProc.update_cnt(map);
+    int cnt = 0;
     int itemcnt = 0;
-    
-    if (cnt == 1) {
-      SurveyitemVO surveyitemVO =  this.surveyitemProc.read(sur_itemno);
-      itemcnt = surveyitemVO.getItemcnt();
+    boolean sw = false;
+    int gen_memberno = 0;
+
+    if (genmemberProc.isMember(session)) {
+      sw = true;
     }
 
+    if (sw = true) {
+      cnt = this.surveyitemProc.update_cnt(map);
+
+      if (cnt == 1) {
+        SurveyitemVO surveyitemVO = this.surveyitemProc.read(sur_itemno);
+        itemcnt = surveyitemVO.getItemcnt();
+
+        gen_memberno = (int) session.getAttribute("genmemberno");
+
+        SurveymemberVO surveymemberVO = surveymemberProc.read(gen_memberno);
+        surveymemberProc.create(surveymemberVO);
+      }
+    }
+    
     JSONObject json = new JSONObject();
     json.put("itemcnt", itemcnt);
     json.put("cnt", cnt);
-
+    
     return json.toString();
   }
   
