@@ -260,8 +260,12 @@ ORDER BY notice_seqno ASC;
 /**********************************/
 /* Table Name: 회사소개 */
 /**********************************/
+DROP TABLE COM_INTRO CASCADE CONSTRAINTS;
+DROP SEQUENCE comintro_seq;
+
 CREATE TABLE COM_INTRO(
 		COMNO                         		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
+        COR_MEMBERNO                  		NUMBER(7)		 NULL ,
 		COM_NAME                      		VARCHAR2(1000)		 NOT NULL,
 		COM_FORM                      		VARCHAR2(1000)		 NOT NULL,
 		COM_TYPE                      		VARCHAR2(1000)		 NOT NULL,
@@ -271,11 +275,14 @@ CREATE TABLE COM_INTRO(
 		NUM_PEOPLE                    		VARCHAR2(50)		 NOT NULL,
 		EDATE                         		VARCHAR2(500)		 NOT NULL,
 		CEO_NAME                      		VARCHAR2(1000)		 NOT NULL,
-		VISIBLE                       		CHAR(1)		 NOT NULL
+		VISIBLE                       		CHAR(1)		 NOT NULL,
+        FOREIGN KEY (COR_MEMBERNO) REFERENCES  corporate_member(COR_MEMBERNO)
 );
+
 
 COMMENT ON TABLE COM_INTRO is '회사소개';
 COMMENT ON COLUMN COM_INTRO.COMNO is '회사번호';
+COMMENT ON COLUMN COM_INTRO.COR_MEMBERNO is '기업회사번호';
 COMMENT ON COLUMN COM_INTRO.COM_NAME is '회사이름';
 COMMENT ON COLUMN COM_INTRO.COM_FORM is '기업형태';
 COMMENT ON COLUMN COM_INTRO.COM_TYPE is '업종';
@@ -297,15 +304,15 @@ CREATE SEQUENCE comintro_seq
   NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
 
 -- 등록
-INSERT INTO com_intro(comno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,visible)
-VALUES(comintro_seq.nextval, '솔데스크','학원','컴퓨터학원','10억원','www.soldesk.com','종로구관철로','50명','2010-01-01','솔원장','Y');
+INSERT INTO com_intro(comno,cor_memberno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,visible)
+VALUES(comintro_seq.nextval, 1, '솔데스크','학원','컴퓨터학원','10억원','www.soldesk.com','종로구관철로','50명','2010-01-01','솔원장','Y');
 
-INSERT INTO com_intro(comno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,visible)
-VALUES(comintro_seq.nextval, '삼성전자','000','000','10억원','www.soldesk.com','종로구관철로','1000명','2010-01-01','솔원장','Y');
+INSERT INTO com_intro(comno, cor_memberno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,visible)
+VALUES(comintro_seq.nextval, 1, '삼성전자','000','000','10억원','www.soldesk.com','종로구관철로','1000명','2010-01-01','솔원장','Y');
 
 
 -- 목록
-SELECT comno, com_name, com_form,com_type, sales, homepage,address,num_people,edate,ceo_name,visible
+SELECT comno, cor_memberno, com_name, com_form,com_type, sales, homepage,address,num_people,edate,ceo_name,visible
 FROM com_intro
 ORDER BY comno ASC;
  
