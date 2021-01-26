@@ -8,7 +8,7 @@
     <NAV class='top_menu'>
       <div class="bottom_header">      
       <ul class="gnb">
-        <li><A style='font-size: 14px;' href="${pageContext.request.contextPath}/index.jsp" >메인</A></li>
+        <li><A style='font-size: 16px;' href="${pageContext.request.contextPath}/index.jsp" >메인</A></li>
         <li><a href="#">공지사항</a>
           <ul class="depth2">
             <li><A href='${pageContext.request.contextPath}/notice/list.do' >공지사항</A></li>
