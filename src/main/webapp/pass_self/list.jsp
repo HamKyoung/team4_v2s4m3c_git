@@ -66,7 +66,7 @@
       <c:otherwise>
       <TD><a href="../genmember/login_need.jsp">${pass_selfVO.pass_self_title}</a></TD> 
       </c:otherwise>
-      </c:choose>
+      </c:choose> 
       <TD class="td_bs">${pass_selfVO.com_name }</TD>
       <TD class="td_bs">${pass_selfVO.pass_self_date.substring(0, 10) }</TD>
       <TD class="td_bs">
