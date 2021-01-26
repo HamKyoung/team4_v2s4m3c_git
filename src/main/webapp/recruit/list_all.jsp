@@ -29,7 +29,7 @@
     <A href="javascript:location.reload();">새로고침</A>
     <A href="./create.do">/ 등록</A>
     <!--  <span class='menu_divide' >│</span> -->
-  </ASIDE> 
+  </ASIDE>
   <DIV class='menu_line'></DIV>
   
   <div style='width: 100%;'>

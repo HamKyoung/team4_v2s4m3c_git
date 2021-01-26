@@ -40,7 +40,7 @@
     <A href=''>직무별</A> >
     구인 등록
   </ASIDE>
-  <ASIDE class="aside_right">
+  <ASIDE class="aside_right"> 
     <A href='./list_all.do'>목록</A>
     <!-- <span class='menu_divide' >│</span> --> 
   </ASIDE> 
