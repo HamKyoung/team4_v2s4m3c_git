@@ -75,7 +75,7 @@
   </div>
 
   <div class="form-group">
-     <label class="control-label col-md-3">리뷰 제목</label>
+     <label class="control-label col-md-3">제목</label>
      <div class="col-md-9">
        <input type='text' name='rev_title' value='제목' required="required"
                   class="form-control" style='width: 50%;'>
