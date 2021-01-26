@@ -35,7 +35,7 @@
       <input type="hidden" name='cor_memberno' value='${sessionScope.cormemberno}'>
       <ul>
         <li class="li_none">
-          <label>제목: </label> 
+          <label>제목: </label>
           <input type='text' class="form-control" name='pass_self_title' value='삼성그룹 합격 자기소개서' placeholder="제목" required="required" style='width: 80%;'>
         </li>
         

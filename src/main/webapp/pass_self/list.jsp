@@ -72,7 +72,7 @@
       <TD class="td_bs">
         <A href="./read_update.do?pass_self_no=${pass_selfVO.pass_self_no }" title="수정"><span class="glyphicon glyphicon-pencil"></span></A>
         <A href="./read_delete.do?pass_self_no=${pass_selfVO.pass_self_no }" title="삭제"><span class="glyphicon glyphicon-trash"></span></A>
-      </TD>   
+      </TD>  
     </TR>   
   </c:forEach> 
   </tbody>
