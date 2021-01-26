@@ -40,8 +40,8 @@
     <A href=''>직무별</A> >
     구인 등록
   </ASIDE>
-  <ASIDE class="aside_right">
-    <A href=''>목록</A>
+  <ASIDE class="aside_right"> 
+    <A href='./list_all.do'>목록</A>
     <!-- <span class='menu_divide' >│</span> --> 
   </ASIDE> 
  
@@ -68,7 +68,7 @@
 
       <div class="form-group">   
         <div class="col-md-12">
-          실제 컬럼명: file1, Spring File 객체 대응: file1MF
+          
           <input type='file' class="form-control" name='file1MF' id='file1MF' 
                     value='' placeholder="파일 선택">
         </div>
@@ -95,8 +95,9 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">등록</button>
         <button type="button" 
-                    onclick="location.href='./list.do?comno=${param.comno}'" 
+                    onclick="location.href='./read.do?recruitno=${param.recruitno}'" 
                     class="btn btn-info">취소[목록]</button>
+
       </DIV>
        
     </FORM>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.admin.AdminProc;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -28,6 +30,11 @@ public class JobnwsCont {
   public JobnwsCont() {
     System.out.println("-> JobnwsCont Created");
   }
+  
+  @Autowired
+  @Qualifier("dev.mvc.admin.AdminProc")
+  private AdminProc adminProc;
+
   
   /**
    * 등록폼 http://localhost:9090/team4/jobnws/create.do
@@ -96,12 +103,18 @@ public class JobnwsCont {
    * @return
    */
   @RequestMapping(value = "/jobnws/list.do", method = RequestMethod.GET)
-  public ModelAndView list() {
+  public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobnws/list"); // /webapp/jobnws/list.jsp
     
     List<JobnwsVO> list = this.jobnwsProc.list_jobnwsno_asc();
+    boolean adlogin = false;
+    
+    if (adminProc.isAdmin(session)) {  // 관리자 로그인
+      adlogin = true;
+    }
     mav.addObject("list", list);
+    mav.addObject("adlogin", adlogin);
 
     return mav; // forward
   }
@@ -112,12 +125,19 @@ public class JobnwsCont {
    * @return
    */
   @RequestMapping(value = "/jobnws/read.do", method = RequestMethod.GET)
-  public ModelAndView read_update(int jobnwsno) {
+  public ModelAndView read_update(int jobnwsno, HttpSession session) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobnws/read"); // /webapp/jobnws/read.jsp
 
     JobnwsVO jobnwsVO = this.jobnwsProc.read(jobnwsno);
     mav.addObject("jobnwsVO", jobnwsVO);
+    boolean adlogin = false;
+    
+    if (adminProc.isAdmin(session)) {  // 관리자 로그인
+      adlogin = true;
+    }
+    
+    mav.addObject("adlogin", adlogin);
         
     mav.setViewName("/jobnws/read"); // /webapp/contents/read.jsp 
     return mav; // forward

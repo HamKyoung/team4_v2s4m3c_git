@@ -21,12 +21,6 @@
   });
 
   function send() {
-    // $('#btn_close').attr("data-focus", "이동할 태그 지정");
-    
-    // var frm = $('#frm'); // id가 frm인 태그 검색
-    //$('#frm').attr('action', './create_ajax.do');
-    // var id = $('#id', frm).val(); // frm 폼에서 id가 'id'인 태그 검색
-    // var params = 'contentsno=' + ${param.contentsno};
     var params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
     var msg = '';
     
@@ -39,10 +33,9 @@
       data: params,      // 데이터
       success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
         if (rdata.cnt > 0) {
-          msg += "『" + $('#com_name').val() + "』 리뷰를 등록했습니다."
-          msg += " <button type='button' onclick='location.reload(true)'>확인</button>";
+          msg += "리뷰를 등록했습니다."
         } else {
-          msg += "『" + $('#com_name').val() + "』 리뷰 등록에 실패했습니다."
+          msg += "리뷰 등록에 실패했습니다."
         }
         alert(msg);
         window.close();
@@ -82,7 +75,7 @@
   </div>
 
   <div class="form-group">
-     <label class="control-label col-md-3">리뷰 제목</label>
+     <label class="control-label col-md-3">제목</label>
      <div class="col-md-9">
        <input type='text' name='rev_title' value='제목' required="required"
                   class="form-control" style='width: 50%;'>
@@ -111,7 +104,7 @@
   </div>
   
   <div class="content_bottom_menu" style="padding-right: 20%;">
-    <button type="submit" id="btn_send" class="btn btn-primary">등록</button>
+    <button type="button" id="btn_send" class="btn btn-primary">등록</button> 
     <button type="button" onclick="location.href='./list.do'" class="btn btn-light">목록</button>
   </div>
 

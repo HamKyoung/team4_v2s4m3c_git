@@ -60,19 +60,19 @@
     <TR>
       <TD class="td_bs">${pass_selfVO.pass_self_no }</TD>
       <c:choose>
-      <c:when test="${corlogin eq true || genlogin eq true } ">
+      <c:when test="${corlogin eq true || genlogin eq true}">
       <TD><a href="./read.do?pass_self_no=${pass_selfVO.pass_self_no}">${pass_selfVO.pass_self_title}</a></TD> 
       </c:when>
       <c:otherwise>
       <TD><a href="../genmember/login_need.jsp">${pass_selfVO.pass_self_title}</a></TD> 
       </c:otherwise>
-      </c:choose>
+      </c:choose> 
       <TD class="td_bs">${pass_selfVO.com_name }</TD>
       <TD class="td_bs">${pass_selfVO.pass_self_date.substring(0, 10) }</TD>
       <TD class="td_bs">
         <A href="./read_update.do?pass_self_no=${pass_selfVO.pass_self_no }" title="수정"><span class="glyphicon glyphicon-pencil"></span></A>
         <A href="./read_delete.do?pass_self_no=${pass_selfVO.pass_self_no }" title="삭제"><span class="glyphicon glyphicon-trash"></span></A>
-      </TD>   
+      </TD>  
     </TR>   
   </c:forEach> 
   </tbody>

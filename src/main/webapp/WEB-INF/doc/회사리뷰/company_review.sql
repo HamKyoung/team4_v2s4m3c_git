@@ -137,12 +137,12 @@ COMMENT ON COLUMN com_review.gen_memberno is '회원 번호';
 INSERT INTO com_review(rev_no, com_name,rev_title, rev_score, rev_depart, rev_content, 
 rev_visible, rev_good, rev_bad, rev_date, rev_cnt, comno, gen_memberno)
 VALUES(com_review_seq.nextval, '솔데스크', '제목', '5', '행정', '역에서 가까운 학원', 
-'Y', '1','0', sysdate, '1', '1', '1');
+'Y', '1','0', sysdate, '1', '3', '1');
 
 INSERT INTO com_review(rev_no, com_name,rev_title, rev_score, rev_depart, rev_content, 
 rev_visible, rev_good, rev_bad, rev_date, rev_cnt, comno, gen_memberno)
 VALUES(com_review_seq.nextval, '제일기획', '제목', '5', '데이터마케팅', '밥이 맛있음', 
-'Y', '1','0', sysdate, '1', '2', '2');
+'Y', '1','0', sysdate, '1', '4', '2');
 
 -- 목록
 SELECT*FROM com_intro ORDER BY comno ASC;
@@ -152,7 +152,7 @@ SELECT*FROM com_review ORDER BY rev_no ASC;
 -- 조회
 SELECT rev_no, com_name,rev_title, rev_score, rev_depart, rev_content, rev_date, comno, gen_memberno, rev_cnt
 FROM com_review
-WHERE comno=1;
+WHERE comno=4;
 
 -- 수정
 UPDATE com_review

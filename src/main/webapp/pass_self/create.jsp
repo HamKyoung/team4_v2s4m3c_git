@@ -32,6 +32,7 @@
 <DIV class='title_line'>합격 자소서 등록</DIV>
  
 <FORM name='frm' method='POST' action='./create.do' class="form-horizontal" enctype="multipart/form-data">
+      <input type="hidden" name='cor_memberno' value='${sessionScope.cormemberno}'>
       <ul>
         <li class="li_none">
           <label>제목: </label>
@@ -39,12 +40,11 @@
         </li>
         
         <li class="li_none">
-          <label>회사번호</label>
+          <label>회사번호 "${sessionScope}"</label>
           <input type='text' class="form-control" name='comno' value='1' placeholder="제목" required="required" style='width: 10%;'>
         </li>
         <li class="li_none">
-          <label>작성자(기업회원) 번호</label>
-          <input type='text' class="form-control" name='cor_memberno' value='1' placeholder="제목" required="required" style='width: 10%;'>
+          <label>작성자: ${sessionScope.cor_name }</label>
         </li>
         
         <li class="li_none">

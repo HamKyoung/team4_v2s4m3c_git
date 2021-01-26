@@ -29,6 +29,7 @@
   </DIV>
   
   <ASIDE class="aside_right">
+  <c:if test="${adlogin eq true }">
     <A href="create.do">뉴스 등록</A>
         <c:choose>
       <c:when test="${jobnwsVO.jobnws_file1.trim().length() > 0 }">
@@ -39,16 +40,17 @@
         <span class='menu_divide' > | </span> 
         <A href='./img_create.do?jobnwsno=${jobnwsno }'>메인 이미지 등록</A>     
       </c:otherwise>
-    </c:choose>  
-    <span class='menu_divide' > | </span>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./list.do?jobnwsno=${jobnwsno }'>목록</A>
+    </c:choose>
     <span class='menu_divide' > | </span> 
     <A href='./update.do?jobnwsno=${jobnwsno }&jobnwsno=${jobnwsno}'>수정</A>
     <span class='menu_divide' > | </span> 
     <A href='./delete.do?jobnwsno=${jobnwsno }&jobnwsno=${jobnwsno}'>삭제</A>
-    
+    </c:if>
+    <span class='menu_divide' > | </span>
+    <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' > | </span> 
+    <A href='./list.do?jobnwsno=${jobnwsno }'>목록</A>
+
   </ASIDE> 
   
   <div class='menu_line'></div>
