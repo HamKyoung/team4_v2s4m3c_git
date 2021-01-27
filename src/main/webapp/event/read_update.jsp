@@ -51,7 +51,7 @@
       <label class="control-label col-md-3">사진</label>
         <div class="col-md-9">
           <input type='file' class="form-control" name='eve_picMF' id='eve_picMF' 
-                    value='' placeholder="이미지 선택(필수)" multiple="multiple" style='width: 50%;'>
+                    value= "${eventVO.eve_pic}" placeholder="이미지 선택(필수)" multiple="multiple" style='width: 50%;'>
         </div>
       </div>
 
