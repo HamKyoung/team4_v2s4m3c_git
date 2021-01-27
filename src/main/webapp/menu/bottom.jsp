@@ -15,10 +15,10 @@
   <DIV style='text-align: right;'>
         <c:choose>
         <c:when test="${sessionScope.id == null}">
-          <A class='top_menu_link'  style='font-size: 10px; font-weight: lighter;' href='${pageContext.request.contextPath}/admin/login.do' >Ad.Login</A><span class='top_menu_sep'> </span>
+          <A style='font-size: 10px; font-weight: lighter;' href='${pageContext.request.contextPath}/admin/login.do' >Ad.Login</A><span class='top_menu_sep'> </span>
         </c:when>
         <c:otherwise>
-          ${sessionScope.id } <A class='top_menu_link' style='font-size: 10px; font-weight: lighter;' href='${pageContext.request.contextPath}/admin/logout.do' >Ad.Logout</A><span class='top_menu_sep'> </span>
+          ${sessionScope.id } <A style='font-size: 10px; font-weight: lighter;' href='${pageContext.request.contextPath}/admin/logout.do' >Ad.Logout</A><span class='top_menu_sep'> </span>
         </c:otherwise>
       </c:choose>
   </DIV>
