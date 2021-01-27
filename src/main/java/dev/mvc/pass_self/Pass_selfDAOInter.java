@@ -20,7 +20,7 @@ public interface Pass_selfDAOInter {
    * @return
    */
   public List<Pass_selfVO> list();
-  
+   
   /**
    * 합격자소서 조회
    * @param 

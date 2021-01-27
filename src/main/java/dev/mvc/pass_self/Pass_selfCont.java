@@ -77,7 +77,7 @@ public class Pass_selfCont {
     mav.setViewName("/pass_self/list");
 
     boolean genlogin = false;
-    boolean corlogin = false;
+    boolean corlogin = false; 
     
     if (genmemberProc.isMember(session)) { // 일반회원 로그인 된 경우
       genlogin = true;

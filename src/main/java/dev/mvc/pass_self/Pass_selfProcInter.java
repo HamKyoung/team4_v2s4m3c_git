@@ -6,7 +6,7 @@ import dev.mvc.questions.QuesVO;
 
 
 public interface Pass_selfProcInter {
-  
+   
   /**
    * 합격자소서 등록
    * 

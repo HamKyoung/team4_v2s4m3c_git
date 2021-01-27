@@ -50,7 +50,7 @@ public class Pass_selfProc implements Pass_selfProcInter{
     int cnt = this.pass_selfDAO.delete(pass_self_no);
     return cnt;
   }
-
+ 
 
 
 }

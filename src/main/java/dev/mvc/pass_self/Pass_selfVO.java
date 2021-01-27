@@ -128,7 +128,7 @@ public class Pass_selfVO {
   }
   public void setPass_self_date(String pass_self_date) {
     this.pass_self_date = pass_self_date;
-  }
+  } 
   public int getPass_self_views() {
     return pass_self_views;
   }
