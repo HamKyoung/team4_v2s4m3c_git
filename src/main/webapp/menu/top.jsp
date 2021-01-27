@@ -14,6 +14,7 @@
             <li><A href='${pageContext.request.contextPath}/notice/list.do' >공지사항</A></li>
             <li><A href='${pageContext.request.contextPath}/answer/list.do'>Q&A</A></li>
             <li><A href='${pageContext.request.contextPath}/survey/list.do'>설문 조사 목록</A></li>
+            <li><A href='${pageContext.request.contextPath}/event/list.do'>이벤트</A></li>
           </ul>
         </li>
         

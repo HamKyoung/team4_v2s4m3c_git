@@ -42,6 +42,7 @@
   <context:component-scan base-package="dev.mvc.comcate" /> <!-- 회사직무별 패키지 -->
   <context:component-scan base-package="dev.mvc.recruit" /> <!-- 구인 패키지 -->
   <context:component-scan base-package="dev.mvc.attachfile" /> <!-- 첨부파일 패키지 -->
+  <context:component-scan base-package="dev.mvc.event" /> <!-- 이벤트 패키지 -->
   
  
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.event.EventDAOInter">
+
+  <insert id="create" parameterType="EventVO">
+    INSERT INTO event(eventno,eve_title,eve_content,eve_visible,eve_date,eve_pic,eve_thumb,eve_size)
+    VALUES(event_seq.nextval, #{eve_title}, #{eve_content}, #{eve_visible}, sysdate, #{eve_pic}, #{eve_thumb}, #{eve_size}) 
+  </insert>
+  
+  <select id="list" resultType="EventVO">
+    SELECT eventno,eve_title,eve_visible,eve_pic,eve_thumb
+    FROM event 
+    ORDER BY eventno DESC    
+  </select> 
+  
+  <select id="read" resultType="EventVO" parameterType="int">
+    SELECT eventno,eve_title,eve_content,eve_visible,eve_date,eve_pic,eve_thumb,eve_size
+    FROM event
+    WHERE eventno = #{eventno}
+  </select>
+  
+  <update id="update" parameterType="EventVO">
+    UPDATE event    
+    SET eve_title=#{eve_title}, eve_content=#{eve_content}, eve_visible=#{eve_visible}, eve_pic=#{eve_pic}, eve_thumb=#{eve_thumb}, eve_size=#{eve_size} 
+    WHERE eventno=#{eventno}
+  </update>
+
+  <!-- 삭제, return: int -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM event
+    WHERE eventno = #{eventno}
+  </delete>   
+
+  <!-- 수정, id: update_visible, 입력: ResumeVO, 리턴: int -->
+  <update id="update_visible" parameterType="EventVO">
+    UPDATE event
+    SET eve_visible=#{eve_visible}
+    WHERE eventno=#{eventno}
+  </update>
+
+   <!-- 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM event
+     <choose>
+       <when test="eve_content == null or eve_content == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+       </when>
+       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+         WHERE eve_content LIKE '%' || #{eve_content} || '%'
+       </otherwise>
+     </choose>
+   </select>  
+  
+   <!-- 페이징 + 메인 이미지 + 검색-->   
+   <select id="list_eventno_seqno_asc" resultType="EventVO" parameterType="HashMap">   
+      SELECT eventno,eve_title,eve_content,eve_visible,eve_date,eve_pic,eve_thumb,eve_size, r
+      FROM (
+                 SELECT eventno,eve_title,eve_content,eve_visible,eve_date,eve_pic,eve_thumb,eve_size, rownum as r
+                 FROM (
+                           SELECT eventno,eve_title,eve_content,eve_visible,eve_date,eve_pic,eve_thumb,eve_size
+                           FROM event
+                          <choose>
+                            <when test="eve_content == null or eve_content == ''"> <!-- 검색하지 않는 경우 -->
+                            </when>
+                            <otherwise>
+                              WHERE eve_content LIKE '%' || #{eve_content} || '%'
+                            </otherwise>
+                          </choose>
+                          ORDER BY eventno DESC
+                 )          
+      )
+     WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
+     <!-- 
+       1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30;
+      -->
+   </select> 
+  
+  <!-- 이미지 변경 -->
+  <update id="update_img" parameterType="EventVO">
+    UPDATE event
+    SET eve_pic=#{eve_pic}, eve_thumb=#{eve_thumb}, eve_size=#{eve_size}
+    WHERE eventno=#{eventno}
+  </update>
+    
+
+  
+</mapper>
+
+
+
+
+
