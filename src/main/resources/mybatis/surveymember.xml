@@ -31,4 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM surveymember
     WHERE sur_memberno=#{sur_memberno}
   </delete>
+  
+  <select id="survey_check" parameterType="int" resultType="int">
+    SELECT COUNT(gen_memberno) as cnt
+    FROM surveymember
+    WHERE gen_memberno = #{gen_memberno}
+  </select>
 </mapper>
