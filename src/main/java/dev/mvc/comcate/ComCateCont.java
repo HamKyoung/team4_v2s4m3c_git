@@ -15,9 +15,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.comintro.ComIntroProcInter;
 import dev.mvc.comintro.ComIntroVO;
+import dev.mvc.cormember.CormemberProc;
+import dev.mvc.genmember.GenmemberProc;
 
 @Controller
 public class ComCateCont {
+  
+  @Autowired
+  @Qualifier("dev.mvc.cormember.CormemberProc")
+  private CormemberProc cormemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
   
   @Autowired
   @Qualifier("dev.mvc.comintro.ComIntroProc")
@@ -68,13 +78,15 @@ public class ComCateCont {
   @RequestMapping(value = "/comcate/create_ajax.do", method = RequestMethod.POST,
                           produces = "text/plain;charset=UTF-8")
   public String create_ajax(ComCateVO comcateVO) {
+    //System.out.println("-->cate_name: "+comcateVO.getCate_name());
     try {
-      Thread.sleep(3000);
+      Thread.sleep(1000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
     
     int cnt = this.comcateProc.create(comcateVO); // 殿废 贸府
+    
     
     JSONObject json = new JSONObject();
     json.put("cnt", cnt);
@@ -194,13 +206,14 @@ public class ComCateCont {
   @RequestMapping(value = "/comcate/update_ajax.do", method = RequestMethod.POST,
                           produces = "text/plain;charset=UTF-8")
   public String update_ajax(ComCateVO comcateVO) {
+    
     try {
-      Thread.sleep(3000);
+      Thread.sleep(1000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
     
-    int cnt = this.comcateProc.update(comcateVO); // 殿废 贸府
+    int cnt = this.comcateProc.update(comcateVO); // 荐沥 贸府
     
     JSONObject json = new JSONObject();
     json.put("cnt", cnt);
