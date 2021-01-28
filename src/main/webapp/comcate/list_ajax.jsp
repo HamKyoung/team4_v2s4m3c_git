@@ -29,7 +29,7 @@
     // var id = $('#id', frm).val(); // frm 폼에서 id가 'id'인 태그 검색
     // var params = 'contentsno=' + ${param.contentsno};
     var params = $('#frm_create').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
-    // alert('params: ' + params);
+   //alert('params: ' + params);
     // return;
 
     var msg = '';
@@ -42,10 +42,10 @@
       data: params,      // 데이터
       success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
         if (rdata.cnt > 0) {
-          msg = $('#name').val() + " 새로운 회사를 등록했습니다."
+          msg = $('#cate_name').val() + " 새로운 직무를 등록했습니다."
           msg += " <button type='button' onclick='location.reload(true)'>확인</button>";
         } else {
-          msg = $('#name').val() + " 새로운 회사 등록에 실패했습니다."
+          msg = $('#cate_name').val() + " 새로운 직무 등록에 실패했습니다."
         }
         $('#panel1').html(msg); // 메시지 출력
       },
@@ -87,7 +87,7 @@
     // var id = $('#id', frm).val(); // frm 폼에서 id가 'id'인 태그 검색
     var params = 'cateno=' + cateno;
     // var params = 'contentsno=' + ${param.contentsno};
-    // var params = $('#frm_create').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+    //var params = $('#frm_create').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
     // alert('params: ' + params);
     // return;
 
@@ -100,7 +100,7 @@
       dataType: 'json', // 응답 형식: json, html, xml...
       data: params,      // 데이터
       success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-        var frm = $('#frm');
+        var frm = $('#frm_create');
         $('#cateno', frm).val(rdata.cateno);
         $('#cate_name', frm).val(rdata.cate_name);
         $('#cate_seqno', frm).val(rdata.cate_seqno);
@@ -150,7 +150,7 @@
     // $('#frm').attr('action', './update_ajax.do');
     // var id = $('#id', frm).val(); // frm 폼에서 id가 'id'인 태그 검색
     // var params = 'contentsno=' + ${param.contentsno};
-    var params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+    var params = $('#frm_create').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
     // alert('params: ' + params);
     // return;
 
@@ -308,7 +308,7 @@
   <DIV class='menu_line'></DIV>
   
     <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
-    <FORM name='frm' id='frm' method='POST' action=''>
+    <FORM name='frm_create' id='frm_create' method='POST' action=''>
       <input type='hidden' name='cateno' id='cateno' value='0'>
       
       <label>회사 번호</label>
