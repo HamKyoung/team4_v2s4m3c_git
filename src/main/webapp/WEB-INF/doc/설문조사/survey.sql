@@ -1,48 +1,48 @@
 /**********************************/
-/* Table Name: ì„¤ë¬¸ì¡°ì‚¬ */
+/* Table Name: ¼³¹®Á¶»ç */
 /**********************************/
 drop table surveymember;
 drop table surveyitem;
 drop table survey;
 CREATE TABLE survey(
-		surveyno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		topic                         		VARCHAR2(200)		 NOT NULL,
-		startdate                     	VARCHAR2(10)		 NOT NULL,
-		enddate                       	VARCHAR2(10)		 NOT NULL,
-		poster                        	VARCHAR2(100)	     NULL,
-		cnt                           		NUMBER(7)		     NULL ,
-		continueyn                    		CHAR(1)		     NOT NULL
+    surveyno                          NUMBER(10)     NOT NULL    PRIMARY KEY,
+    topic                             VARCHAR2(200)    NOT NULL,
+    startdate                       VARCHAR2(10)     NOT NULL,
+    enddate                         VARCHAR2(10)     NOT NULL,
+    poster                          VARCHAR2(100)      NULL,
+    cnt                               NUMBER(7)        NULL ,
+    continueyn                        CHAR(1)        NOT NULL
 );
 
-COMMENT ON TABLE survey is 'ì„¤ë¬¸ì¡°ì‚¬';
-COMMENT ON COLUMN survey.surveyno is 'ì„¤ë¬¸ì¡°ì‚¬ë²ˆí˜¸';
-COMMENT ON COLUMN survey.topic is 'ì œëª©';
-COMMENT ON COLUMN survey.startdate is 'ì‹œì‘ë‚ ì§œ';
-COMMENT ON COLUMN survey.enddate is 'ì¢…ë£Œ ë‚ ì§œ';
-COMMENT ON COLUMN survey.poster is 'í¬ìŠ¤í„° íŒŒì¼';
-COMMENT ON COLUMN survey.cnt is 'ì°¸ì—¬ì¸ì›';
-COMMENT ON COLUMN survey.continueyn is 'ì§„í–‰ì—¬ë¶€';
+COMMENT ON TABLE survey is '¼³¹®Á¶»ç';
+COMMENT ON COLUMN survey.surveyno is '¼³¹®Á¶»ç¹øÈ£';
+COMMENT ON COLUMN survey.topic is 'Á¦¸ñ';
+COMMENT ON COLUMN survey.startdate is '½ÃÀÛ³¯Â¥';
+COMMENT ON COLUMN survey.enddate is 'Á¾·á ³¯Â¥';
+COMMENT ON COLUMN survey.poster is 'Æ÷½ºÅÍ ÆÄÀÏ';
+COMMENT ON COLUMN survey.cnt is 'Âü¿©ÀÎ¿ø';
+COMMENT ON COLUMN survey.continueyn is 'ÁøÇà¿©ºÎ';
 
 DROP SEQUENCE survey_seq;
 CREATE SEQUENCE survey_seq
-  START WITH 1              -- ì‹œì‘ ë²ˆí˜¸
-  INCREMENT BY 1          -- ì¦ê°€ê°’
-  MAXVALUE 9999999999 -- ìµœëŒ€ê°’: 9999999 --> NUMBER(10) ëŒ€ì‘
-  CACHE 2                       -- 2ë²ˆì€ ë©”ëª¨ë¦¬ì—ì„œë§Œ ê³„ì‚°
-  NOCYCLE;                     -- ë‹¤ì‹œ 1ë¶€í„° ìƒì„±ë˜ëŠ” ê²ƒì„ ë°©ì§€
+  START WITH 1              -- ½ÃÀÛ ¹øÈ£
+  INCREMENT BY 1          -- Áõ°¡°ª
+  MAXVALUE 9999999999 -- ÃÖ´ë°ª: 9999999 --> NUMBER(10) ´ëÀÀ
+  CACHE 2                       -- 2¹øÀº ¸Ş¸ğ¸®¿¡¼­¸¸ °è»ê
+  NOCYCLE;                     -- ´Ù½Ã 1ºÎÅÍ »ı¼ºµÇ´Â °ÍÀ» ¹æÁö
 
--- ë“±ë¡
+-- µî·Ï
 INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
-VALUES(survey_seq.nextval, 'ì„¤ë¬¸ì¡°ì‚¬', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
-
-INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
-VALUES(survey_seq.nextval, 'ì„¤ë¬¸ì¡°ì‚¬1', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
+VALUES(survey_seq.nextval, '¼³¹®Á¶»ç', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
 
 INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
-VALUES(survey_seq.nextval, 'ì„¤ë¬¸ì¡°ì‚¬2', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
+VALUES(survey_seq.nextval, '¼³¹®Á¶»ç1', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
 
 INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
-VALUES(survey_seq.nextval, 'ì„¤ë¬¸ì¡°ì‚¬2', '2020-11-04', '2020-11-11', ' ', 1, 'Y');
+VALUES(survey_seq.nextval, '¼³¹®Á¶»ç2', '2020-11-04', '2020-11-11', 'poster', 1, 'Y');
+
+INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
+VALUES(survey_seq.nextval, '¼³¹®Á¶»ç2', '2020-11-04', '2020-11-11', ' ', 1, 'Y');
 
 INSERT INTO survey(surveyno, topic, startdate, enddate, poster, cnt, continueyn)
 VALUES(survey_seq.nextval, 'topic', '2020-11-04', '2020-11-11', ' ', 1, 'Y');
@@ -50,7 +50,7 @@ VALUES(survey_seq.nextval, 'topic', '2020-11-04', '2020-11-11', ' ', 1, 'Y');
 ALTER TABLE survey
 ADD (word VARCHAR2(300));
 
---ëª©ë¡
+--¸ñ·Ï
 SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word
 FROM survey 
 ORDER BY surveyno ASC;
@@ -64,93 +64,93 @@ ORDER BY surveyno DESC;
 
 commit;
 
---ì¡°íšŒ
+--Á¶È¸
 SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn
 FROM survey 
 WHERE surveyno=1;
 
---ìˆ˜ì •
+--¼öÁ¤
 UPDATE survey 
-SET topic='ì œëª©', startdate='2020.01.10', enddate='2020.01.21', poster='ê²€ìƒ‰ì–´', cnt=2
+SET topic='Á¦¸ñ', startdate='2020.01.10', enddate='2020.01.21', poster='°Ë»ö¾î', cnt=2
 WHERE surveyno=1;
 
---ì‚­ì œ
+--»èÁ¦
 DELETE FROM survey
 WHERE surveyno=1;
 
 /**********************************/
-/* Table Name: ì¼ë°˜ íšŒì› */
+/* Table Name: ÀÏ¹İ È¸¿ø */
 /**********************************/
 CREATE TABLE gen_member(
-		gen_memberno                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
-		gen_id                        		VARCHAR2(50)		 NOT NULL UNIQUE ,
-		gen_passwd                    		VARCHAR2(20)		 NOT NULL,
-		gen_name                      		VARCHAR2(20)		 NOT NULL,
-		gen_resident                  		VARCHAR2(13)		 NOT NULL,
-		gen_sex                       		VARCHAR2(10)		 NOT NULL,
-		gen_phone                     		VARCHAR2(20)		 NOT NULL,
-		gen_zipcode                   		VARCHAR2(5)		 NULL ,
-		gen_addr                      		VARCHAR2(100)		 NULL ,
-		gen_addr1                     		VARCHAR2(50)		 NULL ,
-		gen_mail                      		VARCHAR2(50)		 NOT NULL,
-		gen_date                      		DATE		 NOT NULL
+    gen_memberno                      NUMBER(7)    NOT NULL    PRIMARY KEY,
+    gen_id                            VARCHAR2(50)     NOT NULL UNIQUE ,
+    gen_passwd                        VARCHAR2(20)     NOT NULL,
+    gen_name                          VARCHAR2(20)     NOT NULL,
+    gen_resident                      VARCHAR2(13)     NOT NULL,
+    gen_sex                           VARCHAR2(10)     NOT NULL,
+    gen_phone                         VARCHAR2(20)     NOT NULL,
+    gen_zipcode                       VARCHAR2(5)    NULL ,
+    gen_addr                          VARCHAR2(100)    NULL ,
+    gen_addr1                         VARCHAR2(50)     NULL ,
+    gen_mail                          VARCHAR2(50)     NOT NULL,
+    gen_date                          DATE     NOT NULL
 );
 
-COMMENT ON TABLE gen_member is 'ì¼ë°˜ íšŒì›';
-COMMENT ON COLUMN gen_member.gen_memberno is 'íšŒì› ë²ˆí˜¸';
-COMMENT ON COLUMN gen_member.gen_id is 'íšŒì› ì•„ì´ë””';
-COMMENT ON COLUMN gen_member.gen_passwd is 'ë¹„ë°€ë²ˆí˜¸ ';
-COMMENT ON COLUMN gen_member.gen_name is 'íšŒì› ì´ë¦„';
-COMMENT ON COLUMN gen_member.gen_resident is 'ìƒë…„ì›”ì¼';
-COMMENT ON COLUMN gen_member.gen_sex is 'ì„±ë³„';
-COMMENT ON COLUMN gen_member.gen_phone is 'ì „í™” ë²ˆí˜¸';
-COMMENT ON COLUMN gen_member.gen_zipcode is 'ìš°í¸ ë²ˆí˜¸';
-COMMENT ON COLUMN gen_member.gen_addr is 'íšŒì› ì£¼ì†Œ';
-COMMENT ON COLUMN gen_member.gen_addr1 is 'íšŒì› ì£¼ì†Œ1';
-COMMENT ON COLUMN gen_member.gen_mail is 'ì´ë©”ì¼';
-COMMENT ON COLUMN gen_member.gen_date is 'ê°€ì… ë‚ ì§œ';
+COMMENT ON TABLE gen_member is 'ÀÏ¹İ È¸¿ø';
+COMMENT ON COLUMN gen_member.gen_memberno is 'È¸¿ø ¹øÈ£';
+COMMENT ON COLUMN gen_member.gen_id is 'È¸¿ø ¾ÆÀÌµğ';
+COMMENT ON COLUMN gen_member.gen_passwd is 'ºñ¹Ğ¹øÈ£ ';
+COMMENT ON COLUMN gen_member.gen_name is 'È¸¿ø ÀÌ¸§';
+COMMENT ON COLUMN gen_member.gen_resident is '»ı³â¿ùÀÏ';
+COMMENT ON COLUMN gen_member.gen_sex is '¼ºº°';
+COMMENT ON COLUMN gen_member.gen_phone is 'ÀüÈ­ ¹øÈ£';
+COMMENT ON COLUMN gen_member.gen_zipcode is '¿ìÆí ¹øÈ£';
+COMMENT ON COLUMN gen_member.gen_addr is 'È¸¿ø ÁÖ¼Ò';
+COMMENT ON COLUMN gen_member.gen_addr1 is 'È¸¿ø ÁÖ¼Ò1';
+COMMENT ON COLUMN gen_member.gen_mail is 'ÀÌ¸ŞÀÏ';
+COMMENT ON COLUMN gen_member.gen_date is '°¡ÀÔ ³¯Â¥';
 
 
 /**********************************/
-/* Table Name: ì„¤ë¬¸ ì¡°ì‚¬ í•­ëª© */
+/* Table Name: ¼³¹® Á¶»ç Ç×¸ñ */
 /**********************************/
 
 CREATE TABLE surveyitem(
-		sur_itemno                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		surveyno                      		NUMBER(10)		 NOT NULL,
-		itemseq                       		NUMBER(2)	DEFAULT 1	 NOT NULL,
-		item                          		VARCHAR2(200)		 NOT NULL,
-		itemfile                      		VARCHAR2(100)		 NULL,
-		itemcnt                       		NUMBER(7)	DEFAULT 0	 NOT NULL,
+    sur_itemno                        NUMBER(10)     NOT NULL    PRIMARY KEY,
+    surveyno                          NUMBER(10)     NOT NULL,
+    itemseq                           NUMBER(2) DEFAULT 1  NOT NULL,
+    item                              VARCHAR2(200)    NOT NULL,
+    itemfile                          VARCHAR2(100)    NULL,
+    itemcnt                           NUMBER(7) DEFAULT 0  NOT NULL,
   FOREIGN KEY (surveyno) REFERENCES survey (surveyno)
 );
 
-COMMENT ON TABLE surveyitem is 'ì„¤ë¬¸ ì¡°ì‚¬ í•­ëª©';
-COMMENT ON COLUMN surveyitem.sur_itemno is 'ì„¤ë¬¸ ì¡°ì‚¬ í•­ëª© ë²ˆí˜¸';
-COMMENT ON COLUMN surveyitem.surveyno is 'ì„¤ë¬¸ ì¡°ì‚¬ ë²ˆí˜¸';
-COMMENT ON COLUMN surveyitem.itemseq is 'í•­ëª© ì¶œë ¥ ìˆœì„œ';
-COMMENT ON COLUMN surveyitem.item is 'í•­ëª©';
-COMMENT ON COLUMN surveyitem.itemfile is 'í•­ëª© íŒŒì¼';
-COMMENT ON COLUMN surveyitem.itemcnt is 'í•­ëª© ì„ íƒ ì¸ì›';
+COMMENT ON TABLE surveyitem is '¼³¹® Á¶»ç Ç×¸ñ';
+COMMENT ON COLUMN surveyitem.sur_itemno is '¼³¹® Á¶»ç Ç×¸ñ ¹øÈ£';
+COMMENT ON COLUMN surveyitem.surveyno is '¼³¹® Á¶»ç ¹øÈ£';
+COMMENT ON COLUMN surveyitem.itemseq is 'Ç×¸ñ Ãâ·Â ¼ø¼­';
+COMMENT ON COLUMN surveyitem.item is 'Ç×¸ñ';
+COMMENT ON COLUMN surveyitem.itemfile is 'Ç×¸ñ ÆÄÀÏ';
+COMMENT ON COLUMN surveyitem.itemcnt is 'Ç×¸ñ ¼±ÅÃ ÀÎ¿ø';
 
 drop table surveyitem;
 DROP SEQUENCE surveyitem_seq;
 CREATE SEQUENCE surveyitem_seq
-  START WITH 1              -- ì‹œì‘ ë²ˆí˜¸
-  INCREMENT BY 1          -- ì¦ê°€ê°’
-  MAXVALUE 9999999999 -- ìµœëŒ€ê°’: 9999999 --> NUMBER(10) ëŒ€ì‘
-  CACHE 2                       -- 2ë²ˆì€ ë©”ëª¨ë¦¬ì—ì„œë§Œ ê³„ì‚°
-  NOCYCLE;                     -- ë‹¤ì‹œ 1ë¶€í„° ìƒì„±ë˜ëŠ” ê²ƒì„ ë°©ì§€
+  START WITH 1              -- ½ÃÀÛ ¹øÈ£
+  INCREMENT BY 1          -- Áõ°¡°ª
+  MAXVALUE 9999999999 -- ÃÖ´ë°ª: 9999999 --> NUMBER(10) ´ëÀÀ
+  CACHE 2                       -- 2¹øÀº ¸Ş¸ğ¸®¿¡¼­¸¸ °è»ê
+  NOCYCLE;                     -- ´Ù½Ã 1ºÎÅÍ »ı¼ºµÇ´Â °ÍÀ» ¹æÁö
   
--- ë“±ë¡
+-- µî·Ï
 INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
-VALUES(surveyitem_seq.nextval, 1, 1, 'í…ŒìŠ¤íŠ¸', 'íŒŒì¼', 0);
+VALUES(surveyitem_seq.nextval, 1, 1, 'Å×½ºÆ®', 'ÆÄÀÏ', 0);
 
 INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
-VALUES(surveyitem_seq.nextval, 1, 1, 'í…ŒìŠ¤íŠ¸', 'íŒŒì¼', 0);
+VALUES(surveyitem_seq.nextval, 1, 1, 'Å×½ºÆ®', 'ÆÄÀÏ', 0);
 
 INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
-VALUES(surveyitem_seq.nextval, 1, 1, 'í…ŒìŠ¤íŠ¸', 'íŒŒì¼', 0);
+VALUES(surveyitem_seq.nextval, 1, 1, 'Å×½ºÆ®', 'ÆÄÀÏ', 0);
 
 INSERT INTO surveyitem(sur_itemno, surveyno, itemseq, item, itemfile, itemcnt)
 VALUES(surveyitem_seq.nextval, 1, 1, 'test', 'file', 0);
@@ -158,54 +158,54 @@ VALUES(surveyitem_seq.nextval, 1, 1, 'test', 'file', 0);
 ALTER TABLE surveyitem
 ADD (word VARCHAR2(300));
 
--- ëª©ë¡
+-- ¸ñ·Ï
 SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt, word
 FROM surveyitem 
 ORDER BY itemseq ASC;
 
 commit;
 
--- ì¡°íšŒ
+-- Á¶È¸
 SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt
 FROM surveyitem 
 WHERE sur_itemno=1;
 
--- ìˆ˜ì •
+-- ¼öÁ¤
 UPDATE surveyitem 
 SET itemseq =2, item='test', itemfile='test.jpg', itemcnt=1
 WHERE sur_itemno=2;
 
--- ì‚­ì œ
+-- »èÁ¦
 DELETE FROM surveyitem 
 WHERE sur_itemno=1;
 
 /**********************************/
-/* Table Name: ì„¤ë¬¸ ì°¸ì—¬ íšŒì› */
+/* Table Name: ¼³¹® Âü¿© È¸¿ø */
 /**********************************/
 CREATE TABLE surveymember(
-		sur_memberno                  		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		sur_itemno                    		NUMBER(10)		 NOT NULL,
-		gen_memberno                  		NUMBER(7)		 NOT NULL,
-		rdate                         		DATE		 NOT NULL,
+    sur_memberno                      NUMBER(10)     NOT NULL    PRIMARY KEY,
+    sur_itemno                        NUMBER(10)     NOT NULL,
+    gen_memberno                      NUMBER(7)    NOT NULL,
+    rdate                             DATE     NOT NULL,
   FOREIGN KEY (sur_itemno) REFERENCES surveyitem (sur_itemno),
   FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
 );
 
-COMMENT ON TABLE surveymember is 'ì„¤ë¬¸ ì°¸ì—¬ íšŒì›';
-COMMENT ON COLUMN surveymember.sur_memberno is 'ì„¤ë¬¸ ì°¸ì—¬ íšŒì› ë²ˆí˜¸';
-COMMENT ON COLUMN surveymember.sur_itemno is 'ì„¤ë¬¸ ì¡°ì‚¬ í•­ëª© ë²ˆí˜¸';
-COMMENT ON COLUMN surveymember.gen_memberno is 'íšŒì› ë²ˆí˜¸';
-COMMENT ON COLUMN surveymember.rdate is 'ì„¤ë¬¸ ì°¸ì—¬ ë‚ ì§œ';
+COMMENT ON TABLE surveymember is '¼³¹® Âü¿© È¸¿ø';
+COMMENT ON COLUMN surveymember.sur_memberno is '¼³¹® Âü¿© È¸¿ø ¹øÈ£';
+COMMENT ON COLUMN surveymember.sur_itemno is '¼³¹® Á¶»ç Ç×¸ñ ¹øÈ£';
+COMMENT ON COLUMN surveymember.gen_memberno is 'È¸¿ø ¹øÈ£';
+COMMENT ON COLUMN surveymember.rdate is '¼³¹® Âü¿© ³¯Â¥';
 
 DROP SEQUENCE surveymember_seq;
 CREATE SEQUENCE surveymember_seq
-  START WITH 1              -- ì‹œì‘ ë²ˆí˜¸
-  INCREMENT BY 1          -- ì¦ê°€ê°’
-  MAXVALUE 9999999999 -- ìµœëŒ€ê°’: 9999999 --> NUMBER(10) ëŒ€ì‘
-  CACHE 2                       -- 2ë²ˆì€ ë©”ëª¨ë¦¬ì—ì„œë§Œ ê³„ì‚°
-  NOCYCLE;                     -- ë‹¤ì‹œ 1ë¶€í„° ìƒì„±ë˜ëŠ” ê²ƒì„ ë°©ì§€
+  START WITH 1              -- ½ÃÀÛ ¹øÈ£
+  INCREMENT BY 1          -- Áõ°¡°ª
+  MAXVALUE 9999999999 -- ÃÖ´ë°ª: 9999999 --> NUMBER(10) ´ëÀÀ
+  CACHE 2                       -- 2¹øÀº ¸Ş¸ğ¸®¿¡¼­¸¸ °è»ê
+  NOCYCLE;                     -- ´Ù½Ã 1ºÎÅÍ »ı¼ºµÇ´Â °ÍÀ» ¹æÁö
 
--- ë“±ë¡
+-- µî·Ï
 INSERT INTO surveymember(sur_memberno, sur_itemno, gen_memberno, rdate)
 VALUES(surveymember_seq.nextval, 1, 1, sysdate);
 
@@ -215,28 +215,28 @@ VALUES(surveymember_seq.nextval, 1, 2, sysdate);
 INSERT INTO surveymember(sur_memberno, sur_itemno, gen_memberno, rdate)
 VALUES(surveymember_seq.nextval, 1, 3, sysdate);
 
--- ëª©ë¡
+-- ¸ñ·Ï
 SELECT sur_memberno, sur_itemno, gen_memberno, rdate
 FROM surveymember 
 ORDER BY sur_memberno ASC;
 
 commit;
 
--- ì¡°íšŒ
+-- Á¶È¸
 SELECT sur_memberno, sur_itemno, gen_memberno, rdate
 FROM surveymember 
 WHERE sur_memberno=1;
 
--- ìˆ˜ì •
+-- ¼öÁ¤
 UPDATE surveymember 
 SET rdate='2020-11-09'
 WHERE sur_memberno=1;
 
--- ì‚­ì œ
+-- »èÁ¦
 DELETE FROM surveymember
 WHERE sur_memberno=1;
 
---ë©¤ë²„ ì¡°ì¸
+--¸â¹ö Á¶ÀÎ
 SELECT s.sur_memberno, s.sur_itemno, s.gen_memberno, s.rdate, g.gen_id as gid
 FROM surveymember s , gen_member g
 WHERE s.gen_memberno = g.gen_memberno
