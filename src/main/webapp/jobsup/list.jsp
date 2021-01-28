@@ -40,8 +40,9 @@
     <thead>  
     <TR>
       <TH class="th_bs">구직 신청 번호</TH>
-      <TH class="th_bs">회사 번호</TH>
+      <TH class="th_bs">채용 번호</TH>
       <TH class="th_bs">회원 번호</TH>
+      <TH class="th_bs">이력서 번호</TH>
       <TH class="th_bs">지원 제목</TH>
       <TH class="th_bs">지원 메세지</TH>
       <TH class="th_bs">지원일</TH>
@@ -49,24 +50,27 @@
     </thead>
     
     <ASIDE class="aside_left">
+    <c:if test="${sessionScope.gen_id != null  or sessionScope.id != null }">
     <A href="create.do">구직 신청</A>
+    </c:if>
     </ASIDE>
-    <tbody>
-    <c:forEach var="JobsupVO" items="${list }">  <!-- request 객체에 접근 -->
+     <tbody>
+        <c:forEach var="JobsupVO" items="${list }">  <!-- request 객체에 접근 -->
       <c:set var="jobsupno" value="${JobsupVO.jobsupno}" />
-      
+       <%-- 글을 등록한 회원만 메뉴 출력 --%>
+     <c:if test="${sessionScope.gen_id != null  or sessionScope.id != null }">
       <TR>
         <TD class="td_bs">${jobsupno }</TD>
-        <TD class="td_bs">${JobsupVO.comno }</TD>
-        <TD class="td_bs">${JobsupVO.gen_memberno }</TD>     
+        <TD class="td_bs">${JobsupVO.recruitno }</TD>
+        <TD class="td_bs">${JobsupVO.gen_memberno }</TD>
+        <TD class="td_bs">${JobsupVO.res_no }</TD>     
         <TD class="td_bs_left"><A href="./read.do?jobsupno=${jobsupno }">${JobsupVO.jobsup_title }</A></TD>
         <TD class="td_bs">${JobsupVO.jobsup_msg}</TD>
         <TD class="td_bs">${JobsupVO.jobsup_date.substring(0, 10) }</TD>     
       </TR> 
+      </c:if>
     </c:forEach>
-    
-    </tbody>
-   
+   </tbody>
   </TABLE>
  
  

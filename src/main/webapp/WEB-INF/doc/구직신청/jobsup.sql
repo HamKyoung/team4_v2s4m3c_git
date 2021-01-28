@@ -358,34 +358,25 @@ COMMIT;
 DROP TABLE jobsup;
 CREATE TABLE jobsup(
 		jobsupno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-        gen_memberno                  	NUMBER(7)		 NOT NULL ,
-		comno                        		NUMBER(10)		 NOT NULL ,
-        cateno                        		NUMBER(10)		 NOT NULL,
-        cor_memberno                     NUMBER(10)		 NOT NULL,
         recruitno                             NUMBER(10)		 NOT NULL,
+        gen_memberno                  	NUMBER(7)		 NOT NULL,  
         res_no                                NUMBER(10)		 NOT NULL,
 		jobsup_title                  		VARCHAR2(300)		 NOT NULL,
 		jobsup_msg                    		VARCHAR2(1000)		 NOT NULL,
 		jobsup_date                   		DATE		 NOT NULL,
-  FOREIGN KEY (comno) REFERENCES com_intro (comno),
-  FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno),
-  FOREIGN KEY (cateno) REFERENCES com_cate (cateno),
-  FOREIGN KEY (cor_memberno) REFERENCES cor_member (cor_memberno),
-  FOREIGN KEY (recruitno) REFERENCES recruit (recruitno),
-  FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
+FOREIGN KEY (recruitno) REFERENCES recruit (recruitno),
+FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno),
+FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
 );
 
 COMMENT ON TABLE jobsup is '구직 신청';
 COMMENT ON COLUMN jobsup.jopsupno is '구직 신청 번호';
+COMMENT ON COLUMN jobsup.recruitno is '채용 번호'
+COMMENT ON COLUMN jobsup.gen_memberno is '회원 번호';;
+COMMENT ON COLUMN jobsup.res_no is '이력서 번호';
 COMMENT ON COLUMN jobsup.jopsup_title is '지원 제목';
 COMMENT ON COLUMN jobsup.jobsup_msg is '지원 메세지';
 COMMENT ON COLUMN jobsup.jobsup_date is '지원 등록일';
-COMMENT ON COLUMN jobsup.gen_memberno is '회원 번호';
-COMMENT ON COLUMN jobsup.comno is '회사 소개 번호';
-COMMENT ON COLUMN jobsup.cateno is '회사  대분류 번호';
-COMMENT ON COLUMN jobsup.cor_memberno is '기업 회원 번호';
-COMMENT ON COLUMN jobsup.recruitno is '채용 번호';
-COMMENT ON COLUMN jobsup.res_no is '이력서 번호';
 
 COMMIT;
 
@@ -401,13 +392,19 @@ CREATE SEQUENCE jobsup_seq
   
   
 -- 등록
-INSERT INTO jobsup(jobsupno, gen_memberno, comno, cateno, cor_memberno, recruitno, res_no, jobsup_title, jobsup_msg, jobsup_date)
-VALUES(jobsup_seq.nextval, 1, 1, 1, 1, 1, 1, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
+INSERT INTO jobsup(jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval, 1, 1, 1, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
+
+INSERT INTO jobsup(jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval, 2, 2, 2, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
+
+INSERT INTO jobsup(jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval, 3, 3, 3, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
   
 COMMIT;
 
 -- 목록
-SELECT jobsupno, gen_memberno, comno, cateno, cor_memberno, recruitno, res_no,  jobsup_title, jobsup_msg, jobsup_date
+SELECT jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
 FROM jobsup
 ORDER BY jobsupno ASC;
 
@@ -421,6 +418,12 @@ UPDATE jobsup
 SET jobsup_title='믿음직하고 꼼꼼한사람입니다.', jobsup_msg='돈이필요해서 입니다'
 WHERE jobsupno = 1;
 
+UPDATE jobsup
+SET recruitno = 2;
+WHERE jobsupno = 2;
 
+UPDATE jobsup
+SET recruitno = 3;
+WHERE jobsupno = 3;
 
 COMMIT;

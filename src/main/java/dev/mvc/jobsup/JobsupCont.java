@@ -3,6 +3,8 @@ package dev.mvc.jobsup;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,17 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.mvc.jobnws.JobnwsVO;
+import dev.mvc.genmember.GenmemberProc;
+
 
 @Controller
 public class JobsupCont {
   @Autowired
   @Qualifier("dev.mvc.jobsup.JobsupProc")
   private JobsupProcInter jobsupProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
+
 
   public JobsupCont() {
     System.out.println("--> JobsupCont created.");
   }
+  
+
 
   /**
    * 등록폼 http://localhost:9090/resort/categrp/create.do
@@ -59,8 +69,16 @@ public class JobsupCont {
    * @return
    */
   @RequestMapping(value = "/jobsup/list.do", method = RequestMethod.GET)
-  public ModelAndView list_jobsupno_asc() {
+  public ModelAndView list_jobsupno_asc(HttpSession session) {
     ModelAndView mav = new ModelAndView();
+    
+    boolean genmem = false;
+    
+    if (genmemberProc.isMember(session)) {  // 회원 로그인
+      genmem = true;
+    }
+    
+    mav.addObject("genmem", genmem);
 
     mav.setViewName("/jobsup/list"); // /webapp/jobsup/create.jsp
 

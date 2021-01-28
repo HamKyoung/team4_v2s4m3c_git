@@ -5,7 +5,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>채용뉴스</title>
+<title>구직신청</title>
  
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
  
@@ -34,9 +34,11 @@
     <FORM name='frm' method='POST' action='./update.do' class="form-horizontal">
          
       <!-- FK comno 지정 -->
-      <input type='hidden' name='comno' id='comno' value='${param.comno }'>
+      <input type='hidden' name='recruitno' id='recruitno' value='${param.recruitno }'>
       <!-- FK gen_memberno 지정 -->
       <input type='hidden' name='gen_memberno' id='gen_memberno' value="${param.gen_memberno }">
+      <!-- FK comno 지정 -->
+      <input type='hidden' name='res_no' id='res_no' value='${param.res_no }'>
       <input type='hidden' name='jobsupno' id='jobsupno' value='${param.jobsupno }'>
       
       <div class="form-group">   

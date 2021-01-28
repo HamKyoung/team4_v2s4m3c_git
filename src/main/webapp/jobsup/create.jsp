@@ -29,12 +29,20 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"
                enctype="multipart/form-data">
-               
-      <!-- FK comno 지정 -->
-      <input type="text" name='comno' id='comno' value='2'>
+        
+        
+       채용번호:       
+      <!-- FK recruitno 지정 -->
+      <input type="text" name='recruitno' id='recruitno' value='1'><br><br>
+      
+       회원번호:
       <!-- FK gen_memberno 지정 -->
-      <%-- <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.genmemberno}"> --%>
-       <input type='text' name='gen_memberno' id='gen_memberno' value="1">
+      <%-- <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.gen_memberno}"> --%>
+       <input type='text' name='gen_memberno' id='gen_memberno' value="1"><br><br>
+       
+       이력서번호:
+      <!-- FK res_no 지정 -->
+      <input type="text" name='res_no' id='res_no' value='1'><br><br>
                
       <div class="form-group">   
         <div class="col-md-12">
