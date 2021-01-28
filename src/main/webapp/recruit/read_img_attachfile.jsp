@@ -128,8 +128,6 @@
     <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
   
     <c:if test="${corlogin eq true }">
-    <span class='menu_divide' > | </span> 
-    <A href="./create.do">글 등록</A>
     <span class='menu_divide' > | </span>
     <A href='./reply.do?recruitno=${recruitno }&cateno=${cateno }'>답변</A>
 

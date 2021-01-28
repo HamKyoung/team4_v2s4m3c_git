@@ -37,7 +37,7 @@
   <fieldset class='fieldset_basic'>
     <UL>
       <c:choose>
-        <c:when test="${param.cnt == 1 }">
+        <c:when test="${cnt == 1 }">
           <LI class='li_none'>
             <span class='span_success'>새로운 구인를 등록했습니다.</span>
           </LI>
@@ -51,10 +51,10 @@
       <LI class='li_none'>
         <br>
         <c:choose>
-          <c:when test="${param.cnt == 1 }">
+          <c:when test="${cnt == 1 }">
             <button type='button' 
                          onclick="location.href='./create.do?cateno=${param.cateno}'"
-                         class="btn btn-info">새로운 컨텐츠 등록</button>
+                         class="btn btn-info">새로운 구인 등록</button>
           </c:when>
           <c:otherwise>
             <button type='button' 

@@ -56,7 +56,7 @@
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='title' value='' placeholder="제목" required="required" style='width: 80%;'>
+          <input type='text' class="form-control" name='title' value='a' placeholder="제목" required="required" style='width: 80%;'>
         </div>
       </div>   
       
@@ -76,7 +76,7 @@
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='homepage' value='' placeholder="인터넷 주소" style='width: 80%;'>
+          <input type='text' class="form-control" name='homepage' value='naver.com' placeholder="인터넷 주소" style='width: 80%;'>
         </div>
       </div>   
       
@@ -95,9 +95,8 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">등록</button>
         <button type="button" 
-                    onclick="location.href='./read.do?recruitno=${param.recruitno}'" 
+                    onclick="location.href='./list.do?cateno=${param.cateno}'" 
                     class="btn btn-info">취소[목록]</button>
-
       </DIV>
        
     </FORM>
