@@ -1,16 +1,10 @@
 package dev.mvc.surveyitem;
 
-import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.genmember.GenmemberProc;
-import dev.mvc.genmember.GenmemberVO;
 import dev.mvc.survey.SurveyProc;
 import dev.mvc.survey.SurveyVO;
 import dev.mvc.surveymember.SurveymemberProc;
@@ -71,7 +64,6 @@ public class SurveyitemCont {
     int itemcnt = 0;
     boolean sw = false;
     int gen_memberno = (int) session.getAttribute("genmemberno");
-    int survey_check = 0;
 
     if (genmemberProc.isMember(session)) {
       sw = true;
@@ -164,7 +156,7 @@ public class SurveyitemCont {
     
     int gen_memberno = (int) session.getAttribute("genmemberno");
     int cnt = surveymemberProc.survey_check(gen_memberno);
-
+    
     if (cnt == 1) {
       mav.setViewName("/surveyitem/already");
     } else {
@@ -187,7 +179,7 @@ public class SurveyitemCont {
     mav.addObject("surveyVO", surveyVO);
 
     return mav;
-  }
+    }
   
   /**
    * 설문 조사 결과 목록 http://localhost:9090/team4/surveyitem/list.do
