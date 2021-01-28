@@ -66,8 +66,9 @@ public class RecruitCont {
   public ModelAndView create() {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/recruit/create"); // /webapp/categrp/create.jsp
-    // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
-    // mav.addObject("content", content);
+    String content = "장소: \n+인원:\n준비물:\n비용:\n기타:\n";
+    //String content = "장소:\n";
+    mav.addObject("content", content);
 
     
     return mav; // forward
@@ -82,7 +83,7 @@ public class RecruitCont {
    @RequestMapping(value="/recruit/create.do", 
                                method=RequestMethod.POST )
    public ModelAndView create(HttpServletRequest request, RecruitVO recruitVO) {
-     
+     //System.out.println("--> cateno : " + recruitVO.getCateno());
      ModelAndView mav = new ModelAndView();
      // -------------------------------------------------------------------
      // 파일 전송 코드 시작
