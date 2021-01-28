@@ -117,12 +117,13 @@
             <td style='text-align: center;'>${comintroVO.com_type}</td> 
            </TR>
         </c:forEach>
-  </c:when>
-  </c:choose> 
+ 
       </tbody>
     </table>
     <br><br>
   </div>
+  </c:when>
+  </c:choose>
 
 
   <c:choose>
@@ -182,7 +183,7 @@
     <br><br>
   </div>
 </c:when>
-      </c:choose> 
+</c:choose> 
 
 
  
