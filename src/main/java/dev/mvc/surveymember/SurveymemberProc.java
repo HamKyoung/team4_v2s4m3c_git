@@ -44,6 +44,12 @@ public class SurveymemberProc implements SurveymemberProcInter {
     return cnt;
   }
 
+  @Override
+  public int survey_check(int gen_memberno) {
+    int cnt = this.surveymemberDAO.survey_check(gen_memberno);
+    return cnt;
+  }
+
   
   
 }

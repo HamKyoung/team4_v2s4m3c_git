@@ -1,11 +1,16 @@
 package dev.mvc.surveyitem;
 
+import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,31 +61,30 @@ public class SurveyitemCont {
    */
   @ResponseBody
   @RequestMapping(value = "/surveyitem/vote.do", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
-  public String vote(int sur_itemno, int surveyno, HttpSession session ) {
+  public String vote(int sur_itemno, int surveyno, HttpSession session, SurveymemberVO surveymemberVO){
     
     Map<String, Object> map = new HashMap<String, Object>();
     map.put("sur_itemno", sur_itemno);     // #{sur_itemno}
     map.put("surveyno", surveyno); // #{surveyno}
-    
+
     int cnt = 0;
     int itemcnt = 0;
     boolean sw = false;
-    int gen_memberno = 0;
+    int gen_memberno = (int) session.getAttribute("genmemberno");
+    int survey_check = 0;
 
     if (genmemberProc.isMember(session)) {
       sw = true;
-    }
-
-    if (sw = true) {
-      cnt = this.surveyitemProc.update_cnt(map);
-
+      
+      if (sw = true) {
+        cnt = this.surveyitemProc.update_cnt(map);
+      }
+      
       if (cnt == 1) {
         SurveyitemVO surveyitemVO = this.surveyitemProc.read(sur_itemno);
         itemcnt = surveyitemVO.getItemcnt();
 
-        gen_memberno = (int) session.getAttribute("genmemberno");
-
-        SurveymemberVO surveymemberVO = surveymemberProc.read(gen_memberno);
+        surveymemberVO.setGen_memberno(gen_memberno);
         surveymemberProc.create(surveymemberVO);
       }
     }
@@ -153,30 +157,37 @@ public class SurveyitemCont {
   @RequestMapping(value = "/surveyitem/list.do", method = RequestMethod.GET)
   public ModelAndView list_by_search(
       @RequestParam(value="surveyno", defaultValue="1") int surveyno,
-      @RequestParam(value="word", defaultValue="") String word
+      @RequestParam(value="word", defaultValue="") String word,
+      HttpSession session
       ) { 
-    
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("/surveyitem/list");   
     
+    int gen_memberno = (int) session.getAttribute("genmemberno");
+    int cnt = surveymemberProc.survey_check(gen_memberno);
+
+    if (cnt == 1) {
+      mav.setViewName("/surveyitem/already");
+    } else {
+      mav.setViewName("/surveyitem/list");
+    }
     // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
     HashMap<String, Object> map = new HashMap<String, Object>();
     map.put("surveyno", surveyno); // #{surveyno}
-    map.put("word", word);     // #{word}
-    
+    map.put("word", word); // #{word}
+
     // 검색 목록
     List<SurveyitemVO> list = surveyitemProc.list_by_search(map);
     mav.addObject("list", list);
-    
+
     // 검색된 레코드 갯수
     int search_count = surveyitemProc.search_count(map);
     mav.addObject("search_count", search_count);
-    
+
     SurveyVO surveyVO = surveyProc.read(surveyno);
     mav.addObject("surveyVO", surveyVO);
 
     return mav;
-  }    
+  }
   
   /**
    * 설문 조사 결과 목록 http://localhost:9090/team4/surveyitem/list.do

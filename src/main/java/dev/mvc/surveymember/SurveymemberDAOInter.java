@@ -37,4 +37,11 @@ public interface SurveymemberDAOInter {
    * @return
    */
   public int delete(int sur_memberno);
+  
+  /**
+   * 설문조사 참여 체크
+   * @param gen_memberno
+   * @return
+   */
+  public int survey_check(int gen_memberno);
 }
