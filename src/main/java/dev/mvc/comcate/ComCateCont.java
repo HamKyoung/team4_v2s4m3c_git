@@ -3,6 +3,7 @@ package dev.mvc.comcate;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,10 +119,25 @@ public class ComCateCont {
    * @return
    */
   @RequestMapping(value = "/comcate/list.do", method = RequestMethod.GET)
-  public ModelAndView list(int comno) {
+  public ModelAndView list(int comno, HttpSession session) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/comcate/list_ajax"); // /webapp/comcate/list.jsp
 
+    boolean genlogin = false;
+    boolean corlogin = false;
+    
+    if (genmemberProc.isMember(session)) { 
+      genlogin = true;
+    }
+    
+    if (cormemberProc.isMember(session)) {
+      corlogin = true;
+    }
+    
+    mav.addObject("genlogin", genlogin);
+    mav.addObject("corlogin", corlogin);
+
+    
     //ComIntro Á¢±Ù
     ComIntroVO comintroVO = this.comintroProc.read(comno);
     mav.addObject("comintroVO",comintroVO);
