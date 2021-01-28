@@ -396,8 +396,8 @@ CREATE SEQUENCE cate_seq
 
 --등록  
 --(부모테이블 먼저)
-INSERT INTO com_intro(comno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,cor_memberno,visible)
-VALUES(comintro_seq.nextval, '솔데스크','학원','컴퓨터학원','10억원','www.soldesk.com','종로구관철로','50명','2010-01-01','솔원장',1,'Y');
+INSERT INTO com_intro(comno, cor_memberno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,visible)
+VALUES(comintro_seq.nextval, 1, '솔데스크','학원','컴퓨터학원','10억원','www.soldesk.com','종로구관철로','50명','2010-01-01','솔원장',1,'Y');
 
 --(자식테이블)
 INSERT INTO com_cate(cateno, comno, cate_name, cate_seqno, cate_visible, cate_date, cate_cnt)
