@@ -1,10 +1,16 @@
 package dev.mvc.surveyitem;
 
+import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.admin.AdminProc;
 import dev.mvc.genmember.GenmemberProc;
+import dev.mvc.genmember.GenmemberVO;
 import dev.mvc.survey.SurveyProc;
 import dev.mvc.survey.SurveyVO;
 import dev.mvc.surveymember.SurveymemberProc;
@@ -43,6 +51,11 @@ public class SurveyitemCont {
   @Qualifier("dev.mvc.genmember.GenmemberProc")
   private GenmemberProc genmemberProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.admin.AdminProc")
+  private AdminProc adminProc;
+
+  
   public SurveyitemCont() {
     System.out.println("--> SurveyitemCont created.");
   }
@@ -57,30 +70,35 @@ public class SurveyitemCont {
   public String vote(int sur_itemno, int surveyno, HttpSession session, SurveymemberVO surveymemberVO){
     
     Map<String, Object> map = new HashMap<String, Object>();
-    map.put("sur_itemno", sur_itemno);     // #{sur_itemno}
+    map.put("sur_itemno", sur_itemno); // #{sur_itemno}
     map.put("surveyno", surveyno); // #{surveyno}
 
     int cnt = 0;
     int itemcnt = 0;
     boolean sw = false;
-    int gen_memberno = (int) session.getAttribute("genmemberno");
+    int gen_memberno = 0;
 
-    if (genmemberProc.isMember(session)) {
-      sw = true;
+    if (adminProc.isAdmin(session) == true) {
+      cnt = this.surveyitemProc.update_cnt(map);
       
-      if (sw = true) {
-        cnt = this.surveyitemProc.update_cnt(map);
-      }
-      
-      if (cnt == 1) {
-        SurveyitemVO surveyitemVO = this.surveyitemProc.read(sur_itemno);
-        itemcnt = surveyitemVO.getItemcnt();
+    } else {
+      if (genmemberProc.isMember(session) == true) {
+        sw = true;
+        if (sw = true) {
+          cnt = this.surveyitemProc.update_cnt(map);
+        }
+        gen_memberno = (int) session.getAttribute("genmemberno");
 
-        surveymemberVO.setGen_memberno(gen_memberno);
-        surveymemberProc.create(surveymemberVO);
+        if (cnt == 1) {
+          SurveyitemVO surveyitemVO = this.surveyitemProc.read(sur_itemno);
+          itemcnt = surveyitemVO.getItemcnt();
+
+          surveymemberVO.setGen_memberno(gen_memberno);
+          surveymemberProc.create(surveymemberVO);
+        }
       }
     }
-    
+
     JSONObject json = new JSONObject();
     json.put("itemcnt", itemcnt);
     json.put("cnt", cnt);
@@ -149,18 +167,21 @@ public class SurveyitemCont {
   @RequestMapping(value = "/surveyitem/list.do", method = RequestMethod.GET)
   public ModelAndView list_by_search(
       @RequestParam(value="surveyno", defaultValue="1") int surveyno,
-      @RequestParam(value="word", defaultValue="") String word,
-      HttpSession session
-      ) { 
+      @RequestParam(value = "word", defaultValue = "") String word, HttpSession session) {
     ModelAndView mav = new ModelAndView();
+    boolean sw = false;
     
-    int gen_memberno = (int) session.getAttribute("genmemberno");
-    int cnt = surveymemberProc.survey_check(gen_memberno);
-    
-    if (cnt == 1) {
-      mav.setViewName("/surveyitem/already");
-    } else {
+    if (adminProc.isAdmin(session) == true) {
       mav.setViewName("/surveyitem/list");
+    } else {
+      int gen_memberno = (int) session.getAttribute("genmemberno");
+      int cnt = surveymemberProc.survey_check(gen_memberno);
+
+      if (cnt == 1) {
+        mav.setViewName("/surveyitem/already");
+      } else {
+        mav.setViewName("/surveyitem/list");
+      }
     }
     // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
     HashMap<String, Object> map = new HashMap<String, Object>();
@@ -179,7 +200,7 @@ public class SurveyitemCont {
     mav.addObject("surveyVO", surveyVO);
 
     return mav;
-    }
+  }
   
   /**
    * 설문 조사 결과 목록 http://localhost:9090/team4/surveyitem/list.do
