@@ -78,13 +78,55 @@
     전체 보기 
   </ASIDE>
   <ASIDE class="aside_right">
-    <A href="./create.do">회사등록</A> /
-    <A href="javascript:location.reload();">새로고침</A>
-    <!--  <span class='menu_divide' >│</span> -->
+    <c:if test="${corlogin eq true }">
+      <A href="./create.do">회사등록</A> /
+      <A href="javascript:location.reload();">새로고침</A>
+      <!--  <span class='menu_divide' >│</span> -->
+    </c:if>
   </ASIDE> 
   <DIV class='menu_line'></DIV>
   
+  <c:choose>
+  <c:when test="${corlogin eq false}">
   <div style='width: 100%;'>
+    <table class="table table-striped" style='width: 100%;'>
+      <colgroup>
+        <col style="width: 20%;"></col>
+        <col style="width: 60%;"></col>
+        <col style="width: 20%;"></col>
+      </colgroup>
+      <%-- table 컬럼 --%>
+      <thead>
+        <tr>
+          <th style='text-align: center;'>번호</th>
+          <th style='text-align: center;'>회사이름</th>
+          <th style='text-align: center;'>업종</th>
+        </tr>
+      
+      </thead>
+      
+      <%-- table 내용 --%>
+      <tbody>
+        <c:forEach var="comintroVO" items="${list }">
+          <c:set var="comno" value="${comintroVO.comno }" />
+          <TR> 
+            <td style='text-align: center;'>${comintroVO.comno}</td>
+            <td>
+              <a href="../comcate/list.do?comno=${comno}">${comintroVO.com_name}</a> 
+            </td> 
+            <td style='text-align: center;'>${comintroVO.com_type}</td> 
+           </TR>
+        </c:forEach>
+  </c:when>
+  </c:choose> 
+      </tbody>
+    </table>
+    <br><br>
+  </div>
+
+
+  <c:choose>
+  <c:when test="${corlogin eq true}">
     <table class="table table-striped" style='width: 100%;'>
       <colgroup>
         <col style="width: 15%;"></col>
@@ -92,6 +134,7 @@
         <col style="width: 20%;"></col>
         <col style="width: 15%;"></col>
         <col style="width: 15%;"></col>
+
       </colgroup>
       <%-- table 컬럼 --%>
       <thead>
@@ -128,7 +171,7 @@
       <TD class="td_bs">
         <A href="./update.do?comno=${comno }" title="수정"><span class="glyphicon glyphicon-pencil"></span></A>
         <A href="./delete.do?comno=${comno }" title="삭제"><span class="glyphicon glyphicon-trash"></span></A>      
-      </TD>   
+      </TD>      
 
 
           </TR>
@@ -138,6 +181,10 @@
     </table>
     <br><br>
   </div>
+</c:when>
+      </c:choose> 
+
+
  
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>

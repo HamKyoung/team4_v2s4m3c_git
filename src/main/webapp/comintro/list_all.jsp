@@ -26,9 +26,11 @@
     전체 보기 
   </ASIDE>
   <ASIDE class="aside_right">
-    <A href="./create.do">회사등록</A> /
-    <A href="javascript:location.reload();">새로고침</A>
-    <!--  <span class='menu_divide' >│</span> -->
+    <c:if test="${corlogin eq true }">
+      <A href="./create.do">회사등록</A> /
+      <A href="javascript:location.reload();">새로고침</A>
+      <!--  <span class='menu_divide' >│</span> -->
+    </c:if>
   </ASIDE> 
   <DIV class='menu_line'></DIV>
   
@@ -74,8 +76,12 @@
         </c:choose>
       </TD>   
       <TD class="td_bs">
+      <c:choose>
+      <c:when test="${corlogin eq true}">
         <A href="./update.do?comno=${comno }" title="수정"><span class="glyphicon glyphicon-pencil"></span></A>
         <A href="./delete.do?comno=${comno }" title="삭제"><span class="glyphicon glyphicon-trash"></span></A>      
+      </c:when>
+      </c:choose>
       </TD>   
 
 

@@ -3,6 +3,7 @@ package dev.mvc.comintro;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cormember.CormemberProc;
+import dev.mvc.genmember.GenmemberProc;
+
 @Controller
 public class ComIntroCont {
+  
+  @Autowired
+  @Qualifier("dev.mvc.cormember.CormemberProc")
+  private CormemberProc cormemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
   
   @Autowired
   @Qualifier("dev.mvc.comintro.ComIntroProc")
@@ -57,14 +69,30 @@ public class ComIntroCont {
    * @return
    */
     @RequestMapping(value = "/comintro/list_all.do", method = RequestMethod.GET)
-    public ModelAndView list() { ModelAndView mav = new ModelAndView();
-        List<ComIntroVO> list = this.comintroProc.list_all();
-        mav.addObject("list",list);
+    public ModelAndView list(HttpSession session) {     
+      ModelAndView mav = new ModelAndView();
 
       //mav.setViewName("/comintro/list_all"); // /webapp/contents/list_all.jsp
-        mav.setViewName("/comintro/list_ajax"); // /webapp/contents/list_ajax.jsp
+      mav.setViewName("/comintro/list_ajax"); // /webapp/contents/list_ajax.jsp
 
-        return mav; // forward 
+      boolean genlogin = false;
+      boolean corlogin = false;
+      
+      if (genmemberProc.isMember(session)) { 
+        genlogin = true;
+      }
+      
+      if (cormemberProc.isMember(session)) {
+        corlogin = true;
+      }
+      
+      mav.addObject("genlogin", genlogin);
+      mav.addObject("corlogin", corlogin);
+      
+      List<ComIntroVO> list = this.comintroProc.list_all();
+      mav.addObject("list",list);
+      
+      return mav; // forward 
     }
    
 
