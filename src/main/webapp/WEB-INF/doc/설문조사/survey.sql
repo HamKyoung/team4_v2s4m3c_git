@@ -5,13 +5,13 @@ drop table surveymember;
 drop table surveyitem;
 drop table survey;
 CREATE TABLE survey(
-    surveyno                          NUMBER(10)     NOT NULL    PRIMARY KEY,
-    topic                             VARCHAR2(200)    NOT NULL,
-    startdate                       VARCHAR2(10)     NOT NULL,
-    enddate                         VARCHAR2(10)     NOT NULL,
-    poster                          VARCHAR2(100)      NULL,
-    cnt                               NUMBER(7)        NULL ,
-    continueyn                        CHAR(1)        NOT NULL
+		surveyno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		topic                         		VARCHAR2(200)		 NOT NULL,
+		startdate                     	VARCHAR2(10)		 NOT NULL,
+		enddate                       	VARCHAR2(10)		 NOT NULL,
+		poster                        	VARCHAR2(100)	     NULL,
+		cnt                           		NUMBER(7)		     NULL ,
+		continueyn                    		CHAR(1)		     NOT NULL
 );
 
 COMMENT ON TABLE survey is '설문조사';
@@ -82,18 +82,18 @@ WHERE surveyno=1;
 /* Table Name: 일반 회원 */
 /**********************************/
 CREATE TABLE gen_member(
-    gen_memberno                      NUMBER(7)    NOT NULL    PRIMARY KEY,
-    gen_id                            VARCHAR2(50)     NOT NULL UNIQUE ,
-    gen_passwd                        VARCHAR2(20)     NOT NULL,
-    gen_name                          VARCHAR2(20)     NOT NULL,
-    gen_resident                      VARCHAR2(13)     NOT NULL,
-    gen_sex                           VARCHAR2(10)     NOT NULL,
-    gen_phone                         VARCHAR2(20)     NOT NULL,
-    gen_zipcode                       VARCHAR2(5)    NULL ,
-    gen_addr                          VARCHAR2(100)    NULL ,
-    gen_addr1                         VARCHAR2(50)     NULL ,
-    gen_mail                          VARCHAR2(50)     NOT NULL,
-    gen_date                          DATE     NOT NULL
+		gen_memberno                  		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
+		gen_id                        		VARCHAR2(50)		 NOT NULL UNIQUE ,
+		gen_passwd                    		VARCHAR2(20)		 NOT NULL,
+		gen_name                      		VARCHAR2(20)		 NOT NULL,
+		gen_resident                  		VARCHAR2(13)		 NOT NULL,
+		gen_sex                       		VARCHAR2(10)		 NOT NULL,
+		gen_phone                     		VARCHAR2(20)		 NOT NULL,
+		gen_zipcode                   		VARCHAR2(5)		 NULL ,
+		gen_addr                      		VARCHAR2(100)		 NULL ,
+		gen_addr1                     		VARCHAR2(50)		 NULL ,
+		gen_mail                      		VARCHAR2(50)		 NOT NULL,
+		gen_date                      		DATE		 NOT NULL
 );
 
 COMMENT ON TABLE gen_member is '일반 회원';
@@ -116,12 +116,12 @@ COMMENT ON COLUMN gen_member.gen_date is '가입 날짜';
 /**********************************/
 
 CREATE TABLE surveyitem(
-    sur_itemno                        NUMBER(10)     NOT NULL    PRIMARY KEY,
-    surveyno                          NUMBER(10)     NOT NULL,
-    itemseq                           NUMBER(2) DEFAULT 1  NOT NULL,
-    item                              VARCHAR2(200)    NOT NULL,
-    itemfile                          VARCHAR2(100)    NULL,
-    itemcnt                           NUMBER(7) DEFAULT 0  NOT NULL,
+		sur_itemno                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		surveyno                      		NUMBER(10)		 NOT NULL,
+		itemseq                       		NUMBER(2)	DEFAULT 1	 NOT NULL,
+		item                          		VARCHAR2(200)		 NOT NULL,
+		itemfile                      		VARCHAR2(100)		 NULL,
+		itemcnt                       		NUMBER(7)	DEFAULT 0	 NOT NULL,
   FOREIGN KEY (surveyno) REFERENCES survey (surveyno)
 );
 
@@ -175,11 +175,6 @@ UPDATE surveyitem
 SET itemseq =2, item='test', itemfile='test.jpg', itemcnt=1
 WHERE sur_itemno=2;
 
---카운트
-UPDATE surveyitem 
-SET itemcnt = itemcnt + 1
-WHERE surveyno = 8 and sur_itemno = 15;
-
 -- 삭제
 DELETE FROM surveyitem 
 WHERE sur_itemno=1;
@@ -188,10 +183,10 @@ WHERE sur_itemno=1;
 /* Table Name: 설문 참여 회원 */
 /**********************************/
 CREATE TABLE surveymember(
-    sur_memberno                      NUMBER(10)     NOT NULL    PRIMARY KEY,
-    sur_itemno                        NUMBER(10)     NOT NULL,
-    gen_memberno                      NUMBER(7)    NOT NULL,
-    rdate                             DATE     NOT NULL,
+		sur_memberno                  		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		sur_itemno                    		NUMBER(10)		 NOT NULL,
+		gen_memberno                  		NUMBER(7)		 NOT NULL,
+		rdate                         		DATE		 NOT NULL,
   FOREIGN KEY (sur_itemno) REFERENCES surveyitem (sur_itemno),
   FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno)
 );
