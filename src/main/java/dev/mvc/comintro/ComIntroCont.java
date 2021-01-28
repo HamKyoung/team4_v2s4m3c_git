@@ -50,7 +50,7 @@ public class ComIntroCont {
   
   /**
    * 등록처리
-   * @param cateVO
+   * @param comintroVO
    * @return
    */
   @RequestMapping(value = "/comintro/create.do", method = RequestMethod.POST)

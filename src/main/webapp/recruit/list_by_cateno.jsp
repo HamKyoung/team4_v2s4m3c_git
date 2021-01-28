@@ -59,7 +59,7 @@
           <c:set var="recruitno" value="${recruitVO.recruitno }" />
           
           <tr> 
-            <td class="td_bs">${recruitVO.seqno }</td> 
+            <td class="td_bs">${recruitVO.recruitno }</td> 
             <td>
               <a href="./read.do?recruitno=${recruitno}">${recruitVO.title}</a> 
             </td> 

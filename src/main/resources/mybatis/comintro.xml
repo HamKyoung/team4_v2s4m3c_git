@@ -8,13 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   <!-- 등록 -->
   <insert id="create" parameterType="ComIntroVO">
-    INSERT INTO com_intro(comno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,cor_memberno)
-    VALUES(comintro_seq.nextval, #{com_name},#{com_form},#{com_type},#{sales},#{homepage},#{address},#{num_people},#{edate},#{ceo_name},#{cor_memberno})
-  </insert>
+    INSERT INTO com_intro(comno,cor_memberno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name, visible)
+    VALUES(comintro_seq.nextval, #{cor_memberno}, #{com_name}, #{com_form}, #{com_type},#{sales},
+                                                 #{homepage}, #{address}, #{num_people}, #{edate}, #{ceo_name},#{visible})
+  </insert>     
   
   <!--글 목록, id="list_all"  -->
   <select id="list_all" resultType="ComIntroVO">
-    SELECT comno, com_name, com_form,com_type, sales, homepage,address,num_people,edate,ceo_name,visible
+    SELECT comno, com_name, com_form,com_type, sales, homepage,address,num_people,edate,ceo_name, visible
     FROM com_intro
     ORDER BY comno ASC  
   </select>  

@@ -5,7 +5,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>team4</title>
  
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
  
@@ -39,7 +39,8 @@
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal">
                
       <!-- FK memberno 지정 -->
-      <input type='hidden' name='cor_memberno' id='cor_memberno' value='1'>
+      <input type='hidden' name='cor_memberno' value='${sessionScope.cormemberno}'>
+      <input type='hidden' name='visible' id='visible' value='Y'>
       
       <div class="form-group">   
         <div class="col-md-12">
@@ -106,7 +107,7 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">등록</button>
         <button type="button" 
-                    onclick="location.href='./list_all.do?categrpno=${param.categrpno}'" 
+                    onclick="location.href='./list_all.do'" 
                     class="btn btn-info">취소[목록]</button>
       </DIV>
        

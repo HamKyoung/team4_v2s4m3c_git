@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <insert id="create" parameterType="RecruitVO">
     INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
                                   file1, thumb1, size1)
-    VALUES(recruit_seq.nextval,#{cateno}, #{title}, #{content}, #{homepage},
+    VALUES(recruit_seq.nextval,#{cateno}, #{title}, #{seqno}, #{content}, #{homepage},
                  #{passwd}, #{word}, sysdate, #{file1}, #{thumb1}, #{size1})
   </insert> 
   

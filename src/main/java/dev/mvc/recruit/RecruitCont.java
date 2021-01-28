@@ -58,6 +58,7 @@ public class RecruitCont {
     // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
     // mav.addObject("content", content);
 
+    
     return mav; // forward
   }
   
@@ -123,10 +124,11 @@ public class RecruitCont {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/recruit/list_all"); // /webapp/recruit/list_all.jsp
 
-//    ComCateVO comcateVO = this.comcateProc.read(cateno);
+    //ComCateVO comcateVO = this.comcateProc.read();
+    //mav.addObject("comcateVO", comcateVO);
 
-//    ComIntroVO comintroVO = this.comintroProc.read(comcateVO.getComno());
-//    mav.addObject("comintroVO", comintroVO);
+    //ComIntroVO comintroVO = this.comintroProc.read(comcateVO.getComno());
+    //mav.addObject("comintroVO", comintroVO);
 
     List<RecruitVO> list = this.recruitProc.list_all();
     mav.addObject("list", list);

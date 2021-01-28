@@ -274,8 +274,8 @@ CREATE TABLE COM_INTRO(
 		ADDRESS                       		VARCHAR2(1000)		 NOT NULL,
 		NUM_PEOPLE                    		VARCHAR2(50)		 NOT NULL,
 		EDATE                         		VARCHAR2(500)		 NOT NULL,
-		CEO_NAME                      		VARCHAR2(1000)		 NOT NULL,
-		VISIBLE                       		CHAR(1)		 NOT NULL,
+		CEO_NAME                         VARCHAR2(1000)		 NOT NULL,
+		VISIBLE                       		CHAR(1)		DEFAULT 'Y'  NOT NULL,
         FOREIGN KEY (COR_MEMBERNO) REFERENCES  corporate_member(COR_MEMBERNO)
 );
 

@@ -27,7 +27,6 @@
   </ASIDE>
   <ASIDE class="aside_right">
     <A href="javascript:location.reload();">새로고침</A>
-    <A href="./create.do">/ 등록</A>
     <!--  <span class='menu_divide' >│</span> -->
   </ASIDE>
   <DIV class='menu_line'></DIV>
@@ -38,7 +37,6 @@
         <col style="width: 20%;"></col>
         <col style="width: 40%;"></col>
         <col style="width: 20%;"></col>
-        <col style="width: 20%;"></col>
         
       </colgroup>
       <%-- table 컬럼 --%>
@@ -46,7 +44,6 @@
         <tr>
           <th style='text-align: center;'>순서</th>
           <th style='text-align: center;'>제목</th>
-          <th style='text-align: center;'>회사명</th>
           <th style='text-align: center;'>등록일</th>
         </tr>
       
@@ -59,11 +56,10 @@
           <%-- <c:set var="thumb1" value="${recruitVO.thumb1 }" /> --%>
           
           <tr> 
-            <td class="td_bs">${recruitVO.seqno }</td>
+            <td class="td_bs">${recruitVO.recruitno }</td>
             <td style='vertical-align: middle;'>
               <a href="./read.do?recruitno=${recruitno}">${recruitVO.title}</a> 
             </td> 
-            <td class="td_bs">${comintroVO.com_name }</td>
             <td style='vertical-align: middle; text-align: center;'>${recruitVO.rdate.substring(0, 10)}</td>
 <%--             <td style='vertical-align: middle; text-align: center;'>
               <c:choose>

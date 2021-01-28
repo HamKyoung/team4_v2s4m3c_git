@@ -1,24 +1,26 @@
 package dev.mvc.comintro;
 
 /*
-CREATE TABLE com_intro(
- comno                             NUMBER(7)       NOT NULL     PRIMARY KEY,
- com_name                        VARCHAR2(1000)     NOT NULL,
- com_form                          VARCHAR2(1000)     NOT NULL,
- com_type                          VARCHAR2(1000)     NOT NULL,
- sales                                 VARCHAR2(50)           NOT NULL,
- homepage                        VARCHAR2(1000)     NOT NULL,
- address                           VARCHAR2(1000)     NOT NULL,
- num_people                      VARCHAR2(50)           NOT NULL,
- edate                             VARCHAR2(500)                  NOT NULL,
- ceo_name                          VARCHAR2(1000)     NOT NULL,
- cor_memberno                    NUMBER(7)        NULL ,
-FOREIGN KEY (cor_memberno) REFERENCES corporate_member (cor_memberno)
+CREATE TABLE COM_INTRO(
+    COMNO                             NUMBER(7)    NOT NULL    PRIMARY KEY,
+    COR_MEMBERNO                      NUMBER(7)    NULL ,
+    COM_NAME                          VARCHAR2(1000)     NOT NULL,
+    COM_FORM                          VARCHAR2(1000)     NOT NULL,
+    COM_TYPE                          VARCHAR2(1000)     NOT NULL,
+    SALES                             VARCHAR2(50)     NOT NULL,
+    HOMEPAGE                          VARCHAR2(1000)     NOT NULL,
+    ADDRESS                           VARCHAR2(1000)     NOT NULL,
+    NUM_PEOPLE                        VARCHAR2(50)     NOT NULL,
+    EDATE                             VARCHAR2(500)    NOT NULL,
+    CEO_NAME                         VARCHAR2(1000)    NOT NULL,
+    VISIBLE                           CHAR(1)   DEFAULT 'Y'  NOT NULL,
+        FOREIGN KEY (COR_MEMBERNO) REFERENCES  corporate_member(COR_MEMBERNO)
 );
 */
 public class ComIntroVO {
 
   private int comno;
+  private int  cor_memberno;
   private String  com_name="";
   private String  com_form="";
   private String  com_type="";
@@ -28,7 +30,6 @@ public class ComIntroVO {
   private String  num_people="";
   private String  edate="";
   private String  ceo_name="";
-  private int  cor_memberno;
   private String visible = "";
   
 
@@ -37,6 +38,12 @@ public class ComIntroVO {
   }
   public void setComno(int comno) {
     this.comno = comno;
+  } 
+  public int getCor_memberno() {
+    return cor_memberno;
+  }
+  public void setCor_memberno(int cor_memberno) {
+    this.cor_memberno = cor_memberno;
   }
   public String getCom_name() {
     return com_name;
@@ -91,14 +98,7 @@ public class ComIntroVO {
   }
   public void setCeo_name(String ceo_name) {
     this.ceo_name = ceo_name;
-  }
-  public int getCor_memberno() {
-    return cor_memberno;
-  }
-  public void setCor_memberno(int cor_memberno) {
-    this.cor_memberno = cor_memberno;
-  }
-  
+  }  
   public String getVisible() {
     return visible;
   }
