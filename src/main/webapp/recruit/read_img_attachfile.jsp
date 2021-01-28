@@ -124,12 +124,15 @@
   </ASIDE>
   <ASIDE class="aside_right">
     <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' > | </span>
+    <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
+  
+    <c:if test="${corlogin eq true }">
     <span class='menu_divide' > | </span> 
     <A href="./create.do">글 등록</A>
     <span class='menu_divide' > | </span>
     <A href='./reply.do?recruitno=${recruitno }&cateno=${cateno }'>답변</A>
-    <span class='menu_divide' > | </span>
-    <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
+
 
     <%-- 글을 등록한 회원만 메뉴 출력 --%>
     <%-- <c:if test="${sessionScope.memberno == contentsVO.memberno or sessionScope.id_admin ne null }"> --%>
@@ -144,6 +147,7 @@
           <A href='./img_create.do?cateno=${cateno }&recruitno=${recruitno}'>메인 이미지 등록</A>     
         </c:otherwise>
       </c:choose>    
+      <br>
       <span class='menu_divide' > | </span>
       <A href='../attachfile/create.do?recruitno=${recruitno }&cateno=${cateno }'>첨부 파일 등록</A>
       <span class='menu_divide' > | </span>
@@ -154,6 +158,7 @@
           
       <span class='menu_divide' > | </span> 
       <A href='./delete.do?cateno=${cateno }&recruitno=${recruitno}'>삭제</A>
+    </c:if>
   </ASIDE> 
   
   <div class='menu_line'></div>
