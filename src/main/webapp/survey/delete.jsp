@@ -38,6 +38,9 @@
           msg += "항목을 먼저 삭제해 주세요.";
   
           $('#panel1').attr("class", "msg_warning"); // 경고 style 지정
+        } else {
+          msg = "삭제 가능합니다."
+          $('#panel1').attr("class", "msg_warning"); // 경고 style 지정
         }
         $('#panel1').html(msg); // 메시지 출력
       },
@@ -66,7 +69,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
-    기업 회원 삭제
+   설문 조사 삭제
   </DIV>
   
   <ASIDE class="aside_left">
