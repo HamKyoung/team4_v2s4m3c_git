@@ -55,12 +55,6 @@ public interface SurveyitemProcInter {
    */
   public List<SurveyitemVO> list_by_search(HashMap<String, Object> hashMap);
   
-  /**
-   * 설문조사 번호별 항목목록
-   * @param hashMap
-   * @return
-   */
-  public List<SurveyitemVO> list_by_surveyno(int surveyno);
   
   /**
    * 검색한 갯수
@@ -76,10 +70,4 @@ public interface SurveyitemProcInter {
    */
   public int count_by_surveyno(int surveyno);
   
-  /**
-   * 부모키를 이용한 모든 레코드 삭제
-   * @param surveyno
-   * @return
-   */
-  public int delete_by_surveyno(int surveyno);
 }

@@ -328,36 +328,5 @@ public class SurveyitemCont {
     return json.toString();
   }
   
-  /**
-   * 설문조사항목 전체 삭제 처리
-   * 1
-   * @return
-   */
-  @ResponseBody
-  @RequestMapping(value = "/surveyitem/delete_by_surveyno.do", 
-                             method = RequestMethod.POST,
-                             produces = "text/plain;charset=UTF-8")
-  public String delete_by_contentsno(HttpServletRequest request,
-                                                @RequestParam(value="surveyno", defaultValue = "0") int surveyno) {
-    try {
-      Thread.sleep(3000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    
-    List<SurveyitemVO> list = this.surveyitemProc.list_by_surveyno(surveyno);
-     int cnt = 0;
-    
-     for(SurveyitemVO surveyitemVO : list) {
-       surveyitemProc.delete(surveyitemVO.getSur_itemno());
-       cnt += 1;
-     }
-
-   
-    JSONObject json = new JSONObject();
-    json.put("cnt", cnt);
-
-    return json.toString();
-  }
 
 }
