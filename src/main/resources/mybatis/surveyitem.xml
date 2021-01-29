@@ -20,7 +20,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY itemseq ASC
   </select>
   
-  <select id="read" parameterType="int" resultType="SurveyitemVO">
+  <select id="list_by_surveyno" resultType="SurveyitemVO" parameterType="int">
+    SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt, word
+    FROM surveyitem
+    WHERE surveyno = #{surveyno}
+    ORDER BY itemseq ASC
+  </select>
+  
+  <select id="read" parameterType="int">    
     SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt
     FROM surveyitem 
     WHERE sur_itemno=#{sur_itemno}
