@@ -26,11 +26,10 @@
  
 <body>
 <jsp:include page="/menu/top.jsp" />
- 
   <DIV class='title_line'>합격 자소서
   <ASIDE class="aside_right">
     <c:if test="${corlogin eq true }">
-       <A href="./create.do" title="등록">등록</A>
+       <A href="./create?cormemberno=${sessionScope.cormemberno }" title="등록">등록</A>
     </c:if>
   </ASIDE>
   </DIV>

@@ -40,8 +40,7 @@
         </li>
         
         <li class="li_none">
-          <label>회사번호 "${sessionScope}"</label>
-          <input type='text' class="form-control" name='comno' value='1' placeholder="제목" required="required" style='width: 10%;'>
+          <label>회사이름: ${com_name}</label>
         </li>
         <li class="li_none">
           <label>작성자: ${sessionScope.cor_name }</label>
