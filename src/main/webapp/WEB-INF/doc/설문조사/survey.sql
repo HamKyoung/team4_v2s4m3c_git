@@ -160,7 +160,8 @@ ADD (word VARCHAR2(300));
 
 -- 목록
 SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt, word
-FROM surveyitem 
+FROM surveyitem
+WHERE surveyno = 10
 ORDER BY itemseq ASC;
 
 commit;
@@ -177,7 +178,7 @@ WHERE sur_itemno=2;
 
 -- 삭제
 DELETE FROM surveyitem 
-WHERE sur_itemno=1;
+WHERE sur_itemno=7;
 
 
 --부모키 산출
