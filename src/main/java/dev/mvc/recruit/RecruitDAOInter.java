@@ -3,7 +3,6 @@ package dev.mvc.recruit;
 import java.util.HashMap;
 import java.util.List;
 
-
 public interface RecruitDAOInter {
   /**
    * 등록
@@ -51,4 +50,11 @@ public interface RecruitDAOInter {
    * @return
    */
   public int delete(int recruitno);
+  
+  /**
+   * 이미지 변경
+   * @param recruitVO
+   * @return
+   */
+  public int update_img(RecruitVO recruitVO);
 }

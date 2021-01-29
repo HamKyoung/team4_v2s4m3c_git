@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import dev.mvc.tool.Tool;
 
-
 @Component("dev.mvc.recruit.RecruitProc")
 public class RecruitProc implements RecruitProcInter{
   @Autowired
@@ -74,6 +73,24 @@ public class RecruitProc implements RecruitProcInter{
   @Override
   public int delete(int recruitno) {
     int cnt = this.recruitDAO.delete(recruitno);
+    return cnt;
+  }
+
+  @Override
+  public int img_create(RecruitVO recruitVO) {
+    int cnt = this.recruitDAO.update_img(recruitVO);
+    return cnt;
+  }
+
+  @Override
+  public int img_update(RecruitVO recruitVO) {
+    int cnt = this.recruitDAO.update_img(recruitVO);
+    return cnt;
+  }
+
+  @Override
+  public int img_delete(RecruitVO recruitVO) {
+    int cnt = this.recruitDAO.update_img(recruitVO);
     return cnt;
   }
 

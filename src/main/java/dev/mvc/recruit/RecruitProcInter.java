@@ -57,5 +57,26 @@ public interface RecruitProcInter {
    * @return
    */
   public int delete(int recruitno);
+  
+  /**
+   * 이미지 등록
+   * @param contentsVO
+   * @return
+   */
+  public int img_create(RecruitVO recruitVO);
+  
+  /**
+   * 이미지 수정
+   * @param contentsVO
+   * @return
+   */
+  public int img_update(RecruitVO recruitVO);
+
+  /**
+   * 이미지 삭제
+   * @param contentsVO
+   * @return
+   */
+  public int img_delete(RecruitVO recruitVO);
 
 }
