@@ -30,7 +30,16 @@
           <ul class="depth2">
             <li><A href='${pageContext.request.contextPath}/jobsup/list.do' >구직</A></li>
             <li><A href='${pageContext.request.contextPath}/resume/list.do'>이력서</A></li>
-            <li><A href='${pageContext.request.contextPath}/recruit/list_all.do' >채용</A></li>
+            <li>
+                <c:choose>
+                  <c:when test="${sessionScope.cor_id != null}">
+                    <A href='${pageContext.request.contextPath}/recruit/list_by_cateno.do' >채용</A>
+                  </c:when>
+                  <c:otherwise>
+                    <A href='${pageContext.request.contextPath}/recruit/list_all.do' >채용</A>
+                  </c:otherwise> 
+                </c:choose>            
+            </li>
           </ul>
         </li>
 
