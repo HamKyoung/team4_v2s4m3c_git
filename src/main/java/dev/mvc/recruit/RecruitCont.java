@@ -378,6 +378,270 @@ public class RecruitCont {
     
     return mav;
   }
+  
+  /**
+   * 메인 이미지 등록 폼 http://localhost:9090/resort/recruit/img_create.do
+   * @return
+   */
+  @RequestMapping(value = "/recruit/img_create.do", method = RequestMethod.GET)
+  public ModelAndView img_create(int recruitno) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/recruit/img_create"); // /webapp/contents/img_create.jsp
+
+    RecruitVO recruitVO = this.recruitProc.read(recruitno);
+    mav.addObject("recruitVO", recruitVO);
+    
+    ComCateVO comcateVO = this.comcateProc.read(recruitVO.getCateno());
+    mav.addObject("comcateVO", comcateVO); 
+
+    ComIntroVO comIntroVO = this.comintroProc.read(comcateVO.getComno());
+    mav.addObject("comIntroVO", comIntroVO); 
+    
+    return mav; // forward
+  }
+  
+  /**
+   * 메인 이미지 등록 처리 http://localhost:9090/resort/recruit/img_create.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/recruit/img_create.do", method = RequestMethod.POST)
+  public ModelAndView img_create(HttpServletRequest request, RecruitVO recruitVO,
+                                    @RequestParam(value="nowPage", defaultValue="1") int nowPage) {
+    ModelAndView mav = new ModelAndView();
+    
+    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+    hashMap.put("recruitno", recruitVO.getRecruitno());
+    hashMap.put("passwd", recruitVO.getPasswd());
+    
+    int passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int cnt = 0;             // 수정된 레코드 갯수 
+    
+    passwd_cnt = this.recruitProc.passwd_check(hashMap);
+    
+    if (passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
+      // -------------------------------------------------------------------
+      // 파일 전송 코드 시작
+      // -------------------------------------------------------------------
+      String file1 = "";     // main image
+      String thumb1 = ""; // preview image
+          
+      String upDir = Tool.getRealPath(request, "/recruit/storage/main_images"); // 절대 경로
+      // 전송 파일이 없어서도 fnamesMF 객체가 생성됨.
+      // <input type='file' class="form-control" name='file1MF' id='file1MF' 
+      //           value='' placeholder="파일 선택" multiple="multiple">
+      MultipartFile mf = recruitVO.getFile1MF();
+      long size1 = mf.getSize();  // 파일 크기
+      if (size1 > 0) { // 파일 크기 체크
+        // mp3 = mf.getOriginalFilename(); // 원본 파일명, spring.jpg
+        // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+        file1 = Upload.saveFileSpring(mf, upDir); 
+        
+        if (Tool.isImage(file1)) { // 이미지인지 검사
+          // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
+          thumb1 = Tool.preview(upDir, file1, 200, 150); 
+        }
+      }    
+      
+      recruitVO.setFile1(file1);
+      recruitVO.setThumb1(thumb1);
+      recruitVO.setSize1(size1);
+      // -------------------------------------------------------------------
+      // 파일 전송 코드 종료
+      // -------------------------------------------------------------------
+      
+      //mav.addObject("nowPage", nowPage);
+      mav.addObject("recruitno", recruitVO.getRecruitno());
+      
+      mav.setViewName("redirect:/recruit/read.do");
+      
+      cnt = this.recruitProc.img_create(recruitVO);
+      // mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
+      
+    } else {
+      mav.setViewName("/recruit/update_msg"); // webapp/contents/update_msg.jsp
+    }
+    
+    mav.addObject("cnt", cnt); // request에 저장
+    mav.addObject("passwd_cnt", passwd_cnt); // request에 저장
+            
+    return mav;    
+  }
+  
+  /**
+   * 메인 이미지 삭제/수정 폼 http://localhost:9090/resort/recruit/img_update.do
+   * @return
+   */
+  @RequestMapping(value = "/recruit/img_update.do", method = RequestMethod.GET)
+  public ModelAndView img_update(int recruitno) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/recruit/img_update"); // /webapp/recruit/img_update.jsp
+
+    RecruitVO recruitVO = this.recruitProc.read(recruitno);
+    mav.addObject("recruitVO", recruitVO);
+    
+    ComCateVO comcateVO = this.comcateProc.read(recruitVO.getCateno());
+    mav.addObject("comcateVO", comcateVO); 
+
+    ComIntroVO comIntroVO = this.comintroProc.read(comcateVO.getComno());
+    mav.addObject("comIntroVO", comIntroVO); 
+    
+    return mav; // forward
+  }
+  
+  /**
+   * 메인 이미지 삭제 처리 http://localhost:9090/resort/recruit/img_delete.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/recruit/img_delete.do", method = RequestMethod.POST)
+  public ModelAndView img_delete(HttpServletRequest request,
+                                       int recruitno, 
+                                       int cateno, 
+                                       String passwd,
+                                       @RequestParam(value="nowPage", defaultValue="1") int nowPage) {
+    ModelAndView mav = new ModelAndView();
+    
+    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+    hashMap.put("recruitno", recruitno);
+    hashMap.put("passwd", passwd);
+    
+    int passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int cnt = 0;             // 수정된 레코드 갯수 
+    
+    passwd_cnt = this.recruitProc.passwd_check(hashMap);
+    
+    if (passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
+      // -------------------------------------------------------------------
+      // 파일 삭제 코드 시작
+      // -------------------------------------------------------------------
+      // 삭제할 파일 정보를 읽어옴.
+      RecruitVO recruitVO = recruitProc.read(recruitno);
+      // System.out.println("file1: " + contentsVO.getFile1());
+      
+      String file1 = recruitVO.getFile1().trim();
+      String thumb1 = recruitVO.getThumb1().trim();
+      long size1 = recruitVO.getSize1();
+      boolean sw = false;
+      
+      String upDir = Tool.getRealPath(request, "/recruit/storage/main_images"); // 절대 경로
+      sw = Tool.deleteFile(upDir, recruitVO.getFile1());  // Folder에서 1건의 파일 삭제
+      sw = Tool.deleteFile(upDir, recruitVO.getThumb1());  // Folder에서 1건의 파일 삭제
+      // System.out.println("sw: " + sw);
+      
+      file1 = "";
+      thumb1 = "";
+      size1 = 0;
+      
+      recruitVO.setFile1(file1);
+      recruitVO.setThumb1(thumb1);
+      recruitVO.setSize1(size1);
+      // -------------------------------------------------------------------
+      // 파일 삭제 종료 시작
+      // -------------------------------------------------------------------
+      
+      //mav.addObject("nowPage", nowPage);  // redirect시에 get parameter로 전송됨
+      mav.addObject("recruitno", recruitno);
+      mav.setViewName("redirect:/recruit/read.do");
+      
+      cnt = this.recruitProc.img_delete(recruitVO);
+      // mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
+      
+    } else {
+      mav.setViewName("/recruit/update_msg"); // webapp/recruit/update_msg.jsp
+      
+    }
+
+    mav.addObject("cnt", cnt); // request에 저장
+    mav.addObject("passwd_cnt", passwd_cnt); // request에 저장
+            
+    return mav;    
+  }
+  
+  /**
+   * 메인 이미지 수정 처리 http://localhost:9090/resort/recruit/img_update.do
+   * 기존 이미지 삭제후 새로운 이미지 등록(수정 처리)
+   * @return
+   */
+  @RequestMapping(value = "/recruit/img_update.do", method = RequestMethod.POST)
+  public ModelAndView img_update(HttpServletRequest request, RecruitVO recruitVO,
+                                     @RequestParam(value="nowPage", defaultValue="1") int nowPage) {
+    ModelAndView mav = new ModelAndView();
+    
+    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+    hashMap.put("recruitno", recruitVO.getRecruitno());
+    hashMap.put("passwd", recruitVO.getPasswd());
+    
+    int passwd_cnt = 0; // 패스워드 일치 레코드 갯수
+    int cnt = 0;             // 수정된 레코드 갯수 
+    
+    passwd_cnt = this.recruitProc.passwd_check(hashMap);
+    
+    if (passwd_cnt == 1) { // 패스워드가 일치할 경우 파일 업로드
+      // -------------------------------------------------------------------
+      // 파일 삭제 코드 시작
+      // -------------------------------------------------------------------
+      // 삭제할 파일 정보를 읽어옴.
+      RecruitVO vo = recruitProc.read(recruitVO.getRecruitno());
+      // System.out.println("file1: " + contentsVO.getFile1());
+      
+      String file1 = vo.getFile1().trim();
+      String thumb1 = vo.getThumb1().trim();
+      long size1 = 0;
+      boolean sw = false;
+      
+      String upDir = Tool.getRealPath(request, "/recruit/storage/main_images"); // 절대 경로
+      sw = Tool.deleteFile(upDir, recruitVO.getFile1());  // Folder에서 1건의 파일 삭제
+      sw = Tool.deleteFile(upDir, recruitVO.getThumb1());  // Folder에서 1건의 파일 삭제
+      // System.out.println("sw: " + sw);
+      // -------------------------------------------------------------------
+      // 파일 삭제 종료 시작
+      // -------------------------------------------------------------------
+      
+      // -------------------------------------------------------------------
+      // 파일 전송 코드 시작
+      // -------------------------------------------------------------------
+      // 전송 파일이 없어서도 fnamesMF 객체가 생성됨.
+      // <input type='file' class="form-control" name='file1MF' id='file1MF' 
+      //           value='' placeholder="파일 선택" multiple="multiple">
+      MultipartFile mf = recruitVO.getFile1MF();
+      size1 = mf.getSize();  // 파일 크기
+      if (size1 > 0) { // 파일 크기 체크
+        // mp3 = mf.getOriginalFilename(); // 원본 파일명, spring.jpg
+        // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+        file1 = Upload.saveFileSpring(mf, upDir); 
+        
+        if (Tool.isImage(file1)) { // 이미지인지 검사
+          // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
+          thumb1 = Tool.preview(upDir, file1, 200, 150); 
+        }
+      }    
+      
+      recruitVO.setFile1(file1);
+      recruitVO.setThumb1(thumb1);
+      recruitVO.setSize1(size1);
+      // -------------------------------------------------------------------
+      // 파일 전송 코드 종료
+      // -------------------------------------------------------------------
+
+      //mav.addObject("nowPage", nowPage);
+      mav.addObject("recruitno", recruitVO.getRecruitno());
+      mav.setViewName("redirect:/recruit/read.do");
+      
+      
+      cnt = this.recruitProc.img_create(recruitVO);
+      // mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
+      
+    } else {
+      mav.setViewName("/recruit/update_msg"); // webapp/recruit/update_msg.jsp
+      
+    }
+
+    mav.addObject("cnt", cnt); // request에 저장
+    mav.addObject("passwd_cnt", passwd_cnt); // request에 저장
+            
+    return mav;    
+  }
      
 
 }
