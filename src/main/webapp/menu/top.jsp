@@ -37,7 +37,7 @@
                   </c:when>
                   <c:otherwise>
                     <A href='${pageContext.request.contextPath}/recruit/list_all.do' >채용</A>
-                  </c:otherwise>
+                  </c:otherwise> 
                 </c:choose>            
             </li>
           </ul>
