@@ -90,7 +90,7 @@
             <TD class="td_bs">${SurveyVO.startdate }</TD>
             <TD class="td_bs">${SurveyVO.enddate }</TD>
             <TD class="td_bs"><a href="./delete.do?surveyno=${surveyno }">삭제</a>
-              <a href="../surveyitem/list.do?surveyno=${surveyno }">항목관리</a>
+              <a href="./update.do?surveyno=${surveyno }">수정</a>
             </TD>
           </TR>
         </c:forEach>

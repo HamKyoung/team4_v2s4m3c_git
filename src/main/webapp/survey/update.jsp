@@ -36,27 +36,22 @@
 
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='topic' value='test' placeholder="주제" required="required" style='width: 30%;'>
+          <input type='text' class="form-control" name='topic' value='${surveyVO.topic }' placeholder="주제" required="required" style='width: 30%;'>
         </div>
       </div>   
 
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='startdate' value='2020.01.01' placeholder="시작 날짜" style='width: 15%;'>
+          <input type='text' class="form-control" name='startdate' value='${surveyVO.startdate }' placeholder="시작 날짜" style='width: 15%;'>
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='enddate' value='2020.02.01' placeholder="종료 날짜" style='width: 15%;'>
+          <input type='text' class="form-control" name='enddate' value='${surveyVO.enddate }' placeholder="종료 날짜" style='width: 15%;'>
         </div>
       </div>    
       
-      <div class="form-group">   
-        <div class="col-md-12">
-          <input type='text' class="form-control" name='cnt'  value='1' placeholder="참여 인원" style='width: 15%;'>
-        </div>
-      </div>
       
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">수정</button>
