@@ -75,5 +75,11 @@ public class SurveyitemProc implements SurveyitemProcInter {
     int cnt = this.surveyitemDAO.delete_by_surveyno(surveyno);
     return cnt;
   }
+
+  @Override
+  public List<SurveyitemVO> list_by_surveyno(int surveyno) {
+    List<SurveyitemVO> list_by_surveyno = this.surveyitemDAO.list_by_surveyno(surveyno);
+    return list_by_surveyno;
+  }
   
 }

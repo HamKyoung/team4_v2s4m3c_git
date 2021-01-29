@@ -330,7 +330,7 @@ public class SurveyitemCont {
   
   /**
    * 설문조사항목 전체 삭제 처리
-   * 
+   * 1
    * @return
    */
   @ResponseBody
@@ -345,7 +345,14 @@ public class SurveyitemCont {
       e.printStackTrace();
     }
     
-    int cnt = surveyitemProc.delete_by_surveyno(surveyno);
+    List<SurveyitemVO> list = this.surveyitemProc.list_by_surveyno(surveyno);
+     int cnt = 0;
+    
+     for(SurveyitemVO surveyitemVO : list) {
+       surveyitemProc.delete(surveyitemVO.getSur_itemno());
+       cnt += 1;
+     }
+
    
     JSONObject json = new JSONObject();
     json.put("cnt", cnt);

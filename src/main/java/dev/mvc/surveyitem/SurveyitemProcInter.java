@@ -56,6 +56,13 @@ public interface SurveyitemProcInter {
   public List<SurveyitemVO> list_by_search(HashMap<String, Object> hashMap);
   
   /**
+   * 설문조사 번호별 항목목록
+   * @param hashMap
+   * @return
+   */
+  public List<SurveyitemVO> list_by_surveyno(int surveyno);
+  
+  /**
    * 검색한 갯수
    * @param hashMap
    * @return
