@@ -337,16 +337,17 @@ public class RecruitCont {
     passwd_cnt = this.recruitProc.passwd_check(hashMap);
     boolean sw = false;
     
-/*    if (passwd_cnt == 1) { // 패스워드가 일치할 경우 글 수정
+    if (passwd_cnt == 1) { // 패스워드가 일치할 경우 글 수정
       cnt = this.recruitProc.delete(recruitno);
       if (cnt == 1) {
         comcateProc.decreaseCnt(cateno);
-        
+        /*
         // -------------------------------------------------------------------------------------
         // 마지막 페이지의 레코드 삭제시의 페이지 번호 -1 처리
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("cateno", cateno);
         map.put("word", word);
+        
         // 하나의 페이지가 3개의 레코드로 구성되는 경우 현재 9개의 레코드가 남아 있으면
         if (recruitProc.search_count(map) % Contents.RECORD_PER_PAGE == 0) {
           nowPage = nowPage - 1;
@@ -355,6 +356,7 @@ public class RecruitCont {
           }
         }
         // -------------------------------------------------------------------------------------
+         */
       }
       
       String upDir = Tool.getRealPath(request, "/recruit/storage/main_images"); // 절대 경로
@@ -362,7 +364,7 @@ public class RecruitCont {
       sw = Tool.deleteFile(upDir, recruitVO.getThumb1());  // Folder에서 1건의 파일 삭제
 
     }
-*/
+
     mav.addObject("cnt", cnt); // request에 저장
     mav.addObject("passwd_cnt", passwd_cnt); // request에 저장
     //mav.addObject("nowPage", nowPage); // request에 저장
