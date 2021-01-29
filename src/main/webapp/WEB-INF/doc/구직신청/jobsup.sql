@@ -427,3 +427,4 @@ SET recruitno = 3;
 WHERE jobsupno = 3;
 
 COMMIT;
+  
