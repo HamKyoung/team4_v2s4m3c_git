@@ -36,7 +36,7 @@
                     <A href='${pageContext.request.contextPath}/recruit/list.do' >채용</A>
                   </c:when>
                   <c:otherwise>
-                    <A href='${pageContext.request.contextPath}/recruit/list_all.do' >채용</A>
+                    <A href='${pageContext.request.contextPath}/recruit/list_all.do' >채용</A> 
                   </c:otherwise> 
                 </c:choose>            
             </li>
