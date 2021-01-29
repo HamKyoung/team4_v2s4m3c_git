@@ -65,62 +65,6 @@ WHERE gen_memberno = 1;
 
 commit;
 
-/**********************************/
-/* Table Name: 회사소개 */
-/**********************************/
-CREATE TABLE COM_INTRO(
-		COMNO                         		NUMBER(7)		 NOT NULL		 PRIMARY KEY,
-		COM_NAME                      		VARCHAR2(1000)		 NOT NULL,
-		COM_FORM                      		VARCHAR2(1000)		 NOT NULL,
-		COM_TYPE                      		VARCHAR2(1000)		 NOT NULL,
-		SALES                         		VARCHAR2(50)		 NOT NULL,
-		HOMEPAGE                      		VARCHAR2(1000)		 NOT NULL,
-		ADDRESS                       		VARCHAR2(1000)		 NOT NULL,
-		NUM_PEOPLE                    		VARCHAR2(50)		 NOT NULL,
-		EDATE                         		VARCHAR2(500)		 NOT NULL,
-		CEO_NAME                      		VARCHAR2(1000)		 NOT NULL,
-		COR_MEMBERNO                  		NUMBER(7)		 NULL ,
-		VISIBLE                       		CHAR(1)		 NOT NULL
-);
-
-COMMENT ON TABLE COM_INTRO is '회사소개';
-COMMENT ON COLUMN COM_INTRO.COMNO is '회사번호';
-COMMENT ON COLUMN COM_INTRO.COM_NAME is '회사이름';
-COMMENT ON COLUMN COM_INTRO.COM_FORM is '기업형태';
-COMMENT ON COLUMN COM_INTRO.COM_TYPE is '업종';
-COMMENT ON COLUMN COM_INTRO.SALES is '매출액';
-COMMENT ON COLUMN COM_INTRO.HOMEPAGE is '홈페이지';
-COMMENT ON COLUMN COM_INTRO.ADDRESS is '회사주소';
-COMMENT ON COLUMN COM_INTRO.NUM_PEOPLE is '사원수';
-COMMENT ON COLUMN COM_INTRO.EDATE is '설립일';
-COMMENT ON COLUMN COM_INTRO.CEO_NAME is '대표자명';
-COMMENT ON COLUMN COM_INTRO.COR_MEMBERNO is '기업 회원 번호';
-COMMENT ON COLUMN COM_INTRO.VISIBLE is '출력모드';
-
-
-/**********************************/
-/* Table Name: 회사대분류 */
-/**********************************/
-CREATE TABLE COM_CATE(
-		CATENO                        		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		COMNO                         		NUMBER(10)		 NULL ,
-		CATE_NAME                     		VARCHAR2(100)		 NOT NULL,
-		CATE_SEQNO                    		NUMBER(10)		 NOT NULL,
-		CATE_VISIBLE                  		CHAR(1)		 NOT NULL,
-		CATE_DATE                     		DATE		 NOT NULL,
-		CATE_CNT                      		NUMBER(10)		 NOT NULL,
-  FOREIGN KEY (COMNO) REFERENCES COM_INTRO (COMNO)
-);
-
-COMMENT ON TABLE COM_CATE is '회사대분류';
-COMMENT ON COLUMN COM_CATE.CATENO is '대분류 번호';
-COMMENT ON COLUMN COM_CATE.COMNO is '회사번호';
-COMMENT ON COLUMN COM_CATE.CATE_NAME is '대분류 이름';
-COMMENT ON COLUMN COM_CATE.CATE_SEQNO is '출력순서';
-COMMENT ON COLUMN COM_CATE.CATE_VISIBLE is '출력모드';
-COMMENT ON COLUMN COM_CATE.CATE_DATE is '등록일';
-COMMENT ON COLUMN COM_CATE.CATE_CNT is '등록된 글 수';
-
 
 /**********************************/
 /* Table Name: 구인 */
@@ -200,53 +144,6 @@ FROM recruit
 ORDER BY recruitno DESC;
 
 commit;
-
-
-/**********************************/
-/* Table Name: 기업 회원 */
-/**********************************/
-CREATE TABLE cor_member(
-cor_memberno                   NUMBER(7)  NOT NULL  PRIMARY KEY,
-cor_id                         VARCHAR2(50)  NOT NULL UNIQUE,
-cor_passwd                     VARCHAR2(20)  NOT NULL,
-cor_name                       VARCHAR2(20)  NOT NULL,
-cor_resident                   VARCHAR2(13)  NOT NULL,
-cor_sex                        VARCHAR2(10)  NOT NULL,
-cor_phone                      VARCHAR2(20)  NOT NULL,
-cor_zipcode                    VARCHAR2(5)  NULL ,
-cor_addr                       VARCHAR2(100)  NULL ,
-cor_addr1                      VARCHAR2(50)  NULL ,
-cor_mail                       VARCHAR2(50)  NOT NULL,
-cor_date                       DATE  NOT NULL
-);
-
-COMMENT ON TABLE cor_member is '기업 회원';
-COMMENT ON COLUMN cor_member.cor_memberno is '기업 회원 번호';
-COMMENT ON COLUMN cor_member.cor_id is '기업 회원 아이디';
-COMMENT ON COLUMN cor_member.cor_passwd is '기업 회원 비밀번호';
-COMMENT ON COLUMN cor_member.cor_name is '기업 회원 이름';
-COMMENT ON COLUMN cor_member.cor_resident is '기업 회원 생년월일';
-COMMENT ON COLUMN cor_member.cor_sex is '기업 회원 성별 ';
-COMMENT ON COLUMN cor_member.cor_phone is '기업 회원 전화 번호';
-COMMENT ON COLUMN cor_member.cor_zipcode is '기업 회원 우편 번호';
-COMMENT ON COLUMN cor_member.cor_addr is '기업 회원 주소';
-COMMENT ON COLUMN cor_member.cor_addr1 is '기업 회원 주소1';
-COMMENT ON COLUMN cor_member.cor_mail is '기업 회원 이메일';
-COMMENT ON COLUMN cor_member.cor_date is '기업 회원 가입 날짜';
-
-DROP SEQUENCE cor_member_seq;
-CREATE SEQUENCE cor_member_seq
-  START WITH 1              -- 시작 번호
-  INCREMENT BY 1          -- 증가값
-  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(10) 대응
-  CACHE 2                       -- 2번은 메모리에서만 계산
-  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
-
-
--- 등록
-insert into cor_member(cor_memberno, cor_id, cor_passwd, cor_name, cor_resident, cor_sex, cor_phone, cor_mail, cor_date)
-values(cor_member_seq.nextval, 'test', '1234', '테스트', '1111111', '남자', '01011111111', 'test@test.com', sysdate);
-
 
 
 /**********************************/
@@ -425,6 +322,4 @@ WHERE jobsupno = 2;
 UPDATE jobsup
 SET recruitno = 3;
 WHERE jobsupno = 3;
-
 COMMIT;
-  
