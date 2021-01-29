@@ -20,29 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY itemseq ASC
   </select>
   
-  <select id="list_by_surveyno" resultType="SurveyitemVO" parameterType="int">
-    SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt, word
-    FROM surveyitem
-    WHERE surveyno = #{surveyno}
-    ORDER BY itemseq ASC
-  </select>
-  
-  <select id="read" parameterType="int">    
+  <select id="read" parameterType="int" resultType="SurveyitemVO">    
     SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt
     FROM surveyitem 
     WHERE sur_itemno=#{sur_itemno}
   </select>
-  
-  <select id="count_by_surveyno" parameterType="int" resultType="int">
-    SELECT COUNT(*) as cnt
-    FROM surveyitem
-    WHERE surveyno = #{surveyno}
-  </select>
-  
-  <delete id="delete_by_surveyno" parameterType="int">
-    DELETE FROM surveyitem
-    WHERE surveyno = ${surveyno}
-  </delete>
   
   <update id="update" parameterType="SurveyitemVO">
     UPDATE surveyitem 
@@ -56,10 +38,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE sur_itemno =#{sur_itemno} and surveyno =#{surveyno}
   </update>
   
-  <delete id="delete" parameterType="int">
+  <delete id="delete" parameterType="int" >
     DELETE FROM surveyitem
     WHERE sur_itemno=#{sur_itemno}
   </delete>
+  
+  <select id="count_by_surveyno" parameterType="int" resultType="int">
+    SELECT COUNT(*) as cnt
+    FROM surveyitem
+    WHERE surveyno = #{surveyno}
+  </select>
   
     <!-- 설문조사항목별 검색 목록 -->
    <select id="list_by_search" resultType="SurveyitemVO" parameterType="HashMap">
