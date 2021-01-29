@@ -21,28 +21,44 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>
-      ${jobsupVO.jobsup_title }
+      구직신청
   </DIV>
 
   <ASIDE class="aside_left">
     <A href=''>구직신청</A> > 수정
   </ASIDE>
+  
+    <ASIDE class="aside_right">
+    <A href=''>목록</A>
+    <!-- <span class='menu_divide' >│</span> --> 
+  </ASIDE> 
+ 
  
   <div class='menu_line'></div>
   
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./update.do' class="form-horizontal">
-         
-      <!-- FK comno 지정 -->
-      <input type='hidden' name='recruitno' id='recruitno' value='${param.recruitno }'>
+        
+       <input type='hidden' name='jobsupno' id='jobsupno' value="${param.jobsupno }">
+        
+       채용번호:       
+      <!-- FK recruitno 지정 -->
+      <input type="text" name='recruitno' id='recruitno' value='1'><br><br>
+      
+       회원번호:
       <!-- FK gen_memberno 지정 -->
-      <input type='hidden' name='gen_memberno' id='gen_memberno' value="${param.gen_memberno }">
-      <!-- FK comno 지정 -->
-      <input type='hidden' name='res_no' id='res_no' value='${param.res_no }'>
-      <input type='hidden' name='jobsupno' id='jobsupno' value='${param.jobsupno }'>
+      <%-- <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.gen_memberno}"> --%>
+       <input type='text' name='gen_memberno' id='gen_memberno' value="1"><br><br>
+       
+       이력서번호:
+      <!-- FK res_no 지정 -->
+      <input type="text" name='res_no' id='res_no' value='1'><br><br>
+               
+      
       
       <div class="form-group">   
         <div class="col-md-12">
+        지원 제목:
           <input type='text' class="form-control" name='jobsup_title' value="${jobsupVO.jobsup_title }" 
                     placeholder="지원 제목" required="required" style='width: 80%;' autofocus="autofocus">
         </div>
@@ -50,6 +66,7 @@
       
       <div class="form-group">   
         <div class="col-md-12">
+        지원 메세지:
           <textarea class="form-control" name='jobsup_msg' id='jobsup_msg' rows='10' placeholder="지원 메세지">${jobsupVO.jobsup_msg }</textarea>
         </div>
       </div>
