@@ -179,6 +179,16 @@ WHERE sur_itemno=2;
 DELETE FROM surveyitem 
 WHERE sur_itemno=1;
 
+
+--부모키 산출
+SELECT COUNT(*) as cnt
+FROM surveyitem
+WHERE surveyno = 10;
+
+-- 부모키 삭제
+DELETE FROM surveyitem
+WHERE surveyno = 10;
+
 /**********************************/
 /* Table Name: 설문 참여 회원 */
 /**********************************/
