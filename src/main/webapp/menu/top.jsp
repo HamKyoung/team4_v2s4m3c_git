@@ -28,7 +28,17 @@
 
         <li><a href="#">구직</a>
           <ul class="depth2">
-            <li><A href='${pageContext.request.contextPath}/jobsup/list.do' >구직</A></li>
+              <li>
+                  <c:choose>
+                    <c:when test="${sessionScope.gen_id != null || sessionScope.cor_id != null}">
+                      <A href='${pageContext.request.contextPath}/jobsup/list.do'>구직</A>
+                    </c:when>
+                    <c:otherwise>
+                      <A href='${pageContext.request.contextPath}/login/login_need.jsp'>구직</A>
+                    </c:otherwise>
+                  </c:choose>
+              </li>
+            <!-- <li><A href='${pageContext.request.contextPath}/jobsup/list.do' >구직</A></li> -->
             <li><A href='${pageContext.request.contextPath}/resume/list.do'>이력서</A></li>
             <li>
                 <c:choose>
