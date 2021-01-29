@@ -19,38 +19,26 @@
 </head> 
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
- 
- 
-<DIV class='message'>
-     <fieldset class='fieldset_basic'>
+
+
+  <DIV class='message'>
+    <fieldset class='fieldset_basic'>
       <UL>
         <c:choose>
-          <c:when test="${passwd_cnt == 1 }">
-            <!-- 패스워드 일치 -->
-            <c:choose>
-              <c:when test="${cnt == 1}">
-                <!-- 글 수정 성공 -->
-                <LI class='li_none'><span class='span_success'>설문조사를
-                    수정했습니다.</span></LI>
-              </c:when>
-              <c:otherwise>
-                <!-- 글 수정 실패 -->
-                <LI class='li_none'><span class='span_fail'>설문조사를
-                    수정에 실패했습니다.</span></LI>
-                <LI class='li_none'><span class='span_fail'>다시
-                    시도해주세요.</span></LI>
-              </c:otherwise>
-            </c:choose>
+          <c:when test="${cnt == 1}">
+            <!-- 글 수정 성공 -->
+            <LI class='li_none'><span class='span_success'>설문조사를 수정했습니다.</span></LI>
           </c:when>
           <c:otherwise>
-            <!-- 패스워드 불일치 -->
-            <LI class='li_none'><span class='span_fail'>패스워드가
-                일치하지 않습니다. 다시 시도해주세요.</span></LI>
+            <!-- 글 수정 실패 -->
+            <LI class='li_none'><span class='span_fail'>설문조사를 수정에 실패했습니다.</span></LI>
+            <LI class='li_none'><span class='span_fail'>다시 시도해주세요.</span></LI>
           </c:otherwise>
         </c:choose>
 
+
         <c:choose>
-          <c:when test="${cnt == 1 && passwd_cnt == 1}">
+          <c:when test="${cnt == 1}">
             <LI class='li_none'>
               <button type='button'
                 onclick="location.href='./read.do?surveyno${param.surveyno}'"
@@ -73,10 +61,10 @@
 
       </UL>
     </fieldset>
- 
-</DIV>
- 
-<jsp:include page="/menu/bottom.jsp" flush='false' />
+
+  </DIV>
+
+  <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html>
