@@ -63,5 +63,17 @@ public class SurveyitemProc implements SurveyitemProcInter {
     int cnt = this.surveyitemDAO.update_cnt(map);
     return cnt;
   }
+
+  @Override
+  public int count_by_surveyno(int surveyno) {
+    int cnt = this.surveyitemDAO.count_by_surveyno(surveyno);
+    return cnt;
+  }
+
+  @Override
+  public int delete_by_surveyno(int surveyno) {
+    int cnt = this.surveyitemDAO.delete_by_surveyno(surveyno);
+    return cnt;
+  }
   
 }

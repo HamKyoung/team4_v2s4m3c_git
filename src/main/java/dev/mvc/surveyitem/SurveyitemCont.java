@@ -307,5 +307,50 @@ public class SurveyitemCont {
 
     return mav; // forward
   }
+  
+  /**
+   * 부모키별 갯수 산출
+   * @return
+   */
+  @ResponseBody
+  @RequestMapping(value = "/surveyitem/count_by_surveyno.do", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+  public String count_by_surveyno(int surveyno) {
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    int cnt = this.surveyitemProc.count_by_surveyno(surveyno);
+     
+    JSONObject json = new JSONObject();
+    json.put("cnt", cnt);
+
+    return json.toString();
+  }
+  
+  /**
+   * 설문조사항목 전체 삭제 처리
+   * 
+   * @return
+   */
+  @ResponseBody
+  @RequestMapping(value = "/surveyitem/delete_by_surveyno.do", 
+                             method = RequestMethod.POST,
+                             produces = "text/plain;charset=UTF-8")
+  public String delete_by_contentsno(HttpServletRequest request,
+                                                @RequestParam(value="surveyno", defaultValue = "0") int surveyno) {
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    
+    int cnt = surveyitemProc.delete_by_surveyno(surveyno);
+   
+    JSONObject json = new JSONObject();
+    json.put("cnt", cnt);
+
+    return json.toString();
+  }
 
 }

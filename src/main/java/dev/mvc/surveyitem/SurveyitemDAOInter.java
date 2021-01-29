@@ -60,4 +60,18 @@ public interface SurveyitemDAOInter {
    * @return
    */
   public int search_count(HashMap<String, Object> hashMap);
+  
+  /**
+   * 부모키별 갯수 산출
+   * @param surveyno
+   * @return
+   */
+  public int count_by_surveyno(int surveyno);
+  
+  /**
+   * 부모키를 이용한 모든 레코드 삭제
+   * @param surveyno
+   * @return
+   */
+  public int delete_by_surveyno(int surveyno);
 }
