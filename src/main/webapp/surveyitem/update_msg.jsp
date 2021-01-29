@@ -40,21 +40,13 @@
         <c:choose>
           <c:when test="${cnt == 1}">
             <LI class='li_none'>
-              <button type='button'
-                onclick="location.href='./read.do?surveyno${param.surveyno}'"
-                class="btn btn-info">변경 확인</button>
-              <button type='button'
-                onclick="location.href='./list.do?surveyno=${param.surveyno}'"
-                class="btn btn-info">목록</button>
+              <button type='button' onclick="location.href='./list.do?surveyno=${param.surveyno}'" class="btn btn-info">목록</button>
             </LI>
           </c:when>
           <c:otherwise>
             <LI class='li_none'>
-              <button type='button' onclick="history.back();"
-                class="btn btn-info">재시도</button>
-              <button type='button'
-                onclick="location.href='./list.do?surveyno=${param.surveyno}'"
-                class="btn btn-info">목록</button>
+              <button type='button' onclick="history.back();" class="btn btn-info">재시도</button>
+              <button type='button' onclick="location.href='./list.do?surveyno=${param.surveyno}'" class="btn btn-info">목록</button>
             </LI>
           </c:otherwise>
         </c:choose>
