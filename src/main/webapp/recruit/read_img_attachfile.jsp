@@ -128,9 +128,10 @@
     <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
   
     <c:if test="${corlogin eq true }">
+    <!--  
     <span class='menu_divide' > | </span>
     <A href='./reply.do?recruitno=${recruitno }&cateno=${cateno }'>답변</A>
-
+     -->
 
     <%-- 글을 등록한 회원만 메뉴 출력 --%>
     <%-- <c:if test="${sessionScope.memberno == contentsVO.memberno or sessionScope.id_admin ne null }"> --%>
