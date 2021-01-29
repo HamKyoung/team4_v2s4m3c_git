@@ -1,6 +1,6 @@
 package dev.mvc.pass_self;
 
-import java.util.HashMap;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.comintro.ComIntroProc;
+import dev.mvc.comintro.ComIntroVO;
 import dev.mvc.cormember.CormemberProc;
+import dev.mvc.cormember.CormemberVO;
 import dev.mvc.genmember.GenmemberProc;
-import dev.mvc.questions.QuesVO;
-import dev.mvc.tool.Tool;
-import dev.mvc.tool.Upload;
+
 
 
 @Controller
@@ -35,6 +35,10 @@ public class Pass_selfCont {
   @Qualifier("dev.mvc.pass_self.Pass_selfProc")
   private Pass_selfProcInter pass_selfProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.comintro.ComIntroProc")
+  private ComIntroProc comintroProc;
+  
   public Pass_selfCont() {
     System.out.println("--> Pass_selfCont created.");
   }
@@ -43,9 +47,15 @@ public class Pass_selfCont {
    * 합격 자소서 등록
    * @return
    */
-  @RequestMapping(value = "/pass_self/create.do", method = RequestMethod.GET)
-  public ModelAndView create() {
+  @RequestMapping(value = "/pass_self/create", method = RequestMethod.GET)
+  public ModelAndView create(int cormemberno) {
     ModelAndView mav = new ModelAndView();
+
+    ComIntroVO comintroVO = comintroProc.read(cormemberno);
+    
+    String com_name = comintroVO.getCom_name();
+    
+    mav.addObject("com_name", com_name);
     mav.setViewName("/pass_self/create");
     return mav; // forward
   }
@@ -76,6 +86,7 @@ public class Pass_selfCont {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/pass_self/list");
 
+    
     boolean genlogin = false;
     boolean corlogin = false; 
     
