@@ -52,7 +52,7 @@ public class Pass_selfCont {
     ModelAndView mav = new ModelAndView();
 
     ComIntroVO comintroVO = comintroProc.read(cormemberno);
-    
+     
     String com_name = comintroVO.getCom_name();
     
     mav.addObject("com_name", com_name);
