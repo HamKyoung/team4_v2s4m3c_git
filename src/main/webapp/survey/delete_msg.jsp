@@ -33,17 +33,14 @@
           <LI class='li_none'><span class='span_success'>삭제 완료.</span></LI>
         </c:when>
         <c:otherwise>
-          <!-- 회원 탈퇴 실패 -->
-          <LI class='li_none'><span class='span_fail'>삭제에
-              실패했습니다.</span></LI>
-          <LI class='li_none'><span class='span_fail'>다시
-              시도해주세요.</span></LI>
+          <LI class='li_none'><span class='span_fail'>삭제에 실패했습니다.</span></LI>
+          <LI class='li_none'><span class='span_fail'>다시 시도해주세요.</span></LI>
         </c:otherwise>
       </c:choose>
         <c:choose>
           <c:when test="${cnt == 1}">
             <LI class='li_none'>
-              <button type='button' onclick="location.href='./index.do'"
+              <button type='button' onclick="location.href='../index.do'"
                 class="btn btn-info">확인</button>
               <button type='button' onclick="location.href='./list.do'"
                 class="btn btn-info">목록</button>

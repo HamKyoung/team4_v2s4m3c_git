@@ -42,7 +42,7 @@
         <c:choose>
           <c:when test="${cnt == 1}">
             <LI class='li_none'>
-              <button type='button' onclick="location.href='./index.do'"
+              <button type='button' onclick="location.href='../index.do'"
                 class="btn btn-info">확인</button>
               <button type='button' onclick="location.href='./list.do'"
                 class="btn btn-info">목록</button>
