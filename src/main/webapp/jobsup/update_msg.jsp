@@ -38,7 +38,7 @@
 <DIV class='message'>
   <fieldset class='fieldset_basic'>
     <UL>
-            <c:when test="${cnt == 1}"> <!-- 글 수정 성공 -->
+            <c:when test="${cnt == 1}"> <!-- 글 수정 성공 --> 
               <LI class='li_none'>
                 <span class='span_success'>구직신청를 수정했습니다.</span>
               </LI>
