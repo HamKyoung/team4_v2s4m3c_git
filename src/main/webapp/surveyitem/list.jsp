@@ -60,75 +60,110 @@ $(function(){
   <DIV class='title_line'>설문 조사 항목 목록
     <aside class="aside_right">
       <c:if test="${sessionScope.id != null}">
-        <A href='./create.do?surveyno=${param.surveyno }'>등록</A> 
+        <A href='./create.do?surveyno=${param.surveyno }'>등록</A>
       </c:if>
     </aside>
   </DIV>
-  
-  <DIV style="text-align: right;">  
-    <form name='frm' id='frm' method='get' action='./list.do'>
-      <input type='hidden' name='surveyno' value='${surveyitemVO.surveyno }'>
-      <br>
-      <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
-          <input type='text' name='word' id='word' value='${param.word }' 
-                     style='width: 20%;'>
-        </c:when>
-        <c:otherwise> <%-- 검색하지 않는 경우 --%>
-          <input type='text' name='word' id='word' value='' style='width: 20%;'>
-        </c:otherwise>
-      </c:choose>
-      <button type='submit'>검색</button>
-      <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
-                     onclick="location.href='./list.do?surveyitemno=${surveyitemVO.surveyno }&word='">검색 취소</button>  
-      </c:if>    
-    </form>
-  </DIV>
 
-  
-  <div class="aside_right"></div>
-  <TABLE class='table table-striped'>
-    <colgroup>
-      <col style='width: 70%;'/>
-      <col style='width: 30%;'/>
+  <c:choose>
+    <c:when test="${sessionScope.id != null}">
+      <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 60%;' />
+          <col style='width: 20%;' />
+          <col style='width: 20%;' />
 
-    </colgroup>
-   
-    <thead>  
-    <TR>
-      <TH class="th_bs">주제: ${surveyVO.topic } </TH>
-      <TH class="th_bs">항목 파일</TH>
-    </TR>
-    </thead>
-    
-    <tbody>
-    <c:forEach var="SurveyitemVO" items="${list }">  <!-- request 객체에 접근 -->
-      <c:set var="sur_itemno" value="${SurveyitemVO.sur_itemno}" />
-      <c:set var="surveyno" value="${SurveyitemVO.surveyno}" />
-      <c:set var="itemfile" value="${SurveyitemVO.itemfile}" />
-      <TR>
-        <TD class="td_bs" style="text-align: left;">
-          <label>
-            <input type="radio" name="item" id="item" value="${sur_itemno }"> ${SurveyitemVO.item }
-          </label>
-        </TD>
-        <TD style='vertical-align: middle; text-align: center;'>
-         <c:choose>
-                <c:when test="${itemfile.endsWith('jpg') || itemfile.endsWith('png') || itemfile.endsWith('gif')}">
-                  <IMG src="./storage/main_images/${itemfile }" style='width: 120px; height: 80px;'> 
-                </c:when>
-                <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
-                  ${SurveyitemVO.itemfile}
-                </c:otherwise>
-              </c:choose>
-            </TD>
-      </TR>
-    </c:forEach>
-    </tbody>
-   
-  </TABLE>
-  
+        </colgroup>
+
+        <thead>
+          <TR>
+            <TH class="th_bs">주제: ${surveyVO.topic }</TH>
+            <TH class="th_bs">항목 파일</TH>
+            <TH class="th_bs">기타</TH>
+          </TR>
+        </thead>
+
+        <tbody>
+          <c:forEach var="SurveyitemVO" items="${list }">
+            <!-- request 객체에 접근 -->
+            <c:set var="sur_itemno" value="${SurveyitemVO.sur_itemno}" />
+            <c:set var="surveyno" value="${SurveyitemVO.surveyno}" />
+            <c:set var="itemfile" value="${SurveyitemVO.itemfile}" />
+            <TR>
+              <TD class="td_bs" style="text-align: left;">
+                <label>
+                  <input type="radio" name="item" id="item" value="${sur_itemno }"> ${SurveyitemVO.item }
+                </label>
+              </TD>
+              <TD style='vertical-align: middle; text-align: center;'>
+                <c:choose>
+                  <c:when
+                    test="${itemfile.endsWith('jpg') || itemfile.endsWith('png') || itemfile.endsWith('gif')}">
+                    <IMG src="./storage/main_images/${itemfile }" style='width: 120px; height: 80px;'>
+                  </c:when>
+                  <c:otherwise>
+                    <!-- 이미지가 아닌 일반 파일 -->
+                    ${SurveyitemVO.itemfile}
+                  </c:otherwise>
+                </c:choose>
+              </TD>
+              <TD class="td_bs" style="text-align:center;">
+                <label>
+                  <a href="./update.do?sur_itemno=${sur_itemno }">수정</a> 
+                  <a href="./delete.do?sur_itemno=${sur_itemno }">삭제</a>
+                </label>
+              </TD>
+            </TR>
+          </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:when>
+    <c:otherwise>
+     <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 70%;' />
+          <col style='width: 30%;' />
+
+        </colgroup>
+
+        <thead>
+          <TR>
+            <TH class="th_bs">주제: ${surveyVO.topic }</TH>
+            <TH class="th_bs">항목 파일</TH>
+          </TR>
+        </thead>
+
+        <tbody>
+          <c:forEach var="SurveyitemVO" items="${list }">
+            <!-- request 객체에 접근 -->
+            <c:set var="sur_itemno" value="${SurveyitemVO.sur_itemno}" />
+            <c:set var="surveyno" value="${SurveyitemVO.surveyno}" />
+            <c:set var="itemfile" value="${SurveyitemVO.itemfile}" />
+            <TR>
+              <TD class="td_bs" style="text-align: left;">
+                <label>
+                  <input type="radio" name="item" id="item" value="${sur_itemno }"> ${SurveyitemVO.item }
+                </label>
+              </TD>
+              <TD style='vertical-align: middle; text-align: center;'>
+                <c:choose>
+                  <c:when
+                    test="${itemfile.endsWith('jpg') || itemfile.endsWith('png') || itemfile.endsWith('gif')}">
+                    <IMG src="./storage/main_images/${itemfile }" style='width: 120px; height: 80px;'>
+                  </c:when>
+                  <c:otherwise>
+                    <!-- 이미지가 아닌 일반 파일 -->
+                    ${SurveyitemVO.itemfile}
+                  </c:otherwise>
+                </c:choose>
+              </TD>
+            </TR>
+          </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:otherwise>
+  </c:choose>
+
   <div style="text-align: center;">
     <button type="button" id="btn_send">확인</button>
   </div>

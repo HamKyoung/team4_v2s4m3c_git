@@ -37,21 +37,16 @@
 
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='itemseq' value='1' placeholder="출력 모드" required="required" style='width: 30%;'>
+          <input type='text' class="form-control" name='itemseq' value='${surveyitemVO.itemseq }' placeholder="출력 모드" required="required" style='width: 30%;'>
         </div>
       </div>   
 
       <div class="form-group">   
         <div class="col-md-12">
-          <input type='text' class="form-control" name='item' value='test' placeholder="항목" style='width: 15%;'>
+          <input type='text' class="form-control" name='item' value='${surveyitemVO.item }' placeholder="항목" style='width: 15%;'>
         </div>
       </div>
-      
-      <div class="form-group">   
-        <div class="col-md-12">
-          <input type='text' class="form-control" name='itemcnt' value='1' placeholder="항목 참여 인원" style='width: 15%;'>
-        </div>
-      </div>    
+          
       
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">수정</button>
