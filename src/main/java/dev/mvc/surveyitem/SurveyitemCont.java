@@ -1,17 +1,10 @@
 package dev.mvc.surveyitem;
 
-import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.admin.AdminProc;
 import dev.mvc.genmember.GenmemberProc;
-import dev.mvc.genmember.GenmemberVO;
 import dev.mvc.survey.SurveyProc;
 import dev.mvc.survey.SurveyVO;
 import dev.mvc.surveymember.SurveymemberProc;
@@ -170,17 +162,21 @@ public class SurveyitemCont {
       @RequestParam(value = "word", defaultValue = "") String word, HttpSession session) {
     ModelAndView mav = new ModelAndView();
     boolean sw = false;
-    
+
     if (adminProc.isAdmin(session) == true) {
       mav.setViewName("/surveyitem/list");
     } else {
-      int gen_memberno = (int) session.getAttribute("genmemberno");
-      int cnt = surveymemberProc.survey_check(gen_memberno);
+      if (genmemberProc.isMember(session) == true) {
+        int gen_memberno = (int) session.getAttribute("genmemberno");
+        int cnt = surveymemberProc.survey_check(gen_memberno);
 
-      if (cnt == 1) {
-        mav.setViewName("/surveyitem/already");
+        if (cnt == 1) {
+          mav.setViewName("/surveyitem/already");
+        } else {
+          mav.setViewName("/surveyitem/list");
+        }
       } else {
-        mav.setViewName("/surveyitem/list");
+        mav.setViewName("/login/login_need");
       }
     }
     // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
