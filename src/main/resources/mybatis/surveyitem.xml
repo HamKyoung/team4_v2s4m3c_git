@@ -26,6 +26,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE sur_itemno=#{sur_itemno}
   </select>
   
+  <select id="count_by_surveyno" parameterType="int" resultType="int">
+    SELECT COUNT(*) as cnt
+    FROM surveyitem
+    WHERE surveyno = #{surveyno}
+  </select>
+  
+  <delete id="delete_by_surveyno" parameterType="int">
+    DELETE FROM surveyitem
+    WHERE surveyno = ${surveyno}
+  </delete>
+  
   <update id="update" parameterType="SurveyitemVO">
     UPDATE surveyitem 
     SET item=#{item}, itemcnt=#{itemcnt}
