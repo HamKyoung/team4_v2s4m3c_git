@@ -78,7 +78,7 @@
                         class="btn btn-info">재시도</button>
             <button type='button' 
                         onclick="location.href='./list.do?cateno=${param.cateno}'"
-                        class="btn btn-info">목록</button>                        
+                        class="btn btn-info">목록</button>                     
           </LI>
         </c:otherwise> 
       </c:choose>

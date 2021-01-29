@@ -307,7 +307,11 @@
   </ASIDE> 
   <DIV class='menu_line'></DIV>
   
-    <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
+  
+  <c:choose>
+  <c:when test="${corlogin eq true}">
+  <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
+
     <FORM name='frm_create' id='frm_create' method='POST' action=''>
       <input type='hidden' name='cateno' id='cateno' value='0'>
       
@@ -331,11 +335,48 @@
       <button type="button" id='btn_send'>등록</button>
       <button type="button" onclick="cancel();">취소</button>
     </FORM>
+
   </DIV>
-  
+  </c:when>
+  </c:choose>
+
+  <c:choose>
+  <c:when test="${corlogin eq false}">
   <DIV id='panel1' style="width: 40%; text-align: center; margin: 10px auto; display: none;"></DIV> 
    
   <TABLE class='table table-striped'>
+    <colgroup>
+      <col style="width: 30%;"/>
+      <col style='width: 40%;'/>
+      <col style='width: 30%;'/>
+    </colgroup>
+   
+    <thead>  
+    <TR>
+      <TH class="th_bs">순서</TH>
+      <TH class="th_bs">회사 직무</TH>
+      <TH class="th_bs">등록일</TH>
+    </TR>
+    </thead>
+    
+    <tbody>
+    <c:forEach var="comcateVO" items="${list }">  <!-- request 객체에 접근 -->
+      <c:set var="cateno" value="${comcateVO.cateno}" />
+      <TR>
+        <TD class="td_bs">${comcateVO.cate_seqno }</TD>
+        <TD class="td_bs_left"><A href="../recruit/list.do?cateno=${cateno }">${comcateVO.cate_name }</A></TD>
+        <TD class="td_bs">${comcateVO.cate_date.substring(0, 10) }</TD>             
+      </TR>
+    </c:forEach>
+    </tbody>
+   
+  </TABLE>
+  </c:when>
+  </c:choose>
+  
+ <c:choose>
+ <c:when test="${corlogin eq true}">  
+    <TABLE class='table table-striped'>
     <colgroup>
       <col style="width: 10%;"/>
       <col style='width: 35%;'/>
@@ -382,6 +423,8 @@
     </tbody>
    
   </TABLE>
+  </c:when>
+  </c:choose> 
  
  
 <jsp:include page="/menu/bottom.jsp" />

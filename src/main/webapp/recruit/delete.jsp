@@ -131,12 +131,12 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>
-    카테고리 이름
+    회사 구인 삭제
   </DIV>
 
   <ASIDE class="aside_left">
-    <A href=''>카테고리 그룹</A> > 
-    <A href=''>카테고리</A> > 삭제
+    <A href=''>회사</A> > 
+    <A href=''>직무별</A> > 삭제
   </ASIDE>
   <ASIDE class="aside_right">
     <A href='./list.do?cateno=${param.cateno }'>목록</A>

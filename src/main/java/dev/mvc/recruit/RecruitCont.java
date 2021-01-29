@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,11 +21,21 @@ import dev.mvc.comcate.ComCateProcInter;
 import dev.mvc.comcate.ComCateVO;
 import dev.mvc.comintro.ComIntroProcInter;
 import dev.mvc.comintro.ComIntroVO;
+import dev.mvc.cormember.CormemberProc;
+import dev.mvc.genmember.GenmemberProc;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
 @Controller
 public class RecruitCont {
+  
+  @Autowired
+  @Qualifier("dev.mvc.cormember.CormemberProc")
+  private CormemberProc cormemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genmember.GenmemberProc")
+  private GenmemberProc genmemberProc;
   
   @Autowired
   @Qualifier("dev.mvc.attachfile.AttachfileProc")
@@ -55,8 +66,9 @@ public class RecruitCont {
   public ModelAndView create() {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/recruit/create"); // /webapp/categrp/create.jsp
-    // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
-    // mav.addObject("content", content);
+    String content = "장소: \n+인원:\n준비물:\n비용:\n기타:\n";
+    //String content = "장소:\n";
+    mav.addObject("content", content);
 
     
     return mav; // forward
@@ -71,7 +83,7 @@ public class RecruitCont {
    @RequestMapping(value="/recruit/create.do", 
                                method=RequestMethod.POST )
    public ModelAndView create(HttpServletRequest request, RecruitVO recruitVO) {
-     
+     //System.out.println("--> cateno : " + recruitVO.getCateno());
      ModelAndView mav = new ModelAndView();
      // -------------------------------------------------------------------
      // 파일 전송 코드 시작
@@ -141,13 +153,27 @@ public class RecruitCont {
    * 
    * @return
    */
-    @RequestMapping(value = "/recruit/list.do", method = RequestMethod.GET)
-    public ModelAndView list_by_cateno(int cateno) { ModelAndView mav = new
-    ModelAndView(); // /webapp/contents/list_by_cateno.jsp //
+  @RequestMapping(value = "/recruit/list.do", method = RequestMethod.GET)
+  public ModelAndView list_by_cateno(int cateno,HttpSession session) {
+    ModelAndView mav = new ModelAndView(); // /webapp/contents/list_by_cateno.jsp //
     mav.setViewName("/recruit/list_by_cateno");
-    
+  
     // 테이블 이미지 기반, /webapp/contents/list_by_cateno.jsp
     //mav.setViewName("/recruit/list_by_cateno_table_img1");
+    
+    boolean genlogin = false;
+    boolean corlogin = false;
+    
+    if (genmemberProc.isMember(session)) { 
+      genlogin = true;
+    }
+    
+    if (cormemberProc.isMember(session)) {
+      corlogin = true;
+    }
+    
+    mav.addObject("genlogin", genlogin);
+    mav.addObject("corlogin", corlogin);
     
     ComCateVO comcateVO = this.comcateProc.read(cateno);
     mav.addObject("comcateVO", comcateVO);
@@ -159,8 +185,8 @@ public class RecruitCont {
     mav.addObject("list", list);
     
     return mav; // forward }
-   
-    }
+ 
+  }
     
     // http://localhost:9090/team4/recruit/read.do
     /**
@@ -168,8 +194,22 @@ public class RecruitCont {
      * @return
      */
     @RequestMapping(value="/recruit/read.do", method=RequestMethod.GET )
-    public ModelAndView read(int recruitno) {
+    public ModelAndView read(int recruitno,HttpSession session) {
       ModelAndView mav = new ModelAndView();
+      
+      boolean genlogin = false;
+      boolean corlogin = false;
+      
+      if (genmemberProc.isMember(session)) { 
+        genlogin = true;
+      }
+      
+      if (cormemberProc.isMember(session)) {
+        corlogin = true;
+      }
+      
+      mav.addObject("genlogin", genlogin);
+      mav.addObject("corlogin", corlogin);
 
       RecruitVO recruitVO = this.recruitProc.read(recruitno);
       mav.addObject("recruitVO", recruitVO); // request.setAttribute("contentsVO", contentsVO);

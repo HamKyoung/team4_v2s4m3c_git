@@ -26,8 +26,10 @@
     <A href="../recruit/list.do">회사</A> > <A href="../comcate/list.do?comno=${comintroVO.comno }">${comintroVO.com_name }</A> > ${comcateVO.cate_name} > 전체 보기 
   </ASIDE>
   <ASIDE class="aside_right">
-    <A href="./create.do?cateno=${comcateVO.cateno }">등록</A>
-    <span class='menu_divide' >│</span>
+    <c:if test="${corlogin eq true }">
+      <A href="./create.do?cateno=${comcateVO.cateno }">등록</A>
+      <span class='menu_divide' >│</span>
+    </c:if>
     <A href="javascript:location.reload();">새로고침</A>
   </ASIDE> 
   <DIV class='menu_line'></DIV>

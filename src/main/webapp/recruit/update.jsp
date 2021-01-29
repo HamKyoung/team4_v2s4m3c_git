@@ -87,10 +87,9 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">수정</button>
         <button type="button" 
-                    onclick="location.href='./list.do?comno=${param.comno}'" 
+                    onclick="location.href='./read.do?cateno=${param.cateno}&recruitno=${param.recruitno}'" 
                     class="btn btn-info">취소[목록]</button>
       </DIV>
-       
     </FORM>
   </DIV>
 
