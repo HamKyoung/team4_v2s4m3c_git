@@ -131,14 +131,14 @@ public class JobsupCont {
   @RequestMapping(value = "/jobsup/update.do", method = RequestMethod.POST)
   public ModelAndView update(JobsupVO jobsupVO) {
     ModelAndView mav = new ModelAndView();
-
+    //System.out.println("test");
     mav.addObject("jobsupno", jobsupVO.getJobsupno());
     
-    int cnt = 0;             // 수정된 레코드 갯수 
+    int cnt;             // 수정된 레코드 갯수 
     
-    if (cnt == 1) {
-      cnt = this.jobsupProc.update(jobsupVO);
-    }
+  
+    cnt = this.jobsupProc.update(jobsupVO);
+    System.out.println("test"+cnt);
     mav.addObject("cnt", cnt); // request에 저장
 
     mav.setViewName("/jobsup/update_msg"); // webapp/jobsup/update_msg.jsp

@@ -11,19 +11,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     객체의 타입 return: 등록한 레코드 갯수 리턴 SQL선언시 ';'은 삭제 #{}: ? 동일 #{name}: public String 
     getName() 자동 호출 -->
   <insert id="create" parameterType="JobsupVO">
-    INSERT INTO jobsup(jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
-    VALUES(jobsup_seq.nextval, #{recruitno}, #{gen_memberno},  #{res_no}, #{jobsup_title}, #{jobsup_msg}, sysdate)
+    INSERT INTO jobsup(jobsupno, comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
+    VALUES(jobsup_seq.nextval,  #{comno}, #{recruitno}, #{gen_memberno},  #{res_no}, #{jobsup_title}, #{jobsup_msg}, sysdate)
   </insert>
 
   <select id="list_jobsupno_asc" resultType="JobsupVO">
-    SELECT jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
+    SELECT jobsupno, comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
     FROM jobsup
     ORDER BY jobsupno ASC
   </select>
 
   <!-- 조회, id: read, 입력: jobsupno, 리턴: JobsupVO -->
   <select id="read" resultType="JobsupVO" parameterType="int">
-    SELECT jobsupno,  recruitno,  gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
+    SELECT jobsupno,  comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
     FROM jobsup
     WHERE jobsupno = #{jobsupno}
   </select>
@@ -33,6 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     UPDATE jobsup
     SET jobsup_title=#{jobsup_title}, jobsup_msg=#{jobsup_msg}
     WHERE jobsupno = #{jobsupno}
+    and COMNO =  #{comno}
+    and GEN_MEMBERNO = #{gen_memberno}
   </update>
 
 </mapper>

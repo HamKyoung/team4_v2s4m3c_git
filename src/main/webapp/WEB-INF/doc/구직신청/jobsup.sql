@@ -62,7 +62,6 @@ ORDER BY gen_memberno ASC;
 SELECT gen_memberno, gen_id, gen_passwd, gen_name, gen_resident, gen_sex, gen_phone, gen_zipcode, gen_addr, gen_addr1, gen_mail, gen_date
 FROM gen_member
 WHERE gen_memberno = 1;
-
 commit;
 
 
@@ -155,7 +154,7 @@ CREATE TABLE mem_res(
 		res_phone                     		VARCHAR2(60)		 NOT NULL,
 		res_mail1                      		VARCHAR2(200)		 NOT NULL,
 		res_mail2                      		VARCHAR2(200)		 NOT NULL,
-		res_title                     		VARCHAR2(100)		    NOT NULL,
+		res_title.                     		VARCHAR2(100)		    NOT NULL,
 		res_intro                     		VARCHAR2(800)		    NOT NULL,
 		res_work                      	CLOB		                    DEFAULT 0		 NULL ,
 		res_web                       	VARCHAR2(100)		NULL ,
@@ -248,6 +247,49 @@ WHERE res_no = 8;
 
 COMMIT;
 
+/**********************************/
+/* Table Name: 회사소개 */
+/**********************************/
+DROP TABLE com_intro CASCADE CONSTRAINTS; 
+DROP TABLE com_intro;
+
+CREATE TABLE com_intro(
+		comno                         		NUMBER(7)		    NOT NULL		 PRIMARY KEY,
+		com_name                      	VARCHAR2(1000)		 NOT NULL,
+		com_form                      		VARCHAR2(1000)		 NOT NULL,
+		com_type                      		VARCHAR2(1000)		 NOT NULL,
+		sales                         		    VARCHAR2(50)	         NOT NULL,
+		homepage                      	VARCHAR2(1000)		 NOT NULL,
+		address                       		VARCHAR2(1000)		 NOT NULL,
+		num_people                    	VARCHAR2(50)	         NOT NULL,
+		edate                          		VARCHAR2(500)	                 NOT NULL,
+		ceo_name                      		VARCHAR2(1000)		 NOT NULL,
+        visible                       		CHAR(1)		 DEFAULT 'Y'		 NOT NULL
+);
+
+DROP SEQUENCE comintro_seq;
+CREATE SEQUENCE comintro_seq
+  START WITH 1              -- 시작 번호
+  INCREMENT BY 1          -- 증가값
+  MAXVALUE 9999999999 -- 최대값: 9999999 --> NUMBER(7) 대응
+  CACHE 2                       -- 2번은 메모리에서만 계산
+  NOCYCLE;                     -- 다시 1부터 생성되는 것을 방지
+
+-- 등록
+INSERT INTO com_intro(comno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,visible)
+VALUES(comintro_seq.nextval, '솔데스크','학원','컴퓨터학원','10억원','www.soldesk.com','종로구관철로','50명','2010-01-01','솔원장','Y');
+
+INSERT INTO com_intro(comno, com_name, com_form, com_type, sales, homepage,address,num_people,edate,ceo_name,visible)
+VALUES(comintro_seq.nextval, '삼성전자','000','000','10억원','www.soldesk.com','종로구관철로','1000명','2010-01-01','솔원장','Y');
+
+
+-- 목록
+SELECT comno, com_name, com_form,com_type, sales, homepage,address,num_people,edate,ceo_name,visible
+FROM com_intro
+ORDER BY comno ASC;
+
+
+commit;
 
 /**********************************/
 /* Table Name: 구직신청 */
@@ -255,12 +297,14 @@ COMMIT;
 DROP TABLE jobsup;
 CREATE TABLE jobsup(
 		jobsupno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+        comno                               NUMBER(10)         NOT NULL,
         recruitno                             NUMBER(10)		 NOT NULL,
         gen_memberno                  	NUMBER(7)		 NOT NULL,  
         res_no                                NUMBER(10)		 NOT NULL,
 		jobsup_title                  		VARCHAR2(300)		 NOT NULL,
 		jobsup_msg                    		VARCHAR2(1000)		 NOT NULL,
 		jobsup_date                   		DATE		 NOT NULL,
+FOREIGN KEY (comno) REFERENCES com_intro (comno),        
 FOREIGN KEY (recruitno) REFERENCES recruit (recruitno),
 FOREIGN KEY (gen_memberno) REFERENCES gen_member (gen_memberno),
 FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
@@ -268,8 +312,9 @@ FOREIGN KEY (res_no) REFERENCES mem_res (res_no)
 
 COMMENT ON TABLE jobsup is '구직 신청';
 COMMENT ON COLUMN jobsup.jopsupno is '구직 신청 번호';
-COMMENT ON COLUMN jobsup.recruitno is '채용 번호'
-COMMENT ON COLUMN jobsup.gen_memberno is '회원 번호';;
+COMMENT ON COLUMN jobsup.comno is '회사 번호';
+COMMENT ON COLUMN jobsup.recruitno is '채용 번호';
+COMMENT ON COLUMN jobsup.gen_memberno is '회원 번호';
 COMMENT ON COLUMN jobsup.res_no is '이력서 번호';
 COMMENT ON COLUMN jobsup.jopsup_title is '지원 제목';
 COMMENT ON COLUMN jobsup.jobsup_msg is '지원 메세지';
@@ -289,19 +334,19 @@ CREATE SEQUENCE jobsup_seq
   
   
 -- 등록
-INSERT INTO jobsup(jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
-VALUES(jobsup_seq.nextval, 1, 1, 1, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
+INSERT INTO jobsup(jobsupno, comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval, 1, 1, 1, 1, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
 
-INSERT INTO jobsup(jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
-VALUES(jobsup_seq.nextval, 2, 2, 2, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
+INSERT INTO jobsup(jobsupno, comno ,recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval, 2, 2, 2, 2, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
 
-INSERT INTO jobsup(jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
-VALUES(jobsup_seq.nextval, 3, 3, 3, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
+INSERT INTO jobsup(jobsupno, comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval, 3, 3, 3, 3, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
   
 COMMIT;
 
 -- 목록
-SELECT jobsupno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
+SELECT jobsupno, comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
 FROM jobsup
 ORDER BY jobsupno ASC;
 
@@ -322,4 +367,5 @@ WHERE jobsupno = 2;
 UPDATE jobsup
 SET recruitno = 3;
 WHERE jobsupno = 3;
+
 COMMIT;

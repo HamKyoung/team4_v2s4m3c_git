@@ -50,7 +50,7 @@
     </thead>
     
     <ASIDE class="aside_left">
-    <c:if test="${sessionScope.gen_id != null  or sessionScope.id != null }">
+    <c:if test="${sessionScope.gen_id != null  or sessionScope.id != null}">
     <A href="create.do">구직 신청</A>
     </c:if>
     </ASIDE>
