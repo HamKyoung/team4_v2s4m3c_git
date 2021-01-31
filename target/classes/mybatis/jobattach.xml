@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.jobattach.JobattachDAOInter">
+  <insert id="create" parameterType="JobattachVO">
+    INSERT INTO jobattach(jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date)
+    VALUES(jobattach_seq.nextval, #{jobnwsno}, #{jobattach_fname}, #{jobattach_fupname}, #{jobattach_thumb}, #{jobattach_fsize}, sysdate)
+  </insert>
+
+  <select id="list" resultType="JobattachVO">
+    SELECT jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date
+    FROM jobattach
+    ORDER BY jobnwsno DESC,  jobattachno ASC
+  </select>
+
+  <!-- PK 기준 하나의 레코드 조회 -->
+  <select id="read" resultType="JobattachVO" parameterType="int">
+    SELECT jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date
+    FROM jobattach
+    WHERE jobattachno=#{jobattachno}  
+  </select>
+
+  <!-- FK 기준 jobnwsno가 동일한 레코드 조회, jobattach_fname 오름 차순 -->
+  <select id="list_by_jobnwsno" resultType="JobattachVO" parameterType="int">
+    SELECT jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date
+    FROM jobattach
+    WHERE jobnwsno=#{jobnwsno}
+  </select>
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM jobattach
+    WHERE jobattachno = #{jobattachno}    
+  </delete>
+  
+  <!-- 부모키별 갯수 산출, id="count_by_jobnwsno" -->
+  <select id="count_by_jobnwsno" parameterType="int" resultType="int">
+    SELECT COUNT(*) as cnt
+    FROM jobattach
+    WHERE jobnwsno=#{jobnwsno}
+  </select>
+
+  <!-- FK 부모키를 이용한 모든 레코드 삭제, id="delete_by_jobnwsno" -->
+  <delete id="delete_by_jobnwsno" parameterType="int">
+    DELETE FROM jobattach
+    WHERE jobnwsno=#{jobnwsno}
+  </delete>
+  
+      
+</mapper> 
+
+
+
+
+
+
+
+
+

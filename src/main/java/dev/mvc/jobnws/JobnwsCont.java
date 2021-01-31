@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.admin.AdminProc;
+import dev.mvc.jobattach.JobattachProcInter;
+import dev.mvc.jobattach.JobattachVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
@@ -23,17 +25,25 @@ import dev.mvc.tool.Upload;
 
 @Controller
 public class JobnwsCont {
+  
   @Autowired
   @Qualifier("dev.mvc.jobnws.JobnwsProc")
   private JobnwsProcInter jobnwsProc;
   
-  public JobnwsCont() {
-    System.out.println("-> JobnwsCont Created");
-  }
-  
   @Autowired
   @Qualifier("dev.mvc.admin.AdminProc")
   private AdminProc adminProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.jobattach.JobattachProc")
+  private JobattachProcInter jobattachProc;
+  
+  public JobnwsCont() {
+    System.out.println("-> JobnwsCont Created");
+    
+  }
+  
+
 
   
   /**
@@ -139,8 +149,12 @@ public class JobnwsCont {
     
     mav.addObject("adlogin", adlogin);
         
-    mav.setViewName("/jobnws/read"); // /webapp/contents/read.jsp 
-    return mav; // forward
+    // 첨부 파일 목록
+    List<JobattachVO> jobattach_list = this.jobattachProc.list_by_jobnwsno(jobnwsno);
+    mav.addObject("jobattach_list", jobattach_list); 
+    
+    mav.setViewName("/jobnws/read_img_jobattach"); // /webapp/jobnws/read_img_jobattach.jsp
+    return mav;
   }
   
   /**

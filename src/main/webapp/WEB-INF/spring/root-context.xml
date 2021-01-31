@@ -43,6 +43,7 @@
                               dev.mvc.recruit ,
                               dev.mvc.attachfile,
                               dev.mvc.jobnws,
+                              dev.mvc.jobattach,
                               dev.mvc.jobsup,
                               dev.mvc.resume,
                               dev.mvc.review,

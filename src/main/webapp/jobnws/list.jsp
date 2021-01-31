@@ -48,11 +48,13 @@
     </TR>
     </thead>
     
-    <ASIDE class="aside_left">
-     <c:if test="${adlogin eq true }">
+    <ASIDE class="aside_right">
+    <c:if test="${adlogin eq true }">
     <A href="create.do">글 등록</A>
     </c:if>
+    
     </ASIDE>
+
     <tbody>
     <c:forEach var="JobnwsVO" items="${list }">  <!-- request 객체에 접근 -->
       <c:set var="jobnwsno" value="${JobnwsVO.jobnwsno}" />
@@ -80,6 +82,7 @@
     </tbody>
    
   </TABLE>
+  
  
  
 <jsp:include page="/menu/bottom.jsp" />
