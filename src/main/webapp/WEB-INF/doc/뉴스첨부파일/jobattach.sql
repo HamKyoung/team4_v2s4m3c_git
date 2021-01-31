@@ -31,7 +31,7 @@ CREATE SEQUENCE jobattach_seq
 
 -- 1) 등록  
 INSERT INTO jobattach(jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date)
-VALUES(jobattach_seq.nextval, 4, 'samyang.jpg', 'samyang_1.jpg', 'samyang_t.jpg', 1000, sysdate);
+VALUES(jobattach_seq.nextval, 7, 'samyang.jpg', 'samyang_1.jpg', 'samyang_t.jpg', 1000, sysdate);
 
 INSERT INTO jobattach(jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date)
 VALUES(jobattach_seq.nextval, 1, 'samyang2.jpg', 'samyang2_1.jpg', 'samyang2_t.jpg', 2000, sysdate);
@@ -48,7 +48,7 @@ ORDER BY jobnwsno DESC,  jobattachno ASC;
 -- 3) 글별 파일 목록(jobnwsno 기준 내림 차순, jobattachno 기준 오르차순)
 SELECT jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date
 FROM jobattach
-WHERE jobnwsno = 1
+WHERE jobnwsno = 7
 ORDER BY jobattach_fname ASC;
 
 -- 4) 하나의 파일 삭제
@@ -81,4 +81,6 @@ WHERE jobnwsno=1;
 -- 8) 조회
 SELECT jobattachno, jobnwsno, jobattach_fname, jobattach_fupname, jobattach_thumb, jobattach_fsize, jobattach_date
 FROM jobattach
-WHERE jobattachno=1;    
+WHERE jobattachno=1;
+
+COMMIT;

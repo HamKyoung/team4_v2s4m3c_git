@@ -41,9 +41,11 @@ commit;
 /**********************************/
 /* Table Name: 회사뉴스 */
 /**********************************/
+
 DROP TABLE jobnws;
+DROP TABLE jobnws CASCADE CONSTRAINTS;
 CREATE TABLE jobnws(
-		jobnwsno                        		NUMBER(30)		 NOT NULL,
+		jobnwsno                        		NUMBER(30)		 NOT NULL PRIMARY KEY,
         adminno                              NUMBER(30)		 NOT NULL,
 		jobnws_title                    		VARCHAR2(1000)		 NOT NULL,
 		jobnws_content                  		CLOB 		 NOT NULL,
