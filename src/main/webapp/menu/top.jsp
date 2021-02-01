@@ -21,7 +21,16 @@
         <li><a href="#">회사</a>
           <ul class="depth2">
             <li><A href='${pageContext.request.contextPath}/comintro/list_all.do' >기업</A></li>
-            <li><A href='${pageContext.request.contextPath}/jobnws/list.do' >뉴스</A></li>
+           <li>
+                  <c:choose>
+                    <c:when test="${sessionScope.id != null}">
+                      <A href='${pageContext.request.contextPath}/jobnws/list.do'>뉴스</A>
+                    </c:when>
+                    <c:otherwise>
+                      <A href='${pageContext.request.contextPath}/admin/login_need.jsp'>뉴스</A>
+                    </c:otherwise>
+                  </c:choose>            
+           </li>
           </ul>
         </li>
 
