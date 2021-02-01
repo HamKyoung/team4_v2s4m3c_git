@@ -105,7 +105,7 @@ public class ResumeCont {
       @RequestParam(value="res_work", defaultValue="") String res_work,
       @RequestParam(value="nowPage", defaultValue="1") int nowPage
       ) { 
-    System.out.println("--> nowPage: " + nowPage);
+    //System.out.println("--> nowPage: " + nowPage);
     
     ModelAndView mav = new ModelAndView();
     
