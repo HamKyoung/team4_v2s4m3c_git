@@ -157,6 +157,9 @@
           
       <span class='menu_divide' > | </span> 
       <A href='./delete.do?cateno=${cateno }&recruitno=${recruitno}'>삭제</A>
+      
+      <span class='menu_divide' > | </span> 
+      <A href="">접수</A>
     </c:if>
   </ASIDE> 
   
