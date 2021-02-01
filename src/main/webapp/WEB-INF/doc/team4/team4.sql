@@ -426,6 +426,7 @@ commit;
 /**********************************/
 /* Table Name: 구인 */
 /**********************************/
+DROP TABLE recruit CASCADE CONSTRAINTS;
 drop table recruit;
 CREATE TABLE recruit(
 		recruitno                     		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
@@ -439,6 +440,8 @@ CREATE TABLE recruit(
 		passwd                        		VARCHAR2(15)		 NOT NULL,
         word                                  VARCHAR2(300)         NULL ,
         rdate                                 DATE               NOT NULL,
+        sdate                                 VARCHAR2(30)         NULL ,
+        edate                                 VARCHAR2(300)         NULL ,
         file1                                   VARCHAR(100)          NULL,
         thumb1                              VARCHAR(100)          NULL,
         size1                                 NUMBER(10)      DEFAULT 0 NULL,
@@ -457,6 +460,8 @@ COMMENT ON COLUMN recruit.comno is '회사번호';
 COMMENT ON COLUMN recruit.passwd is '패스워드';
 COMMENT ON COLUMN recruit.word is '검색어';
 COMMENT ON COLUMN recruit.rdate is '등록일';
+COMMENT ON COLUMN recruit.sdate is '접수시작일';
+COMMENT ON COLUMN recruit.edate is '접수마감일';
 COMMENT ON COLUMN recruit.file1 is '메인 이미지';
 COMMENT ON COLUMN recruit.thumb1 is '메인 이미지 Preview';
 COMMENT ON COLUMN recruit.size1 is '메인 이미지 크기';
@@ -473,45 +478,45 @@ CREATE SEQUENCE recruit_seq
   
 1) 글 등록(이미지 관련 컬러 추가)
 -- cateno: 1이 사전에 등록이되어 있어야 INSERT 가능
-INSERT INTO recruit(recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+INSERT INTO recruit(recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate, sdate, edate,
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,1, '2020년 하반기 직원 공개채용', 1, '우리는 몇명뽑는다' ,'http://www.daum.net',
-             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+             '1234', '하반기', sysdate, '2021-01-01', '2021-01-15', 'spring.jpg', 'spring_t.jpg', 23657);
 
-INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate, sdate, edate,
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,1, '2020년도 현성그룹 신입 / 경력사원 모집', 2, '우리는 몇명뽑는다' ,'http://www.daum.net',
-             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+             '1234', '하반기', sysdate, '2021-01-01', '2021-01-15', 'spring.jpg', 'spring_t.jpg', 23657);
 
-INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate, sdate, edate,
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,1, '2020년도 삼성그룹 신입모집', 3, '우리는 몇명뽑는다' ,'http://www.daum.net',
-             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+             '1234', '하반기', sysdate, '2021-01-01', '2021-01-15', 'spring.jpg', 'spring_t.jpg', 23657);
              
-INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate, sdate, edate,
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,1, '2021년도 쿠팡 신입 / 경력사원 모집', 4, '우리는 몇명뽑는다' ,'http://www.daum.net',
-             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+             '1234', '하반기', sysdate, '2021-01-01', '2021-01-15', 'spring.jpg', 'spring_t.jpg', 23657);
 
 
-INSERT INTO recruit(recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+INSERT INTO recruit(recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate, sdate, edate,
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,2, '2021년 개발자 채용', 1, '우리는 몇명뽑는다' ,'http://www.daum.net',
-             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+             '1234', '하반기', sysdate, '2021-01-01', '2021-01-15', 'spring.jpg', 'spring_t.jpg', 23657);
 
-INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate, sdate, edate,
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,2, '2021년도 현성그룹 신입 / 경력사원 모집', 2, '우리는 몇명뽑는다' ,'http://www.daum.net',
-             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+             '1234', '하반기', sysdate, '2021-01-01', '2021-01-15', 'spring.jpg', 'spring_t.jpg', 23657);
 
-INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate,
+INSERT INTO recruit(recruitno, cateno, title, seqno, content, homepage, passwd, word, rdate, sdate, edate,
                               file1, thumb1, size1)
 VALUES(recruit_seq.nextval,2, '2021년도 카카오 경력모집', 3, '우리는 몇명뽑는다' ,'http://www.daum.net',
-             '1234', '하반기', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+             '1234', '하반기', sysdate, '2021-01-01', '2021-01-15', 'spring.jpg', 'spring_t.jpg', 23657);
 
 
 2) 전체목록
-SELECT recruitno, cateno, title, content, homepage ,passwd, word, rdate
+SELECT recruitno, cateno, title, content, homepage ,passwd, word, rdate, sdate, edate
 FROM recruit 
 ORDER BY recruitno DESC;
 
