@@ -1,22 +1,4 @@
 package dev.mvc.recruit;
-/*
-   CREATE TABLE com_recruit(
-    recruitno                         NUMBER(10)     NOT NULL    PRIMARY KEY,
-    cateno                            NUMBER(10)     NOT NULL,
-    title                             VARCHAR2(300)    NOT NULL,
-    content                           CLOB     NOT NULL,
-    homepage                          VARCHAR2(500)    NULL ,
-    visible                           CHAR(1)    DEFAULT 'Y'     NOT NULL,
-    comno                             NUMBER(10)     NOT NULL,
-    passwd                            VARCHAR2(15)     NOT NULL,
-        word                                  VARCHAR2(300)         NULL ,
-        rdate                                 DATE               NOT NULL,
-        file1                                   VARCHAR(100)          NULL,
-        thumb1                              VARCHAR(100)          NULL,
-        size1                                 NUMBER(10)      DEFAULT 0 NULL,
-  FOREIGN KEY (CATENO) REFERENCES COM_CATE (CATENO)
-);
- */
 
 import org.springframework.web.multipart.MultipartFile;
 
