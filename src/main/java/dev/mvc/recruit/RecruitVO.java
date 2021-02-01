@@ -41,6 +41,10 @@ public class RecruitVO {
   
   private String rdate = ""; //등록 날짜
   
+  private String sdate = ""; //접수 시작일
+  
+  private String edate = ""; //접수 마감일
+  
   /** 이미지 */
   private String file1 = ""; // preview 이미지 preview 
   
@@ -118,6 +122,18 @@ public class RecruitVO {
   }
   public void setRdate(String rdate) {
     this.rdate = rdate;
+  }
+  public String getSdate() {
+    return sdate;
+  }
+  public void setSdate(String sdate) {
+    this.sdate = sdate;
+  }
+  public String getEdate() {
+    return edate;
+  }
+  public void setEdate(String edate) {
+    this.edate = edate;
   }
   public String getFile1() {
     return file1;
