@@ -126,8 +126,6 @@
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span>
     <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
-    <span class='menu_divide' > | </span> 
-    <A href="">접수</A>
   
     <c:if test="${corlogin eq true }">
     <!--  
@@ -215,6 +213,9 @@
         </ul>
       </fieldset>
   </FORM>
+  <DIV style="text-align: center;">
+  <button type="button" class="btn btn-primary btn-lg" onclick="location.href='' ">접수하기</button>
+  </DIV>
 
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
