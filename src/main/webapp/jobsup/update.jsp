@@ -39,7 +39,12 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./update.do' class="form-horizontal">
         
-       <input type='hidden' name='jobsupno' id='jobsupno' value="${param.jobsupno }">
+       <input type='hidden' name='jobsupno' id='jobsupno' value="1">
+        
+        
+      회사소개번호:
+      <!-- FK recruitno 지정 -->
+      <input type="text" name='comno' id='comno' value='1'><br><br>
         
        채용번호:       
       <!-- FK recruitno 지정 -->

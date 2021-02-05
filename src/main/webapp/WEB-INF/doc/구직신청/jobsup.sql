@@ -294,6 +294,23 @@ commit;
 /**********************************/
 /* Table Name: 구직신청 */
 /**********************************/
+CREATE TABLE jobsup(
+		jobsupno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+        com_name                           VARCHAR2(1000)		 NOT NULL,
+        title                                    VARCHAR2(300)		 NOT NULL,
+        gen_name                      		VARCHAR2(20)		     NOT NULL,
+        res_intro                     		    VARCHAR2(800)		 NOT NULL,
+		jobsup_title                  		VARCHAR2(300)		 NOT NULL,
+		jobsup_msg                    		VARCHAR2(1000)		 NOT NULL,
+		jobsup_date                   		DATE		 NOT NULL,
+FOREIGN KEY (com_name) REFERENCES com_intro (com_name),        
+FOREIGN KEY (title) REFERENCES recruit (title),
+FOREIGN KEY (gen_name) REFERENCES gen_member (gen_name),
+FOREIGN KEY (res_intro) REFERENCES mem_res (res_intro)
+);
+
+
+
 DROP TABLE jobsup;
 CREATE TABLE jobsup(
 		jobsupno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
@@ -343,6 +360,8 @@ VALUES(jobsup_seq.nextval, 2, 2, 2, 2, '믿음직하고 꼼꼼한사람입니다.', '저는 이 
 INSERT INTO jobsup(jobsupno, comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date)
 VALUES(jobsup_seq.nextval, 3, 3, 3, 3, '믿음직하고 꼼꼼한사람입니다.', '저는 이 회사에 지원하고 싶은 이유는 뭣보다 돈이필요해서 입니다.', sysdate);
   
+INSERT INTO jobsup(jobsupno, comno,recruitno, gen_memberno,jobsup_title, jobsup_msg, jobsup_date)
+VALUES(jobsup_seq.nextval,  7, 1,'test', 'test', sysdate);
 COMMIT;
 
 -- 목록

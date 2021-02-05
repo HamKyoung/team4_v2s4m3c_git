@@ -17,14 +17,18 @@
 
 </head>
 
-<body>
+<body> 
 <c:set var="recruitno" value="${jobsupVO.recruitno}" />
+<c:set var="res_no" value="${jobsupVO.res_no}" />
 <c:set var="gen_memberno" value="${jobsupVO.gen_memberno }" />
-<c:set var="res_no" value="${jobsupVO.res_no }" />
+<c:set var="comno" value="${jobsupVO.comno }" />
 
-<jsp:include page="/menu/top.jsp" flush='false' />
-  <DIV class='title_line'>
-    ${jobsupVO.jobsup_title }
+
+
+<jsp:include page="/menu/top.jsp" flush='false' /><br>
+  
+  <DIV class="title_line">
+    구직 신청 > 조회
   </DIV>
   
   <ASIDE class="aside_right">
@@ -35,9 +39,9 @@
     <span class='menu_divide' > | </span> 
     <A href='./list.do?jobsupno=${jobsupno }'>목록</A>
     <span class='menu_divide' > | </span> 
-    <A href='./update.do?comno=${param.comno}&gen_memberno=${param.gen_memberno }&jobsupno=${param.jobsupno}'>수정</A>
+    <A href='./update.do?comno=${comintroVO.comno }&comname=${comintroVO.com_name }&cateno=${recruitVO.cateno }&recruitno=${recruitVO.recruitno}&title=${recruitVO.title}'>수정</A>
     <span class='menu_divide' > | </span> 
-    <A href='./delete.do?comno=${param.comno}&gen_memberno=${param.gen_memberno }&jobsupno=${jobsupno}'>삭제</A>
+    <A href='./delete.do?jobsupno=${jobsupno }&jobsupno=${jobsupno}'>삭제</A>
     </c:if>
   </ASIDE> 
   
@@ -48,19 +52,25 @@
       <fieldset class="fieldset">
         <ul>
           <li class="li_none" style='border-bottom: solid 1px #AAAAAA;'>
-            <span>${jobsupVO.recruitno}</span>
-            <span>${jobsupVO.gen_memberno}</span>
-            <span>${jobsupVO.res_no}</span>
-            <span>${jobsupVO.jobsup_title}</span>
-            <span>${jobsupVO.jobsup_date.substring(0, 16)}</span>
+            회사명: 
+            <span>${comname}</span><br><br>
+            채용 공고명:
+            <span> ${title}</span><br><br>
+            회원 이름: 
+            <span>${sessionScope.gen_name }</span><br><br>
+            이력서 제목: 
+            <span>${res_intro}</span><br><br>
+            지원제목:
+            <span>${jobsupVO.jobsup_title}</span><br><br>
+            지원메시지:
+            <span>${jobsupVO.jobsup_msg }</span><br><br>
           </li>
            <li class="li_none">
-             <DIV>${jobsupVO.jobsup_msg }</DIV>
+             <DIV>${jobsupVO.jobsup_date.substring(0, 16)}</DIV>
           </li>         
         </ul>
       </fieldset>
   </FORM>
-
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
 
