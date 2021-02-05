@@ -126,6 +126,11 @@
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span>
     <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
+<<<<<<< HEAD
+=======
+    <span class='menu_divide' > | </span> 
+    <A href="../jobsup/create.do?comno=${comintroVO.comno }&comname=${comintroVO.com_name }&cateno=${recruitVO.cateno }&recruitno=${recruitVO.recruitno}&title=${recruitVO.title}">접수</A>
+>>>>>>> branch 'master' of https://github.com/HamKyoung/team4_v2s4m3c_git.git
   
     <c:if test="${corlogin eq true }">
     <!--  
