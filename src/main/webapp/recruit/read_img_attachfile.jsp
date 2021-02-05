@@ -126,12 +126,9 @@
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span>
     <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
-<<<<<<< HEAD
-=======
+
     <span class='menu_divide' > | </span> 
     <A href="../jobsup/create.do?comno=${comintroVO.comno }&comname=${comintroVO.com_name }&cateno=${recruitVO.cateno }&recruitno=${recruitVO.recruitno}&title=${recruitVO.title}">접수</A>
->>>>>>> branch 'master' of https://github.com/HamKyoung/team4_v2s4m3c_git.git
-  
     <c:if test="${corlogin eq true }">
     <!--  
     <span class='menu_divide' > | </span>
@@ -219,7 +216,7 @@
       </fieldset>
   </FORM>
   <DIV style="text-align: center;">
-  <button type="button" class="btn btn-primary btn-lg" onclick="location.href='' ">접수하기</button>
+  <button type="button" class="btn btn-primary btn-lg" onclick="location.href='../jobsup/create.do?comno=${comintroVO.comno }&comname=${comintroVO.com_name }&cateno=${recruitVO.cateno }&recruitno=${recruitVO.recruitno}&title=${recruitVO.title}' ">접수하기</button>
   </DIV>
 
 <jsp:include page="/menu/bottom.jsp" flush='false' />
