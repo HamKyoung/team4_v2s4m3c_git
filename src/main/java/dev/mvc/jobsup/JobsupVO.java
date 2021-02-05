@@ -2,6 +2,7 @@ package dev.mvc.jobsup;
 
 /*
     jobsupno                          NUMBER(10)     NOT NULL    PRIMARY KEY,
+    comno                               NUMBER(10)         NOT NULL,
     recruitno                             NUMBER(10)     NOT NULL,
     gen_memberno                    NUMBER(7)    NOT NULL,  
     res_no                                NUMBER(10)     NOT NULL,
@@ -13,6 +14,8 @@ package dev.mvc.jobsup;
 public class JobsupVO {
   /** 구직 신청 번호 */
   private int jobsupno;
+  /** 회사 번호 */
+  private int comno;
   /** 채용 번호 */
   private int recruitno;
   /** 회원 번호 */
@@ -66,6 +69,12 @@ public class JobsupVO {
   }
   public void setJobsup_date(String jobsup_date) {
     this.jobsup_date = jobsup_date;
+  }
+  public int getComno() {
+    return comno;
+  }
+  public void setComno(int comno) {
+    this.comno = comno;
   }
 
 }

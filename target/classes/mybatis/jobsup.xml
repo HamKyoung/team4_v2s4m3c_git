@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   <!-- 조회, id: read, 입력: jobsupno, 리턴: JobsupVO -->
   <select id="read" resultType="JobsupVO" parameterType="int">
-    SELECT jobsupno,  comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
+    SELECT jobsupno, comno, recruitno, gen_memberno, res_no, jobsup_title, jobsup_msg, jobsup_date
     FROM jobsup
     WHERE jobsupno = #{jobsupno}
   </select>
