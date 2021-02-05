@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -39,21 +40,29 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./update.do' class="form-horizontal">
         
-       <input type='hidden' name='jobsupno' id='jobsupno' value="${param.jobsupno }">
+            <input type='hidden' name='recruitno' id='recruitno' value="${recruitno}">
+            <input type='hidden' name='comno' id='comno' value="${comno }">
+            <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.genmemberno }">
+            
+            
+            
+       회사명: ${comname}<br><br>
+  
         
-       채용번호:       
-      <!-- FK recruitno 지정 -->
-      <input type="text" name='recruitno' id='recruitno' value='1'><br><br>
+       채용 공고명: ${title}<br><br>
+        
       
-       회원번호:
-      <!-- FK gen_memberno 지정 -->
-      <%-- <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.gen_memberno}"> --%>
-       <input type='text' name='gen_memberno' id='gen_memberno' value="1"><br><br>
+       회원 이름: ${sessionScope.gen_name }<br><br>
        
-       이력서번호:
-      <!-- FK res_no 지정 -->
-      <input type="text" name='res_no' id='res_no' value='1'><br><br>
-               
+       
+       이력서 제목:     <!-- FK res_no 지정 -->
+       <select class="form-control" id="res_no" name="res_no" onchange="">
+          <c:forEach var="ResumeVO" items="${list }">
+          <c:set var="res_no" value="${ResumeVO.res_no}" />
+          <c:set var="res_intro" value="${ResumeVO.res_intro}" />
+          <option  value="${ResumeVO.res_no}">${res_intro}</option>
+          </c:forEach>  
+      </select><br>
       
       
       <div class="form-group">   
@@ -70,8 +79,7 @@
           <textarea class="form-control" name='jobsup_msg' id='jobsup_msg' rows='10' placeholder="지원 메세지">${jobsupVO.jobsup_msg }</textarea>
         </div>
       </div>
-
-      
+   
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">수정</button>
         <button type="button" 

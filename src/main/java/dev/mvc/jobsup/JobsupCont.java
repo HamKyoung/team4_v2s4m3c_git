@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.genmember.GenmemberProc;
+import dev.mvc.genmember.GenmemberVO;
+import dev.mvc.recruit.RecruitVO;
+import dev.mvc.comcate.ComCateProc;
+import dev.mvc.comcate.ComCateVO;
+import dev.mvc.comintro.ComIntroProcInter;
+import dev.mvc.comintro.ComIntroVO;
+import dev.mvc.recruit.RecruitProc;
+import dev.mvc.resume.ResumeProc;
+import dev.mvc.resume.ResumeVO;
+
 
 
 @Controller
@@ -24,8 +34,24 @@ public class JobsupCont {
   @Autowired
   @Qualifier("dev.mvc.genmember.GenmemberProc")
   private GenmemberProc genmemberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.recruit.RecruitProc")
+  private RecruitProc recruitProc;
 
+  @Autowired
+  @Qualifier("dev.mvc.comcate.ComCateProc")
+  private ComCateProc comcateProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.comintro.ComIntroProc")
+  private ComIntroProcInter comintroProc;
 
+  @Autowired
+  @Qualifier("dev.mvc.resume.ResumeProc")
+  private ResumeProc resumeProc;
+  
+  
   public JobsupCont() {
     System.out.println("--> JobsupCont created.");
   }
@@ -38,9 +64,21 @@ public class JobsupCont {
    * @return
    */
   @RequestMapping(value = "/jobsup/create.do", method = RequestMethod.GET)
-  public ModelAndView create() {
+  public ModelAndView create(HttpSession session, String comname, String title, int comno, int recruitno) {
     ModelAndView mav = new ModelAndView();
+  
+    List<ResumeVO> list = this.resumeProc.list();
+    String id=(String)session.getAttribute("gen_id");
+    
+    
+    mav.addObject("list" ,list);  
+    mav.addObject("comname",comname);
+    mav.addObject("title",title);
+    mav.addObject("comno", comno);
+    mav.addObject("recruitno", recruitno);
     mav.setViewName("/jobsup/create"); // /webapp/jobsup/create.jsp
+    
+    
 
     return mav; // forward
   }
@@ -52,11 +90,14 @@ public class JobsupCont {
    */
   @RequestMapping(value = "/jobsup/create.do", method = RequestMethod.POST)
   public ModelAndView create(JobsupVO jobsupVO) {
+    System.out.println("testessettesesttes"+jobsupVO.getRes_no());
     // request.setAttribute("jobsupVO", jobsupVO) 자동 실행
-
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobsup/create_msg"); // /webapp/categrp/create_msg.jsp
-
+//    System.out.println("testessettesesttes"+jobsupVO.getRes_no());
+//    System.out.println("testessettesesttes"+jobsupVO.getComno());
+//    System.out.println("testessettesesttes"+jobsupVO.getGen_memberno());
+//    System.out.println("testessettesesttes"+jobsupVO.getRecruitno());
     int cnt = this.jobsupProc.create(jobsupVO); // 등록 처리
     mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
 
@@ -94,13 +135,30 @@ public class JobsupCont {
    * @return
    */
   @RequestMapping(value = "/jobsup/read.do", method = RequestMethod.GET)
-  public ModelAndView read_update(int jobsupno) {
+  public ModelAndView read_update(HttpSession session, int jobsupno, int recruitno, int comno, int res_no) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobsup/read"); // /webapp/jobsup/read.jsp
-
+    
+    RecruitVO recruitVO = this.recruitProc.read(recruitno);
     JobsupVO jobsupVO = this.jobsupProc.read(jobsupno);
+    ResumeVO resumeVO = this.resumeProc.read(res_no);
+    ComIntroVO comIntroVO = this.comintroProc.read(comno);
+    
+    
+    
+    String title = recruitVO.getTitle();
+    String res_intro = resumeVO.getRes_intro();
+    String comname = comIntroVO.getCom_name();
+    String id=(String)session.getAttribute("gen_id");
+    
+    
     mav.addObject("jobsupVO", jobsupVO);
-
+    mav.addObject("recruitno" , recruitno); 
+    mav.addObject("title", title);
+    mav.addObject("res_intro", res_intro);
+    mav.addObject("comno", comno);
+    mav.addObject("comname" , comname);
+    
     mav.setViewName("/jobsup/read"); // /webapp/jobsup/read.jsp
     return mav; // forward
   }
@@ -111,11 +169,28 @@ public class JobsupCont {
    * @return
    */
   @RequestMapping(value = "/jobsup/update.do", method = RequestMethod.GET)
-  public ModelAndView update(int jobsupno) {
+  public ModelAndView update(HttpSession session, int jobsupno, int recruitno, int comno, int res_no) {
     ModelAndView mav = new ModelAndView();
 
-    JobsupVO jobsupVO = this.jobsupProc.read_update(jobsupno); // 수정용 읽기
-    mav.addObject("jobsupVO", jobsupVO); // request.setAttribute("jobsupVO", jobsupVO);
+    List<ResumeVO> list = this.resumeProc.list();
+    RecruitVO recruitVO = this.recruitProc.read(recruitno);
+    JobsupVO jobsupVO = this.jobsupProc.read(jobsupno);
+    ResumeVO resumeVO = this.resumeProc.read(res_no);
+    ComIntroVO comIntroVO = this.comintroProc.read(comno);
+      
+    String title = recruitVO.getTitle();
+    String res_intro = resumeVO.getRes_intro();
+    String comname = comIntroVO.getCom_name();
+    String id=(String)session.getAttribute("gen_id");
+    
+    mav.addObject("jobsupVO", jobsupVO);
+    mav.addObject("recruitno" , recruitno); 
+    mav.addObject("title", title);
+    mav.addObject("list" ,list);
+    mav.addObject("res_intro", res_intro);
+    mav.addObject("comno", comno);
+    mav.addObject("comname" , comname);
+ 
 
     mav.setViewName("/jobsup/update"); // webapp/jobsup/update.jsp
 

@@ -2,6 +2,8 @@ package dev.mvc.jobsup;
 
 import java.util.List;
 
+import dev.mvc.jobnws.JobnwsVO;
+
 
 // MyBATIS의 <mapper namespace="dev.mvc.jobnws.JobnwsDAOInter">에 선언 
 public interface JobsupDAOInter {
@@ -40,6 +42,20 @@ public interface JobsupDAOInter {
    * @return
    */
   public JobsupVO read_update(int jobsupno);
+  
+  /**
+   * 삭제
+   * @param jobsupno
+   * @return
+   */
+  public int delete(int jobsupno);
+  
+  /**
+   * 삭제 처리
+   * @param jobnwsVO
+   * @return
+   */
+  public int delete(JobnwsVO jobnwsVO);
   
 }
 
