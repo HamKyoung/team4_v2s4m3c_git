@@ -100,8 +100,8 @@
             <td style='text-align: center; vertical-align: middle;'><a href="./read.do?res_no=${res_no}">${resumeVO.res_intro}</a></td>
             <td style='text-align: center; vertical-align: middle;'><a href="./read.do?res_no=${res_no}">${resumeVO.res_mail}</a></td>
             
-            <TD class="td_bs">
-              <A href="./read_update.do?res_no=${res_no }" title="수정"><span class="glyphicon glyphicon-pencil"></span></A>
+            <TD class="td_bs" style='text-align: center; vertical-align: middle;'>
+              <A href="./read_update.do?res_no=${res_no }" title="수정" ><span class="glyphicon glyphicon-pencil"></span></A>
               <A href="./read_delete.do?res_no=${res_no }" title="삭제"><span class="glyphicon glyphicon-trash"></span></A>
 
               <c:choose>

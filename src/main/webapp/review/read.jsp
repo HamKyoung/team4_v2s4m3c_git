@@ -32,11 +32,13 @@
     ${reviewVO.rev_title } - ${reviewVO.rev_score} 점
   </ASIDE>
   <ASIDE class="aside_right">
-    <A href='./list.do?comno=${comno }'>목록</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./update.do?comno=${comno }&rev_no=${rev_no}'>수정</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./delete.do?comno=${comno }&rev_no=${rev_no}'>삭제</A>    
+    <A href='./list.do?comno=${comno }'>목록</A>    
+        <c:if test="${sessionScope.gen_id != null }">
+        <span class='menu_divide' > | </span> 
+        <A href='./update.do?comno=${comno }&rev_no=${rev_no}'>수정</A>
+        <span class='menu_divide' > | </span> 
+        <A href='./delete.do?comno=${comno }&rev_no=${rev_no}'>삭제</A>
+        </c:if>
   </ASIDE> 
   
   <div class='menu_line'></div>

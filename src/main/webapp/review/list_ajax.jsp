@@ -70,11 +70,22 @@
 <jsp:include page="/menu/top.jsp" />
  
   <DIV class='title_line'>회사 리뷰</DIV>
-  
-    <DIV style="text-align: right;">  
-    <form name='frm' id='frm' method='get' action='./list.do'>
-      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
-      <br>
+
+    <DIV><ASIDE class="aside_right">
+          <c:choose>
+              <c:when test="${sessionScope.gen_id == null}">
+                <A href='${pageContext.request.contextPath}/login/login_need.jsp'>등록</A>
+              </c:when>                          
+              <c:when test="${sessionScope.id != null}">
+                <A href='${pageContext.request.contextPath}/login/gen_only.jsp'>등록</A>
+              </c:when>
+              <c:otherwise>
+                <button type="button" id="create_form" class="btn btn-light">등록</button>
+              </c:otherwise>            
+          </c:choose>
+    </ASIDE></DIV>
+
+      <DIV style="text-align: right;">
       <c:choose>
         <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
           <input type='text' name='word' id='word' value='${param.word }' 
@@ -88,24 +99,20 @@
       <c:if test="${param.word.length() > 0 }">
         <button type='button' 
                      onclick="location.href='./list.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
-      </c:if>    
-    </form>
-  </DIV>
+      </c:if>
+      </DIV>
+
   
-  <DIV id='panel_create' style='padding: 10px 0px 10px 0px; width: 100%; text-align: right;'>
-      <button type="button" id="create_form" class="btn btn-light">등록</button>
-  </DIV>
     <DIV id='panel1' style="width: 40%; text-align: center; margin: 10px auto; display: none;"></DIV> 
   
 <TABLE class='table table-striped'>
   <colgroup>
-    <col style='width: 10%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 20%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 20%;'/>
-    <col style='width: 10%;'/>    
-    <col style='width: 20%;'/>
+    <col style='width: 7%;'/>
+    <col style='width: 25%;'/>
+    <col style='width: 35%;'/>
+    <col style='width: 8%;'/>
+    <col style='width: 15%;'/>
+    <col style='width:10%;'/>
   </colgroup>
  
   <thead>  
@@ -115,8 +122,7 @@
     <TH class="th_bs">제목</TH>
     <TH class="th_bs">평점</TH>
     <TH class="th_bs">등록일</TH>
-    <TH class="th_bs">출력</TH>
-    <TH class="th_bs">기타</TH>
+    <TH class="th_bs">추천/신고</TH>
   </TR>
   </thead>
   
@@ -131,20 +137,8 @@
         <td class="td_bs">${reviewVO.rev_score }</td>
         <td class="td_bs">${reviewVO.rev_date.substring(5,10) }</td>
         <TD class="td_bs">
-          <c:choose>
-            <c:when test="${reviewVO.rev_visible == 'Y'}">
-              <A href="./update_visible.do?rev_no=${rev_no }&rev_visible=${reviewVO.rev_visible }"><IMG src="./images/open.png" style='width:15px;'></A>
-            </c:when>
-            <c:otherwise>
-              <A href="./update_visible.do?rev_no=${rev_no }&rev_visible=${reviewVO.rev_visible }"><IMG src="./images/close.png" style='width:15px;'></A>
-            </c:otherwise>
-          </c:choose>
-        </TD>
-        <TD class="td_bs">
-          <A href="./update.do?rev_no=${reviewVO.rev_no }" title="수정"><span class="glyphicon glyphicon-pencil"></span></A>
-          <A href="./read_delete.do?rev_no=${reviewVO.rev_no }" title="삭제"><span class="glyphicon glyphicon-trash"></span></A>
-          <A href="./update_rev_no_up.do?rev_no=${reviewVO.rev_no }" title="우선순위 상향"><span class="glyphicon glyphicon-arrow-up"></span></A>
-          <A href="./update_rev_no_down.do?rev_no=${reviewVO.rev_no }" title="우선순위 하향"><span class="glyphicon glyphicon-arrow-down"></span></A>        
+          <A href="./update_rev_no_up.do?rev_no=${reviewVO.rev_no }" title="추천"><span class="glyphicon glyphicon-arrow-up"></span></A>
+          <A href="./update_rev_no_down.do?rev_no=${reviewVO.rev_no }" title="신고"><span class="glyphicon glyphicon-arrow-down"></span></A>        
          </TD>             
       </tr>
   </c:forEach>

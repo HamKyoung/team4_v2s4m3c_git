@@ -28,7 +28,6 @@
   </ASIDE>
   <ASIDE class="aside_right">
     <A href='./list.do?comno=${reviewVO.comno }'>목록</A>
-    <!-- <span class='menu_divide' >│</span> --> 
   </ASIDE> 
  
   <div class='menu_line'></div>
@@ -43,8 +42,8 @@
       <div class="form-group">
          <label class="control-label col-md-3">회사명</label>
          <div class="col-md-9">
-           <input type='text' name='com_name' readonly="${reviewVO.com_name}"
-                      class="form-control" style='width: 50%;'>
+           <input type='text' name='com_name' readonly="${reviewVO.com_name}" value="${reviewVO.com_name}" 
+                      class="form-control" style='width: 50%;'>회사명은 수정할 수 없습니다.
          </div>
       </div>
     

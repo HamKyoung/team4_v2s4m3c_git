@@ -38,11 +38,7 @@
       <!-- FK memberno 지정 -->
       <input type='hidden' name='gen_memberno' id='gen_memberno' value='1'> <!-- 회원 고유번호로 바꿔야함 -->
       <input type='hidden' name='res_visible' id='res_visible' value='Y'> <!-- 회원이 기업회원에게 공개여부 결정 -->
-      
-      <!-- null값으로 처리할 컬럼들 //  나중엔 지워야함 -->
-      <input type='hidden' name='res_lice2' id='res_lice2' value='자격증추가'>
-      <input type='hidden' name='res_lice2_lev' id='res_lice2_lev' value='자격증추가레벨'>
-      
+            
       <div class="form-group">
         <label class="control-label col-md-3">이름</label>
         <div class="col-md-9">
