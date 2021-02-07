@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.attachfile.AttachfileProcInter;
 import dev.mvc.comintro.ComIntroProc;
 import dev.mvc.comintro.ComIntroVO;
 import dev.mvc.cormember.CormemberProc;
 import dev.mvc.cormember.CormemberVO;
 import dev.mvc.genmember.GenmemberProc;
+import dev.mvc.ps_attachfile.Ps_attachfileProcInter;
+import dev.mvc.ps_attachfile.Ps_attachfileVO;
 
 
 
@@ -39,29 +42,35 @@ public class Pass_selfCont {
   @Qualifier("dev.mvc.comintro.ComIntroProc")
   private ComIntroProc comintroProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.ps_attachfile.Ps_attachfileProc")
+  private Ps_attachfileProcInter ps_attachfileProc;
+  
   public Pass_selfCont() {
     System.out.println("--> Pass_selfCont created.");
   }
   
   /**
-   * 합격 자소서 등록
+   * �⑷꺽 ������ �깅�
    * @return
    */
   @RequestMapping(value = "/pass_self/create", method = RequestMethod.GET)
   public ModelAndView create(int cormemberno) {
     ModelAndView mav = new ModelAndView();
 
-    ComIntroVO comintroVO = comintroProc.read(cormemberno);
-     
+    ComIntroVO comintroVO = this.comintroProc.read(cormemberno);
+    System.out.println(comintroVO);
     String com_name = comintroVO.getCom_name();
+    int comno = comintroVO.getComno();
     
+    mav.addObject("comno", comno);
     mav.addObject("com_name", com_name);
     mav.setViewName("/pass_self/create");
     return mav; // forward
   }
   
   /**
-   * 합격 자소서 등록 처리
+   * �⑷꺽 ������ �깅� 泥�由�
    * @param pass_selfVO
    * @return
    */
@@ -78,7 +87,7 @@ public class Pass_selfCont {
   }
   
   /**
-   * 합격 자소서 목록
+   * �⑷꺽 ������ 紐⑸�
    * @return
    */
   @RequestMapping(value = "/pass_self/list.do", method = RequestMethod.GET)
@@ -90,7 +99,7 @@ public class Pass_selfCont {
     boolean genlogin = false;
     boolean corlogin = false; 
     
-    if (genmemberProc.isMember(session)) { // 일반회원 로그인 된 경우
+    if (genmemberProc.isMember(session)) { // �쇰����� 濡�洹몄�� �� 寃쎌��
       genlogin = true;
     }
     
@@ -109,7 +118,7 @@ public class Pass_selfCont {
   }
   
   /**
-   * 합격자소서 조회
+   * �⑷꺽������ 議고��
    * @param 
    * @return
    */
@@ -119,14 +128,17 @@ public class Pass_selfCont {
     
     Pass_selfVO pass_selfVO = this.pass_selfProc.read(pass_self_no);
     mav.addObject("pass_selfVO", pass_selfVO);
-
+    
+    List<Ps_attachfileVO> attachfile_list = this.ps_attachfileProc.list_by_pass_self_no(pass_self_no);
+    mav.addObject("attachfile_list", attachfile_list);
+    
     mav.setViewName("/pass_self/read");
     return mav;
   }
   
   
   /**
-   * 합격자소서 수정용 조회
+   * �⑷꺽������ ������ 議고��
    * @param 
    * @return
    */
@@ -145,7 +157,7 @@ public class Pass_selfCont {
   }
   
   /**
-   * 합격자소서 삭제용 조회
+   * �⑷꺽������ ������ 議고��
    * @param 
    * @return
    */
@@ -164,7 +176,7 @@ public class Pass_selfCont {
   }
    
   /**
-   * 합격자소서 수정 처리
+   * �⑷꺽������ ���� 泥�由�
    * @param 
    * @return
    */
@@ -181,7 +193,7 @@ public class Pass_selfCont {
   }
 
   /**
-   * 합격자소서 삭제 처리
+   * �⑷꺽������ ���� 泥�由�
    * @param
    * @return
    */
