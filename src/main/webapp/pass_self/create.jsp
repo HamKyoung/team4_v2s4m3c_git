@@ -6,7 +6,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>합격 자소서 등록</title>
  
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
  
@@ -33,6 +33,7 @@
  
 <FORM name='frm' method='POST' action='./create.do' class="form-horizontal" enctype="multipart/form-data">
       <input type="hidden" name='cor_memberno' value='${sessionScope.cormemberno}'>
+       <input type="hidden" name='comno' value='${comno}'>
       <ul>
         <li class="li_none">
           <label>제목: </label>
@@ -40,7 +41,7 @@
         </li>
         
         <li class="li_none">
-          <label>회사이름: ${com_name}</label>
+           <label>회사이름: ${com_name}</label>
         </li>
         <li class="li_none">
           <label>작성자: ${sessionScope.cor_name }</label>
@@ -110,6 +111,7 @@
   <div class="content_bottom_menu" style="padding-right: 20%;">
     <button type="submit" class="btn btn-primary">등록</button>
     <button type="button" onclick="location.href='./list.do'" class="btn btn-primary">목록</button>
+
   </div>
 
 </FORM>
