@@ -39,7 +39,7 @@
   <fieldset class='fieldset_basic'>
     <UL>
     <c:choose>
-            <c:when test="${cnt == 1}"> <!-- 글 수정 성공 --> 
+            <c:when test ="${cnt == 1}"> <!-- 글 수정 성공 --> 
               <LI class='li_none'>
                 <span class='span_success'>구직신청를 수정했습니다.</span>
               </LI>
@@ -58,8 +58,9 @@
         <c:when test="${cnt == 1}">
           <LI class='li_none'>
             <button type='button' 
-                        onclick="location.href='./read.do?jobsupno=${param.jobsupno}&jobsupno=${param.jobsupno}'"
-                        class="btn btn-info">변경 확인</button>
+                        onclick="location.href='./read.do?jobsupno=${jobsupVO.jobsupno}&recruitno=${jobsupVO.recruitno}&comno=${jobsupVO.comno}&res_no=${jobsupVO.res_no}'"
+                        class="btn btn-info">변경확인</button> 
+          
             <button type='button' 
                         onclick="location.href='./list.do?jobsupno=${param.jobsupno}'"
                         class="btn btn-info">목록</button>                        
@@ -82,7 +83,6 @@
  
 </DIV>
 
-  
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  

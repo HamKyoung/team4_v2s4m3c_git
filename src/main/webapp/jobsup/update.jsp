@@ -40,6 +40,7 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./update.do' class="form-horizontal">
         
+            <input type='hidden' name='jobsupno' id='jobsupno' value="${jobsupno}"> 
             <input type='hidden' name='recruitno' id='recruitno' value="${recruitno}">
             <input type='hidden' name='comno' id='comno' value="${comno }">
             <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.genmemberno }">

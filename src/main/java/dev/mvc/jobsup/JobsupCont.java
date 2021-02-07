@@ -90,7 +90,7 @@ public class JobsupCont {
    */
   @RequestMapping(value = "/jobsup/create.do", method = RequestMethod.POST)
   public ModelAndView create(JobsupVO jobsupVO) {
-    System.out.println("testessettesesttes"+jobsupVO.getRes_no());
+//    System.out.println("testessettesesttes"+jobsupVO.getRes_no());
     // request.setAttribute("jobsupVO", jobsupVO) 자동 실행
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobsup/create_msg"); // /webapp/categrp/create_msg.jsp
@@ -138,13 +138,10 @@ public class JobsupCont {
   public ModelAndView read_update(HttpSession session, int jobsupno, int recruitno, int comno, int res_no) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/jobsup/read"); // /webapp/jobsup/read.jsp
-    
     RecruitVO recruitVO = this.recruitProc.read(recruitno);
     JobsupVO jobsupVO = this.jobsupProc.read(jobsupno);
     ResumeVO resumeVO = this.resumeProc.read(res_no);
     ComIntroVO comIntroVO = this.comintroProc.read(comno);
-    
-    
     
     String title = recruitVO.getTitle();
     String res_intro = resumeVO.getRes_intro();
@@ -182,7 +179,8 @@ public class JobsupCont {
     String res_intro = resumeVO.getRes_intro();
     String comname = comIntroVO.getCom_name();
     String id=(String)session.getAttribute("gen_id");
-    
+  
+    mav.addObject("jobsupno", jobsupno);
     mav.addObject("jobsupVO", jobsupVO);
     mav.addObject("recruitno" , recruitno); 
     mav.addObject("title", title);
@@ -200,7 +198,7 @@ public class JobsupCont {
   /**
    * 수정 처리
    * 
-   * @param contentsVO
+   * @param jobsupVO
    * @return
    */
   @RequestMapping(value = "/jobsup/update.do", method = RequestMethod.POST)
@@ -208,17 +206,72 @@ public class JobsupCont {
     ModelAndView mav = new ModelAndView();
     //System.out.println("test");
     mav.addObject("jobsupno", jobsupVO.getJobsupno());
-    
-    int cnt;             // 수정된 레코드 갯수 
-    
-  
-    cnt = this.jobsupProc.update(jobsupVO);
-    System.out.println("test"+cnt);
+    int cnt = this.jobsupProc.update(jobsupVO);  
+ 
     mav.addObject("cnt", cnt); // request에 저장
 
     mav.setViewName("/jobsup/update_msg"); // webapp/jobsup/update_msg.jsp
 
     return mav;
-
   }
+  
+  /**
+   * 삭제 폼
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/jobsup/delete.do", method = RequestMethod.GET)
+  public ModelAndView delete(HttpSession session, int jobsupno, int recruitno, int comno, int res_no) {
+    ModelAndView mav = new ModelAndView();
+
+    List<ResumeVO> list = this.resumeProc.list();
+    RecruitVO recruitVO = this.recruitProc.read(recruitno);
+    JobsupVO jobsupVO = this.jobsupProc.read(jobsupno);
+    ResumeVO resumeVO = this.resumeProc.read(res_no);
+    ComIntroVO comIntroVO = this.comintroProc.read(comno);
+      
+    String title = recruitVO.getTitle();
+    String res_intro = resumeVO.getRes_intro();
+    String comname = comIntroVO.getCom_name();
+    String id=(String)session.getAttribute("gen_id");
+  
+    mav.addObject("jobsupno", jobsupno);
+    mav.addObject("jobsupVO", jobsupVO);
+    mav.addObject("recruitno" , recruitno); 
+    mav.addObject("title", title);
+    mav.addObject("list" ,list);
+    mav.addObject("res_intro", res_intro);
+    mav.addObject("comno", comno);
+    mav.addObject("comname" , comname);
+ 
+
+    mav.setViewName("/jobsup/delete"); // webapp/jobsup/delete.jsp
+
+    return mav;
+  }
+
+/**
+ * 삭제 처리
+ * 
+ * @param jobsupno
+ * @return
+ */
+@RequestMapping(value = "/jobsup/delete.do", method = RequestMethod.POST)
+public ModelAndView delete(JobsupVO jobsupVO) {
+  ModelAndView mav = new ModelAndView();
+  //System.out.println("test");
+  int jobsupno = jobsupVO.getJobsupno();
+  mav.addObject("jobsupno", jobsupno);
+  
+  String title = this.jobsupProc.read(jobsupno).getJobsup_title();
+  mav.addObject("title", title);
+  
+  int cnt = this.jobsupProc.delete(jobsupVO);
+  mav.addObject("cnt", cnt); // request에 저장
+  
+  mav.setViewName("/jobsup/delete_msg"); // webapp/jobsup/update_msg.jsp
+
+  return mav;
+  }
+
 }

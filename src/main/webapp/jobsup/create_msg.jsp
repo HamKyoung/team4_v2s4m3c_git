@@ -46,7 +46,7 @@
         <c:choose>
           <c:when test="${cnt == 1 }">
             <button type='button' 
-                         onclick="location.href='./create.do'"
+                         onclick="location.href='../recruit/list_all.do'"
                          class="btn btn-info">새로운 구직 신청</button>
           </c:when>
           <c:otherwise>

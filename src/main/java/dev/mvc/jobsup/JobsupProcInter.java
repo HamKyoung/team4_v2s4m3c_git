@@ -39,6 +39,21 @@ public interface JobsupProcInter {
    * @return
    */
   public JobsupVO read_update(int jobsupno);
+  
+  /**
+   * 昏力
+   * @param jobsupno
+   * @return
+   */
+  public int delete(int jobsupno);
+  
+  /**
+   * 昏力 贸府
+   * @param jobsupVO
+   * @return
+   */
+  public int delete(JobsupVO jobsupVO);
+ 
 }
   
 

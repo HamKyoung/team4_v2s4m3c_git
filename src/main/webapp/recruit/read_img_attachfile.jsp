@@ -128,7 +128,6 @@
     <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
 
     <span class='menu_divide' > | </span> 
-    <A href="../jobsup/create.do?comno=${comintroVO.comno }&comname=${comintroVO.com_name }&cateno=${recruitVO.cateno }&recruitno=${recruitVO.recruitno}&title=${recruitVO.title}">접수</A>
     <c:if test="${corlogin eq true }">
     <!--  
     <span class='menu_divide' > | </span>
@@ -216,7 +215,15 @@
       </fieldset>
   </FORM>
   <DIV style="text-align: center;">
-  <button type="button" class="btn btn-primary btn-lg" onclick="location.href='../jobsup/create.do?comno=${comintroVO.comno }&comname=${comintroVO.com_name }&cateno=${recruitVO.cateno }&recruitno=${recruitVO.recruitno}&title=${recruitVO.title}' ">접수하기</button>
+  <c:choose>
+                    <c:when test="${sessionScope.gen_id != null}">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="location.href='../jobsup/create.do?comno=${comintroVO.comno }&comname=${comintroVO.com_name }&cateno=${recruitVO.cateno }&recruitno=${recruitVO.recruitno}&title=${recruitVO.title}' ">접수하기</button>
+                    </c:when>
+                    <c:otherwise>
+                      <button type="button" class="btn btn-primary btn-lg" onclick="location.href='../login/login_need.jsp' ">접수하기</button>
+                    </c:otherwise>
+                  </c:choose>
+  
   </DIV>
 
 <jsp:include page="/menu/bottom.jsp" flush='false' />

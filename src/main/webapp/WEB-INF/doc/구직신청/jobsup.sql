@@ -368,4 +368,8 @@ UPDATE jobsup
 SET recruitno = 3;
 WHERE jobsupno = 3;
 
+-- ªË¡¶
+DELETE jobsup
+WHERE jobsupno = 44;
+
 COMMIT;

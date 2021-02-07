@@ -39,14 +39,14 @@
   <fieldset class='fieldset_basic'>
     <UL>
     <c:choose>
-            <c:when test="${cnt == 1}"> <!-- 글 수정 성공 --> 
+            <c:when test ="${cnt == 1}"> <!-- 글 수정 성공 --> 
               <LI class='li_none'>
                 <span class='span_success'>구직신청를 삭제했습니다.</span>
               </LI>
             </c:when>
             <c:otherwise>    <!-- 글 수정 실패 -->
               <LI class='li_none'>
-                <span class='span_fail'>구직신청 수정삭제를 실패했습니다.</span>
+                <span class='span_fail'>구직신청 삭제에 실패했습니다.</span>
               </LI>
               <LI class='li_none'>
                 <span class='span_fail'>다시 시도해주세요.</span>
@@ -79,7 +79,6 @@
  
 </DIV>
 
-  
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  

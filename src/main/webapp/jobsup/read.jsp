@@ -33,16 +33,16 @@
   
   <ASIDE class="aside_right">
   <c:if test="${sessionScope.gen_id != null  or sessionScope.id != null }">
-    <A href="create.do">구직 신청</A>
     <span class='menu_divide' > | </span>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span> 
     <A href='./list.do?jobsupno=${jobsupno }'>목록</A>
     <span class='menu_divide' > | </span> 
     <A href="./update.do?jobsupno=${jobsupVO.jobsupno}&recruitno=${jobsupVO.recruitno}&comno=${jobsupVO.comno}
-                                         &res_no=${jobsupVO.res_no}">수정</A>
+                                         &res_no=${jobsupVO.res_no}&jobsupno=${jobsupno}">수정</A>
     <span class='menu_divide' > | </span> 
-    <A href='./delete.do?jobsupno=${jobsupno }&jobsupno=${jobsupno}'>삭제</A>
+    <A href='./delete.do?jobsupno=${jobsupVO.jobsupno}&recruitno=${jobsupVO.recruitno}&comno=${jobsupVO.comno}
+                                         &res_no=${jobsupVO.res_no}&jobsupno=${jobsupno}'>삭제</A>
     </c:if>
   </ASIDE> 
   

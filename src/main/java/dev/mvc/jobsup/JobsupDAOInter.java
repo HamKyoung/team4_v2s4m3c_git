@@ -52,10 +52,10 @@ public interface JobsupDAOInter {
   
   /**
    * 삭제 처리
-   * @param jobnwsVO
+   * @param jobsupVO
    * @return
    */
-  public int delete(JobnwsVO jobnwsVO);
+  public int delete(JobsupVO jobsupVO);
   
 }
 

@@ -31,7 +31,8 @@
   <DIV style='width: 100%;'>
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"
                enctype="multipart/form-data">
-      
+     
+          
             <input type='hidden' name='recruitno' id='recruitno' value="${recruitno}">
             <input type='hidden' name='comno' id='comno' value="${comno }">
             <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.genmemberno }">

@@ -30,6 +30,9 @@
  
   <FORM name='frm' method='POST' action='./delete.do'>
       <input type='hidden' name='jobsupno' value='${param.jobsupno}'>
+      <input type='hidden' name='recruitno' id='recruitno' value="${recruitno}">
+      <input type='hidden' name='comno' id='comno' value="${comno }">
+      <input type='hidden' name='gen_memberno' id='gen_memberno' value="${sessionScope.genmemberno }">
      
       <div class="form-group">   
         <div class="col-md-12" style='text-align: center; margin: 30px;'>
@@ -40,7 +43,7 @@
         </div>
       </div>   
   </FORM>
- 
+  
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
