@@ -47,7 +47,8 @@
                               dev.mvc.jobsup,
                               dev.mvc.resume,
                               dev.mvc.review,
-                              dev.mvc.event" />
+                              dev.mvc.event,
+                              dev.mvc.ps_attachfile" />
                    
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>
