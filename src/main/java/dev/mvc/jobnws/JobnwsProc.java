@@ -86,11 +86,6 @@ public class JobnwsProc implements JobnwsProcInter {
     return cnt;
   }
 
-  @Override
-  public int update_good(int jobnwsno) {
-    int cnt = this.jobnwsDAO.update_good(jobnwsno);
-    return cnt;
-  }
 
   @Override
   public int update_img(JobnwsVO jobnwsVO) {

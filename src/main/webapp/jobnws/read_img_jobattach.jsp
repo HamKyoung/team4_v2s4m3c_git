@@ -112,9 +112,7 @@ function panel_img(dir, file) {
             ${jobnwsVO.jobnws_url }
           </li>
           <li class="li_none">
-           조회수: ${jobnwsVO.jobnws_cnt }  추천수: <img src='./images/good01.png' 
-               style='width: 50px; margin-left: 20px;' title="추천">${jobnwsVO.jobnws_good }
-           
+           조회수: ${jobnwsVO.jobnws_cnt }   
           </li>
 
         </ul>

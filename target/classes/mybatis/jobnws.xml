@@ -23,14 +23,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
    
     <select id="list_jobnwsno_asc" resultType="JobnwsVO">
-      SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
+      SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt,  jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
       FROM jobnws
       ORDER BY jobnwsno ASC
     </select>
     
     <!-- 조회, id: read, 입력: jobnwsno, 리턴: JobnwsVO -->
     <select id="read" resultType="JobnwsVO" parameterType="int">
-      SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
+      SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt,  jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
       FROM jobnws
       WHERE jobnwsno= #{jobnwsno}
     </select>
@@ -57,12 +57,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <update id="update_cnt" parameterType="int">
      UPDATE jobnws
      SET jobnws_cnt = jobnws_cnt + 1 
-     WHERE jobnwsno = #{jobnwsno}
-   </update>
-   
-   <update id="update_good" parameterType="int">
-     UPDATE jobnws
-     SET jobnws_good = jobnws_good + 1 
      WHERE jobnwsno = #{jobnwsno}
    </update>
    

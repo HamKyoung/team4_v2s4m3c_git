@@ -52,8 +52,6 @@ CREATE TABLE jobnws(
 		jobnws_url                      		VARCHAR2(500)		 NOT NULL,
         jobnws_passwd                      	VARCHAR2(15)		 NOT NULL,
 		jobnws_cnt                      		NUMBER(10)		 DEFAULT 0		 NOT NULL,
-		jobnws_good                     		NUMBER(10)		 DEFAULT 0		 NOT NULL,
-		jobnws_coment                   		VARCHAR2(1000)		 NULL ,
 		jobnws_date                     		DATE		 NOT NULL,
 		jobnws_file1                    		VARCHAR2(100)		 NULL ,
 		jobnws_thumb1                       VARCHAR2(100)		 NULL ,
@@ -66,10 +64,9 @@ COMMENT ON COLUMN jobnws.jobnwsno is '뉴스 번호';
 COMMENT ON COLUMN admin.adminno is '관리자 번호';
 COMMENT ON COLUMN jobnws.jobnws_title is '뉴스 제목';
 COMMENT ON COLUMN jobnws.jobnws_content is '뉴스 내용';
+COMMENT ON COLUMN jobnws.jobnws_passwd is '뉴스 비밀번호';
 COMMENT ON COLUMN jobnws.jobnws_url is '뉴스 출처';
 COMMENT ON COLUMN jobnws.jobnws_cnt is '뉴스 조회수';
-COMMENT ON COLUMN jobnws.jobnws_good is '뉴스 추천수';
-COMMENT ON COLUMN jobnws.jobnws_coment is '뉴스 댓글';
 COMMENT ON COLUMN jobnws.jobnws_date is '등록일';
 COMMENT ON COLUMN jobnws.jobnws_file1 is '뉴스 메인 이미지';
 COMMENT ON COLUMN jobnws.jobnws_thumb1 is '뉴스 메인 이미지 Preview';
@@ -92,16 +89,16 @@ CREATE SEQUENCE jobnws_seq
 /**********************************/
 
 -- 등록
-INSERT INTO jobnws(jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1)
-VALUES(jobnws_seq.nextval, 1, '삼성채용뉴스', '이러한 조건하에', 'https://', 0, 0, '좋은 도움이됬어요', '1234', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
+INSERT INTO jobnws(jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1)
+VALUES(jobnws_seq.nextval, 1, '삼성채용뉴스', '이러한 조건하에', 'https://',  0,  '1234', sysdate, 'spring.jpg', 'spring_t.jpg', 23657);
 
 
 -- 뉴스 테이블에 추가
-INSERT INTO jobnws(jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1 )
-VALUES(jobnws_seq.nextval, 1, '삼성채용뉴스', '이러한 조건하에', 'https://', 0, 0, '좋은 도움이됬어요', '1234', sysdate, 'summer.jpg', 'summer_t.jpg', 23657);
+INSERT INTO jobnws(jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1)
+VALUES(jobnws_seq.nextval, 1, '삼성채용뉴스', '이러한 조건하에', 'https://', 0,  '1234', sysdate, 'summer.jpg', 'summer_t.jpg', 23657);
 
-INSERT INTO jobnws(jobnwsno, adminno ,jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1)
-VALUES(jobnws_seq.nextval, 1 ,'LG채용뉴스', '이러한 조건하에', 'https://', 0, 0, '좋은 도움이됬어요', '1234', sysdate, 'winter.jpg', 'winter_t.jpg', 23657);
+INSERT INTO jobnws(jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1)
+VALUES(jobnws_seq.nextval, 1 ,'LG채용뉴스', '이러한 조건하에', 'https://', 0,  '1234', sysdate, 'winter.jpg', 'winter_t.jpg', 23657);
 
 
 COMMIT;
@@ -109,12 +106,12 @@ COMMIT;
 SELECT * FROM jobnws ORDER BY jobnwsno ASC;
 
 -- 목록
-SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
+SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
 FROM jobnws
 ORDER BY jobnwsno ASC;
 
 -- 조회
-SELECT jobnwsno, adminno,jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_good, jobnws_coment, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
+SELECT jobnwsno, adminno,jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
 FROM jobnws
 WHERE jobnwsno=1;
 
@@ -143,11 +140,6 @@ SELECT * FROM jobnws;
 -- 조회수 증가
 UPDATE jobnws
 SET jobnws_cnt = jobnws_cnt + 1 
-WHERE jobnwsno = 1;
-
--- 추천수 증가
-UPDATE jobnws
-SET jobnws_good = jobnws_good + 1 
 WHERE jobnwsno = 1;
 
 -- 컬럼 추가

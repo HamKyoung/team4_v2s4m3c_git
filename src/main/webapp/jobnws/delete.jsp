@@ -138,6 +138,7 @@
     <A href='./list.do'>채용뉴스</A> > 삭제
   </ASIDE>
   
+  
   <div class='menu_line'></div>
  
   <FORM name='frm' method='POST' action='./delete.do'>

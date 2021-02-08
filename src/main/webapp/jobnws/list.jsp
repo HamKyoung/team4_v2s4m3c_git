@@ -43,7 +43,6 @@
       <TH class="th_bs">파일</TH>
       <TH class="th_bs">뉴스제목</TH>
       <TH class="th_bs">조회수</TH>
-      <TH class="th_bs">추천수</TH>
       <TH class="th_bs">등록일</TH>
     </TR>
     </thead>
@@ -74,7 +73,6 @@
               </TD>
         <TD class="td_bs_left"><A href="./read.do?jobnwsno=${jobnwsno }">${JobnwsVO.jobnws_title }</A></TD>
         <TD class="td_bs">${JobnwsVO.jobnws_cnt }</TD>
-        <TD class="td_bs">${JobnwsVO.jobnws_good }</TD>
         <TD class="td_bs">${JobnwsVO.jobnws_date.substring(0, 10) }</TD>     
       </TR> 
     </c:forEach>

@@ -30,10 +30,6 @@ public class JobnwsVO {
   private String jobnws_url = "";
   /** 뉴스 조회수*/
   private int jobnws_cnt = 0;
-  /** 뉴스 추천수*/
-  private int jobnws_good = 0;
-  /** 뉴스 덧글 */
-  private String jobnws_coment = "";
   /** 뉴스 비밀번호*/ 
   private String jobnws_passwd = "";
   /** 뉴스 등록일 */
@@ -93,22 +89,6 @@ public class JobnwsVO {
 
   public void setJobnws_cnt(int jobnws_cnt) {
     this.jobnws_cnt = jobnws_cnt;
-  }
-
-  public int getJobnws_good() {
-    return jobnws_good;
-  }
-
-  public void setJobnws_good(int jobnws_good) {
-    this.jobnws_good = jobnws_good;
-  }
-
-  public String getJobnws_coment() {
-    return jobnws_coment;
-  }
-
-  public void setJobnws_coment(String jobnws_coment) {
-    this.jobnws_coment = jobnws_coment;
   }
 
   public String getJobnws_passwd() {

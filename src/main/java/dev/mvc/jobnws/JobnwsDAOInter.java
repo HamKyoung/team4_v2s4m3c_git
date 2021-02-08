@@ -71,13 +71,7 @@ public interface JobnwsDAOInter {
    * @return
    */
   public int update_cnt(int jobnwsno);
-  
-  /**
-   * 추천수 증가
-   * @param jobnwsno
-   * @return
-   */
-  public int update_good(int jobnwsno);
+ 
   
   /**
    * 이미지 변경
