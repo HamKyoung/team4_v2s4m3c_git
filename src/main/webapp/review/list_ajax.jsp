@@ -71,19 +71,19 @@
  
   <DIV class='title_line'>회사 리뷰</DIV>
 
-    <DIV><ASIDE class="aside_right">
+    <ASIDE class="aside_right">    
           <c:choose>
-              <c:when test="${sessionScope.gen_id == null}">
-                <A href='${pageContext.request.contextPath}/login/login_need.jsp'>등록</A>
+              <c:when test="${sessionScope.gen_id == null && sessionScope.cor_id == null}">
+                <A href='${pageContext.request.contextPath}/login/login_need.jsp' class="btn btn-light">등록</A>
               </c:when>                          
-              <c:when test="${sessionScope.id != null}">
-                <A href='${pageContext.request.contextPath}/login/gen_only.jsp'>등록</A>
+              <c:when test="${sessionScope.cor_id != null}">
+                <A href='${pageContext.request.contextPath}/login/gen_only.jsp' class="btn btn-light">등록</A>
               </c:when>
-              <c:otherwise>
+              <c:when test="${sessionScope.gen_id != null}">
                 <button type="button" id="create_form" class="btn btn-light">등록</button>
-              </c:otherwise>            
-          </c:choose>
-    </ASIDE></DIV>
+              </c:when>            
+          </c:choose>          
+    </ASIDE>
 
       <DIV style="text-align: right;">
       <c:choose>
@@ -137,8 +137,21 @@
         <td class="td_bs">${reviewVO.rev_score }</td>
         <td class="td_bs">${reviewVO.rev_date.substring(5,10) }</td>
         <TD class="td_bs">
-          <A href="./update_rev_no_up.do?rev_no=${reviewVO.rev_no }" title="추천"><span class="glyphicon glyphicon-arrow-up"></span></A>
-          <A href="./update_rev_no_down.do?rev_no=${reviewVO.rev_no }" title="신고"><span class="glyphicon glyphicon-arrow-down"></span></A>        
+          <c:choose>
+              <c:when test="${sessionScope.gen_id == null && sessionScope.cor_id == null}">
+                <A href='${pageContext.request.contextPath}/login/login_need.jsp' ><span class="glyphicon glyphicon-arrow-up"></span></A>
+                <A href='${pageContext.request.contextPath}/login/login_need.jsp' ><span class="glyphicon glyphicon-arrow-down"></span></A>
+              </c:when>                          
+              <c:when test="${sessionScope.cor_id != null}">
+                <A href='${pageContext.request.contextPath}/login/gen_only.jsp' ><span class="glyphicon glyphicon-arrow-up"></span></A>
+                <A href='${pageContext.request.contextPath}/login/gen_only.jsp' ><span class="glyphicon glyphicon-arrow-down"></span></A>
+              </c:when>
+              <c:when test="${sessionScope.gen_id != null}">
+                <A href="./update_rev_no_up.do?rev_no=${reviewVO.rev_no }" title="추천"><span class="glyphicon glyphicon-arrow-up"></span></A>
+                <A href="./update_rev_no_down.do?rev_no=${reviewVO.rev_no }" title="신고"><span class="glyphicon glyphicon-arrow-down"></span></A>        
+              </c:when>            
+          </c:choose>          
+
          </TD>             
       </tr>
   </c:forEach>
