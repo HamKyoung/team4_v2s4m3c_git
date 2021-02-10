@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.ps_attachfile.Ps_attachfileDAOInter">
+  <insert id="create" parameterType="Ps_attachfileVO">
+    INSERT INTO ps_attachfile(ps_attachfileno, pass_self_no, ps_fname, ps_upname, ps_thumb, ps_fsize, ps_rdate)
+    VALUES(ps_attachfile_seq.nextval, #{pass_self_no}, #{ps_fname}, #{ps_upname}, #{ps_thumb}, #{ps_fsize}, sysdate)
+  </insert>
+   
+  <select id="list" resultType="Ps_attachfileVO">
+    SELECT ps_attachfileno, pass_self_no, ps_fname, ps_upname, ps_thumb, ps_fsize, ps_rdate
+    FROM ps_attachfile
+    ORDER BY pass_self_no DESC,  ps_attachfileno ASC
+  </select>
+  
+  <select id="list_by_pass_self_no" resultType="Ps_attachfileVO" parameterType="int">
+    SELECT ps_attachfileno, pass_self_no, ps_fname, ps_upname, ps_thumb, ps_fsize, ps_rdate
+    FROM ps_attachfile
+    WHERE pass_self_no = #{pass_self_no}
+    ORDER BY ps_attachfileno ASC
+  </select>
+  
+  
+  <select id="read" resultType="Ps_attachfileVO" parameterType="int">
+    SELECT ps_attachfileno, pass_self_no, ps_fname, ps_upname, ps_thumb, ps_fsize, ps_rdate
+    FROM ps_attachfile
+    WHERE ps_attachfileno=#{ps_attachfileno}
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM ps_attachfile
+    WHERE ps_attachfileno = #{ps_attachfileno}
+  </delete>
+</mapper>
+
+
+
+
+
+
