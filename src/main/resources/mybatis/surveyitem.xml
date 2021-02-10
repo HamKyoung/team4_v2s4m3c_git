@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY itemseq ASC
   </select>
   
-  <select id="read" parameterType="int" resultType="SurveyitemVO">    
+  <select id="read" parameterType="int" resultType="SurveyitemVO">
     SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt
     FROM surveyitem 
     WHERE sur_itemno=#{sur_itemno}
@@ -38,32 +38,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE sur_itemno =#{sur_itemno} and surveyno =#{surveyno}
   </update>
   
-  <delete id="delete" parameterType="int" >
+  <delete id="delete" parameterType="int">
     DELETE FROM surveyitem
     WHERE sur_itemno=#{sur_itemno}
   </delete>
   
-  <select id="count_by_surveyno" parameterType="int" resultType="int">
-    SELECT COUNT(*) as cnt
-    FROM surveyitem
-    WHERE surveyno = #{surveyno}
-  </select>
-  
     <!-- 설문조사항목별 검색 목록 -->
    <select id="list_by_search" resultType="SurveyitemVO" parameterType="HashMap">
       SELECT sur_itemno, surveyno, itemseq, item, itemfile, itemcnt, word
-      FROM surveyitem 
-     <choose>
-       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-         WHERE surveyno=#{surveyno}
-       </when>
-       <otherwise>
-         WHERE surveyno=#{surveyno} AND (item LIKE '%' || #{word} || '%' 
-                                                        OR itemfile LIKE '%' || #{word} || '%' 
-                                                        OR word LIKE '%' || #{word} || '%')
-       </otherwise>
-     </choose>
-     ORDER BY surveyno DESC   
+      FROM surveyitem
+      WHERE  surveyno = #{surveyno}
+      ORDER BY sur_itemno ASC   
    </select>
    
    <!-- 카테고리별 검색 레코드 갯수 -->
