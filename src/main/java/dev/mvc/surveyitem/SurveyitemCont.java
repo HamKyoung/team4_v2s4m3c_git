@@ -1,10 +1,15 @@
 package dev.mvc.surveyitem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -56,6 +61,7 @@ public class SurveyitemCont {
    * 투표, JSON 출력
    * 
    * @return
+   * http://localhost:9090/team4/surveyitem/vote.do?surveyno=5&sur_itemno=5
    */
   @ResponseBody
   @RequestMapping(value = "/surveyitem/vote.do", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
@@ -96,6 +102,46 @@ public class SurveyitemCont {
     json.put("cnt", cnt);
     
     return json.toString();
+  }
+  
+  /**
+   * 투표 결과, JSON 출력
+   * 
+   * @return
+   * http://localhost:9090/team4/surveyitem/vote_result.do?surveyno=5
+   */
+  @ResponseBody
+  @RequestMapping(value = "/surveyitem/vote_result.do", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+  public String result(int surveyno){
+    
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("surveyno", surveyno); // #{surveyno}
+    
+    List<SurveyitemVO> list = surveyitemProc.list_by_search(map);
+    
+    JSONArray array = new JSONArray();
+    JSONArray json = null;
+    
+    String item = "";
+    int itemcnt = 0;
+    
+    json = new JSONArray();
+    json.put("항목");
+    json.put("선택수");
+    array.put(json);
+
+    for(int i = 0; i<list.size(); i++) { 
+      SurveyitemVO surveyitemVO = list.get(i);
+      item = surveyitemVO.getItem();
+      itemcnt = surveyitemVO.getItemcnt();
+
+      json = new JSONArray();
+      json.put(item);
+      json.put(itemcnt);
+      
+      array.put(json);
+    }
+    return array.toString();
   }
   
   /**
