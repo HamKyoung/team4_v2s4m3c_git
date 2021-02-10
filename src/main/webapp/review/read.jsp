@@ -26,10 +26,10 @@
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>
     ${reviewVO.com_name }
-  </DIV>
+  </DIV> &nbsp;&nbsp; <A href="./list_join.do" style='font-size: 10px;'>이 회사 다른 리뷰 보기</A>
   
   <ASIDE class="aside_left">
-    ${reviewVO.rev_title } - ${reviewVO.rev_score} 점
+    ${reviewVO.rev_title } : ${reviewVO.rev_score} 점
   </ASIDE>
   <ASIDE class="aside_right">
     <A href='./list.do?comno=${comno }'>목록</A>    
@@ -44,9 +44,6 @@
   <div class='menu_line'></div>
 
   <FORM name='frm' method="get" action='./update.do'>
-    <input type='hidden' name='comno' id='comno' value='1'>
-    <input type='hidden' name='gen_memberno' id='gen_memberno' value='1'>
-    <input type='hidden' name='rev_visible' id='rev_visible' value='Y'>
       <fieldset class="fieldset_basic">
         <ul>
           <li class="li_none">

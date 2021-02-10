@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.comcate.ComIntro_ComCate_join;
+import dev.mvc.comintro.ComIntroProcInter;
 import dev.mvc.review.ReviewVO;
 
 @Controller
@@ -20,6 +22,10 @@ public class ReviewCont {
   @Autowired
   @Qualifier("dev.mvc.review.ReviewProc")
   private ReviewProcInter reviewProc;
+
+  @Autowired
+  @Qualifier("dev.mvc.comintro.ComIntroProc")
+  private ComIntroProcInter comintroProc;
 
   public ReviewCont() {
     System.out.println("--> ReviewCont created.");
@@ -85,75 +91,91 @@ public class ReviewCont {
   }
 
   /**
+   * review + comintro join 목록
+   * @return
+   */
+  @RequestMapping(value="/review/list_join.do", method=RequestMethod.GET )
+  public ModelAndView list_join() {
+    ModelAndView mav = new ModelAndView();
+    
+    List<Review_comintroVO> list = this.reviewProc.list_join();
+    mav.addObject("list", list); // request.setAttribute("list", list);
+
+    mav.setViewName("/review/list_join"); // webapp/comcate/list_join.jsp
+    return mav;
+  }
+
+  
+  /**
    * 목록 (최종목표:특정 회사만 나오게)
    * 
    * @return
    */
-  @RequestMapping(value = "/review/list_final.do", method = RequestMethod.GET)
-  public ModelAndView list_final(@RequestParam(value = "rev_no", defaultValue = "1") int rev_no,
-      @RequestParam(value = "com_name", defaultValue = "") String com_name,
-      @RequestParam(value = "nowPage", defaultValue = "1") int nowPage) {
-    ModelAndView mav = new ModelAndView();
-    // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
-    HashMap<String, Object> map = new HashMap<String, Object>();
-    map.put("rev_no", rev_no); // #{cateno}
-    map.put("com_name", com_name); // #{word}
-    map.put("nowPage", nowPage); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
-
-    // 검색 목록
-    List<ReviewVO> list = reviewProc.list_comno(map);
-    mav.addObject("list", list);
-
-    // 검색된 레코드 갯수
-    int search_count = reviewProc.search_count(map);
-    mav.addObject("search_count", search_count);
-
-    /*
-     * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-     * 18 19 20 [다음]
-     * 
-     * @param listFile 목록 파일명
-     * 
-     * @param cateno 카테고리번호
-     * 
-     * @param search_count 검색(전체) 레코드수
-     * 
-     * @param nowPage 현재 페이지
-     * 
-     * @param word 검색어
-     * 
-     * @return 페이징 생성 문자열
-     */
-    String paging = reviewProc.pagingBox("list.do", rev_no, search_count, nowPage, com_name);
-    mav.addObject("paging", paging);
-    mav.addObject("nowPage", nowPage);
-    mav.setViewName("/review/list.do");
-
-    return mav;
-  }
-
+  /*
+   * @RequestMapping(value = "/review/list_final.do", method = RequestMethod.GET)
+   * public ModelAndView list_final(@RequestParam(value = "rev_no", defaultValue =
+   * "1") int rev_no,
+   * 
+   * @RequestParam(value = "com_name", defaultValue = "") String com_name,
+   * 
+   * @RequestParam(value = "nowPage", defaultValue = "1") int nowPage) {
+   * ModelAndView mav = new ModelAndView(); // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+   * HashMap<String, Object> map = new HashMap<String, Object>();
+   * map.put("rev_no", rev_no); // #{cateno} map.put("com_name", com_name); //
+   * #{word} map.put("nowPage", nowPage); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+   * 
+   * // 검색 목록 List<ReviewVO> list = reviewProc.list_comno(map);
+   * mav.addObject("list", list);
+   * 
+   * // 검색된 레코드 갯수 int search_count = reviewProc.search_count(map);
+   * mav.addObject("search_count", search_count);
+   * 
+   * 
+   * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+   * 18 19 20 [다음]
+   * 
+   * @param listFile 목록 파일명
+   * 
+   * @param cateno 카테고리번호
+   * 
+   * @param search_count 검색(전체) 레코드수
+   * 
+   * @param nowPage 현재 페이지
+   * 
+   * @param word 검색어
+   * 
+   * @return 페이징 생성 문자열
+   * 
+   * String paging = reviewProc.pagingBox("list.do", rev_no, search_count,
+   * nowPage, com_name); mav.addObject("paging", paging); mav.addObject("nowPage",
+   * nowPage); mav.setViewName("/review/list.do");
+   * 
+   * return mav; }
+   */
+  
+  
   /**
    * 조회
    * 
    * @return
    */
-   @RequestMapping(value = "/review/read.do", method = RequestMethod.GET) 
-   public ModelAndView read(int rev_no) {
-     ModelAndView mav = new ModelAndView();
-   
-     ReviewVO reviewVO = this.reviewProc.read(rev_no); mav.addObject("reviewVO",
-     reviewVO);
-  
-     mav.setViewName("/review/read");
-   
-     return mav; 
-   }
+  @RequestMapping(value = "/review/read.do", method = RequestMethod.GET)
+  public ModelAndView read(int rev_no) {
+    ModelAndView mav = new ModelAndView();
 
-   /*
-       * Ajax read
-       * 
-       * @return
-       */
+    ReviewVO reviewVO = this.reviewProc.read(rev_no);
+    mav.addObject("reviewVO", reviewVO);
+
+    mav.setViewName("/review/read");
+
+    return mav;
+  }
+
+  /*
+   * Ajax read
+   * 
+   * @return
+   */
   /*
    * @ResponseBody
    * 
@@ -170,8 +192,7 @@ public class ReviewCont {
    * 
    * return json.toString(); }
    */
-   
-   
+
   /**
    * 수정 폼
    * 

@@ -29,6 +29,13 @@ public class ReviewProc implements ReviewProcInter{
   }
 
   @Override
+  public List<Review_comintroVO> list_join() {
+    List<Review_comintroVO> list = this.reviewDAO.list_join();
+    
+    return list;
+  }
+
+  @Override
   public List<ReviewVO> list_comno(HashMap<String, Object> map) {
     /* 
     페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작
@@ -180,6 +187,7 @@ public class ReviewProc implements ReviewProcInter{
     int cnt = this.reviewDAO.delete(rev_no);
     return cnt;
   }
+
 
 
 

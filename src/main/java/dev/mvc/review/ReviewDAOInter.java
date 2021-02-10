@@ -17,6 +17,12 @@ public interface ReviewDAOInter {
    */
   public List<ReviewVO> list_rev_no();
   
+  /**
+   * JOIN ¸ñ·Ï
+   * @return
+   */
+  public List<Review_comintroVO> list_join();
+  
   public List<ReviewVO> list_comno(HashMap<String, Object> map);
   
   /**

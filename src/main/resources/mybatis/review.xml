@@ -19,6 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY rev_no ASC
   </select>
   
+  <!-- com_intro JOIN 목록 -->
+  <select id="list_join" resultType="Review_comintroVO">
+    SELECT r.rev_no, r.com_name, r.rev_title, r.rev_score, i.homepage
+    FROM com_review r,com_intro i
+    WHERE r.com_name=i.com_name
+    ORDER BY r.rev_no ASC
+  </select>
+
   <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
   <select id="list_comno"  resultType="ReviewVO" parameterType="HashMap">
      SELECT rev_no, com_name, rev_title, rev_score, rev_content, rev_visible, rev_date, comno, r

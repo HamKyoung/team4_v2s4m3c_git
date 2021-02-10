@@ -29,11 +29,11 @@
 
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>
-    ${reviewVO.com_name }
-  </DIV>
+    ${reviewVO.com_name }    
+  </DIV> 
   
   <ASIDE class="aside_left">
-    ${reviewVO.rev_title } - ${reviewVO.rev_score} 점
+    ${reviewVO.rev_title } : ${reviewVO.rev_score} 점
   </ASIDE>
   <ASIDE class="aside_right">
     <A href='./list.do?comno=${comno }'>목록</A>
