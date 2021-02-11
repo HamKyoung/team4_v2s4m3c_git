@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.comcate.ComIntro_ComCate_join;
 import dev.mvc.comintro.ComIntroProcInter;
+import dev.mvc.resume.ResumeVO;
 import dev.mvc.review.ReviewVO;
 
 @Controller
@@ -43,21 +44,6 @@ public class ReviewCont {
     return mav;
   }
 
-  /*  *//**
-         * 등록처리 http://localhost:9090/team4/review/create.do
-         * 
-         * @return
-         *//*
-            * @RequestMapping(value = "/review/create.do", method = RequestMethod.POST)
-            * public ModelAndView create(ReviewVO reviewVO) { ModelAndView mav = new
-            * ModelAndView(); mav.setViewName("/review/create_msg");
-            * 
-            * int rev_cnt = this.reviewProc.create(reviewVO); mav.addObject("rev_cnt",
-            * rev_cnt);
-            * 
-            * return mav; }
-            */
-
   /**
    * Ajax 기반 등록 처리 http://localhost:9090/resort/categrp/create_ajax.do
    * 
@@ -80,11 +66,26 @@ public class ReviewCont {
    * @return
    */
   @RequestMapping(value = "/review/list.do", method = RequestMethod.GET)
-  public ModelAndView list() {
+  public ModelAndView list(      
+      @RequestParam(value="com_name", defaultValue="") String com_name,
+      @RequestParam(value="nowPage", defaultValue="1") int nowPage
+      ) {
     ModelAndView mav = new ModelAndView();
+    
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("com_name", com_name);
+    map.put("nowPage", nowPage);
 
-    List<ReviewVO> list = this.reviewProc.list_rev_no();
+    List<ReviewVO> list = reviewProc.list_rev_no(map);
     mav.addObject("list", list);
+    
+    int search_count = reviewProc.search_count(map);
+    mav.addObject("search_count", search_count);
+
+    String paging = reviewProc.pagingBox("list.do", search_count, nowPage, com_name);
+    mav.addObject("paging", paging);
+  
+    mav.addObject("nowPage", nowPage);
 
     mav.setViewName("/review/list_ajax");
     return mav;
@@ -92,12 +93,13 @@ public class ReviewCont {
 
   /**
    * review + comintro join 목록
+   * 
    * @return
    */
-  @RequestMapping(value="/review/list_join.do", method=RequestMethod.GET )
+  @RequestMapping(value = "/review/list_join.do", method = RequestMethod.GET)
   public ModelAndView list_join() {
     ModelAndView mav = new ModelAndView();
-    
+
     List<Review_comintroVO> list = this.reviewProc.list_join();
     mav.addObject("list", list); // request.setAttribute("list", list);
 
@@ -105,7 +107,6 @@ public class ReviewCont {
     return mav;
   }
 
-  
   /**
    * 목록 (최종목표:특정 회사만 나오게)
    * 
@@ -151,9 +152,8 @@ public class ReviewCont {
    * nowPage); mav.setViewName("/review/list.do");
    * 
    * return mav; }
+   * 
    */
-  
-  
   /**
    * 조회
    * 

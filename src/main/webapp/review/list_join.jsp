@@ -71,7 +71,8 @@
  
   <DIV class='title_line'>회사 리뷰</DIV>
 
-    <ASIDE class="aside_right">    
+    <ASIDE class="aside_right">
+    <A href="./list.do" class="btn btn-light"> 리뷰 전체 보기</A>
           <c:choose>
               <c:when test="${sessionScope.gen_id == null && sessionScope.cor_id == null}">
                 <A href='${pageContext.request.contextPath}/login/login_need.jsp' class="btn btn-light">등록</A>
@@ -89,52 +90,29 @@
   
 <TABLE class='table table-striped'>
   <colgroup>
-    <col style='width: 7%;'/>
     <col style='width: 25%;'/>
-    <col style='width: 35%;'/>
-    <col style='width: 8%;'/>
-    <col style='width: 15%;'/>
-    <col style='width:10%;'/>
+    <col style='width: 25%;'/>
+    <col style='width: 25%;'/>
+    <col style='width: 25%;'/>
   </colgroup>
  
   <thead>  
   <TR>
-    <TH class="th_bs">순서</TH>
     <TH class="th_bs">회사명</TH>
-    <TH class="th_bs">제목</TH>
-    <TH class="th_bs">평점</TH>
+    <TH class="th_bs">기업형태</TH>
+    <TH class="th_bs">업종</TH>
     <TH class="th_bs">홈페이지</TH>
-    <TH class="th_bs">추천/신고</TH>
   </TR>
   </thead>
   
   <tbody>
   <c:forEach var="Review_comintroVO" items="${list }">
-    <!--<c:set var="comno" value="${reviewVO.comno }" /> -->
-    <c:set var="rev_no" value="${Review_comintroVO.rev_no }" />
       <tr>
-        <td class="td_bs">${rev_no }</td>
-        <td><a href="./read.do?rev_no=${rev_no}"> ${Review_comintroVO.com_name }</a></td>        
-        <td><a href="./read.do?rev_no=${rev_no}"> ${Review_comintroVO.rev_title }</a></td>
-        <td class="td_bs">${Review_comintroVO.rev_score }</td>
+        <td>${Review_comintroVO.com_name }</td>
+        <td>${Review_comintroVO.com_form }</td>
+        <td>${Review_comintroVO.com_type }</td>
         <td class="td_bs">${Review_comintroVO.homepage }</td>
-        <TD class="td_bs">
-          <c:choose>
-              <c:when test="${sessionScope.gen_id == null && sessionScope.cor_id == null}">
-                <A href='${pageContext.request.contextPath}/login/login_need.jsp' ><span class="glyphicon glyphicon-arrow-up"></span></A>
-                <A href='${pageContext.request.contextPath}/login/login_need.jsp' ><span class="glyphicon glyphicon-arrow-down"></span></A>
-              </c:when>                          
-              <c:when test="${sessionScope.cor_id != null}">
-                <A href='${pageContext.request.contextPath}/login/gen_only.jsp' ><span class="glyphicon glyphicon-arrow-up"></span></A>
-                <A href='${pageContext.request.contextPath}/login/gen_only.jsp' ><span class="glyphicon glyphicon-arrow-down"></span></A>
-              </c:when>
-              <c:when test="${sessionScope.gen_id != null}">
-                <A href="./update_rev_no_up.do?rev_no=${reviewVO.rev_no }" title="추천"><span class="glyphicon glyphicon-arrow-up"></span></A>
-                <A href="./update_rev_no_down.do?rev_no=${reviewVO.rev_no }" title="신고"><span class="glyphicon glyphicon-arrow-down"></span></A>        
-              </c:when>            
-          </c:choose>          
-
-         </TD>             
+             
       </tr>
   </c:forEach>
  

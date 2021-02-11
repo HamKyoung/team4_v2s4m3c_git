@@ -13,11 +13,17 @@ public interface ReviewProcInter {
   public int create (ReviewVO reviewVO); 
   
   /**
-   * 목록
-   * @param seqno
+   * 검색 레코드 갯수
+   * @param hashMap
    * @return
    */
-  public List<ReviewVO> list_rev_no();
+  public int search_count(HashMap<String, Object> hashMap);
+
+  /**
+   * 목록
+   * @return
+   */
+  public List<ReviewVO> list_rev_no(HashMap<String, Object> map);
   
   /**
    * JOIN 목록
@@ -36,15 +42,8 @@ public interface ReviewProcInter {
    * @param word 검색어
    * @return
    */
-  public String pagingBox(String listFile, int rev_no, int search_count, int nowPage, String word);
-  
-  /**
-   * 카테고리별 검색 레코드 갯수
-   * @param hashMap
-   * @return
-   */
-  public int search_count(HashMap<String, Object> hashMap);
-  
+  public String pagingBox(String listFile, int search_count, int nowPage, String com_name);
+    
   /**
    * 조회
    * @return

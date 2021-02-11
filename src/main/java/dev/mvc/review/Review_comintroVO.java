@@ -7,9 +7,11 @@ public class Review_comintroVO {
   private String com_name="";
   private String rev_title="";
   private int rev_score;
+  private String  com_form="";  
+  private String  com_type="";
   private String  homepage="";
   
-  
+ 
   public int getRev_no() {
     return rev_no;
   }
@@ -34,12 +36,26 @@ public class Review_comintroVO {
   public void setRev_score(int rev_score) {
     this.rev_score = rev_score;
   }
+  public String getCom_form() {
+    return com_form;
+  }
+  public void setCom_form(String com_form) {
+    this.com_form = com_form;
+  }
+  public String getCom_type() {
+    return com_type;
+  }
+  public void setCom_type(String com_type) {
+    this.com_type = com_type;
+  }
   public String getHomepage() {
     return homepage;
   }
   public void setHomepage(String homepage) {
     this.homepage = homepage;
   }
+
+
 
   
   

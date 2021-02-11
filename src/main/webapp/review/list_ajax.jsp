@@ -85,21 +85,23 @@
           </c:choose>          
     </ASIDE>
 
-      <DIV style="text-align: right;">
+      <DIV style="text-align: right;">      
+      <form name='frm' id='frm' method='get' action='./list.do'>
       <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
-          <input type='text' name='word' id='word' value='${param.word }' 
+        <c:when test="${param.com_name != '' }"> <%-- 검색하는 경우 --%>
+          <input type='text' name='com_name' id='com_name' value='${param.com_name }' 
                      style='width: 20%;'>
         </c:when>
         <c:otherwise> <%-- 검색하지 않는 경우 --%>
-          <input type='text' name='word' id='word' value='' style='width: 20%;'>
+          <input type='text' name='com_name' id='com_name' value='' style='width: 20%;'>
         </c:otherwise>
       </c:choose>
       <button type='submit'>검색</button>
-      <c:if test="${param.word.length() > 0 }">
+      <c:if test="${param.com_name.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
+                     onclick="location.href='./list.do?&com_name='">검색 취소</button>  
       </c:if>
+      </form>
       </DIV>
 
   

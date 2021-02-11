@@ -13,18 +13,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  #{rev_good}, #{rev_bad}, sysdate, 0, #{comno}, #{gen_memberno})
   </insert>
   
-  <select id="list_rev_no" resultType="ReviewVO">
-    SELECT rev_no, com_name, rev_title, rev_score, rev_visible, rev_date, comno
+   <!-- 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
     FROM com_review
-    ORDER BY rev_no ASC
+    <choose>
+      <when test="com_name == null or com_name == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE com_name LIKE '%' || #{com_name} || '%'
+      </otherwise>
+    </choose>
+  </select>  
+  
+  <select id="list_rev_no" resultType="ReviewVO" parameterType="HashMap">
+     SELECT rev_no, com_name, rev_title, rev_score, rev_content, rev_visible, rev_date, comno, r
+     FROM (
+                SELECT rev_no, com_name, rev_title, rev_score, rev_content, rev_visible, rev_date, comno, rownum as r
+                FROM (
+                          SELECT rev_no, com_name, rev_title, rev_score, rev_content, rev_visible, rev_date, comno
+                          FROM com_review
+                          <choose>
+                            <when test="com_name == null or com_name == ''"> <!-- 검색하지 않는 경우 -->
+                            </when>
+                            <otherwise>
+                              WHERE com_name LIKE '%' || #{com_name} || '%' 
+                            </otherwise>
+                          </choose>                            
+                          ORDER BY rev_no DESC
+                )
+     )
+     WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
   </select>
   
   <!-- com_intro JOIN 목록 -->
   <select id="list_join" resultType="Review_comintroVO">
-    SELECT r.rev_no, r.com_name, r.rev_title, r.rev_score, i.homepage
+    SELECT DISTINCT r.rev_no, r.com_name, i.homepage, i.com_form, i.com_type
     FROM com_review r,com_intro i
     WHERE r.com_name=i.com_name
-    ORDER BY r.rev_no ASC
+    ORDER BY rev_no ASC
   </select>
 
   <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
@@ -49,22 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      )
      WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
    </select>
-  
-     <!-- 카테고리별 검색 레코드 갯수 -->
-   <select id="search_count" resultType="int" parameterType="HashMap">
-     SELECT COUNT(*) as cnt
-     FROM com_review
-     <choose>
-       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
-         WHERE rev_no=#{rev_no}
-       </when>
-       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
-         WHERE rev_no=#{rev_no} AND (title LIKE '%' || #{com_name} || '%' 
-                                                        OR rev_content LIKE '%' || #{rev_content} || '%')
-       </otherwise>
-     </choose>
-   </select>    
-  
+    
   <select id="read" resultType="ReviewVO" parameterType="int">
     SELECT rev_no, com_name, rev_title, rev_score, rev_depart, rev_content, rev_visible, rev_date, comno
     FROM com_review

@@ -26,7 +26,7 @@
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>
     ${reviewVO.com_name }
-  </DIV> &nbsp;&nbsp; <A href="./list_join.do" style='font-size: 10px;'>이 회사 다른 리뷰 보기</A>
+  </DIV> &nbsp;&nbsp; <A href="./list_join.do" style='font-size: 10px;'>이 회사 정보 보기</A>
   
   <ASIDE class="aside_left">
     ${reviewVO.rev_title } : ${reviewVO.rev_score} 점
