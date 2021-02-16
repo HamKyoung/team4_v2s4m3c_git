@@ -143,6 +143,8 @@
  
   <FORM name='frm' method='POST' action='./delete.do'>
       <input type='hidden' name='jobnwsno' value='${param.jobnwsno}'>
+      <input type='hidden' name='nowPage' id='nowPage' value='${param.nowPage }'>
+      
       
       <DIV id='panel1' style="width: 40%; text-align: center; margin: 10px auto;"></DIV>
             

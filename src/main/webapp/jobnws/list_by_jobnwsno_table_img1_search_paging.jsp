@@ -71,11 +71,31 @@
                 </c:otherwise>
               </c:choose>
               </TD>
-             <TD class="td_bs_left"><A href="./read.do?jobnwsno=${jobnwsno}&title=${param.jobnws_title }&nowPage=${param.nowPage}">${JobnwsVO.jobnws_title }</A></TD>   
+             <TD class="td_bs_left"><A href="./read.do?jobnwsno=${jobnwsno}&jobnws_title=${param.jobnws_title }&nowPage=${nowPage}">${JobnwsVO.jobnws_title }</A></TD>   
           <TD class="td_bs">${JobnwsVO.jobnws_cnt }</TD>
         <TD class="td_bs">${JobnwsVO.jobnws_date.substring(0, 10) }</TD>     
       </TR> 
     </c:forEach>
+    
+    <DIV style="text-align: right;">
+    <form name='frm' id='frm' method='get' action='./list.do'>
+      <br>
+      <c:choose>
+        <c:when test="${param.jobnws_title != '' }"> <%-- 검색하는 경우 --%>
+          <input type='text' name='jobnws_title' id='jobnws_title' value='${param.jobnws_title }' 
+                     style='width: 20%;'>
+        </c:when>
+        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+          <input type='text' name='jobnws_title' id='jobnws_title' value='' style='width: 20%;'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit'>검색</button>
+      <c:if test="${param.jobnws_title.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list.do?&jobnws_title='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </DIV>
     
       </tbody>
     </TABLE>

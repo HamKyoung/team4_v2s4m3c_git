@@ -133,7 +133,7 @@ ORDER BY jobnwsno DESC;
 
 -- 삭제
 DELETE jobnws
-WHERE jobnwsno = 5;
+WHERE jobnwsno = 14;
 
 SELECT * FROM jobnws;
 
@@ -159,7 +159,89 @@ RENAME COLUMN word to jobnws_word;
 -- 컬럼 삭제
 ALTER TABLE jobnws
 DROP COLUMN jobnws_word;
+
+-- 검색 + 페이징 + 메인 이미지
+-- step 1
+SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1
+FROM jobnws
+WHERE  jobnws_title LIKE '%단풍%'
+ORDER BY jobnwsno DESC;
+
+-- step 2
+SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1, rownum as r
+FROM (
+          SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1
+          FROM jobnws
+          WHERE  jobnws_title LIKE '%단풍%'
+          ORDER BY jobnwsno DESC
+);
+
+-- step 3, 1 page
+SELECT  jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1, r
+FROM (
+           SELECT  jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1, rownum as r
+           FROM (
+                     SELECT  jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1
+                     FROM jobnws
+                     WHERE  jobnws_title LIKE '%단풍%'
+                     ORDER BY jobnwsno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 10;
+
+-- step 3, 2 page
+SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1, r
+FROM (
+           SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1, rownum as r
+           FROM (
+                     SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1
+                     FROM jobnws
+                     WHERE jobnws_title LIKE '%단풍%'
+                     ORDER BY jobnwsno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 10;
+
+----------------------------------------------------------------------------------------------
+ admin join start
+----------------------------------------------------------------------------------------------
  
+SELECT c.jobnwsno, c.adminno,  a.id
+FROM jobnws c, admin a
+WHERE c.adminno = a.adminno;
 
+  JOBNWSNO    ADMINNO             ID                                                
+----------    ------------------------  --------------------------
+         8                1                  admin           
 
+-- 2개의 컬럼에 중복되는경우는 as를 사용하여 컬럼명을 변경, id를 aid로 변경
+SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_date, jobnws_file1,
+jobnws_thumb1, jobnws_size1, aid, r      
+FROM (
+           SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_date, jobnws_file1,
+                     jobnws_thumb1, jobnws_size1, aid, rownum as r
+           FROM (
+                     SELECT  c.jobnwsno, c.adminno, c.jobnws_title, c.jobnws_content, c.jobnws_url, c.jobnws_cnt, c.jobnws_date, c.jobnws_file1,
+                     c.jobnws_thumb1, c.jobnws_size1, a.id as aid
+                     FROM jobnws c, admin a
+                     WHERE jobnwsno=8 
+                               AND c.adminno = a.adminno 
+                               AND (jobnws_title LIKE '%단풍%' OR jobnws_content LIKE '%단풍%')
+                     ORDER BY jobnwsno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 10;        
+
+----------------------------------------------------------------------------------------------
+ admin join end
+----------------------------------------------------------------------------------------------
 

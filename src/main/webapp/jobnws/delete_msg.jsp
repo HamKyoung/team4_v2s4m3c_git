@@ -63,7 +63,7 @@
         <c:when test="${cnt == 1 && jobnws_passwd_cnt == 1}">
           <LI class='li_none'>
             <button type='button' 
-                        onclick="location.href='./list.do?jobnwsno=${param.jobnwsno}'"
+                        onclick="location.href='./list.do?nowPage=${param.nowPage }'"
                         class="btn btn-info">목록</button>                        
           </LI>
         </c:when>
@@ -73,7 +73,7 @@
                         onclick="history.back();"
                         class="btn btn-info">재시도</button>
             <button type='button' 
-                        onclick="location.href='./list.do?jobnwsno=${param.jobnwsno}'"
+                        onclick="location.href='./list.do?nowPage=${param.nowPage }'"
                         class="btn btn-info">목록</button>                        
           </LI>
         </c:otherwise> 

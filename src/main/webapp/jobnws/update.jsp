@@ -34,6 +34,7 @@
     <FORM name='frm' method='POST' action='./update.do' class="form-horizontal">
       
       <input type='hidden' name='jobnwsno' id='jobnwsno' value='${jobnwsVO.jobnwsno }'>
+      <input type='hidden' name='nowPage' id='nowPage' value='${param.nowPage }'>
       
       <div class="form-group">   
         <div class="col-md-12">
