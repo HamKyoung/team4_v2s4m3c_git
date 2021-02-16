@@ -103,7 +103,7 @@ public class ComIntroCont {
    * @return
    */
   @RequestMapping(value="/comintro/read.do", method=RequestMethod.GET )
-  public ModelAndView read(int comno) {
+  public ModelAndView read(int comno,HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
     ComIntroVO comintroVO = this.comintroProc.read(comno);
@@ -111,6 +111,20 @@ public class ComIntroCont {
 
     
     mav.setViewName("/comintro/read"); // /webapp/comintro/read.jsp
+    
+    boolean genlogin = false;
+    boolean corlogin = false;
+    
+    if (genmemberProc.isMember(session)) { 
+      genlogin = true;
+    }
+    
+    if (cormemberProc.isMember(session)) {
+      corlogin = true;
+    }
+    
+    mav.addObject("genlogin", genlogin);
+    mav.addObject("corlogin", corlogin);
     return mav;
   }
   

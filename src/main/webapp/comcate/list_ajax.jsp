@@ -300,9 +300,11 @@
 <jsp:include page="/menu/top.jsp" />
  
   <DIV class='title_line'>
-  <A href="../comintro/list_all.do">회사 목록</A> > ${comintroVO.com_name }
+  <A href="../comintro/list_all.do">회사 목록</A> ><A href="../comintro/read.do?comno=${comintroVO.comno }">${comintroVO.com_name }</A> 
   </DIV>
   <ASIDE class="aside_right">
+    <A href="../comintro/read.do?comno=${comintroVO.comno }">회사소개</A>
+    <span class='menu_divide' > | </span>
     <A href="./list_join.do">전체보기</A> 
   </ASIDE> 
   <DIV class='menu_line'></DIV>

@@ -28,15 +28,18 @@
   <ASIDE class="aside_left">
   </ASIDE>
   <ASIDE class="aside_right">
+  <c:if test="${corlogin eq true }">
     <A href="./create.do">글 등록</A>
     <span class='menu_divide' > | </span>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./list_all.do?comno=${comno }'>목록</A>
-    <span class='menu_divide' > | </span> 
     <A href='./update.do?comno=${comno }'>수정</A>
     <span class='menu_divide' > | </span> 
     <A href='./delete.do?comno=${comno }'>삭제</A>
+    <span class='menu_divide' > | </span>
+  </c:if>
+    
+    <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' > | </span> 
+    <A href='./list_all.do?comno=${comno }'>목록</A>
     
   </ASIDE> 
   

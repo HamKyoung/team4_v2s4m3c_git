@@ -112,7 +112,7 @@
           <TR> 
             <td style='text-align: center;'>${comintroVO.comno}</td>
             <td>
-              <a href="../comcate/list.do?comno=${comno}">${comintroVO.com_name}</a> 
+              <a href="./read.do?comno=${comno}">${comintroVO.com_name}</a> 
             </td> 
             <td style='text-align: center;'>${comintroVO.com_type}</td> 
            </TR>
