@@ -74,7 +74,7 @@
     
     <div>
       <div id="logo" >
-      로고
+      로고2
       </div>
       <div style="background-color:pink;">
       회사이름
