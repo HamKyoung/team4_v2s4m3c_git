@@ -48,6 +48,7 @@
 
 <DIV class="col-md-9"> 
   <div id="inner-grid">
+  
     <div>
       <div class="logo" >
         <img src="./css/images/soldeskLogo.jpeg" style="width:140px; height:70px;">
@@ -56,69 +57,191 @@
       솔데스크
       </div>
       <div id="recruit_title">
-      2021년 상반기 직원 채용
+        2021년 상반기 직원 채용
       </div>
     </div>
     
     <div>
       <div class="logo" >
-        <img src="./css/images/coupang.png" style="width:140px; height:70px;">
+        <img src="./css/images/main/coupang.JPG" style="width:140px; height:70px;">
       </div>
-      <div style="background-color:pink;">
-      회사이름
+      <div>
+        쿠팡
       </div>
       <div id="recruit_title">
-      제목
+        2021년 상반기 직원 채용
       </div>
     </div>
     
     <div>
       <div id="logo" >
-      로고2
+        <img src="./css/images/main/gs.JPG" style="width:140px; height:70px;">
       </div>
-      <div style="background-color:pink;">
-      회사이름
+      <div>
+        (주)GS리테일
       </div>
       <div id="recruit_title">
-      제목
+        2021년 상반기 직원 채용
       </div>
     </div>
     
     <div>
       <div id="logo" >
-      로고
+        <img src="./css/images/main/kgc.JPG" style="width:140px; height:70px;">
       </div>
-      <div style="background-color:pink;">
-      회사이름
+      <div>
+        KGC인삼공사
       </div>
-      
       <div id="recruit_title">
-      제목
+        한국인삼공사 각 부분별 인력모집
       </div>
     </div>
-        <div>
+    
+    <div>
       <div id="logo" >
-      로고
+        <img src="./css/images/main/streami.JPG" style="width:140px; height:70px;">
       </div>
-      <div style="background-color:pink;">
-      회사이름
+      <div>
+        스트리미
       </div>
-      
       <div id="recruit_title">
-      제목
+        스트리미 개발/비개발직군 모집
       </div>
     </div>
-    <div>6</div>
-    <div>7</div>
-    <div>8</div>
-    <div>6</div>
-    <div>7</div>
-    <div>8</div>
-    <div>5</div>
-    <div>6</div>
-    <div>7</div>
-    <div>6</div>
-    <div>7</div>
+    
+    <div>
+      <div id="logo" >
+        <img src="./css/images/main/thinklab.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        (주)생각연구소
+      </div>
+      <div id="recruit_title">
+        실력있는 광고 기획자
+      </div>
+    </div>
+    
+    <div>
+      <div id="logo" >
+        <img src="./css/images/main/nhbank.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        NH농협은행
+      </div>
+      <div id="recruit_title">
+        2021년 상반기 신규직원 채용
+      </div>
+    </div>
+    
+    <div>
+      <div id="logo" >
+        <img src="./css/images/main/emart.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        (주)이마트
+      </div>
+      <div id="recruit_title">
+        이마트 경력직 채용
+      </div>
+    </div>
+
+    <div>
+      <div id="logo" >
+        <img src="./css/images/main/emart.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        (주)이마트
+      </div>
+      <div id="recruit_title">
+        이마트 경력직 채용
+      </div>
+    </div>
+    
+    <div>
+      <div id="logo" >
+        <img src="./css/images/main/hyundai.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        현대씨앤알(주)
+      </div>
+      <div id="recruit_title">
+        현대C&R 2021년 2분기 공개채용
+      </div>
+    </div>
+    
+     <div>
+      <div id="logo" >
+        <img src="./css/images/main/ssg.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        SSG.COM
+      </div>
+      <div id="recruit_title">
+        부문별 경력사원 대규모 공채
+      </div>
+    </div>
+    
+     <div>
+      <div id="logo" >
+        <img src="./css/images/main/gyeryong.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        계룡건설산업(주)
+      </div>
+      <div id="recruit_title">
+        2021년 신입/경력 수시채용
+      </div>
+    </div> 
+    
+     <div>
+      <div id="logo" >
+        <img src="./css/images/main/hanssem.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        한샘
+      </div>
+      <div id="recruit_title">
+       키친디자이너 KD 공개채용
+      </div>
+    </div>
+    
+     <div>
+      <div id="logo" >
+        <img src="./css/images/main/monitorapp.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        (주)모니터랩
+      </div>
+      <div id="recruit_title">
+        2021년 개발/마케팅 공개채용
+      </div>
+    </div>
+    
+     <div>
+      <div id="logo" >
+        <img src="./css/images/main/gc.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        (주)GC녹십자그룹
+      </div>
+      <div id="recruit_title">
+        부문별 수시 채용
+      </div>
+    </div>
+    
+     <div>
+      <div id="logo" >
+        <img src="./css/images/main/naver.JPG" style="width:140px; height:70px;">
+      </div>
+      <div>
+        네이버파이낸셜(주)
+      </div>
+      <div id="recruit_title">
+        경력 1일 이상 개발차 채용
+      </div>
+    </div>
+    
+                               
   </div>
 </DIV>
 
