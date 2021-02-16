@@ -227,7 +227,7 @@
   /* ************************************************ */  
   .top_menu_link:link{  /* 방문전 상태 */
     text-decoration: none; /* 밑줄 삭제 */
-    color: black;
+    color: white;
     font-weight: bold;
   }
 
