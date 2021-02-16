@@ -28,6 +28,78 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       ORDER BY jobnwsno ASC
     </select>
     
+     
+   <!-- 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM jobnws
+     <choose>
+       <when test="jobnws_title == null or jobnws_title == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+       </when>
+       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+         WHERE jobnws_title LIKE '%' || #{jobnws_title} || '%'
+       </otherwise>
+     </choose>
+   </select>
+   
+   
+   <!-- 페이징 + 메인 이미지 + 검색-->   
+   <select id="list_by_jobnwsno_search_paging" 
+              resultType="JobnwsVO" parameterType="HashMap">
+     SELECT  jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+                 jobnws_thumb1, jobnws_size1, r
+     FROM (
+                SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+                           jobnws_thumb1, jobnws_size1, rownum as r
+                FROM (
+                          SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_passwd, jobnws_date, jobnws_file1,
+                                     jobnws_thumb1, jobnws_size1
+                          FROM jobnws
+                          <choose>
+                            <when test="jobnws_title == null or jobnws_title == ''"> <!-- 검색하지 않는 경우 -->
+                            </when>
+                            <otherwise>
+                              WHERE jobnws_title LIKE '%' || #{jobnws_title} || '%'
+                            </otherwise>
+                          </choose>
+                          ORDER BY jobnwsno DESC
+                )
+     )
+     WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
+     <!-- 
+       1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30;
+      -->
+   </select> 
+   
+     <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지  -->
+     <select id="list_by_jobnwsno_search_paging_join" resultType="Jobnws_AdminVO" parameterType="HashMap"> 
+      SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_date, jobnws_file1,
+      jobnws_thumb1, jobnws_size1, aid, r      
+      FROM (
+                 SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt, jobnws_date, jobnws_file1,
+                           jobnws_thumb1, jobnws_size1, aid, rownum as r
+                 FROM (
+                           SELECT  c.jobnwsno, c.adminno, c.jobnws_title, c.jobnws_content, c.jobnws_url, c.jobnws_cnt, c.jobnws_date, c.jobnws_file1,
+                           c.jobnws_thumb1, c.jobnws_size1, a.id as aid
+                           FROM jobnws c, admin a
+                          <choose>
+                            <when test="jobnws_title == null or jobnws_title == ''"> <!-- 검색하지 않는 경우 -->
+                            </when>
+                            <otherwise>
+                              WHERE jobnwsno = #{jobnwsno}
+                                        AND c.adminno = m.adminno
+                                        AND (jobnws_title LIKE '%' || #{jobnws_title} || '%' 
+                                                OR jobnws_content LIKE '%' || #{jobnws_content} || '%')
+                            </otherwise>
+                          </choose>
+                          ORDER BY jobnwsno DESC
+                 )          
+      )
+       WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
+    </select>      
+       
     <!-- 조회, id: read, 입력: jobnwsno, 리턴: JobnwsVO -->
     <select id="read" resultType="JobnwsVO" parameterType="int">
       SELECT jobnwsno, adminno, jobnws_title, jobnws_content, jobnws_url, jobnws_cnt,  jobnws_date, jobnws_file1, jobnws_thumb1, jobnws_size1
@@ -54,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      WHERE jobnwsno=#{jobnwsno} AND jobnws_passwd=#{jobnws_passwd}
    </select>
    
-   <update id="update_cnt" parameterType="int">
+   <update id="increaseCnt" parameterType="int">
      UPDATE jobnws
      SET jobnws_cnt = jobnws_cnt + 1 
      WHERE jobnwsno = #{jobnwsno}

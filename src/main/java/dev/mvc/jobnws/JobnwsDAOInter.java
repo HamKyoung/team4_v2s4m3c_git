@@ -1,7 +1,9 @@
 package dev.mvc.jobnws;
 
+
 import java.util.HashMap;
 import java.util.List;
+
 
 
 
@@ -20,9 +22,29 @@ public interface JobnwsDAOInter {
    * 목록
    * @return
    */
-  public List<JobnwsVO> list_jobnwsno_asc();
+   public List<JobnwsVO> list_jobnwsno_asc(); 
   
+  /**
+   * 검색 레코드 갯수
+   * @param hashMap
+   * @return
+   */
+  public int search_count(HashMap<String, Object> hashMap);
   
+  /**
+   * 검색 + 페이징 목록
+   * @param map
+   * @return
+   */
+  public List<JobnwsVO> list_by_jobnwsno_search_paging(HashMap<String, Object> map);
+  
+  /**
+   * 검색 + 페이징 목록 + Admin join
+   * @param map
+   * @return
+   */
+  public List<Jobnws_AdminVO> list_by_jobnwsno_search_paging_join(HashMap<String, Object> map);
+ 
   /**
    * 조회, 수정폼
    * @param jobnwsno
@@ -67,10 +89,9 @@ public interface JobnwsDAOInter {
   
   /**
    * 조회수 증가
-   * @param jobnwsno
    * @return
    */
-  public int update_cnt(int jobnwsno);
+  public int increaseCnt(int jobnwsno);    
  
   
   /**

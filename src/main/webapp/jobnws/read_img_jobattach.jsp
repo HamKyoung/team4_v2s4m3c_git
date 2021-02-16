@@ -45,11 +45,11 @@ function panel_img(dir, file) {
         <c:choose>
       <c:when test="${jobnwsVO.jobnws_file1.trim().length() > 0 }">
         <span class='menu_divide' > | </span> 
-        <A href='./img_update.do?jobnwsno=${jobnwsno }'>메인 이미지 변경/삭제</A>     
+        <A href='./img_update.do?jobnwsno=${jobnwsno }&nowPage=${param.nowPage}'>메인 이미지 변경/삭제</A>     
       </c:when>
       <c:otherwise>
         <span class='menu_divide' > | </span> 
-        <A href='./img_create.do?jobnwsno=${jobnwsno }'>메인 이미지 등록</A>     
+        <A href='./img_create.do?jobnwsno=${jobnwsno }&nowPage=${param.nowPage}'>메인 이미지 등록</A>     
       </c:otherwise>
     </c:choose>
     <span class='menu_divide' > | </span>
@@ -58,15 +58,15 @@ function panel_img(dir, file) {
     <A href='../jobattach/list_by_jobnwsno.do?jobnwsno=${jobnwsno }'>첨부 파일 삭제</A>
         
     <span class='menu_divide' > | </span> 
-    <A href='./update.do?jobnwsno=${jobnwsno }&jobnwsno=${jobnwsno}'>수정</A>
+    <A href='./update.do?jobnwsno=${jobnwsno}&nowPage=${param.nowPage}'>수정</A>
     <span class='menu_divide' > | </span> 
-    <A href='./delete.do?jobnwsno=${jobnwsno }&jobnwsno=${jobnwsno}'>삭제</A>
+    <A href='./delete.do?jobnwsno=${jobnwsno}&nowPage=${param.nowPage}'>삭제</A>
     </c:if>
     
     <span class='menu_divide' > | </span>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span> 
-    <A href='./list.do?jobnwsno=${jobnwsno }'>목록</A>
+    <A href='./list.do?jobnws_title=${param.jobnws_title }&nowPage=${param.nowPage}'>목록</A>
 
   </ASIDE> 
   
