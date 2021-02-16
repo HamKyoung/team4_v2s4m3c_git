@@ -122,21 +122,19 @@
     <A href="../comcate/list.do?comno=${comintroVO.comno }">${comintroVO.com_name }</A> > 
     <A href="../recruit/list.do?cateno=${recruitVO.cateno }&word=${param.word }&nowPage=${param.nowPage}">${comcateVO.cate_name}</A>  
   </ASIDE>
+  
   <ASIDE class="aside_right">
+    <A href="../comintro/read.do?comno=${comintroVO.comno }">회사소개</A>
+    <span class='menu_divide' > | </span>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span>
     <A href='./list.do?cateno=${cateno }&word=${param.word }&nowPage=${param.nowPage}'>목록</A>
-
-    <span class='menu_divide' > | </span> 
+    
     <c:if test="${corlogin eq true }">
-    <!--  
-    <span class='menu_divide' > | </span>
-    <A href='./reply.do?recruitno=${recruitno }&cateno=${cateno }'>답변</A>
-     -->
-
-    <%-- 글을 등록한 회원만 메뉴 출력 --%>
-    <%-- <c:if test="${sessionScope.memberno == contentsVO.memberno or sessionScope.id_admin ne null }"> --%>
-      <%-- 글을 등록한 회원임. ${sessionScope.memberno} / ${contentsVO.memberno } --%>
+     
+    <!-- <span class='menu_divide' > | </span>
+    <A href='./reply.do?recruitno=${recruitno }&cateno=${cateno }'>답변</A>-->
+     
       <c:choose>
         <c:when test="${recruitVO.file1.trim().length() > 0 }">
           <span class='menu_divide' > | </span> 
