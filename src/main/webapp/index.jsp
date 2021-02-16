@@ -51,13 +51,13 @@
   
     <div>
       <div class="logo" >
-        <img src="./css/images/soldeskLogo.jpeg" style="width:140px; height:70px;">
+        <img src="./css/images/kcc.JPG" style="width:140px; height:70px;">
       </div>
       <div>
-      솔데스크
+        (주)케이씨씨
       </div>
       <div id="recruit_title">
-        2021년 상반기 직원 채용
+        2021년 각 부문 수시채용
       </div>
     </div>
     
