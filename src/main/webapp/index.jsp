@@ -18,38 +18,29 @@
     
 </head>
 <style>
-#outer-grid {
-  display: grid;
-  grid-template-rows: 100px 1fr;
-  grid-template-columns: 1fr 200px;
-  grid-gap: 8px;
-}
-#outer-grid > div {
-  background-color: limegreen;
-  color: white;
-  font-size: 4vw;
-  padding: 8px;
-}
 #inner-grid{
   display: grid;
   grid-template-rows: 130px 130px 130px 130px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 5px;
   padding: 8px;
+  border: 1px solid black;
+  border-
+
 }
 #inner-grid > div {
   <!--background: lightgreen; -->
   padding: 8px;
+  rules :all;
 }
-#logo{
+.logo{
   height:70px;
   width: auto;
-  background-color:yellow;
+
 }
 #recruit_title{
   height:40px;
   width: auto;
-  background-color:lightgreen;
 }
 </style>
 <body>
@@ -58,42 +49,42 @@
 <DIV class="col-md-9"> 
   <div id="inner-grid">
     <div>
+      <div class="logo" >
+        <img src="./css/images/soldeskLogo.jpeg" style="width:140px; height:70px;">
+      </div>
+      <div>
+      솔데스크
+      </div>
+      <div id="recruit_title">
+      2021년 상반기 직원 채용
+      </div>
+    </div>
+    
+    <div>
+      <div class="logo" >
+        <img src="./css/images/coupang.png" style="width:140px; height:70px;">
+      </div>
+      <div style="background-color:pink;">
+      회사이름
+      </div>
+      <div id="recruit_title">
+      제목
+      </div>
+    </div>
+    
+    <div>
       <div id="logo" >
       로고
       </div>
       <div style="background-color:pink;">
       회사이름
       </div>
-      
       <div id="recruit_title">
       제목
       </div>
     </div>
-        <div>
-      <div id="logo" >
-      로고
-      </div>
-      <div style="background-color:pink;">
-      회사이름
-      </div>
-      
-      <div id="recruit_title">
-      제목
-      </div>
-    </div>
-        <div>
-      <div id="logo" >
-      로고
-      </div>
-      <div style="background-color:pink;">
-      회사이름
-      </div>
-      
-      <div id="recruit_title">
-      제목
-      </div>
-    </div>
-        <div>
+    
+    <div>
       <div id="logo" >
       로고
       </div>
