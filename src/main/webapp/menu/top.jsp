@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<DIV class='container' style='width: 90%; '>
+<DIV class='container_main' style='width: 90%; '>
 
 <header class='header'>
 
