@@ -30,7 +30,7 @@
     <c:if test="${adlogin eq true }">
     <A href="create.do">글 등록</A>
     </c:if>
-
+</ASIDE>
   
   <TABLE class='table table-striped'>
     <colgroup>
@@ -57,8 +57,7 @@
     </thead>
     
    
-    
-    </ASIDE>
+   
 
     <tbody>
     <c:forEach var="jobnws_AdminVO" items="${list }">  <!-- request 객체에 접근 -->
