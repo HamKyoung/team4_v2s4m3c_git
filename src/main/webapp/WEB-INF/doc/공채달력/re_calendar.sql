@@ -142,16 +142,16 @@ INSERT INTO re_calendar(calendar_no, RECRUITNO, c_rdate, c_edate, c_title, c_cnt
 VALUES(re_calendar_seq.nextval, 1, '2021-04-11', '2021-05-11', '가족같이 일 할 직원', 0, sysdate);
 
 -- list
-SELECT c.c_rdate, c.c_edate, c.c_title, c.RECRUITNO
-FROM re_calendar c, RECRUIT re
-WHERE re.RECRUITNO = c.RECRUITNO
+SELECT c.c_rdate, c.c_edate, c.c_title, c.RECRUITNO, ci.com_name
+FROM re_calendar c, RECRUIT re, COM_CATE cc, COM_INTRO ci
+WHERE re.RECRUITNO = c.RECRUITNO AND re.CATENO = cc.CATENO AND cc.comno = ci.comno
 ORDER BY re.RECRUITNO DESC;
 
 
 -- read, 조회
 SELECT calendar_no, RECRUITNO, c_rdate, c_edate, c_title, c_cnt, c_date
 FROM re_calendar
-WHERE calendar_no = 2;
+WHERE calendar_no = 1;
 
 
 
