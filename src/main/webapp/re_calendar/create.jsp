@@ -51,8 +51,8 @@
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"
                 enctype="multipart/form-data">
 
-      <!-- FK categrpno 지정 -->
-      <input type='hidden' name='RECRUITNO' id='RECRUITNO' value=1>
+      <!-- FK 지정 -->
+      <input type='hidden' name='RECRUITNO' id='RECRUITNO' value="${param.recruitno }">
       
       <div class="form-group">   
         <div class="col-md-12">
@@ -62,8 +62,8 @@
       
       <div class="form-group">   
         <div class="col-md-12">
-          <textarea class="form-control" name='c_rdate' id='c_rdate' rows='10' placeholder="시작일">${c_rdate }</textarea>
-          <textarea class="form-control" name='c_edate' id='c_edate' rows='10' placeholder="마감일">${c_edate }</textarea>
+          <textarea class="form-control" name='c_rdate' id='c_rdate' rows='1' placeholder="시작일">${c_rdate }</textarea>
+          <textarea class="form-control" name='c_edate' id='c_edate' rows='1' placeholder="마감일">${c_edate }</textarea>
         </div>
       </div>
       

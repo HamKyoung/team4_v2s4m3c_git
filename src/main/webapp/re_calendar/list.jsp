@@ -33,6 +33,8 @@
   ArrayList<Integer> edate_y = new ArrayList<Integer>();
   ArrayList<Integer> edate_m = new ArrayList<Integer>();
   ArrayList<Integer> edate_d = new ArrayList<Integer>();
+  ArrayList<String> com_name = new ArrayList<String>();
+  ArrayList<Integer> recruitno = new ArrayList<Integer>();
 
   %>
   
@@ -43,6 +45,9 @@
   this.edate_y.clear();
   this.edate_m.clear();
   this.edate_d.clear();
+  this.com_name.clear();
+  this.recruitno.clear();
+
   %>
   
   <c:forEach var="re_calendarVO"  items="${list}">
@@ -50,16 +55,19 @@
     <c:set var="c_rdate" value="${re_calendarVO.c_rdate }" />
     <c:set var="c_edate" value="${re_calendarVO.c_edate }" />
     <c:set var="c_title" value="${re_calendarVO.c_title }" />
-<%--     "${RECRUITNO }"
-    "${c_rdate }"
-    "${c_edate }"
-    "${c_title }" --%>
+    <c:set var="com_name" value="${re_calendarVO.com_name }" />
     <%
     
     String rdate = (String)pageContext.getAttribute("c_rdate");
     String edate = (String)pageContext.getAttribute("c_edate");
     String title = (String)pageContext.getAttribute("c_title");
+    
+    String name = (String)pageContext.getAttribute("com_name");
+    int no = (int)pageContext.getAttribute("RECRUITNO");
 
+    this.com_name.add(name);
+    this.recruitno.add(no);
+    
     this.rdate_y.add(Integer.parseInt(rdate.substring(0, 4)));
     this.rdate_m.add(Integer.parseInt(rdate.substring(5, 7)));
     this.rdate_d.add(Integer.parseInt(rdate.substring(8, 10)));
@@ -105,10 +113,10 @@
     <tr>
       <td align="center">
         <!--  이전 년월 -->
-        <a href="./list.jsp?y=<%=prevYear%>&m=<%=prevMonth%>">◁</a>
+        <a href="./list.do?y=<%=prevYear%>&m=<%=prevMonth%>">◁</a>
         <%=year%>년  <%=month+1%>월
         <!--  다음 년월 --> 
-        <a href="./list.jsp?y=<%=nextYear%>&m=<%=nextMonth%>">▷</a>
+        <a href="./list.do?y=<%=nextYear%>&m=<%=nextMonth%>">▷</a>
       </td>
     </tr>
     <tr>
@@ -130,7 +138,7 @@
     for (int k=1; k<bgnWeek; k++){
       out.println("<td>&nbsp;</td>");
     }
-    
+            
     // 첫날~마지막날까지 처리
     // - 날짜를 하루씩 이동하여 월이 바뀔때까지 그린다
     while (cal.get(Calendar.MONTH) == month) {
@@ -140,18 +148,18 @@
           if(cal.get(Calendar.YEAR) == this.rdate_y.get(in) && cal.get(Calendar.MONTH) == this.rdate_m.get(in) - 1) {   // 연도, 월이 구직시작과 같은 경우
             if(cal.get(Calendar.DATE) == this.rdate_d.get(in) ) {  // 시작일인 경우
               if(cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인경우
-                out.println("<br>" + "시작일" + "<br>" + "마감일");
+                out.println("<br><A href='../recruit/read.do?recruitno=" + this.recruitno.get(in) + "'>" + "<span style= 'font-size:13px; color: blue;'> 시작 </span> <span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span> </A>" + "<br>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>");
               } else {
-                out.println("<br>" + "시작일");
+                out.println("<br><A href='../recruit/read.do?recruitno=" + this.recruitno.get(in) + "'>" + "<span style= 'font-size:13px; color: blue;'> 시작 </span> <span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span> </A>" );
                 }
             } else { // 시작일이 아닌 경우
               if (cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인경우
-                out.println("<br>" + "마감일");
+                out.println("<br><span style= 'font-size:13px; color: red;'>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>");
               }
             }
           } else {   // 연도, 월이 구직시작과 같지 않은 경우
             if (cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인 경우
-              out.println("<br>" + "마감일");
+              out.println("<br><span style= 'font-size:13px; color: red;'>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>");
             }
           }
           }
@@ -164,18 +172,18 @@
           if(cal.get(Calendar.YEAR) == this.rdate_y.get(in) && cal.get(Calendar.MONTH) == this.rdate_m.get(in) - 1) {   // 연도, 월이 구직시작과 같은 경우
             if(cal.get(Calendar.DATE) == rdate_d.get(in) ){  // 시작일인 경우
               if(cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인경우
-                out.println("<br>" + "시작일" + "<br>" + "마감일");
+                out.println("<br><A href='../recruit/read.do?recruitno=" + this.recruitno.get(in) + "'>" + "<span style= 'font-size:13px; color: blue;'> 시작 </span> <span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span> </A>" + "<br>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>");
               } else {
-                out.println("<br>" + "시작일");
+                out.println("<br><A href='../recruit/read.do?recruitno=" + this.recruitno.get(in) + "'>" + "<span style= 'font-size:13px; color: blue;'> 시작 </span> <span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span> </A>" );
                 }
             } else { // 시작일이 아닌 경우
               if (cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인경우
-                out.println("<br>" + "마감일");
+                out.println("<br><span style= 'font-size:13px; color: red;'>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>");
               }
             }
           } else {   // 연도, 월이 구직시작과 같지 않은 경우
             if(cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인 경우
-              out.println("<br>" + "마감일");
+              out.println("<br><span style= 'font-size:13px; color: red;'>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>");
             }
           }
           }
@@ -187,18 +195,18 @@
           if(cal.get(Calendar.YEAR) == this.rdate_y.get(in) && cal.get(Calendar.MONTH) == this.rdate_m.get(in) - 1) {   // 연도, 월이 구직시작과 같은 경우
             if(cal.get(Calendar.DATE) == this.rdate_d.get(in) ) {  // 시작일인 경우
               if(cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인경우
-                out.println("<br>" + "시작일" + "<br>" + "마감일"); // 시작일과 마감일이 동시에 존재
+                out.println("<br><A href='../recruit/read.do?recruitno=" + this.recruitno.get(in) + "'>" + "<span style= 'font-size:13px; color: blue;'> 시작 </span> <span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span> </A>" + "<br>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>"); // 시작일과 마감일이 동시에 존재
                 } else {
-                  out.println("<br>" + "시작일"); // 시작일만 존재
+                  out.println("<br><A href='../recruit/read.do?recruitno=" + this.recruitno.get(in) + "'>" + "<span style= 'font-size:13px; color: blue;'> 시작 </span> <span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span> </A>" ); // 시작일만 존재
                   }
             } else { // 시작일이 아닌 경우
               if (cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인경우
-                out.println("<br>" + "마감일");  // 마감일만 존재
+                out.println("<br><span style= 'font-size:13px; color: red;'>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>");  // 마감일만 존재
                 }
             }
           } else {   // 연도, 월이 구직시작과 같지 않은 경우
             if(cal.get(Calendar.YEAR) == this.edate_y.get(in) && cal.get(Calendar.MONTH) == this.edate_m.get(in) - 1 && cal.get(Calendar.DATE) == this.edate_d.get(in)) { // 마감일인 경우
-              out.println("<br>" + "마감일"); // 마감일만 존재
+              out.println("<br><span style= 'font-size:13px; color: red;'>" + "마감 </span>" + "<span style= 'font-size:13px;'>" + this.com_name.get(in) + "</span>"); // 마감일만 존재
               }
           }
           }
