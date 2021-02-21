@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.notice.NoticeDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.re_calendar.Re_calendarDAOInter">
+  <!-- 
+  insert: INSERT SQL 실행
+  id: Spring에서 호출시 사용
+  parameterType: 전달받는 데이터 객체의 타입
+  return: 등록한 레코드 갯수 리턴
+  SQL선언시 ';'은 삭제
+  #{}: ? 동일
+  #{name}: public String getName() 자동 호출
+   --> 
+   
+  <!-- 등록 -->
+  <insert id="create" parameterType="Re_calendarVO">
+    INSERT INTO re_calendar(calendar_no, RECRUITNO, c_rdate, c_edate, c_title, c_cnt, c_date)
+    VALUES(re_calendar_seq.nextval, #{RECRUITNO}, #{c_rdate}, #{c_edate}, #{c_title}, 0, sysdate)
+  </insert> 
+  
+  <!-- 목록 -->  
+  <select id="list" resultType="Re_calendarVO">
+    SELECT c.c_rdate, c.c_edate, c.c_title, c.RECRUITNO
+    FROM re_calendar c, RECRUIT re
+    WHERE re.RECRUITNO = c.RECRUITNO
+    ORDER BY re.RECRUITNO DESC
+  </select>
+  
+  <!-- 조회, 수정, 삭제폼 -->
+  <select id="read" parameterType="int" resultType="Re_calendarVO">
+    SELECT calendar_no, RECRUITNO, c_rdate, c_edate, c_title, c_cnt, c_date
+    FROM re_calendar
+    WHERE calendar_no = #{calendar_no}
+  </select>
+   
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM re_calendar
+    WHERE calendar_no = #{calendar_no}
+  </delete>
+
+  <!-- 수정 -->
+  <update id="update" parameterType="Re_calendarVO">
+    UPDATE re_calendar
+    SET c_rdate=#{c_rdate}, c_edate=#{c_edate}
+    WHERE calendar_no = #{calendar_no}
+  </update>
+ 
+</mapper>
+
+
+
