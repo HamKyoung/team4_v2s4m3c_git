@@ -124,6 +124,8 @@
   </ASIDE>
   
   <ASIDE class="aside_right">
+    <A href="../re_calendar/create.do?recruitno=${recruitVO.recruitno }">공채 달력 등록</A>
+    <span class='menu_divide' > | </span>
     <A href="../comintro/read.do?comno=${comintroVO.comno }">회사소개</A>
     <span class='menu_divide' > | </span>
     <A href="javascript:location.reload();">새로고침</A>
