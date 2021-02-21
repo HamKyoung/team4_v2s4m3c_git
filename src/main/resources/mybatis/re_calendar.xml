@@ -26,9 +26,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 목록 -->  
   <select id="list" resultType="Re_calendarVO">
-    SELECT c.c_rdate, c.c_edate, c.c_title, c.RECRUITNO
-    FROM re_calendar c, RECRUIT re
-    WHERE re.RECRUITNO = c.RECRUITNO
+    SELECT c.c_rdate, c.c_edate, c.c_title, c.RECRUITNO, ci.com_name
+    FROM re_calendar c, RECRUIT re, COM_CATE cc, COM_INTRO ci
+    WHERE re.RECRUITNO = c.RECRUITNO AND re.CATENO = cc.CATENO AND cc.comno = ci.comno
     ORDER BY re.RECRUITNO DESC
   </select>
   
