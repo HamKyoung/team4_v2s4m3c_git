@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.admin.AdminProc;
 import dev.mvc.answer.AnsProcInter;
+import dev.mvc.comcate.ComCateProcInter;
+import dev.mvc.comintro.ComIntroProcInter;
 import dev.mvc.cormember.CormemberProc;
 import dev.mvc.genmember.GenmemberProc;
 import dev.mvc.genmember.GenmemberVO;
@@ -29,6 +31,15 @@ public class Re_calendarCont {
   @Autowired
   @Qualifier("dev.mvc.recruit.RecruitProc")
   private RecruitProcInter recruitProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.comcate.ComCateProc")
+  private ComCateProcInter comcateProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.comintro.ComIntroProc")
+  private ComIntroProcInter comintroProc;
+
   
   public Re_calendarCont() {
     System.out.println("--> Re_calendarCont created.");
@@ -69,10 +80,10 @@ public class Re_calendarCont {
   public ModelAndView list() {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/re_calendar/list");
-    
+   
     List<Re_calendarVO> list = this.re_calendarProc.list();
     mav.addObject("list", list);
-
+    
     return mav; // forward
   }
   

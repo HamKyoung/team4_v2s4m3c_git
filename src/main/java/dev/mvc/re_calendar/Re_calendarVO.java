@@ -17,6 +17,9 @@ public class Re_calendarVO {
   private String c_title = "";
   private int c_cnt = 0;
   private String c_date = "";
+  
+  private String com_name = "";
+  
   public int getCalendar_no() {
     return calendar_no;
   }
@@ -58,6 +61,12 @@ public class Re_calendarVO {
   }
   public void setC_date(String c_date) {
     this.c_date = c_date;
+  }
+  public String getCom_name() {
+    return com_name;
+  }
+  public void setCom_name(String com_name) {
+    this.com_name = com_name;
   }
   
   
