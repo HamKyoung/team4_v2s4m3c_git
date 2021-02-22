@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<DIV class='container_main' style='width: 90%; '>
+<DIV class='container_main'>
 
 <header class='header'>
 
@@ -93,7 +93,7 @@
   
 <!-- TOP HOME 닫음 -->
 
-    <DIV class="col-md-12 cont" style='margin-top: 100px;'>
+    <DIV class="col-md-12 cont" style='margin-top: 100px; margin-left: 80px;'>
       <DIV class='content'>
 
     

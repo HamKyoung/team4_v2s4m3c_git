@@ -20,10 +20,11 @@
 <style>
 #inner-grid{
   display: grid;
-  grid-template-rows: 130px 130px 130px 130px;
+  grid-template-rows: 120px 120px 120px 120px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 5px;
   padding: 2px;
+  clear: both;
 }
 #inner-grid > div {
   <!--background: lightgreen; -->
@@ -237,26 +238,39 @@
       <div class="recruit_title">
         <A style='font-size: 13px;' href='./recruit/read.do?recruitno=4'>경력 1일 이상 개발차 채용</A>
       </div>
-    </div>
-    
+    </div>    
                                
   </div>
 </DIV>
 
+
 <DIV class="col-md-3">
   <div class="inner-grid">
-    <div>공지배너</div>
-    <div>인기뉴스1</div>
-    <div>인기뉴스2</div>
-   
+         <div>
+      <div class="recruit_title">
+      공지사항<br>
+        <A style='font-size: 13px;' href='./notice/read.do?notice_no=1'>2021년 설 연휴 고객지원 안내</A><br>
+        <A style='font-size: 13px;' href='./notice/read.do?notice_no=2'>2021년 최저임금 적용 안내</A><Br>
+        <A style='font-size: 13px;' href='./notice/read.do?notice_no=3'>[이벤트] 신년스포 이벤트 OPEN!</A>
+      </div>
+    </div>
+    <br><br>
+         <div>
+      <div class="recruit_title">
+      인기뉴스<br>
+      <img src="./css/images/main/gangju.jpg" style="width:140px; height:70px;"><br>
+        <A style='font-size: 13px;' href='./jobnws/read.do?jobnwsno=55'>광주시, 올해 1000여 명 신규 채용한다</A><br>
+      </div>
+    </div>
+    <br><br>
   </div>    
     
-</DIV>
+</DIV>    
+
 
  
  
-<jsp:include page="/menu/bottom.jsp" flush='false' />
- 
+<jsp:include page="/menu/bottom.jsp" flush='false' /> 
 </body>
 </html>
   

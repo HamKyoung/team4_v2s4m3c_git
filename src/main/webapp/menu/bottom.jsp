@@ -9,7 +9,7 @@
   
   <!-- 화면 하단 메뉴 --> 
   <DIV class='fourth' style='text-align: center;'>
-    <HR>
+    <HR style='clear: both;'>
     ⓒ Copyright Team4 All rights reserved.
   </DIV>
   <DIV style='text-align: right;'>
