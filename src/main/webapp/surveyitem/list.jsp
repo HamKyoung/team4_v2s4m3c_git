@@ -72,7 +72,7 @@ $(function(){
     </form>
   </DIV>
 
-  
+  <!-- 관리자일경우 설문조사 항목 -->
   <div class="aside_right"></div>
     <c:choose>
       <c:when test="${sessionScope.id != null}">
@@ -111,6 +111,7 @@ $(function(){
       </TABLE>
     </c:when>
     
+    <!-- 관리자가 아닐경우 설문조사 항목 -->
     <c:otherwise>
       <TABLE class='table table-striped'>
         <colgroup>
