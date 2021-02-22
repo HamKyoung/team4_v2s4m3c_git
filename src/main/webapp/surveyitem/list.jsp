@@ -25,7 +25,6 @@ $(function(){
 
     var msg ="surveyno=" + surveyno;
     msg += "&sur_itemno=" + sur_itemno;
-    alert(sur_itemno);
     var params = msg;
     
     $.ajax({
