@@ -61,6 +61,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                                                         OR word LIKE '%' || #{word} || '%')
        </otherwise>
      </choose>
-   </select>  
+   </select>
+   
+   <!-- 설문조사 검색 목록 + 페이징 -->   
+   <select id="list_by_surveyno_search_paging" 
+              resultType="SurveyVO" parameterType="HashMap">
+     SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word, r
+     FROM (
+                SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word, rownum as r
+                FROM (
+                          SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word
+                          FROM survey
+                          <choose>
+                            <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                              WHERE surveyno=#{surveyno}
+                            </when>
+                            <otherwise>
+                              WHERE surveyno=#{surveyno} AND (topic LIKE '%' || #{word} || '%' 
+                                                               OR poster LIKE '%' || #{word} || '%' 
+                                                               OR word LIKE '%' || #{word} || '%')
+                            </otherwise>
+                          </choose>
+                          ORDER BY surveyno DESC
+                )
+     )
+     WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
+     <!-- 
+       1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30;
+      -->
+   </select>   
 
 </mapper>
