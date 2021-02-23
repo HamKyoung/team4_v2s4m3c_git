@@ -30,56 +30,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM survey
     WHERE surveyno=#{surveyno}
   </delete>
-  
-      <!-- 설문조사항목별 검색 목록 -->
-   <select id="list_by_search" resultType="SurveyVO" parameterType="HashMap">
-    SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word
-    FROM survey 
-     <choose>
-       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-       </when>
-       <otherwise>
-         WHERE  (topic LIKE '%' || #{word} || '%' 
-                      OR poster LIKE '%' || #{word} || '%' 
-                      OR word LIKE '%' || #{word} || '%')
-       </otherwise>
-     </choose>
-     ORDER BY surveyno DESC   
-   </select>
-   
-   <!-- 카테고리별 검색 레코드 갯수 -->
+
+   <!-- 검색 레코드 갯수 -->
    <select id="search_count" resultType="int" parameterType="HashMap">
      SELECT COUNT(*) as cnt
      FROM survey
      <choose>
        <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수-->
-         WHERE surveyno=#{surveyno}
        </when>
        <otherwise><!-- 검색하는 경우의 레코드 갯수-->
-         WHERE surveyno=#{surveyno} AND (topic LIKE '%' || #{word} || '%' 
-                                                        OR poster LIKE '%' || #{word} || '%' 
-                                                        OR word LIKE '%' || #{word} || '%')
+         WHERE (topic LIKE '%' || #{word} || '%' 
+                      OR poster LIKE '%' || #{word} || '%' 
+                      OR word LIKE '%' || #{word} || '%')
        </otherwise>
      </choose>
    </select>
    
-   <!-- 설문조사 검색 목록 + 페이징 -->   
-   <select id="list_by_surveyno_search_paging" 
+   <!-- 설문조사 검색 목록 + 페이징  -->   
+   <select id="list_by_search_paging" 
               resultType="SurveyVO" parameterType="HashMap">
-     SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word, r
-     FROM (
-                SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word, rownum as r
-                FROM (
-                          SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word
-                          FROM survey
+      SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word, r
+      FROM (
+                 SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word, rownum as r
+                 FROM (
+                           SELECT surveyno, topic, startdate, enddate, poster, cnt, continueyn, word
+                           FROM survey
                           <choose>
                             <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-                              WHERE surveyno=#{surveyno}
                             </when>
                             <otherwise>
-                              WHERE surveyno=#{surveyno} AND (topic LIKE '%' || #{word} || '%' 
-                                                               OR poster LIKE '%' || #{word} || '%' 
-                                                               OR word LIKE '%' || #{word} || '%')
+                              WHERE (topic LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                          OR poster LIKE '%' || #{word} || '%' 
+                                          OR word LIKE '%' || #{word} || '%')
                             </otherwise>
                           </choose>
                           ORDER BY surveyno DESC
@@ -91,6 +73,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        2 page: WHERE r >= 11 AND r <= 20;
        3 page: WHERE r >= 21 AND r <= 30;
       -->
-   </select>   
+   </select> 
 
 </mapper>
