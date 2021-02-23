@@ -46,7 +46,7 @@
                 onclick="location.href='./read.do?sur_itemno=${param.sur_itemno }&surveyno=${param.surveyno}'"
                 class="btn btn-info">변경 확인</button>
               <button type='button'
-                onclick="location.href='./list.do?surveyno=${param.surveyno}'"
+                onclick="location.href='./list.do?surveyno=${param.surveyno}&nowPage=${param.nowPage }'"
                 class="btn btn-info">목록</button>
             </LI>
           </c:when>
@@ -55,7 +55,7 @@
               <button type='button' onclick="history.back();"
                 class="btn btn-info">재시도</button>
               <button type='button'
-                onclick="location.href='./list.do?surveyno=${param.surveyno}'"
+                onclick="location.href='./list.do?surveyno=${param.surveyno}&nowPage=${param.nowPage }'"
                 class="btn btn-info">목록</button>
             </LI>
           </c:otherwise>

@@ -68,37 +68,70 @@ $(function(){
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
 
-<div class="aside_right"></div>
-  <TABLE class='table table-striped'>
-    <colgroup>
-      <col style='width: 70%;'/>
-      <col style='width: 30%;'/>
-
-    </colgroup>
-   
-    <thead>  
-    <TR>
-      <TH class="th_bs">주제: ${surveyVO.topic } </TH>
-      <TH class="th_bs">항목 파일</TH>
-    </TR>
-    </thead>
+  <div class="aside_right"></div>
+  <c:choose>
+    <c:when test="${SurveyitemVO.itemfile != null }">
+      <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 70%;'/>
+          <col style='width: 30%;'/>
     
-    <tbody>
-    <c:forEach var="SurveyitemVO" items="${list }">  <!-- request 객체에 접근 -->
-      <c:set var="sur_itemno" value="${SurveyitemVO.sur_itemno}" />
-      <c:set var="surveyno" value="${SurveyitemVO.surveyno}" />
-      <c:set var="itemfile" value="${SurveyitemVO.itemfile}" />
-      <TR>
-        <TD class="td_bs" style="text-align: left;">
-          <label>
-              결과: ${SurveyitemVO.item } > ${SurveyitemVO.itemcnt }(명)
-          </label>
-        </TD>
-      </TR>
-    </c:forEach>
-    </tbody>
-   
-  </TABLE>
+        </colgroup>
+       
+        <thead>  
+        <TR>
+          <TH class="th_bs">주제: ${surveyVO.topic } </TH>
+          <TH class="th_bs">항목 파일</TH>
+        </TR>
+        </thead>
+        
+        <tbody>
+        <c:forEach var="SurveyitemVO" items="${list }">  <!-- request 객체에 접근 -->
+          <c:set var="sur_itemno" value="${SurveyitemVO.sur_itemno}" />
+          <c:set var="surveyno" value="${SurveyitemVO.surveyno}" />
+          <c:set var="itemfile" value="${SurveyitemVO.itemfile}" />
+          <TR>
+            <TD class="td_bs" style="text-align: left;">
+              <label>
+                  결과: ${SurveyitemVO.item } > ${SurveyitemVO.itemcnt }(명)
+              </label>
+            </TD>
+          </TR>
+        </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:when>
+    
+    <c:otherwise>
+    <TABLE class='table table-striped'>
+        <colgroup>
+          <col style='width: 100%;'/>
+    
+        </colgroup>
+       
+        <thead>  
+        <TR>
+          <TH class="th_bs">주제: ${surveyVO.topic } </TH>
+        </TR>
+        </thead>
+        
+        <tbody>
+        <c:forEach var="SurveyitemVO" items="${list }">  <!-- request 객체에 접근 -->
+          <c:set var="sur_itemno" value="${SurveyitemVO.sur_itemno}" />
+          <c:set var="surveyno" value="${SurveyitemVO.surveyno}" />
+          <c:set var="itemfile" value="${SurveyitemVO.itemfile}" />
+          <TR>
+            <TD class="td_bs" style="text-align: left;">
+              <label>
+                  결과: ${SurveyitemVO.item } > ${SurveyitemVO.itemcnt }(명)
+              </label>
+            </TD>
+          </TR>
+        </c:forEach>
+        </tbody>
+      </TABLE>
+    </c:otherwise>
+  </c:choose>
   <div id="piechart" style="width: 900px; height: 500px;"></div>
   
 

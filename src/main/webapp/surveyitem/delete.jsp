@@ -40,7 +40,7 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">삭제</button>
         <button type="button" 
-                    onclick="location.href='./index" 
+                    onclick="location.href='./index.do" 
                     class="btn btn-info">취소[홈페이지]</button>
       </DIV>
        
