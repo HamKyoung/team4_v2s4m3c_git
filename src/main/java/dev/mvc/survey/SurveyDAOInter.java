@@ -42,11 +42,11 @@ public interface SurveyDAOInter {
   public int delete(int surveyno);
   
   /**
-   * 검색 목록
+   * 검색 + 페이지 목록
    * @param hashMap
    * @return
    */
-  public List<SurveyVO> list_by_search(HashMap<String, Object> hashMap);
+  public List<SurveyVO> list_by_surveyno_search_paging(HashMap<String, Object> hashMap);
   
   /**
    * 검색한 갯수
