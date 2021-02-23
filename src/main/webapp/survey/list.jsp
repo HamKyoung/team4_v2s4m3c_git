@@ -80,12 +80,12 @@
           <TR>
             <TD class="td_bs">${surveyno }</TD>
             <TD class="td_left">
-              <a href="../surveyitem/list.do?surveyno=${surveyno }">${SurveyVO.topic }</a>
+              <a href="../surveyitem/list.do?surveyno=${surveyno }&nowPage=${param.nowPage }">${SurveyVO.topic }</a>
             </TD>
             <TD class="td_bs">${SurveyVO.startdate }</TD>
             <TD class="td_bs">${SurveyVO.enddate }</TD>
-            <TD class="td_bs"><a href="./delete.do?surveyno=${surveyno }">삭제</a>
-              <a href="./update.do?surveyno=${surveyno }">수정</a>
+            <TD class="td_bs"><a href="./delete.do?surveyno=${surveyno }&nowPage=${param.nowPage }">삭제</a>
+              <a href="./update.do?surveyno=${surveyno }&nowPage=${param.nowPage }">수정</a>
             </TD>
           </TR>
         </c:forEach>
