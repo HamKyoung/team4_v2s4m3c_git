@@ -136,9 +136,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      SET jobnws_file1=#{jobnws_file1}, jobnws_thumb1=#{jobnws_thumb1}, jobnws_size1=#{jobnws_size1}
      WHERE jobnwsno=#{jobnwsno} 
    </update>
-  
-  
-    
-       
+   
 </mapper>
  
