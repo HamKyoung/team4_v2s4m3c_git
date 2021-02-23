@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                               WHERE jobnws_title LIKE '%' || #{jobnws_title} || '%'
                             </otherwise>
                           </choose>
-                          ORDER BY jobnwsno DESC
+                          
                 )
      )
      WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
@@ -88,13 +88,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                             <when test="jobnws_title == null or jobnws_title == ''"> <!-- 검색하지 않는 경우 -->
                             </when>
                             <otherwise>
-                              WHERE jobnwsno = #{jobnwsno}
-                                        AND c.adminno = m.adminno
-                                        AND (jobnws_title LIKE '%' || #{jobnws_title} || '%' 
-                                                OR jobnws_content LIKE '%' || #{jobnws_content} || '%')
+                             WHERE c.adminno = a.adminno
+                              AND  jobnws_title LIKE '%' || #{jobnws_title} || '%'  
                             </otherwise>
                           </choose>
-                          ORDER BY jobnwsno DESC
+                           ORDER BY jobnwsno DESC
                  )          
       )
        WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
@@ -138,9 +136,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      SET jobnws_file1=#{jobnws_file1}, jobnws_thumb1=#{jobnws_thumb1}, jobnws_size1=#{jobnws_size1}
      WHERE jobnwsno=#{jobnwsno} 
    </update>
-  
-  
-    
-       
+   
 </mapper>
  
