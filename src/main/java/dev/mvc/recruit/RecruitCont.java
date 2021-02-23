@@ -153,6 +153,7 @@ public class RecruitCont {
    * 
    * @return
    */
+  /*
   @RequestMapping(value = "/recruit/list.do", method = RequestMethod.GET)
   public ModelAndView list_by_cateno(int cateno,HttpSession session) {
     ModelAndView mav = new ModelAndView(); // /webapp/contents/list_by_cateno.jsp //
@@ -187,6 +188,128 @@ public class RecruitCont {
     return mav; // forward }
  
   }
+  */
+  
+  /**
+   * 목록 + 검색 지원
+   * http://localhost:9090/team4/recruit/list.do
+   * http://localhost:9090/team4/recruit/list.do?cateno=1&word=스위스
+   * @param cateno
+   * @param word
+   * @return
+   */
+  /*
+  @RequestMapping(value = "/recruit/list.do", 
+                                       method = RequestMethod.GET)
+  public ModelAndView list_by_cateno_search(
+      @RequestParam(value="cateno", defaultValue="1") int cateno,
+      @RequestParam(value="word", defaultValue="") String word,
+      HttpSession session
+      ) { 
+    
+    ModelAndView mav = new ModelAndView();
+    // /contents/list_by_cateno_table_img1_search.jsp
+    mav.setViewName("/recruit/list_by_cateno_table_img1_search");   
+    
+    boolean genlogin = false;
+    boolean corlogin = false;
+    
+    if (genmemberProc.isMember(session)) { 
+      genlogin = true;
+    }
+    
+    if (cormemberProc.isMember(session)) {
+      corlogin = true;
+    }
+    
+    mav.addObject("genlogin", genlogin);
+    mav.addObject("corlogin", corlogin);
+    
+    // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("cateno", cateno); // #{cateno}
+    map.put("word", word);     // #{word}
+    
+    // 검색 목록
+    List<RecruitVO> list = recruitProc.list_by_cateno_search(map);
+    mav.addObject("list", list);
+    
+    // 검색된 레코드 갯수
+    int search_count = recruitProc.search_count(map);
+    mav.addObject("search_count", search_count);
+
+    ComCateVO comcateVO = comcateProc.read(cateno);
+    mav.addObject("comcateVO", comcateVO);
+    
+    ComIntroVO comIntroVO = this.comintroProc.read(comcateVO.getComno());
+    mav.addObject("comIntroVO", comIntroVO); 
+    
+    return mav;
+  } 
+  */
+  
+  
+  /**
+   * 목록 + 검색 + 페이징 지원
+   * http://localhost:9090/team4/recruit/list.do
+   * http://localhost:9090/team4/recruit/list.do?cateno=1&title=채용&nowPage=1
+   * @param cateno
+   * @param title
+   * @param nowPage
+   * @return
+   */  
+  @RequestMapping(value = "/recruit/list.do", method = RequestMethod.GET)
+    public ModelAndView list_by_cateno_search_paging(
+        @RequestParam(value="cateno", defaultValue="1") int cateno,
+        @RequestParam(value="word", defaultValue="") String word,
+        @RequestParam(value="nowPage", defaultValue="1") int nowPage,
+        HttpSession session
+        ) { 
+      System.out.println("--> nowPage: " + nowPage);
+      
+      ModelAndView mav = new ModelAndView();
+           
+      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("cateno", cateno); // #{cateno}
+      map.put("word", word);     // #{word}
+      map.put("nowPage", nowPage);  // 페이지에 출력할 레코드의 범위를 산출하기위해 사용     
+      
+      // 검색 목록
+      List<RecruitVO> list = recruitProc.list_by_cateno_search_paging(map);
+      mav.addObject("list", list);
+
+      // 검색된 레코드 갯수
+      int search_count = recruitProc.search_count(map);
+      mav.addObject("search_count", search_count);
+    
+      ComCateVO  comcateVO  = comcateProc.read(cateno);
+      mav.addObject("comcateVO ", comcateVO);
+      
+      ComIntroVO  comIntroVO = comintroProc.read(comcateVO.getComno());
+      mav.addObject("comIntroVO", comIntroVO);
+
+      /*
+       * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 
+       * 현재 페이지: 11 / 22   [이전] 11 12 13 14 15 16 17 18 19 20 [다음] 
+       * 
+       * @param listFile 목록 파일명 
+       * @param cateno 카테고리번호 
+       * @param search_count 검색(전체) 레코드수 
+       * @param nowPage     현재 페이지
+       * @param word 검색어
+       * @return 페이징 생성 문자열
+       */ 
+      String paging = recruitProc.pagingBox("list.do", cateno, search_count, nowPage, word);
+      mav.addObject("paging", paging);
+    
+      mav.addObject("nowPage", nowPage);
+
+      // /contents/list_by_cateno_table_img1_search_paging.jsp
+      mav.setViewName("/recruit/list_by_cateno_table_img1_search_paging");   
+      
+      return mav;
+    }     
     
     // http://localhost:9090/team4/recruit/read.do
     /**
@@ -642,6 +765,7 @@ public class RecruitCont {
             
     return mav;    
   }
+    
      
 
 }

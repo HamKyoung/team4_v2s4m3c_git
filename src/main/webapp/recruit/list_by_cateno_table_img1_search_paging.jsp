@@ -20,16 +20,41 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class="title_line">
-    등록된 모든 구인글
+    ${comcateVO.cate_name}
   </DIV>
   <ASIDE class="aside_left">
-    전체 보기 
+    <A href="../recruit/list.do">회사</A>
+    <A href="../comcate/list.do?comno=${comintroVO.comno }">${comintroVO.com_name }</A>  ${comcateVO.cate_name} > 전체 보기 
   </ASIDE>
   <ASIDE class="aside_right">
+    <c:if test="${corlogin eq true }">
+      <A href="./create.do?cateno=${comcateVO.cateno }">등록</A>
+      <span class='menu_divide' >│</span>
+    </c:if>
     <A href="javascript:location.reload();">새로고침</A>
-    <!--  <span class='menu_divide' >│</span> -->
-  </ASIDE>
+  </ASIDE> 
   
+  <DIV style="text-align: right;">  
+    <form name='frm' id='frm' method='get' action='./list.do'>
+      <input type='hidden' name='cateno' value='${comcateVO.cateno }'>
+      <br>
+      <c:choose>
+        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
+          <input type='text' name='word' id='word' value='${param.word }' 
+                     style='width: 20%;'>
+        </c:when>
+        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+          <input type='text' name='word' id='word' value='' style='width: 20%;'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit'>검색</button>
+      <c:if test="${param.word.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list.do?cateno=${comcateVO.cateno}&word='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </DIV> 
+    
   <DIV class='menu_line'></DIV>
   
   <div style='width: 100%;'>
@@ -38,14 +63,17 @@
         <col style="width: 20%;"></col>
         <col style="width: 40%;"></col>
         <col style="width: 20%;"></col>
-        
+        <col style="width: 20%;"></col>
       </colgroup>
       <%-- table 컬럼 --%>
       <thead>
         <tr>
           <th style='text-align: center;'>순서</th>
           <th style='text-align: center;'>제목</th>
+          <th style='text-align: center;'>회사명</th>
+          <!-- <th style='text-align: center;'>회원</th> -->
           <th style='text-align: center;'>등록일</th>
+          <!-- <th style='text-align: center;'>IP</th> -->
         </tr>
       
       </thead>
@@ -54,33 +82,24 @@
       <tbody>
         <c:forEach var="recruitVO" items="${list }">
           <c:set var="recruitno" value="${recruitVO.recruitno }" />
-          <%-- <c:set var="thumb1" value="${recruitVO.thumb1 }" /> --%>
           
           <tr> 
-            <td class="td_bs">${recruitVO.recruitno }</td>
-            <td style='vertical-align: middle;'>
+            <td class="td_bs">${recruitVO.recruitno }</td> 
+            <td>
               <a href="./read.do?recruitno=${recruitno}">${recruitVO.title}</a> 
             </td> 
-            <td style='vertical-align: middle; text-align: center;'>${recruitVO.rdate.substring(0, 10)}</td>
-<%--             <td style='vertical-align: middle; text-align: center;'>
-              <c:choose>
-                <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                  <IMG src="./storage/main_images/${thumb1 }" style="width: 120px; height: 80px;"> 
-                </c:when>
-                <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
-                  ${contentsVO.file1}
-                </c:otherwise>
-              </c:choose>
-            </td>   --%>
+            <td class="td_bs">${comintroVO.com_name }</td> 
+            <td style='text-align: center;'>${recruitVO.rdate.substring(0, 10)}</td>
+            
 
-<%--             <td style='vertical-align: middle; text-align: center;'>${contentsVO.memberno}</td>--%>
-            <%-- <td style='vertical-align: middle; text-align: center;'>${contentsVO.ip}</td>  --%>
+<%--             <td style='text-align: center;'>${recruitVO.memberno}</td>
+            <td style='text-align: center;'>${recruitVO.ip}</td> --%>
           </tr>
         </c:forEach>
         
       </tbody>
     </table>
-    <br><br>
+    <DIV class='bottom_menu'>${paging }</DIV>
   </div>
  
 <jsp:include page="/menu/bottom.jsp" flush='false' />

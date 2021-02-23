@@ -56,6 +56,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SET file1=#{file1}, thumb1=#{thumb1}, size1=#{size1}
     WHERE recruitno=#{recruitno} 
   </update>
+  
+   <!-- 카테고리별 검색 목록 -->
+   <select id="list_by_cateno_search" resultType="RecruitVO" parameterType="HashMap">
+     SELECT recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+                              file1, thumb1, size1
+     FROM recruit
+     <choose>
+       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+         WHERE cateno=#{cateno}
+       </when>
+       <otherwise> <!-- 검색하는 경우 -->
+         WHERE cateno=#{cateno} AND (title LIKE '%' || #{word} || '%' 
+                                                        OR content LIKE '%' || #{word} || '%' 
+                                                        OR word LIKE '%' || #{word} || '%')
+       </otherwise>
+     </choose>
+     ORDER BY recruitno DESC   
+   </select>
+   
+   <!-- 카테고리별 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM recruit
+     <choose>
+       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+         WHERE cateno=#{cateno}
+       </when>
+       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+         WHERE cateno=#{cateno} AND (title LIKE '%' || #{word} || '%' 
+                                                        OR content LIKE '%' || #{word} || '%' 
+                                                        OR word LIKE '%' || #{word} || '%')
+       </otherwise>
+     </choose>
+   </select>      
+ 
+    <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+   <select id="list_by_cateno_search_paging" 
+              resultType="RecruitVO" parameterType="HashMap">
+     SELECT recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+                              file1, thumb1, size1 ,r
+     FROM (
+                SELECT recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+                              file1, thumb1, size1, rownum as r
+                FROM (
+                          SELECT recruitno, cateno, title, seqno ,content, homepage, passwd, word, rdate,
+                              file1, thumb1, size1
+                          FROM recruit
+                          <choose>
+                            <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                              WHERE cateno=#{cateno}
+                            </when>
+                            <otherwise>
+                              WHERE cateno=#{cateno} AND (title LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                                               OR content LIKE '%' || #{word} || '%' 
+                                                               OR word LIKE '%' || #{word} || '%')
+                            </otherwise>
+                          </choose>
+                          ORDER BY recruitno DESC
+                )
+     )
+     WHERE <![CDATA[ r >= #{startNum} AND r <= #{endNum} ]]>
+     <!-- 
+       1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30;
+      -->
+   </select>    
+  
          
 </mapper>
 
