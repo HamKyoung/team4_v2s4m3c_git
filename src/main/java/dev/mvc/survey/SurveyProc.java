@@ -45,7 +45,7 @@ public class SurveyProc implements SurveyProcInter {
     return cnt;
   }
   @Override
-  public List<SurveyVO> list_by_surveyno_search_paging(HashMap<String, Object> map) {
+  public List<SurveyVO> list_by_search_paging(HashMap<String, Object> map) {
     /* 
     페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작
     1 페이지 시작 rownum: nowPage = 1, (1 - 1) * 10 --> 0 
@@ -69,7 +69,7 @@ public class SurveyProc implements SurveyProcInter {
     map.put("startNum", startNum);
     map.put("endNum", endNum);
    
-    List<SurveyVO> list = this.surveyDAO.list_by_surveyno_search_paging(map);
+    List<SurveyVO> list = this.surveyDAO.list_by_search_paging(map);
     
     return list;
   }
@@ -85,7 +85,7 @@ public class SurveyProc implements SurveyProcInter {
    * @return 페이징 생성 문자열
    */ 
   @Override
-  public String pagingBox(String listFile, int surveyno, int search_count, int nowPage, String word){ 
+  public String pagingBox(String listFile, int search_count, int nowPage, String word){ 
     int totalPage = (int)(Math.ceil((double)search_count/Survey.RECORD_PER_PAGE)); // 전체 페이지  
     
     int totalGrp = (int)(Math.ceil((double)totalPage/Survey.PAGE_PER_BLOCK));// 전체 그룹 
@@ -135,7 +135,7 @@ public class SurveyProc implements SurveyProcInter {
     // 현재 3그룹일 경우: (3 - 1) * 10 = 2그룹의 마지막 페이지 20
     int _nowPage = (nowGrp-1) * Survey.PAGE_PER_BLOCK;  
     if (nowGrp >= 2){ 
-      str.append("<span class='span_box_1'><A href='"+listFile+"?&word="+word+"&nowPage="+_nowPage+"&surveyno="+surveyno+"'>이전</A></span>"); 
+      str.append("<span class='span_box_1'><A href='"+listFile+"?&word="+word+"&nowPage="+_nowPage+"'>이전</A></span>"); 
     } 
  
     // 중앙의 페이지 목록
@@ -148,7 +148,7 @@ public class SurveyProc implements SurveyProcInter {
         str.append("<span class='span_box_2'>"+i+"</span>"); // 현재 페이지, 강조 
       }else{
         // 현재 페이지가 아닌 페이지는 이동이 가능하도록 링크를 설정
-        str.append("<span class='span_box_1'><A href='"+listFile+"?word="+word+"&nowPage="+i+"&surveyno="+surveyno+"'>"+i+"</A></span>");   
+        str.append("<span class='span_box_1'><A href='"+listFile+"?word="+word+"&nowPage="+i+"'>"+i+"</A></span>");   
       } 
     } 
  
@@ -158,7 +158,7 @@ public class SurveyProc implements SurveyProcInter {
     // 현재 2그룹일 경우: (2 * 10) + 1 = 3그룹의 시작페이지 21
     _nowPage = (nowGrp * Survey.PAGE_PER_BLOCK)+1;  
     if (nowGrp < totalGrp){ 
-      str.append("<span class='span_box_1'><A href='"+listFile+"?&word="+word+"&nowPage="+_nowPage+"&surveyno="+surveyno+"'>다음</A></span>"); 
+      str.append("<span class='span_box_1'><A href='"+listFile+"?&word="+word+"&nowPage="+_nowPage+"'>다음</A></span>"); 
     } 
     str.append("</DIV>"); 
      
