@@ -522,6 +522,34 @@ ORDER BY recruitno DESC;
 
 commit;
 
+) 검색 + 페이징 + 메인 이미지
+-- step 1
+SELECT recruitno, cateno, title, content, rdate
+FROM recruit
+WHERE cateno=1 AND title LIKE '%채용%'
+ORDER BY recruitno DESC;
+
+-- step 2
+SELECT recruitno, cateno, title, content, rdate, rownum as r
+FROM (
+          SELECT recruitno, cateno, title, content, rdate
+          FROM recruit
+          WHERE cateno=1 AND title LIKE '%채용%'
+          ORDER BY recruitno DESC
+);
+
+-- step 3, 1 page
+SELECT recruitno, cateno, title, content, rdate ,r
+FROM (
+           SELECT recruitno, cateno, title, content, rdate ,rownum as r
+           FROM (
+                     SELECT recruitno, cateno, title, content, rdate
+                     FROM recruit
+                     WHERE cateno=1 AND title LIKE '%채용%'
+                     ORDER BY recruitno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 10;
 
 /**********************************/
 /* Table Name: 첨부파일 */
