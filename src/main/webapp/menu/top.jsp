@@ -57,6 +57,7 @@
                   </c:otherwise> 
                 </c:choose>            
             </li>
+            <li><A href='${pageContext.request.contextPath}/re_calendar/list.do'>공채달력</A></li>
           </ul>
         </li>
 
